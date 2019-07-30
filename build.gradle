@@ -1,0 +1,23 @@
+buildscript {
+    repositories {
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+    }
+}
+plugins {
+    id 'org.jbake.site' version '5.0.0'
+    id 'org.ajoberstar.git-publish' version '2.1.1'
+}
+
+gitPublish {
+    repoUri = 'https://github.com/open-jumpco/open-jumpco.github.io.git'
+    // referenceRepoUri = 'file:///home/human/projects/test-repo/'
+    branch = 'gh-pages'
+
+}
+
+gitPublishCommit.dependsOn bake
+// bake.dependsOn gitPublishReset
+
+// retrieve published documentation from various projects.

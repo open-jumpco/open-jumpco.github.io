@@ -1,0 +1,14 @@
+title=Launching Open JumpCO
+date=2019-07-29
+type=post
+tags=blog, open-source, jumpco, collaboration
+status=published
+summary=JumpCO is launching Open JumpCO initiative.
+~~~~~~
+JumpCO has developed a lot of code over the last 15-20 years.
+A portion of this code is not specific to any customer requirements and is useful across projects.
+Harvesting and publishing such code as open source projects and libraries may be useful beyond JumpCO and to the community at large.
+
+Join us on this journey and suggest ways in which we can improve the process of contribution and collaboration.
+
+
