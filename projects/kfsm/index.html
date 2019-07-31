@@ -441,6 +441,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#documentation">Documentation</a></li>
 <li><a href="#dsl">DSL</a>
 <ul class="sectlevel2">
+<li><a href="#statemachine"><code>stateMachine {}</code></a></li>
 <li><a href="#default"><code>default {}</code></a></li>
 <li><a href="#initial"><code>initial {}</code></a></li>
 <li><a href="#states"><code>state(S) {}</code></a></li>
@@ -516,6 +517,8 @@ The statemachine supports:</p>
 </li>
 </ul>
 </div>
+<div class="sect2">
+<h3 id="statemachine"><code>stateMachine {}</code></h3>
 <div class="paragraph">
 <p>The top level element is <code>stateMachine</code> either by using the function</p>
 </div>
@@ -549,6 +552,7 @@ val definition = stateMachine(StateEnum::class, EventEnum::class,ContextType::cl
     state { // state definition
     }
 }.build()</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
