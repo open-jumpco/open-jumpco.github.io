@@ -15,9 +15,12 @@ gitPublish {
     // referenceRepoUri = 'file:///home/human/projects/test-repo/'
     branch = 'gh-pages'
 
+    repoDir = file("$buildDir/jbake")
 }
 
 gitPublishCommit.dependsOn bake
-// bake.dependsOn gitPublishReset
+gitPublishCopy.dependsOn bake
+
+
 
 // retrieve published documentation from various projects.
