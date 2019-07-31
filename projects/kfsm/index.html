@@ -429,97 +429,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 #footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
-<style>
-/* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
-/*pre.CodeRay {background-color:#f7f7f8;}*/
-.CodeRay .line-numbers{border-right:1px solid #d8d8d8;padding:0 0.5em 0 .25em}
-.CodeRay span.line-numbers{display:inline-block;margin-right:.5em;color:rgba(0,0,0,.3)}
-.CodeRay .line-numbers strong{color:rgba(0,0,0,.4)}
-table.CodeRay{border-collapse:separate;border-spacing:0;margin-bottom:0;border:0;background:none}
-table.CodeRay td{vertical-align: top;line-height:1.45}
-table.CodeRay td.line-numbers{text-align:right}
-table.CodeRay td.line-numbers>pre{padding:0;color:rgba(0,0,0,.3)}
-table.CodeRay td.code{padding:0 0 0 .5em}
-table.CodeRay td.code>pre{padding:0}
-.CodeRay .debug{color:#fff !important;background:#000080 !important}
-.CodeRay .annotation{color:#007}
-.CodeRay .attribute-name{color:#000080}
-.CodeRay .attribute-value{color:#700}
-.CodeRay .binary{color:#509}
-.CodeRay .comment{color:#998;font-style:italic}
-.CodeRay .char{color:#04d}
-.CodeRay .char .content{color:#04d}
-.CodeRay .char .delimiter{color:#039}
-.CodeRay .class{color:#458;font-weight:bold}
-.CodeRay .complex{color:#a08}
-.CodeRay .constant,.CodeRay .predefined-constant{color:#008080}
-.CodeRay .color{color:#099}
-.CodeRay .class-variable{color:#369}
-.CodeRay .decorator{color:#b0b}
-.CodeRay .definition{color:#099}
-.CodeRay .delimiter{color:#000}
-.CodeRay .doc{color:#970}
-.CodeRay .doctype{color:#34b}
-.CodeRay .doc-string{color:#d42}
-.CodeRay .escape{color:#666}
-.CodeRay .entity{color:#800}
-.CodeRay .error{color:#808}
-.CodeRay .exception{color:inherit}
-.CodeRay .filename{color:#099}
-.CodeRay .function{color:#900;font-weight:bold}
-.CodeRay .global-variable{color:#008080}
-.CodeRay .hex{color:#058}
-.CodeRay .integer,.CodeRay .float{color:#099}
-.CodeRay .include{color:#555}
-.CodeRay .inline{color:#000}
-.CodeRay .inline .inline{background:#ccc}
-.CodeRay .inline .inline .inline{background:#bbb}
-.CodeRay .inline .inline-delimiter{color:#d14}
-.CodeRay .inline-delimiter{color:#d14}
-.CodeRay .important{color:#555;font-weight:bold}
-.CodeRay .interpreted{color:#b2b}
-.CodeRay .instance-variable{color:#008080}
-.CodeRay .label{color:#970}
-.CodeRay .local-variable{color:#963}
-.CodeRay .octal{color:#40e}
-.CodeRay .predefined{color:#369}
-.CodeRay .preprocessor{color:#579}
-.CodeRay .pseudo-class{color:#555}
-.CodeRay .directive{font-weight:bold}
-.CodeRay .type{font-weight:bold}
-.CodeRay .predefined-type{color:inherit}
-.CodeRay .reserved,.CodeRay .keyword {color:#000;font-weight:bold}
-.CodeRay .key{color:#808}
-.CodeRay .key .delimiter{color:#606}
-.CodeRay .key .char{color:#80f}
-.CodeRay .value{color:#088}
-.CodeRay .regexp .delimiter{color:#808}
-.CodeRay .regexp .content{color:#808}
-.CodeRay .regexp .modifier{color:#808}
-.CodeRay .regexp .char{color:#d14}
-.CodeRay .regexp .function{color:#404;font-weight:bold}
-.CodeRay .string{color:#d20}
-.CodeRay .string .string .string{background:#ffd0d0}
-.CodeRay .string .content{color:#d14}
-.CodeRay .string .char{color:#d14}
-.CodeRay .string .delimiter{color:#d14}
-.CodeRay .shell{color:#d14}
-.CodeRay .shell .delimiter{color:#d14}
-.CodeRay .symbol{color:#990073}
-.CodeRay .symbol .content{color:#a60}
-.CodeRay .symbol .delimiter{color:#630}
-.CodeRay .tag{color:#008080}
-.CodeRay .tag-special{color:#d70}
-.CodeRay .variable{color:#036}
-.CodeRay .insert{background:#afa}
-.CodeRay .delete{background:#faa}
-.CodeRay .change{color:#aaf;background:#007}
-.CodeRay .head{color:#f8f;background:#505}
-.CodeRay .insert .insert{color:#080}
-.CodeRay .delete .delete{color:#800}
-.CodeRay .change .change{color:#66f}
-.CodeRay .head .head{color:#f4f}
-</style>
+<link href="prism.css" rel="stylesheet" />
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
@@ -577,28 +487,28 @@ We want to ensure that the <code>lock()</code> function is only called when the 
 <h4 id="context-class">Context class</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="kotlin">class Turnstile(var locked: Boolean = true) {
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class Turnstile(var locked: Boolean = true) {
     fun unlock() {
-        assert(locked) { &quot;Cannot unlock when not locked&quot; }
-        println(&quot;Unlock&quot;)
+        assert(locked) { "Cannot unlock when not locked" }
+        println("Unlock")
         locked = false
     }
 
     fun lock() {
-        assert(!locked) { &quot;Cannot lock when locked&quot; }
-        println(&quot;Lock&quot;)
+        assert(!locked) { "Cannot lock when locked" }
+        println("Lock")
         locked = true
     }
 
     fun alarm() {
-        println(&quot;Alarm&quot;)
+        println("Alarm")
     }
 
     fun returnCoin() {
-        println(&quot;Return coin&quot;)
+        println("Return coin")
     }
     override fun toString(): String {
-        return &quot;Turnstile(locked=$locked)&quot;
+        return "Turnstile(locked=$locked)"
     }
 }</code></pre>
 </div>
@@ -611,7 +521,7 @@ We want to ensure that the <code>lock()</code> function is only called when the 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="kotlin">enum class TurnstileStates {
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">enum class TurnstileStates {
     LOCKED,
     UNLOCKED
 }
@@ -627,7 +537,7 @@ enum class TurnstileEvents {
 <h4 id="packaged-definition-and-execution">Packaged definition and execution</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="kotlin">class TurnstileFSM(turnstile: Turnstile) {
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class TurnstileFSM(turnstile: Turnstile) {
     companion object {
         private val definition = stateMachine(TurnstileStates::class, TurnstileEvents::class, Turnstile::class) {
             initial {
@@ -638,14 +548,14 @@ enum class TurnstileEvents {
             }
             default {
                 entry { startState, targetState, _ -&gt;
-                    println(&quot;entering:$startState -&gt; $targetState for $this&quot;)
+                    println("entering:$startState -&gt; $targetState for $this")
                 }
                 action { state, event, _ -&gt;
-                    println(&quot;Default action for state($state) -&gt; on($event) for $this&quot;)
+                    println("Default action for state($state) -&gt; on($event) for $this")
                     alarm()
                 }
                 exit { startState, targetState, _ -&gt;
-                    println(&quot;exiting:$startState -&gt; $targetState for $this&quot;)
+                    println("exiting:$startState -&gt; $targetState for $this")
                 }
             }
             state(TurnstileStates.LOCKED) {
@@ -687,7 +597,7 @@ as a member of the context <code>{ unlock() }</code></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="kotlin">val turnstile = Turnstile()
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">val turnstile = Turnstile()
 val fsm = TurnstileFSM(turnstile)</code></pre>
 </div>
 </div>
@@ -699,7 +609,7 @@ val fsm = TurnstileFSM(turnstile)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="kotlin">// State state is LOCKED
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">// State state is LOCKED
 fsm.coin()
 // Expect unlock action end state is UNLOCKED
 fsm.pass()
@@ -729,7 +639,7 @@ fsm.coin()
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="kotlin">fsm.sendEvent(EVENT1, arg1)</code></pre>
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">fsm.sendEvent(EVENT1, arg1)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -737,7 +647,7 @@ fsm.coin()
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="kotlin">on(EVENT1) { args -&gt;
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">on(EVENT1) { args -&gt;
     val value = args[0] as Int
     // use value
 }</code></pre>
@@ -760,7 +670,7 @@ The context class stores values and will update value in very specific ways.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="kotlin">class PayingTurnstile(
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class PayingTurnstile(
     val requiredCoins: Int,
     locked: Boolean = true,
     coins: Int = 0
@@ -771,41 +681,41 @@ The context class stores values and will update value in very specific ways.</p>
         private set
 
     fun unlock() {
-        require(locked) { &quot;Cannot unlock when not locked&quot; }
-        require(coins &gt;= requiredCoins) { &quot;Not enough coins. ${requiredCoins - coins} required&quot; }
-        println(&quot;Unlock&quot;)
+        require(locked) { "Cannot unlock when not locked" }
+        require(coins &gt;= requiredCoins) { "Not enough coins. ${requiredCoins - coins} required" }
+        println("Unlock")
         locked = false
     }
 
     fun lock() {
-        require(!locked) { &quot;Cannot lock when locked&quot; }
-        require(coins == 0) { &quot;Coins $coins must be returned&quot; }
-        println(&quot;Lock&quot;)
+        require(!locked) { "Cannot lock when locked" }
+        require(coins == 0) { "Coins $coins must be returned" }
+        println("Lock")
         locked = true
     }
 
     fun alarm() {
-        println(&quot;Alarm&quot;)
+        println("Alarm")
     }
 
     fun coin(value: Int): Int {
         coins += value
-        println(&quot;Value=$value, Total=$coins&quot;)
+        println("Value=$value, Total=$coins")
         return coins
     }
 
     fun returnCoin(returnCoins: Int) {
-        println(&quot;Return Coin:$returnCoins&quot;)
+        println("Return Coin:$returnCoins")
         coins -= returnCoins
     }
 
     fun reset() {
         coins = 0
-        println(&quot;Reset coins=$coins&quot;)
+        println("Reset coins=$coins")
     }
 
     override fun toString(): String {
-        return &quot;Turnstile(locked=$locked,coins=$coins)&quot;
+        return "Turnstile(locked=$locked,coins=$coins)"
     }
 
 }</code></pre>
@@ -816,7 +726,7 @@ The context class stores values and will update value in very specific ways.</p>
 <h4 id="states-and-events">States and Events</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="kotlin">enum class PayingTurnstileStates {
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">enum class PayingTurnstileStates {
     LOCKED,
     COINS,
     UNLOCKED
@@ -833,7 +743,7 @@ enum class PayingTurnstileEvents {
 <h4 id="state-machine-definition-packaged">State machine definition packaged</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="kotlin">class PayingTurnstileFSM(turnstile: PayingTurnstile) {
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class PayingTurnstileFSM(turnstile: PayingTurnstile) {
     companion object {
         private val definition = stateMachine(
             PayingTurnstileStates::class,
@@ -852,24 +762,24 @@ enum class PayingTurnstileEvents {
             default {
                 entry { _, targetState, args -&gt;
                     if (args.isNotEmpty()) {
-                        println(&quot;entering:$targetState (${args.toList()}) for $this&quot;)
+                        println("entering:$targetState (${args.toList()}) for $this")
                     } else {
-                        println(&quot;entering:$targetState for $this&quot;)
+                        println("entering:$targetState for $this")
                     }
                 }
                 action { state, event, args -&gt;
                     if (args.isNotEmpty()) {
-                        println(&quot;Default action for state($state) -&gt; on($event, ${args.toList()}) for $this&quot;)
+                        println("Default action for state($state) -&gt; on($event, ${args.toList()}) for $this")
                     } else {
-                        println(&quot;Default action for state($state) -&gt; on($event) for $this&quot;)
+                        println("Default action for state($state) -&gt; on($event) for $this")
                     }
                     alarm()
                 }
                 exit { startState, _, args -&gt;
                     if (args.isNotEmpty()) {
-                        println(&quot;entering:$startState (${args.toList()}) for $this&quot;)
+                        println("entering:$startState (${args.toList()}) for $this")
                     } else {
-                        println(&quot;exiting:$startState for $this&quot;)
+                        println("exiting:$startState for $this")
                     }
                 }
             }
@@ -889,7 +799,7 @@ enum class PayingTurnstileEvents {
                         value + this.coins &lt; this.requiredCoins
                     }) { args -&gt; val value = args[0] as Int
                     coin(value)
-                    println(&quot;Coins=$coins, Please add ${requiredCoins - coins}&quot;)
+                    println("Coins=$coins, Please add ${requiredCoins - coins}")
                 }
                 // The coin brings amount to exact amount
                 on(PayingTurnstileEvents.COIN to PayingTurnstileStates.UNLOCKED) { args -&gt; val value = args[0] as Int
@@ -914,7 +824,7 @@ enum class PayingTurnstileEvents {
                         value + this.coins &lt; this.requiredCoins
                     }) { args -&gt; val value = args[0] as Int
                     coin(value)
-                    println(&quot;Coins=$coins, Please add ${requiredCoins - coins}&quot;)
+                    println("Coins=$coins, Please add ${requiredCoins - coins}")
                 }
                 // The coin is exact amount required
                 on(PayingTurnstileEvents.COIN to PayingTurnstileStates.UNLOCKED) { args -&gt; val value = args[0] as Int
@@ -946,28 +856,28 @@ enum class PayingTurnstileEvents {
 <h4 id="test">Test</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="kotlin">val turnstile = PayingTurnstile(50)
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">val turnstile = PayingTurnstile(50)
 val fsm = PayingTurnstileFSM(turnstile)
 assertTrue(turnstile.locked)
-println(&quot;--coin1&quot;)
+println("--coin1")
 fsm.coin(10)
 assertTrue(turnstile.locked)
 assertTrue(turnstile.coins == 10)
-println(&quot;--coin2&quot;)
+println("--coin2")
 fsm.coin(60)
 assertTrue(turnstile.coins == 0)
 assertTrue(!turnstile.locked)
-println(&quot;--pass1&quot;)
+println("--pass1")
 fsm.pass()
 assertTrue(turnstile.locked)
-println(&quot;--pass2&quot;)
+println("--pass2")
 fsm.pass()
-println(&quot;--pass3&quot;)
+println("--pass3")
 fsm.pass()
-println(&quot;--coin3&quot;)
+println("--coin3")
 fsm.coin(40)
 assertTrue(turnstile.coins == 40)
-println(&quot;--coin4&quot;)
+println("--coin4")
 fsm.coin(10)
 assertTrue(turnstile.coins == 0)
 assertTrue(!turnstile.locked)</code></pre>
@@ -978,7 +888,7 @@ assertTrue(!turnstile.locked)</code></pre>
 <h4 id="output">Output</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code>--coin1
+<pre class="highlight"><code>--coin1
 entering:LOCKED ([10]) for Turnstile(locked=true,coins=0)
 Value=10, Total=10
 Coins=10, Please add 40
@@ -1023,5 +933,6 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 Last updated 2019-07-31 17:23:08 +0200
 </div>
 </div>
+<script src="prism.js"></script>
 </body>
 </html>
