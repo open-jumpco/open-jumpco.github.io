@@ -444,6 +444,28 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#source">Source</a></li>
 </ul>
 </li>
+<li><a href="#tutorial">Tutorial</a>
+<ul class="sectlevel2">
+<li><a href="#simple-turnstile-example">Simple turnstile example</a>
+<ul class="sectlevel3">
+<li><a href="#state-diagram">State Diagram</a></li>
+<li><a href="#context-class">Context class</a></li>
+<li><a href="#enums-for-states-and-events">Enums for States and Events</a></li>
+<li><a href="#packaged-definition-and-execution">Packaged definition and execution</a></li>
+<li><a href="#usage">Usage</a></li>
+</ul>
+</li>
+<li><a href="#events-with-arguments">Events with arguments</a>
+<ul class="sectlevel3">
+<li><a href="#context-class-2">Context class</a></li>
+<li><a href="#states-and-events">States and Events</a></li>
+<li><a href="#state-machine-definition-packaged">State machine definition packaged</a></li>
+<li><a href="#test">Test</a></li>
+<li><a href="#output">Output</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="#getting-started">Getting Started</a>
 <ul class="sectlevel2">
 <li><a href="#repository">Repository</a></li>
@@ -477,28 +499,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#entry-2">entry {}</a></li>
 <li><a href="#exit-2">exit {}</a></li>
 <li><a href="#one-to-sguard">on(E [to S],[guard = {}]) {}</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#tutorial">Tutorial</a>
-<ul class="sectlevel2">
-<li><a href="#simple-turnstile-example">Simple turnstile example</a>
-<ul class="sectlevel3">
-<li><a href="#state-diagram">State Diagram</a></li>
-<li><a href="#context-class">Context class</a></li>
-<li><a href="#enums-for-states-and-events">Enums for States and Events</a></li>
-<li><a href="#packaged-definition-and-execution">Packaged definition and execution</a></li>
-<li><a href="#usage">Usage</a></li>
-</ul>
-</li>
-<li><a href="#events-with-arguments">Events with arguments</a>
-<ul class="sectlevel3">
-<li><a href="#context-class-2">Context class</a></li>
-<li><a href="#states-and-events">States and Events</a></li>
-<li><a href="#state-machine-definition-packaged">State machine definition packaged</a></li>
-<li><a href="#test">Test</a></li>
-<li><a href="#output">Output</a></li>
 </ul>
 </li>
 </ul>
@@ -546,6 +546,470 @@ a Kotlin DSL along with a simple implementation.</p>
 <div class="sect2">
 <h3 id="source"><a href="https://github.com/open-jumpco/kfsm">Source</a></h3>
 
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="tutorial">Tutorial</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="simple-turnstile-example">Simple turnstile example</h3>
+<div class="paragraph">
+<p>Assume we and to manage the state on a simple lock.
+We want to ensure that the <code>lock()</code> function is only called when the lock is not locked and we want <code>unlock()</code> to be called when locked.</p>
+</div>
+<div class="paragraph">
+<p>Then we use the DSL to declare a definition of a statemachine matching the diagram:</p>
+</div>
+<div class="sect3">
+<h4 id="state-diagram">State Diagram</h4>
+<div class="imageblock">
+<div class="content">
+<img src="turnstile_fsm.png" alt="LockStateDiagram">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="context-class">Context class</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class Turnstile(var locked: Boolean = true) {
+    fun unlock() {
+        assert(locked) { "Cannot unlock when not locked" }
+        println("Unlock")
+        locked = false
+    }
+
+    fun lock() {
+        assert(!locked) { "Cannot lock when locked" }
+        println("Lock")
+        locked = true
+    }
+
+    fun alarm() {
+        println("Alarm")
+    }
+
+    fun returnCoin() {
+        println("Return coin")
+    }
+    override fun toString(): String {
+        return "Turnstile(locked=$locked)"
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="enums-for-states-and-events">Enums for States and Events</h4>
+<div class="paragraph">
+<p>We declare 2 enums, one for the possible states and one for the possible events.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">enum class TurnstileStates {
+    LOCKED,
+    UNLOCKED
+}
+
+enum class TurnstileEvents {
+    COIN,
+    PASS
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="packaged-definition-and-execution">Packaged definition and execution</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class TurnstileFSM(turnstile: Turnstile) {
+    companion object {
+        private val definition = stateMachine(TurnstileStates::class, TurnstileEvents::class, Turnstile::class) {
+            initial {
+            if (locked)
+                TurnstileStates.LOCKED
+            else
+                TurnstileStates.UNLOCKED
+            }
+            default {
+                entry { startState, targetState, _ -&gt;
+                    println("entering:$startState -&gt; $targetState for $this")
+                }
+                action { state, event, _ -&gt;
+                    println("Default action for state($state) -&gt; on($event) for $this")
+                    alarm()
+                }
+                exit { startState, targetState, _ -&gt;
+                    println("exiting:$startState -&gt; $targetState for $this")
+                }
+            }
+            state(TurnstileStates.LOCKED) {
+                on(TurnstileEvents.COIN to TurnstileStates.UNLOCKED) {
+                    unlock()
+                }
+            }
+            state(TurnstileStates.UNLOCKED) {
+                on(TurnstileEvents.COIN) {
+                    returnCoin()
+                }
+                on(TurnstileEvents.PASS to TurnstileStates.LOCKED) {
+                    lock()
+                }
+            }
+        }.build()
+    }
+
+    private val fsm = definition.create(turnstile)
+
+    fun coin() = fsm.sendEvent(TurnstileEvents.COIN)
+    fun pass() = fsm.sendEvent(TurnstileEvents.PASS)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With this We are saying:
+When the state is <code>LOCKED</code> and on a <code>COIN</code> event then transition to <code>UNLOCKED</code> and execute the lambda which is treated
+as a member of the context <code>{ unlock() }</code></p>
+</div>
+<div class="paragraph">
+<p>When the state is <code>LOCKED</code> and on <code>event(PASS)</code> we are perform the action <code>alarm()</code> without changing the end state.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="usage">Usage</h4>
+<div class="paragraph">
+<p>Then we instantiate the FSM and provide a context to operate on:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">val turnstile = Turnstile()
+val fsm = TurnstileFSM(turnstile)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now we have a context that is independent of the FSM.</p>
+</div>
+<div class="paragraph">
+<p>Sending events may invoke actions:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">// State state is LOCKED
+fsm.coin()
+// Expect unlock action end state is UNLOCKED
+fsm.pass()
+// Expect lock() action and end state is LOCKED
+fsm.pass()
+// Expect alarm() action and end state is LOCKED
+fsm.coin()
+// Expect unlock() and end state is UNLOCKED
+fsm.coin()
+// Expect returnCoin() and end state is UNLOCKED</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/open-jumpco/kfsm-samples">Samples</a></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="statemachine_model.png" alt="StateMachineModel">
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="events-with-arguments">Events with arguments</h3>
+<div class="paragraph">
+<p>Arguments are sent as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">fsm.sendEvent(EVENT1, arg1)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The argument is references in the action as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">on(EVENT1) { args -&gt;
+    val value = args[0] as Int
+    // use value
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If we update the turnstile to include the value of the coin in the coin event we could implement the following:
+Various guard expression determine the specific transitions.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="paying_turnstile_fsm.png" alt="Paying Turnstile">
+</div>
+</div>
+<div class="sect3">
+<h4 id="context-class-2">Context class</h4>
+<div class="paragraph">
+<p>The context class doesn&#8217;t make decisions.
+The context class stores values and will update value in very specific ways.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class PayingTurnstile(
+    val requiredCoins: Int,
+    locked: Boolean = true,
+    coins: Int = 0
+) {
+    var coins: Int = coins
+        private set
+    var locked: Boolean = locked
+        private set
+
+    fun unlock() {
+        require(locked) { "Cannot unlock when not locked" }
+        require(coins &gt;= requiredCoins) { "Not enough coins. ${requiredCoins - coins} required" }
+        println("Unlock")
+        locked = false
+    }
+
+    fun lock() {
+        require(!locked) { "Cannot lock when locked" }
+        require(coins == 0) { "Coins $coins must be returned" }
+        println("Lock")
+        locked = true
+    }
+
+    fun alarm() {
+        println("Alarm")
+    }
+
+    fun coin(value: Int): Int {
+        coins += value
+        println("Value=$value, Total=$coins")
+        return coins
+    }
+
+    fun returnCoin(returnCoins: Int) {
+        println("Return Coin:$returnCoins")
+        coins -= returnCoins
+    }
+
+    fun reset() {
+        coins = 0
+        println("Reset coins=$coins")
+    }
+
+    override fun toString(): String {
+        return "Turnstile(locked=$locked,coins=$coins)"
+    }
+
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="states-and-events">States and Events</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">enum class PayingTurnstileStates {
+    LOCKED,
+    COINS,
+    UNLOCKED
+}
+
+enum class PayingTurnstileEvents {
+    COIN,
+    PASS
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="state-machine-definition-packaged">State machine definition packaged</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class PayingTurnstileFSM(turnstile: PayingTurnstile) {
+    companion object {
+        private val definition = stateMachine(
+            PayingTurnstileStates::class,
+            PayingTurnstileEvents::class,
+            PayingTurnstile::class
+        ) {
+            initial {
+                when {
+                    coins &gt; 0 -&gt; PayingTurnstileStates.COINS
+                    locked -&gt;
+                        PayingTurnstileStates.LOCKED
+                    else -&gt;
+                        PayingTurnstileStates.UNLOCKED
+                }
+            }
+            default {
+                entry { _, targetState, args -&gt;
+                    if (args.isNotEmpty()) {
+                        println("entering:$targetState (${args.toList()}) for $this")
+                    } else {
+                        println("entering:$targetState for $this")
+                    }
+                }
+                action { state, event, args -&gt;
+                    if (args.isNotEmpty()) {
+                        println("Default action for state($state) -&gt; on($event, ${args.toList()}) for $this")
+                    } else {
+                        println("Default action for state($state) -&gt; on($event) for $this")
+                    }
+                    alarm()
+                }
+                exit { startState, _, args -&gt;
+                    if (args.isNotEmpty()) {
+                        println("entering:$startState (${args.toList()}) for $this")
+                    } else {
+                        println("exiting:$startState for $this")
+                    }
+                }
+            }
+            state(PayingTurnstileStates.LOCKED) {
+                // The coins add up to more than required
+                on(PayingTurnstileEvents.COIN to PayingTurnstileStates.UNLOCKED,
+                    guard = { args -&gt; val value = args[0] as Int;
+                        value + this.coins &gt; this.requiredCoins
+                    }) { args -&gt; val value = args[0] as Int
+                    returnCoin(coin(value) - requiredCoins)
+                    unlock()
+                    reset()
+                }
+                // The coins add up to more than required
+                on(PayingTurnstileEvents.COIN to PayingTurnstileStates.COINS,
+                    guard = { args -&gt; val value = args[0] as Int;
+                        value + this.coins &lt; this.requiredCoins
+                    }) { args -&gt; val value = args[0] as Int
+                    coin(value)
+                    println("Coins=$coins, Please add ${requiredCoins - coins}")
+                }
+                // The coin brings amount to exact amount
+                on(PayingTurnstileEvents.COIN to PayingTurnstileStates.UNLOCKED) { args -&gt; val value = args[0] as Int
+                    coin(value)
+                    unlock()
+                    reset()
+                }
+            }
+            state(PayingTurnstileStates.COINS) {
+                // The coins add up to more than required.
+                on(PayingTurnstileEvents.COIN to PayingTurnstileStates.UNLOCKED,
+                    guard = { args -&gt; val value = args[0] as Int
+                        value + this.coins &gt; this.requiredCoins
+                    }) { args -&gt; val value = args[0] as Int
+                    returnCoin(coin(value) - requiredCoins)
+                    unlock()
+                    reset()
+                }
+                // The coins isn't enough to make total match required
+                on(PayingTurnstileEvents.COIN to PayingTurnstileStates.COINS,
+                    guard = { args -&gt; val value = args[0] as Int;
+                        value + this.coins &lt; this.requiredCoins
+                    }) { args -&gt; val value = args[0] as Int
+                    coin(value)
+                    println("Coins=$coins, Please add ${requiredCoins - coins}")
+                }
+                // The coin is exact amount required
+                on(PayingTurnstileEvents.COIN to PayingTurnstileStates.UNLOCKED) { args -&gt; val value = args[0] as Int
+                    coin(value)
+                    unlock()
+                    reset()
+                }
+            }
+            state(PayingTurnstileStates.UNLOCKED) {
+                on(PayingTurnstileEvents.COIN) { args -&gt; val value = args[0] as Int
+                    returnCoin(coin(value))
+                }
+                on(PayingTurnstileEvents.PASS to PayingTurnstileStates.LOCKED) {
+                    lock()
+                }
+            }
+        }.build()
+    }
+
+    private val fsm = definition.create(turnstile)
+
+    fun coin(value: Int) = fsm.sendEvent(PayingTurnstileEvents.COIN, value)
+    fun pass() = fsm.sendEvent(PayingTurnstileEvents.PASS)
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="test">Test</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">val turnstile = PayingTurnstile(50)
+val fsm = PayingTurnstileFSM(turnstile)
+assertTrue(turnstile.locked)
+println("--coin1")
+fsm.coin(10)
+assertTrue(turnstile.locked)
+assertTrue(turnstile.coins == 10)
+println("--coin2")
+fsm.coin(60)
+assertTrue(turnstile.coins == 0)
+assertTrue(!turnstile.locked)
+println("--pass1")
+fsm.pass()
+assertTrue(turnstile.locked)
+println("--pass2")
+fsm.pass()
+println("--pass3")
+fsm.pass()
+println("--coin3")
+fsm.coin(40)
+assertTrue(turnstile.coins == 40)
+println("--coin4")
+fsm.coin(10)
+assertTrue(turnstile.coins == 0)
+assertTrue(!turnstile.locked)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="output">Output</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>--coin1
+entering:LOCKED ([10]) for Turnstile(locked=true,coins=0)
+Value=10, Total=10
+Coins=10, Please add 40
+entering:COINS ([10]) for Turnstile(locked=true,coins=10)
+--coin2
+entering:COINS ([60]) for Turnstile(locked=true,coins=10)
+Value=60, Total=70
+Return Coin:20
+Unlock
+Reset coins=0
+entering:UNLOCKED ([60]) for Turnstile(locked=false,coins=0)
+--pass1
+exiting:UNLOCKED for Turnstile(locked=false,coins=0)
+Lock
+entering:LOCKED for Turnstile(locked=true,coins=0)
+--pass2
+Default action for state(LOCKED) -&gt; on(PASS) for Turnstile(locked=true,coins=0)
+Alarm
+--pass3
+Default action for state(LOCKED) -&gt; on(PASS) for Turnstile(locked=true,coins=0)
+Alarm
+--coin3
+entering:LOCKED ([40]) for Turnstile(locked=true,coins=0)
+Value=40, Total=40
+Coins=40, Please add 10
+entering:COINS ([40]) for Turnstile(locked=true,coins=40)
+--coin4
+entering:COINS ([10]) for Turnstile(locked=true,coins=40)
+Value=10, Total=50
+Unlock
+Reset coins=0
+entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1059,474 +1523,10 @@ on(Event.EV2 to State.S2) { args -&gt; // external transition
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="tutorial">Tutorial</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="simple-turnstile-example">Simple turnstile example</h3>
-<div class="paragraph">
-<p>Assume we and to manage the state on a simple lock.
-We want to ensure that the <code>lock()</code> function is only called when the lock is not locked and we want <code>unlock()</code> to be called when locked.</p>
-</div>
-<div class="paragraph">
-<p>Then we use the DSL to declare a definition of a statemachine matching the diagram:</p>
-</div>
-<div class="sect3">
-<h4 id="state-diagram">State Diagram</h4>
-<div class="imageblock">
-<div class="content">
-<img src="turnstile_fsm.png" alt="LockStateDiagram">
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="context-class">Context class</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class Turnstile(var locked: Boolean = true) {
-    fun unlock() {
-        assert(locked) { "Cannot unlock when not locked" }
-        println("Unlock")
-        locked = false
-    }
-
-    fun lock() {
-        assert(!locked) { "Cannot lock when locked" }
-        println("Lock")
-        locked = true
-    }
-
-    fun alarm() {
-        println("Alarm")
-    }
-
-    fun returnCoin() {
-        println("Return coin")
-    }
-    override fun toString(): String {
-        return "Turnstile(locked=$locked)"
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="enums-for-states-and-events">Enums for States and Events</h4>
-<div class="paragraph">
-<p>We declare 2 enums, one for the possible states and one for the possible events.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">enum class TurnstileStates {
-    LOCKED,
-    UNLOCKED
-}
-
-enum class TurnstileEvents {
-    COIN,
-    PASS
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="packaged-definition-and-execution">Packaged definition and execution</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class TurnstileFSM(turnstile: Turnstile) {
-    companion object {
-        private val definition = stateMachine(TurnstileStates::class, TurnstileEvents::class, Turnstile::class) {
-            initial {
-            if (locked)
-                TurnstileStates.LOCKED
-            else
-                TurnstileStates.UNLOCKED
-            }
-            default {
-                entry { startState, targetState, _ -&gt;
-                    println("entering:$startState -&gt; $targetState for $this")
-                }
-                action { state, event, _ -&gt;
-                    println("Default action for state($state) -&gt; on($event) for $this")
-                    alarm()
-                }
-                exit { startState, targetState, _ -&gt;
-                    println("exiting:$startState -&gt; $targetState for $this")
-                }
-            }
-            state(TurnstileStates.LOCKED) {
-                on(TurnstileEvents.COIN to TurnstileStates.UNLOCKED) {
-                    unlock()
-                }
-            }
-            state(TurnstileStates.UNLOCKED) {
-                on(TurnstileEvents.COIN) {
-                    returnCoin()
-                }
-                on(TurnstileEvents.PASS to TurnstileStates.LOCKED) {
-                    lock()
-                }
-            }
-        }.build()
-    }
-
-    private val fsm = definition.create(turnstile)
-
-    fun coin() = fsm.sendEvent(TurnstileEvents.COIN)
-    fun pass() = fsm.sendEvent(TurnstileEvents.PASS)
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>With this We are saying:
-When the state is <code>LOCKED</code> and on a <code>COIN</code> event then transition to <code>UNLOCKED</code> and execute the lambda which is treated
-as a member of the context <code>{ unlock() }</code></p>
-</div>
-<div class="paragraph">
-<p>When the state is <code>LOCKED</code> and on <code>event(PASS)</code> we are perform the action <code>alarm()</code> without changing the end state.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="usage">Usage</h4>
-<div class="paragraph">
-<p>Then we instantiate the FSM and provide a context to operate on:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">val turnstile = Turnstile()
-val fsm = TurnstileFSM(turnstile)</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Now we have a context that is independent of the FSM.</p>
-</div>
-<div class="paragraph">
-<p>Sending events may invoke actions:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">// State state is LOCKED
-fsm.coin()
-// Expect unlock action end state is UNLOCKED
-fsm.pass()
-// Expect lock() action and end state is LOCKED
-fsm.pass()
-// Expect alarm() action and end state is LOCKED
-fsm.coin()
-// Expect unlock() and end state is UNLOCKED
-fsm.coin()
-// Expect returnCoin() and end state is UNLOCKED</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><a href="https://github.com/open-jumpco/kfsm-samples">Samples</a></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="statemachine_model.png" alt="StateMachineModel">
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="events-with-arguments">Events with arguments</h3>
-<div class="paragraph">
-<p>Arguments are sent as follows:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">fsm.sendEvent(EVENT1, arg1)</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The argument is references in the action as follows:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">on(EVENT1) { args -&gt;
-    val value = args[0] as Int
-    // use value
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If we update the turnstile to include the value of the coin in the coin event we could implement the following:
-Various guard expression determine the specific transitions.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="paying_turnstile_fsm.png" alt="Paying Turnstile">
-</div>
-</div>
-<div class="sect3">
-<h4 id="context-class-2">Context class</h4>
-<div class="paragraph">
-<p>The context class doesn&#8217;t make decisions.
-The context class stores values and will update value in very specific ways.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class PayingTurnstile(
-    val requiredCoins: Int,
-    locked: Boolean = true,
-    coins: Int = 0
-) {
-    var coins: Int = coins
-        private set
-    var locked: Boolean = locked
-        private set
-
-    fun unlock() {
-        require(locked) { "Cannot unlock when not locked" }
-        require(coins &gt;= requiredCoins) { "Not enough coins. ${requiredCoins - coins} required" }
-        println("Unlock")
-        locked = false
-    }
-
-    fun lock() {
-        require(!locked) { "Cannot lock when locked" }
-        require(coins == 0) { "Coins $coins must be returned" }
-        println("Lock")
-        locked = true
-    }
-
-    fun alarm() {
-        println("Alarm")
-    }
-
-    fun coin(value: Int): Int {
-        coins += value
-        println("Value=$value, Total=$coins")
-        return coins
-    }
-
-    fun returnCoin(returnCoins: Int) {
-        println("Return Coin:$returnCoins")
-        coins -= returnCoins
-    }
-
-    fun reset() {
-        coins = 0
-        println("Reset coins=$coins")
-    }
-
-    override fun toString(): String {
-        return "Turnstile(locked=$locked,coins=$coins)"
-    }
-
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="states-and-events">States and Events</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">enum class PayingTurnstileStates {
-    LOCKED,
-    COINS,
-    UNLOCKED
-}
-
-enum class PayingTurnstileEvents {
-    COIN,
-    PASS
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="state-machine-definition-packaged">State machine definition packaged</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class PayingTurnstileFSM(turnstile: PayingTurnstile) {
-    companion object {
-        private val definition = stateMachine(
-            PayingTurnstileStates::class,
-            PayingTurnstileEvents::class,
-            PayingTurnstile::class
-        ) {
-            initial {
-                when {
-                    coins &gt; 0 -&gt; PayingTurnstileStates.COINS
-                    locked -&gt;
-                        PayingTurnstileStates.LOCKED
-                    else -&gt;
-                        PayingTurnstileStates.UNLOCKED
-                }
-            }
-            default {
-                entry { _, targetState, args -&gt;
-                    if (args.isNotEmpty()) {
-                        println("entering:$targetState (${args.toList()}) for $this")
-                    } else {
-                        println("entering:$targetState for $this")
-                    }
-                }
-                action { state, event, args -&gt;
-                    if (args.isNotEmpty()) {
-                        println("Default action for state($state) -&gt; on($event, ${args.toList()}) for $this")
-                    } else {
-                        println("Default action for state($state) -&gt; on($event) for $this")
-                    }
-                    alarm()
-                }
-                exit { startState, _, args -&gt;
-                    if (args.isNotEmpty()) {
-                        println("entering:$startState (${args.toList()}) for $this")
-                    } else {
-                        println("exiting:$startState for $this")
-                    }
-                }
-            }
-            state(PayingTurnstileStates.LOCKED) {
-                // The coins add up to more than required
-                on(PayingTurnstileEvents.COIN to PayingTurnstileStates.UNLOCKED,
-                    guard = { args -&gt; val value = args[0] as Int;
-                        value + this.coins &gt; this.requiredCoins
-                    }) { args -&gt; val value = args[0] as Int
-                    returnCoin(coin(value) - requiredCoins)
-                    unlock()
-                    reset()
-                }
-                // The coins add up to more than required
-                on(PayingTurnstileEvents.COIN to PayingTurnstileStates.COINS,
-                    guard = { args -&gt; val value = args[0] as Int;
-                        value + this.coins &lt; this.requiredCoins
-                    }) { args -&gt; val value = args[0] as Int
-                    coin(value)
-                    println("Coins=$coins, Please add ${requiredCoins - coins}")
-                }
-                // The coin brings amount to exact amount
-                on(PayingTurnstileEvents.COIN to PayingTurnstileStates.UNLOCKED) { args -&gt; val value = args[0] as Int
-                    coin(value)
-                    unlock()
-                    reset()
-                }
-            }
-            state(PayingTurnstileStates.COINS) {
-                // The coins add up to more than required.
-                on(PayingTurnstileEvents.COIN to PayingTurnstileStates.UNLOCKED,
-                    guard = { args -&gt; val value = args[0] as Int
-                        value + this.coins &gt; this.requiredCoins
-                    }) { args -&gt; val value = args[0] as Int
-                    returnCoin(coin(value) - requiredCoins)
-                    unlock()
-                    reset()
-                }
-                // The coins isn't enough to make total match required
-                on(PayingTurnstileEvents.COIN to PayingTurnstileStates.COINS,
-                    guard = { args -&gt; val value = args[0] as Int;
-                        value + this.coins &lt; this.requiredCoins
-                    }) { args -&gt; val value = args[0] as Int
-                    coin(value)
-                    println("Coins=$coins, Please add ${requiredCoins - coins}")
-                }
-                // The coin is exact amount required
-                on(PayingTurnstileEvents.COIN to PayingTurnstileStates.UNLOCKED) { args -&gt; val value = args[0] as Int
-                    coin(value)
-                    unlock()
-                    reset()
-                }
-            }
-            state(PayingTurnstileStates.UNLOCKED) {
-                on(PayingTurnstileEvents.COIN) { args -&gt; val value = args[0] as Int
-                    returnCoin(coin(value))
-                }
-                on(PayingTurnstileEvents.PASS to PayingTurnstileStates.LOCKED) {
-                    lock()
-                }
-            }
-        }.build()
-    }
-
-    private val fsm = definition.create(turnstile)
-
-    fun coin(value: Int) = fsm.sendEvent(PayingTurnstileEvents.COIN, value)
-    fun pass() = fsm.sendEvent(PayingTurnstileEvents.PASS)
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="test">Test</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">val turnstile = PayingTurnstile(50)
-val fsm = PayingTurnstileFSM(turnstile)
-assertTrue(turnstile.locked)
-println("--coin1")
-fsm.coin(10)
-assertTrue(turnstile.locked)
-assertTrue(turnstile.coins == 10)
-println("--coin2")
-fsm.coin(60)
-assertTrue(turnstile.coins == 0)
-assertTrue(!turnstile.locked)
-println("--pass1")
-fsm.pass()
-assertTrue(turnstile.locked)
-println("--pass2")
-fsm.pass()
-println("--pass3")
-fsm.pass()
-println("--coin3")
-fsm.coin(40)
-assertTrue(turnstile.coins == 40)
-println("--coin4")
-fsm.coin(10)
-assertTrue(turnstile.coins == 0)
-assertTrue(!turnstile.locked)</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="output">Output</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>--coin1
-entering:LOCKED ([10]) for Turnstile(locked=true,coins=0)
-Value=10, Total=10
-Coins=10, Please add 40
-entering:COINS ([10]) for Turnstile(locked=true,coins=10)
---coin2
-entering:COINS ([60]) for Turnstile(locked=true,coins=10)
-Value=60, Total=70
-Return Coin:20
-Unlock
-Reset coins=0
-entering:UNLOCKED ([60]) for Turnstile(locked=false,coins=0)
---pass1
-exiting:UNLOCKED for Turnstile(locked=false,coins=0)
-Lock
-entering:LOCKED for Turnstile(locked=true,coins=0)
---pass2
-Default action for state(LOCKED) -&gt; on(PASS) for Turnstile(locked=true,coins=0)
-Alarm
---pass3
-Default action for state(LOCKED) -&gt; on(PASS) for Turnstile(locked=true,coins=0)
-Alarm
---coin3
-entering:LOCKED ([40]) for Turnstile(locked=true,coins=0)
-Value=40, Total=40
-Coins=40, Please add 10
-entering:COINS ([40]) for Turnstile(locked=true,coins=40)
---coin4
-entering:COINS ([10]) for Turnstile(locked=true,coins=40)
-Value=10, Total=50
-Unlock
-Reset coins=0
-entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-07-31 23:18:57 +0200
+Last updated 2019-08-01 00:36:38 +0200
 </div>
 </div>
 <script src="prism.js"></script>
