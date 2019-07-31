@@ -11,16 +11,27 @@ plugins {
 }
 
 gitPublish {
+    def siteDir = file("$buildDir/jbake")
     repoUri = 'https://github.com/open-jumpco/open-jumpco.github.io.git'
-    // referenceRepoUri = 'file:///home/human/projects/test-repo/'
+
     branch = 'gh-pages'
 
-    repoDir = file("$buildDir/jbake")
+    contents {
+        from(siteDir) {
+            into '.'
+        }
+    }
 }
 
 gitPublishCommit.dependsOn bake
 gitPublishCopy.dependsOn bake
 
+jbake {
+    configuration['site.host'] = '.'
+    configuration['render.tags'] = 'false'
+    configuration['render.sitemap'] = 'true'
+    configuration['template.project.file'] = 'project.ftl'
 
+}
 
 // retrieve published documentation from various projects.
