@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>GuardedTransition - kfsm</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kfsm</a>&nbsp;/&nbsp;<a href="../index.html">io.jumpco.open.kfsm</a>&nbsp;/&nbsp;<a href="./index.html">GuardedTransition</a><br/>
+<br/>
+<h1>GuardedTransition</h1>
+<code><span class="keyword">class </span><span class="identifier">GuardedTransition</span><span class="symbol">&lt;</span><span class="identifier">S</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="index.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-simple-transition/index.html"><span class="identifier">SimpleTransition</span></a><span class="symbol">&lt;</span><a href="index.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span></code>
+<p>Represents a guarded transition. The transition will be considered if the guard expression is true</p>
+<h3>Parameters</h3>
+<p><a name="startState"></a>
+<code>startState</code> - The given state</p>
+<p><a name="event"></a>
+<code>event</code> - The given event</p>
+<p><a name="targetState"></a>
+<code>targetState</code> - when optional represents an internal transition</p>
+<p><a name="guard"></a>
+<code>guard</code> - Expression lambda returning a Boolean</p>
+<p><a name="action"></a>
+<code>action</code> - An optional lambda that will be invoked.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">GuardedTransition</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm.GuardedTransition$<init>(io.jumpco.open.kfsm.GuardedTransition.S, io.jumpco.open.kfsm.GuardedTransition.E, io.jumpco.open.kfsm.GuardedTransition.S, kotlin.Function2((io.jumpco.open.kfsm.GuardedTransition.C, kotlin.Array((kotlin.Any)), kotlin.Boolean)), kotlin.Function2((io.jumpco.open.kfsm.GuardedTransition.C, kotlin.Array((kotlin.Any)), kotlin.Unit)))/startState">startState</span><span class="symbol">:</span>&nbsp;<a href="index.html#S"><span class="identifier">S</span></a><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.GuardedTransition$<init>(io.jumpco.open.kfsm.GuardedTransition.S, io.jumpco.open.kfsm.GuardedTransition.E, io.jumpco.open.kfsm.GuardedTransition.S, kotlin.Function2((io.jumpco.open.kfsm.GuardedTransition.C, kotlin.Array((kotlin.Any)), kotlin.Boolean)), kotlin.Function2((io.jumpco.open.kfsm.GuardedTransition.C, kotlin.Array((kotlin.Any)), kotlin.Unit)))/event">event</span><span class="symbol">:</span>&nbsp;<a href="index.html#E"><span class="identifier">E</span></a><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.GuardedTransition$<init>(io.jumpco.open.kfsm.GuardedTransition.S, io.jumpco.open.kfsm.GuardedTransition.E, io.jumpco.open.kfsm.GuardedTransition.S, kotlin.Function2((io.jumpco.open.kfsm.GuardedTransition.C, kotlin.Array((kotlin.Any)), kotlin.Boolean)), kotlin.Function2((io.jumpco.open.kfsm.GuardedTransition.C, kotlin.Array((kotlin.Any)), kotlin.Unit)))/targetState">targetState</span><span class="symbol">:</span>&nbsp;<a href="index.html#S"><span class="identifier">S</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.GuardedTransition$<init>(io.jumpco.open.kfsm.GuardedTransition.S, io.jumpco.open.kfsm.GuardedTransition.E, io.jumpco.open.kfsm.GuardedTransition.S, kotlin.Function2((io.jumpco.open.kfsm.GuardedTransition.C, kotlin.Array((kotlin.Any)), kotlin.Boolean)), kotlin.Function2((io.jumpco.open.kfsm.GuardedTransition.C, kotlin.Array((kotlin.Any)), kotlin.Unit)))/guard">guard</span><span class="symbol">:</span>&nbsp;<a href="../-state-guard.html"><span class="identifier">StateGuard</span></a><span class="symbol">&lt;</span><a href="index.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.GuardedTransition$<init>(io.jumpco.open.kfsm.GuardedTransition.S, io.jumpco.open.kfsm.GuardedTransition.E, io.jumpco.open.kfsm.GuardedTransition.S, kotlin.Function2((io.jumpco.open.kfsm.GuardedTransition.C, kotlin.Array((kotlin.Any)), kotlin.Boolean)), kotlin.Function2((io.jumpco.open.kfsm.GuardedTransition.C, kotlin.Array((kotlin.Any)), kotlin.Unit)))/action">action</span><span class="symbol">:</span>&nbsp;<a href="../-state-action.html"><span class="identifier">StateAction</span></a><span class="symbol">&lt;</span><a href="index.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span><span class="symbol">?</span><span class="symbol">)</span></code>
+<p>Represents a guarded transition. The transition will be considered if the guard expression is true</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="guard-met.html">guardMet</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">guardMet</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm.GuardedTransition$guardMet(io.jumpco.open.kfsm.GuardedTransition.C, kotlin.Array((kotlin.Any)))/context">context</span><span class="symbol">:</span>&nbsp;<a href="index.html#C"><span class="identifier">C</span></a><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.GuardedTransition$guardMet(io.jumpco.open.kfsm.GuardedTransition.C, kotlin.Array((kotlin.Any)))/args">args</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><span class="identifier">Array</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>This function will invoke the guard expression using the provided context to determine if transition can be considered.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

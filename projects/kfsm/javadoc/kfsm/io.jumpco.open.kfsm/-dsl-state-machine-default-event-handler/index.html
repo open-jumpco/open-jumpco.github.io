@@ -1,0 +1,71 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>DslStateMachineDefaultEventHandler - kfsm</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kfsm</a>&nbsp;/&nbsp;<a href="../index.html">io.jumpco.open.kfsm</a>&nbsp;/&nbsp;<a href="./index.html">DslStateMachineDefaultEventHandler</a><br/>
+<br/>
+<h1>DslStateMachineDefaultEventHandler</h1>
+<code><span class="keyword">class </span><span class="identifier">DslStateMachineDefaultEventHandler</span><span class="symbol">&lt;</span><span class="identifier">S</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="index.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code>
+<p>This handler will be active inside the default section of the statemachine.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">DslStateMachineDefaultEventHandler</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm.DslStateMachineDefaultEventHandler$<init>(io.jumpco.open.kfsm.StateMachineBuilder((io.jumpco.open.kfsm.DslStateMachineDefaultEventHandler.S, io.jumpco.open.kfsm.DslStateMachineDefaultEventHandler.E, io.jumpco.open.kfsm.DslStateMachineDefaultEventHandler.C)))/fsm">fsm</span><span class="symbol">:</span>&nbsp;<a href="../-state-machine-builder/index.html"><span class="identifier">StateMachineBuilder</span></a><span class="symbol">&lt;</span><a href="index.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span><span class="symbol">)</span></code>
+<p>This handler will be active inside the default section of the statemachine.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="action.html">action</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">action</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm.DslStateMachineDefaultEventHandler$action(kotlin.Function4((io.jumpco.open.kfsm.DslStateMachineDefaultEventHandler.C, io.jumpco.open.kfsm.DslStateMachineDefaultEventHandler.S, io.jumpco.open.kfsm.DslStateMachineDefaultEventHandler.E, kotlin.Array((kotlin.Any)), kotlin.Unit)))/action">action</span><span class="symbol">:</span>&nbsp;<a href="../-default-state-action.html"><span class="identifier">DefaultStateAction</span></a><span class="symbol">&lt;</span><a href="index.html#C"><span class="identifier">C</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Define a default action that will be applied when no other transitions are matched.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="entry.html">entry</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">entry</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm.DslStateMachineDefaultEventHandler$entry(kotlin.Function4((io.jumpco.open.kfsm.DslStateMachineDefaultEventHandler.C, io.jumpco.open.kfsm.DslStateMachineDefaultEventHandler.S, , kotlin.Array((kotlin.Any)), kotlin.Unit)))/action">action</span><span class="symbol">:</span>&nbsp;<a href="../-default-change-action.html"><span class="identifier">DefaultChangeAction</span></a><span class="symbol">&lt;</span><a href="index.html#C"><span class="identifier">C</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Defines an action to perform before a change in the currentState of the FSM</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="exit.html">exit</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">exit</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm.DslStateMachineDefaultEventHandler$exit(kotlin.Function4((io.jumpco.open.kfsm.DslStateMachineDefaultEventHandler.C, io.jumpco.open.kfsm.DslStateMachineDefaultEventHandler.S, , kotlin.Array((kotlin.Any)), kotlin.Unit)))/action">action</span><span class="symbol">:</span>&nbsp;<a href="../-default-change-action.html"><span class="identifier">DefaultChangeAction</span></a><span class="symbol">&lt;</span><a href="index.html#C"><span class="identifier">C</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Defines an action to be performed after the currentState was changed.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on.html">on</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">on</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm.DslStateMachineDefaultEventHandler$on(((io.jumpco.open.kfsm.EventState.E, io.jumpco.open.kfsm.EventState.S)), kotlin.Function2((io.jumpco.open.kfsm.DslStateMachineDefaultEventHandler.C, kotlin.Array((kotlin.Any)), kotlin.Unit)))/event">event</span><span class="symbol">:</span>&nbsp;<span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">&lt;</span><a href="../-event-state.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="../-event-state.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.DslStateMachineDefaultEventHandler$on(((io.jumpco.open.kfsm.EventState.E, io.jumpco.open.kfsm.EventState.S)), kotlin.Function2((io.jumpco.open.kfsm.DslStateMachineDefaultEventHandler.C, kotlin.Array((kotlin.Any)), kotlin.Unit)))/action">action</span><span class="symbol">:</span>&nbsp;<a href="../-state-action.html"><span class="identifier">StateAction</span></a><span class="symbol">&lt;</span><a href="index.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">DslStateMachineDefaultEventHandler</span></a><span class="symbol">&lt;</span><a href="index.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span></code>
+<p>Defines a default transition when an on is received to a specific state.</p>
+<code><span class="keyword">fun </span><span class="identifier">on</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm.DslStateMachineDefaultEventHandler$on(io.jumpco.open.kfsm.DslStateMachineDefaultEventHandler.E, kotlin.Function2((io.jumpco.open.kfsm.DslStateMachineDefaultEventHandler.C, kotlin.Array((kotlin.Any)), kotlin.Unit)))/event">event</span><span class="symbol">:</span>&nbsp;<a href="index.html#E"><span class="identifier">E</span></a><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.DslStateMachineDefaultEventHandler$on(io.jumpco.open.kfsm.DslStateMachineDefaultEventHandler.E, kotlin.Function2((io.jumpco.open.kfsm.DslStateMachineDefaultEventHandler.C, kotlin.Array((kotlin.Any)), kotlin.Unit)))/action">action</span><span class="symbol">:</span>&nbsp;<a href="../-state-action.html"><span class="identifier">StateAction</span></a><span class="symbol">&lt;</span><a href="index.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">DslStateMachineDefaultEventHandler</span></a><span class="symbol">&lt;</span><a href="index.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span></code>
+<p>Defines a default internal transition for a specific event with no change in state.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
