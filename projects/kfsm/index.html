@@ -438,19 +438,66 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#introduction">Introduction</a></li>
+<li><a href="#links">Links</a>
+<ul class="sectlevel2">
+<li><a href="#api-docs">API Docs</a></li>
+<li><a href="#source">Source</a></li>
+</ul>
+</li>
 <li><a href="#documentation">Documentation</a></li>
+<li><a href="#getting-started">Getting Started</a>
+<ul class="sectlevel2">
+<li><a href="#repository">Repository</a></li>
+<li><a href="#jvm-projects">JVM Projects</a></li>
+<li><a href="#kotlinjs-projects">KotlinJS Projects</a></li>
+<li><a href="#kotlinnative-projects-using-wasm">Kotlin/Native Projects using WASM</a></li>
+<li><a href="#kotlinnative-projects-using-linuxx64">Kotlin/Native Projects using LinuxX64</a></li>
+<li><a href="#kotlinnative-projects-using-mingw64">Kotlin/Native Projects using MinGW64</a></li>
+<li><a href="#kotlinnative-projects-using-macos">Kotlin/Native Projects using macOS</a></li>
+</ul>
+</li>
 <li><a href="#dsl">DSL</a>
 <ul class="sectlevel2">
 <li><a href="#statemachine"><code>stateMachine {}</code></a></li>
-<li><a href="#default"><code>default {}</code></a></li>
+<li><a href="#default"><code>default {}</code></a>
+<ul class="sectlevel3">
+<li><a href="#action">action {}</a></li>
+<li><a href="#entry">entry {}</a></li>
+<li><a href="#exit">exit {}</a></li>
+<li><a href="#one-to-s">on(E [to S]) {}</a></li>
+</ul>
+</li>
 <li><a href="#initial"><code>initial {}</code></a></li>
-<li><a href="#states"><code>state(S) {}</code></a></li>
+<li><a href="#states"><code>state(S) {}</code></a>
+<ul class="sectlevel3">
+<li><a href="#default-2">default {}</a></li>
+<li><a href="#entry-2">entry {}</a></li>
+<li><a href="#exit-2">exit {}</a></li>
+<li><a href="#one-to-sguard">on(E [to S],[guard = {}]) {}</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#tutorial">Tutorial</a>
 <ul class="sectlevel2">
-<li><a href="#simple-turnstile-example">Simple turnstile example</a></li>
-<li><a href="#events-with-arguments">Events with arguments</a></li>
+<li><a href="#simple-turnstile-example">Simple turnstile example</a>
+<ul class="sectlevel3">
+<li><a href="#state-diagram">State Diagram</a></li>
+<li><a href="#context-class">Context class</a></li>
+<li><a href="#enums-for-states-and-events">Enums for States and Events</a></li>
+<li><a href="#packaged-definition-and-execution">Packaged definition and execution</a></li>
+<li><a href="#usage">Usage</a></li>
+</ul>
+</li>
+<li><a href="#events-with-arguments">Events with arguments</a>
+<ul class="sectlevel3">
+<li><a href="#context-class-2">Context class</a></li>
+<li><a href="#states-and-events">States and Events</a></li>
+<li><a href="#state-machine-definition-packaged">State machine definition packaged</a></li>
+<li><a href="#test">Test</a></li>
+<li><a href="#output">Output</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -487,10 +534,98 @@ a Kotlin DSL along with a simple implementation.</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="links">Links</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="api-docs"><a href="javadoc/kfsm/index.html">API Docs</a></h3>
+
+</div>
+<div class="sect2">
+<h3 id="source"><a href="https://github.com/open-jumpco/kfsm">Source</a></h3>
+
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="documentation">Documentation</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p><a href="javadoc/kfsm/index.html">API Docs</a></p>
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="getting-started">Getting Started</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="repository">Repository</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">repositories {
+    maven {
+        url 'https://oss.sonatype.org/content/groups/public'
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="jvm-projects">JVM Projects</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
+    implementation 'io.jumpco.open:kfsm-jvm:0.6.0-SNAPSHOT'
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="kotlinjs-projects">KotlinJS Projects</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
+    implementation 'io.jumpco.open:kfsm-js:0.6.0-SNAPSHOT'
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="kotlinnative-projects-using-wasm">Kotlin/Native Projects using WASM</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
+    implementation 'io.jumpco.open:kfsm-wasm32:0.6.0-SNAPSHOT'
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="kotlinnative-projects-using-linuxx64">Kotlin/Native Projects using LinuxX64</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
+    implementation 'io.jumpco.open:kfsm-linuxX64:0.6.0-SNAPSHOT'
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="kotlinnative-projects-using-mingw64">Kotlin/Native Projects using MinGW64</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
+    implementation 'io.jumpco.open:kfsm-mingwX64:0.6.0-SNAPSHOT'
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="kotlinnative-projects-using-macos">Kotlin/Native Projects using macOS</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
+    implementation 'io.jumpco.open:kfsm-macosX64:0.6.0-SNAPSHOT'
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -516,6 +651,9 @@ The statemachine supports:</p>
 <p>Default actions per state and globally</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>All configuration calls are eventually applied to <a href="javadoc/kfsm/io.jumpco.open.kfsm/-state-machine-builder/index.html">StateMachineBuilder</a></p>
 </div>
 <div class="sect2">
 <h3 id="statemachine"><code>stateMachine {}</code></h3>
@@ -1388,7 +1526,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-07-31 21:24:27 +0200
+Last updated 2019-07-31 22:20:42 +0200
 </div>
 </div>
 <script src="prism.js"></script>
