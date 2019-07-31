@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Open JumpCO</title>
+    <link>.</link>
+    <atom:link href="./feed.xml" rel="self" type="application/rss+xml" />
+    <description>Open JumpCO Feed</description>
+    <language>en-gb</language>
+    <pubDate>Wed, 31 Jul 2019 13:02:35 +0200</pubDate>
+    <lastBuildDate>Wed, 31 Jul 2019 13:02:35 +0200</lastBuildDate>
+
+    <item>
+      <title>Launching Open JumpCO</title>
+      <link>./blog/2019/launching.html</link>
+      <pubDate>Mon, 29 Jul 2019 00:00:00 +0200</pubDate>
+      <guid isPermaLink="false">blog/2019/launching.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;a href=&quot;https://jumpco.io&quot;&gt;JumpCO&lt;/a&gt; has developed a lot of code over the last 15-20 years.
+A portion of this code is not specific to any customer requirements and is useful across projects.
+Harvesting and publishing such code as open source projects and libraries may be useful beyond JumpCO and to the community at large.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Join us on this journey and suggest ways in which we can improve the process of contribution and collaboration.&lt;/p&gt;
+&lt;/div&gt;
+	</description>
+    </item>
+
+  </channel> 
+</rss>
