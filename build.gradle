@@ -9,12 +9,24 @@ plugins {
     id 'org.jbake.site' version '5.0.0'
     id 'org.ajoberstar.git-publish' version '2.1.1'
 }
+repositories {
+    mavenLocal()
+    jcenter()
+    mavenCentral()
+}
+
+configurations {
+    externalDocs
+}
+
+dependencies {
+    externalDocs 'io.jumpco.open:kfsm:0.6.0-SNAPSHOT:doc@zip'
+}
 
 gitPublish {
     def siteDir = file("$buildDir/jbake")
     repoUri = 'https://github.com/open-jumpco/open-jumpco.github.io.git'
-
-    branch = 'gh-pages'
+    branch = 'master'
 
     contents {
         from(siteDir) {
@@ -23,15 +35,25 @@ gitPublish {
     }
 }
 
-gitPublishCommit.dependsOn bake
-gitPublishCopy.dependsOn bake
-
 jbake {
     configuration['site.host'] = '.'
     configuration['render.tags'] = 'false'
     configuration['render.sitemap'] = 'true'
     configuration['template.project.file'] = 'project.ftl'
-
 }
 
-// retrieve published documentation from various projects.
+task copyProjects(dependsOn: [bake]) {
+    doLast {
+        def baseTargetDir = file("$project.buildDir/jbake/projects")
+        configurations.externalDocs.resolvedConfiguration.resolvedArtifacts.each { artifact ->
+            logger.lifecycle "$name:copy:$artifact"
+            copy {
+                into new File(baseTargetDir, artifact.name)
+                from(zipTree(artifact.file))
+            }
+        }
+    }
+}
+
+gitPublishCommit.dependsOn(copyProjects)
+gitPublishCopy.dependsOn(copyProjects)

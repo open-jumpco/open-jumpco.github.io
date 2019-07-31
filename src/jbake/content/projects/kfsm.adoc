@@ -10,7 +10,7 @@ The KFSM project started as an attempt to learn Kotlin DSL and apply to the prob
 along the lines of link:http://smc.sourceforge.net/[SMC] the Statemap Compiler.
 
 * link:kfsm/index.html[Documentation]
-* link:kfsm/apidocs[API Docs]
-
+* link:kfsm/javadoc/kfsm/index.html[API Docs]
+* link:https://github.com/open-jumpco/kfsm[Source]
 
 
