@@ -438,6 +438,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#introduction">Introduction</a></li>
+<li><a href="#documentation">Documentation</a></li>
+<li><a href="#dsl">DSL</a>
+<ul class="sectlevel2">
+<li><a href="#default"><code>default {}</code></a></li>
+<li><a href="#initial"><code>initial {}</code></a></li>
+<li><a href="#states"><code>state(S) {}</code></a></li>
+</ul>
+</li>
 <li><a href="#tutorial">Tutorial</a>
 <ul class="sectlevel2">
 <li><a href="#simple-turnstile-example">Simple turnstile example</a></li>
@@ -452,18 +460,460 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="introduction">Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This is a small implementation of an FSM in Kotlin.
-This model supports events that trigger may cause a transition from one state to another while performing an optional action.</p>
+<p>Having used various incarnations of <a href="http://smc.sourceforge.net/">SMC</a> over the years we decided to try it again and
+discovered it didn&#8217;t have specific support for Kotlin. Instead of creating a generator for Kotlin we decided to attempt
+a Kotlin DSL along with a simple implementation.</p>
 </div>
 <div class="paragraph">
-<p>Assume we and to manage the state on a simple lock.
-We want to ensure that the <code>lock()</code> function is only called when the lock is not locked and we want <code>unlock()</code> to be called when locked.</p>
+<p>To learn more about Finite State Machines visit:</p>
 </div>
-<div class="paragraph">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Finite-state_machine">Wikipedia - Finite-state machine</a></p>
+</li>
+<li>
+<p><a href="https://brilliant.org/wiki/finite-state-machines/">Brilliant - Finite State Machines</a></p>
+</li>
+<li>
 <p><a href="http://smc.sourceforge.net/slides/SMC_Tutorial.pdf">SMC Tutorial</a></p>
+</li>
+</ul>
 </div>
+<div class="paragraph">
+<p>The <a href="#tutorial">Tutorial</a> provides examples of how to compose a DSL and FSM.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="documentation">Documentation</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><a href="javadoc/kfsm/index.html">API Docs</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="dsl">DSL</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The DSL provides a way of configuring the statemachine.
+The statemachine supports:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Transitions: internal and external</p>
+</li>
+<li>
+<p>Guard expressions</p>
+</li>
+<li>
+<p>Entry and exit actions per state and globally</p>
+</li>
+<li>
+<p>Default actions per state and globally</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The top level element is <code>stateMachine</code> either by using the function</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="javadoc/kfsm/io.jumpco.open.kfsm/-state-machine-builder/state-machine.html">StateMachineBuilder::stateMachine</a></p>
+</li>
+<li>
+<p><a href="javadoc/kfsm/io.jumpco.open.kfsm/state-machine.html">stateMachine</a></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">// using builder function
+val definition = StateMachineBuilder&lt;StateEnum,EventEnum,ContextType&gt;().stateMachine {
+    default { // global defaults
+    }
+    initial { // initial state expression
+    }
+    state { // state definition
+    }
+}.build()
+// using global function
+val definition = stateMachine(StateEnum::class, EventEnum::class,ContextType::class) {
+    default { // global defaults
+    }
+    initial { // initial state expression
+    }
+    state { // state definition
+    }
+}.build()</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="default"><code>default {}</code></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-handler/default.html">DslStateMachineHandler::default</a></p>
+</li>
+<li>
+<p>Mandatory: <em>Optional</em></p>
+</li>
+<li>
+<p>Cardinality: <em>Multiple</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Provide default configuration for entry and exit actions as well as a default action.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">default {
+    action { // global action
+    }
+    entry { // global state entry action
+    }
+    exit { // global state exit action
+    }
+    on { // default transitions
+    }
+}</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="action">action {}</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-default-event-handler/action.html">DslStateMachineDefaultEventHandler::action</a></p>
+</li>
+<li>
+<p>Mandatory: <em>Optional</em></p>
+</li>
+<li>
+<p>Cardinality: <em>Single</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Provide a lambda <code>C.(S,E, Array&lt;out Any&gt;)&#8594;Unit</code> that will be invoked when no other transitions are matched.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">action { currentState, event, args -&gt; // global default action
+    contextFunction()
+    anotherContextFunction()
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="entry">entry {}</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-default-event-handler/entry.html">DslStateMachineDefaultEventHandler::entry</a></p>
+</li>
+<li>
+<p>Mandatory: <em>Optional</em></p>
+</li>
+<li>
+<p>Cardinality: <em>Single</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Provide a lambda <code>C.(S,S,Array&lt;out Any&gt;) &#8594; Unit</code> that will be invoked before a change in the state of the FSM.
+Global entry actions will be called for all external transitions after state specific entry actions.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">entry { fromState, targetState, args -&gt;
+    println("Entering:$targetState from $fromState with ${args.toList()}")
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="exit">exit {}</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-default-event-handler/exit.html">DslStateMachineDefaultEventHandler::exit</a></p>
+</li>
+<li>
+<p>Mandatory: <em>Optional</em></p>
+</li>
+<li>
+<p>Cardinality: <em>Single</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Provide a lambda <code>C.(S,S,Array&lt;out Any&gt;) &#8594; Unit</code> that will be invoked after a change in the state of the FSM.
+Global exit actions will be called for all external transitions after state specific entry actions.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">exit { fromState, targetState, args -&gt;
+    println("Exiting:$fromState to $targetState with ${args.toList()}")
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="one-to-s">on(E [to S]) {}</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-default-event-handler/on.html">DslStateMachineDefaultEventHandler::on</a></p>
+</li>
+<li>
+<p>Mandatory: <em>Optional</em></p>
+</li>
+<li>
+<p>Cardinality: <em>Multiple</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This defines a transition when a specific event is receive and no other transition was matched.
+There are 2 variations, the first is internal and doesn&#8217;t define a target state, the second is external and defines a target state.
+In both cases the lambda type is <code>C.(Array&lt;out Any) &#8594; Unit</code></p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">on(Event.EVENT) { args -&gt; // default internal state action for given event
+    someFunction()
+}
+
+on(Event.EVENT to State.STATE) { args-&gt; // default external state action for given event
+    anotherFunction()
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="initial"><code>initial {}</code></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-handler/initial.html">DslStateMachineHandler::initial</a></p>
+</li>
+<li>
+<p>Mandatory: <em>Optional</em></p>
+</li>
+<li>
+<p>Cardinality: <em>Single</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Provide a lambda <code>C.() &#8594; S</code> that will determine the state of the state machine.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">initial {
+    when(flag) {
+        1 -&gt; State.S1
+        2 -&gt; State.S2
+        else -&gt; error("Invalid state")
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="states"><code>state(S) {}</code></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-handler/state.html">DslStateMachineHandler::state</a></p>
+</li>
+<li>
+<p>Mandatory: <em>Mandatory</em></p>
+</li>
+<li>
+<p>Cardinality: <em>Multiple</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Each <code>state</code> block decribes the transitions for a given state.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">state(State.STATE) {
+    default { // default action for State.STATE
+    }
+    entry { // entry action for State.STATE
+    }
+    exit { // exit action for State.STATE
+    }
+    on(Event.EV2 to State.S1, guard = {flag == 1 }) { // external transition with guard expression
+    }
+    on(Event.EV2 to State.S1) { // external transition
+    }
+    on(Event.EV1, guard = { flag == 2 }) { // internal transition with guard expression
+    }
+    on(Event.EV1) { // internal guard expression
+    }
+}</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="default-2">default {}</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-event-handler/default.html">DslStateMachineEventHandler::default</a></p>
+</li>
+<li>
+<p>Mandatory: <em>Optional</em></p>
+</li>
+<li>
+<p>Cardinality: <em>Single</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A state block may have one default action which is a lambda of type <code>C.(S,E,Array&lt;out Any&gt;) &#8594; Unit</code> that is invoked when no other transition is found for the given state and event and guard expressions.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">default { fromState, event, args -&gt; // default state action
+    someDefaultAction()
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="entry-2">entry {}</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-event-handler/entry.html">DslStateMachineEventHandler::entry</a></p>
+</li>
+<li>
+<p>Mandatory: <em>Optional</em></p>
+</li>
+<li>
+<p>Cardinality: <em>Single</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This defines a lambda of type <code>C.(S,S,Array&lt;out Any&gt;) &#8594; Unit</code> that will be invoked after the transition action for an external transition.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">entry { fromState, targetState, args -&gt; // state entry action
+    println("Entering:$targetState from $fromState with ${args.toList()}")
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="exit-2">exit {}</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-event-handler/exit.html">DslStateMachineEventHandler::exit</a></p>
+</li>
+<li>
+<p>Mandatory: <em>Optional</em></p>
+</li>
+<li>
+<p>Cardinality: <em>Single</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This defines a lambda of type <code>C.(S,S,Array&lt;out Any&gt;) &#8594; Unit</code> that will be invoked before the transition action for an external transitions.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">exit { fromState, targetState, args -&gt; // state exit action
+    println("Exiting:$fromState to $targetState with ${args.toList()}")
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="one-to-sguard">on(E [to S],[guard = {}]) {}</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-event-handler/on.html">DslStateMachineEventHandler::on</a></p>
+</li>
+<li>
+<p>Mandatory: <em>Optional</em></p>
+</li>
+<li>
+<p>Cardinality: <em>Multiple</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>There are 4 variations of transitions: External and internal, with and without a guard expression.</p>
+</div>
+<div class="paragraph">
+<p>This defines a transition action for a given event.
+For an external transition a target state must be provided, while an internal transition must have no targetState.
+An optional guard expression can be provided. The order in which the DSL encounters guard expression determine the evaluation order.
+The first matching guard expression will determine the transition that will be used.
+Their may be only one transition without a guard expression.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">on(Event.EV1, guard = { flag == 1 }) { args -&gt; // internal transition with guard expression
+}
+on(Event.EV1 to State.S2, guard = { flag == 2}) { args -&gt; // external transition with guard expression
+}
+on(Event.EV1) { args -&gt; // internal transition
+}
+on(Event.EV2 to State.S2) { args -&gt; // external transition
+}</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -472,6 +922,10 @@ We want to ensure that the <code>lock()</code> function is only called when the 
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="simple-turnstile-example">Simple turnstile example</h3>
+<div class="paragraph">
+<p>Assume we and to manage the state on a simple lock.
+We want to ensure that the <code>lock()</code> function is only called when the lock is not locked and we want <code>unlock()</code> to be called when locked.</p>
+</div>
 <div class="paragraph">
 <p>Then we use the DSL to declare a definition of a statemachine matching the diagram:</p>
 </div>
@@ -930,7 +1384,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-07-31 17:23:08 +0200
+Last updated 2019-07-31 21:24:27 +0200
 </div>
 </div>
 <script src="prism.js"></script>
