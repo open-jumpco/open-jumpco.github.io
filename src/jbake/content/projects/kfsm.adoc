@@ -2,12 +2,12 @@ title=KFSM
 date=2019-07-29
 type=project
 status=published
-summary=KFSM - A Kotlin DSL for finite state machines
+summary=KFSM - A Kotlin finite-state machine
 ~~~~~~
-= KFSM - A Kotlin DSL for finite state machines
+= KFSM - A Kotlin finite-state machine
 
-The KFSM project started as an attempt to learn Kotlin DSL and apply to the problem of producing a finite state machine implementation
-along the lines of link:http://smc.sourceforge.net/[SMC] the Statemap Compiler.
+The KFSM project started as an attempt to learn Kotlin DSL and apply to the problem of producing a finite-state machine implementation
+along the lines of link:http://smc.sourceforge.net/[SMC] the State Machine Compiler.
 
 * link:kfsm/index.html[Documentation]
 * link:kfsm/javadoc/kfsm/index.html[API Docs]
