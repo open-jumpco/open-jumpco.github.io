@@ -489,7 +489,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#action">action {}</a></li>
 <li><a href="#entry">entry {}</a></li>
 <li><a href="#exit">exit {}</a></li>
-<li><a href="#one-to-s">on(E [to S]) {}</a></li>
+<li><a href="#transitione-to-s">transition(E [to S]) {}</a></li>
 </ul>
 </li>
 <li><a href="#initial"><code>initial {}</code></a></li>
@@ -498,7 +498,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#default-2">default {}</a></li>
 <li><a href="#entry-2">entry {}</a></li>
 <li><a href="#exit-2">exit {}</a></li>
-<li><a href="#one-to-sguard">on(E [to S],[guard = {}]) {}</a></li>
+<li><a href="#transitione-to-sguard">transition(E [to S],[guard = {}]) {}</a></li>
 </ul>
 </li>
 </ul>
@@ -637,7 +637,7 @@ enum class TurnstileEvents {
                     println("entering:$startState -&gt; $targetState for $this")
                 }
                 action { state, event, _ -&gt;
-                    println("Default action for state($state) -&gt; on($event) for $this")
+                    println("Default action for state($state) -&gt; event($event) for $this")
                     alarm()
                 }
                 exit { startState, targetState, _ -&gt;
@@ -645,15 +645,15 @@ enum class TurnstileEvents {
                 }
             }
             state(TurnstileStates.LOCKED) {
-                on(TurnstileEvents.COIN to TurnstileStates.UNLOCKED) {
+                transition(TurnstileEvents.COIN to TurnstileStates.UNLOCKED) {
                     unlock()
                 }
             }
             state(TurnstileStates.UNLOCKED) {
-                on(TurnstileEvents.COIN) {
+                transition(TurnstileEvents.COIN) {
                     returnCoin()
                 }
-                on(TurnstileEvents.PASS to TurnstileStates.LOCKED) {
+                transition(TurnstileEvents.PASS to TurnstileStates.LOCKED) {
                     lock()
                 }
             }
@@ -733,7 +733,7 @@ fsm.coin()
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">on(EVENT1) { args -&gt;
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">transition(EVENT1) { args -&gt;
     val value = args[0] as Int
     // use value
 }</code></pre>
@@ -855,9 +855,9 @@ enum class PayingTurnstileEvents {
                 }
                 action { state, event, args -&gt;
                     if (args.isNotEmpty()) {
-                        println("Default action for state($state) -&gt; on($event, ${args.toList()}) for $this")
+                        println("Default action for state($state) -&gt; event($event, ${args.toList()}) for $this")
                     } else {
-                        println("Default action for state($state) -&gt; on($event) for $this")
+                        println("Default action for state($state) -&gt; event($event) for $this")
                     }
                     alarm()
                 }
@@ -871,7 +871,7 @@ enum class PayingTurnstileEvents {
             }
             state(PayingTurnstileStates.LOCKED) {
                 // The coins add up to more than required
-                on(PayingTurnstileEvents.COIN to PayingTurnstileStates.UNLOCKED,
+                transition(PayingTurnstileEvents.COIN to PayingTurnstileStates.UNLOCKED,
                     guard = { args -&gt; val value = args[0] as Int;
                         value + this.coins &gt; this.requiredCoins
                     }) { args -&gt; val value = args[0] as Int
@@ -880,7 +880,7 @@ enum class PayingTurnstileEvents {
                     reset()
                 }
                 // The coins add up to more than required
-                on(PayingTurnstileEvents.COIN to PayingTurnstileStates.COINS,
+                transition(PayingTurnstileEvents.COIN to PayingTurnstileStates.COINS,
                     guard = { args -&gt; val value = args[0] as Int;
                         value + this.coins &lt; this.requiredCoins
                     }) { args -&gt; val value = args[0] as Int
@@ -888,7 +888,7 @@ enum class PayingTurnstileEvents {
                     println("Coins=$coins, Please add ${requiredCoins - coins}")
                 }
                 // The coin brings amount to exact amount
-                on(PayingTurnstileEvents.COIN to PayingTurnstileStates.UNLOCKED) { args -&gt; val value = args[0] as Int
+                transition(PayingTurnstileEvents.COIN to PayingTurnstileStates.UNLOCKED) { args -&gt; val value = args[0] as Int
                     coin(value)
                     unlock()
                     reset()
@@ -896,7 +896,7 @@ enum class PayingTurnstileEvents {
             }
             state(PayingTurnstileStates.COINS) {
                 // The coins add up to more than required.
-                on(PayingTurnstileEvents.COIN to PayingTurnstileStates.UNLOCKED,
+                transition(PayingTurnstileEvents.COIN to PayingTurnstileStates.UNLOCKED,
                     guard = { args -&gt; val value = args[0] as Int
                         value + this.coins &gt; this.requiredCoins
                     }) { args -&gt; val value = args[0] as Int
@@ -905,7 +905,7 @@ enum class PayingTurnstileEvents {
                     reset()
                 }
                 // The coins isn't enough to make total match required
-                on(PayingTurnstileEvents.COIN to PayingTurnstileStates.COINS,
+                transition(PayingTurnstileEvents.COIN to PayingTurnstileStates.COINS,
                     guard = { args -&gt; val value = args[0] as Int;
                         value + this.coins &lt; this.requiredCoins
                     }) { args -&gt; val value = args[0] as Int
@@ -913,17 +913,17 @@ enum class PayingTurnstileEvents {
                     println("Coins=$coins, Please add ${requiredCoins - coins}")
                 }
                 // The coin is exact amount required
-                on(PayingTurnstileEvents.COIN to PayingTurnstileStates.UNLOCKED) { args -&gt; val value = args[0] as Int
+                transition(PayingTurnstileEvents.COIN to PayingTurnstileStates.UNLOCKED) { args -&gt; val value = args[0] as Int
                     coin(value)
                     unlock()
                     reset()
                 }
             }
             state(PayingTurnstileStates.UNLOCKED) {
-                on(PayingTurnstileEvents.COIN) { args -&gt; val value = args[0] as Int
+                transition(PayingTurnstileEvents.COIN) { args -&gt; val value = args[0] as Int
                     returnCoin(coin(value))
                 }
-                on(PayingTurnstileEvents.PASS to PayingTurnstileStates.LOCKED) {
+                transition(PayingTurnstileEvents.PASS to PayingTurnstileStates.LOCKED) {
                     lock()
                 }
             }
@@ -991,10 +991,10 @@ exiting:UNLOCKED for Turnstile(locked=false,coins=0)
 Lock
 entering:LOCKED for Turnstile(locked=true,coins=0)
 --pass2
-Default action for state(LOCKED) -&gt; on(PASS) for Turnstile(locked=true,coins=0)
+Default action for state(LOCKED) -&gt; event(PASS) for Turnstile(locked=true,coins=0)
 Alarm
 --pass3
-Default action for state(LOCKED) -&gt; on(PASS) for Turnstile(locked=true,coins=0)
+Default action for state(LOCKED) -&gt; event(PASS) for Turnstile(locked=true,coins=0)
 Alarm
 --coin3
 entering:LOCKED ([40]) for Turnstile(locked=true,coins=0)
@@ -1035,7 +1035,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-jvm:0.7.0'
+    implementation 'io.jumpco.open:kfsm-jvm:0.8.0'
 }</code></pre>
 </div>
 </div>
@@ -1045,7 +1045,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-js:0.7.0'
+    implementation 'io.jumpco.open:kfsm-js:0.8.0'
 }</code></pre>
 </div>
 </div>
@@ -1055,7 +1055,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-wasm32:0.7.0'
+    implementation 'io.jumpco.open:kfsm-wasm32:0.8.0'
 }</code></pre>
 </div>
 </div>
@@ -1065,7 +1065,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-linuxX64:0.7.0'
+    implementation 'io.jumpco.open:kfsm-linuxX64:0.8.0'
 }</code></pre>
 </div>
 </div>
@@ -1075,7 +1075,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-mingwX64:0.7.0'
+    implementation 'io.jumpco.open:kfsm-mingwX64:0.8.0'
 }</code></pre>
 </div>
 </div>
@@ -1085,7 +1085,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-macosX64:0.7.0'
+    implementation 'io.jumpco.open:kfsm-macosX64:0.8.0'
 }</code></pre>
 </div>
 </div>
@@ -1187,7 +1187,7 @@ val definition = stateMachine(StateEnum::class, EventEnum::class,ContextType::cl
     }
     exit { // global state exit action
     }
-    on { // default transitions
+    transition { // default transitions
     }
 }</code></pre>
 </div>
@@ -1283,11 +1283,11 @@ Global exit actions will be called for all external transitions after state spec
 </div>
 </div>
 <div class="sect3">
-<h4 id="one-to-s">on(E [to S]) {}</h4>
+<h4 id="transitione-to-s">transition(E [to S]) {}</h4>
 <div class="ulist">
 <ul>
 <li>
-<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-default-event-handler/on.html">DslStateMachineDefaultEventHandler::on</a></p>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-default-event-handler/transition.html">DslStateMachineDefaultEventHandler::transition</a></p>
 </li>
 <li>
 <p>Mandatory: <em>Optional</em></p>
@@ -1307,11 +1307,11 @@ In both cases the lambda type is <code>C.(Array&lt;out Any) &#8594; Unit</code><
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">on(Event.EVENT) { args -&gt; // default internal state action for given event
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">transition(Event.EVENT) { args -&gt; // default internal state action for given event
     someFunction()
 }
 
-on(Event.EVENT to State.STATE) { args-&gt; // default external state action for given event
+transition(Event.EVENT to State.STATE) { args-&gt; // default external state action for given event
     anotherFunction()
 }</code></pre>
 </div>
@@ -1381,13 +1381,13 @@ on(Event.EVENT to State.STATE) { args-&gt; // default external state action for 
     }
     exit { // exit action for State.STATE
     }
-    on(Event.EV2 to State.S1, guard = {flag == 1 }) { // external transition with guard expression
+    transition(Event.EV2 to State.S1, guard = {flag == 1 }) { // external transition with guard expression
     }
-    on(Event.EV2 to State.S1) { // external transition
+    transition(Event.EV2 to State.S1) { // external transition
     }
-    on(Event.EV1, guard = { flag == 2 }) { // internal transition with guard expression
+    transition(Event.EV1, guard = { flag == 2 }) { // internal transition with guard expression
     }
-    on(Event.EV1) { // internal guard expression
+    transition(Event.EV1) { // internal guard expression
     }
 }</code></pre>
 </div>
@@ -1480,11 +1480,11 @@ on(Event.EVENT to State.STATE) { args-&gt; // default external state action for 
 </div>
 </div>
 <div class="sect3">
-<h4 id="one-to-sguard">on(E [to S],[guard = {}]) {}</h4>
+<h4 id="transitione-to-sguard">transition(E [to S],[guard = {}]) {}</h4>
 <div class="ulist">
 <ul>
 <li>
-<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-event-handler/on.html">DslStateMachineEventHandler::on</a></p>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-event-handler/transition.html">DslStateMachineEventHandler::transition</a></p>
 </li>
 <li>
 <p>Mandatory: <em>Optional</em></p>
@@ -1509,13 +1509,13 @@ Their may be only one transition without a guard expression.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">on(Event.EV1, guard = { flag == 1 }) { args -&gt; // internal transition with guard expression
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">transition(Event.EV1, guard = { flag == 1 }) { args -&gt; // internal transition with guard expression
 }
-on(Event.EV1 to State.S2, guard = { flag == 2}) { args -&gt; // external transition with guard expression
+transition(Event.EV1 to State.S2, guard = { flag == 2}) { args -&gt; // external transition with guard expression
 }
-on(Event.EV1) { args -&gt; // internal transition
+transition(Event.EV1) { args -&gt; // internal transition
 }
-on(Event.EV2 to State.S2) { args -&gt; // external transition
+transition(Event.EV2 to State.S2) { args -&gt; // external transition
 }</code></pre>
 </div>
 </div>
