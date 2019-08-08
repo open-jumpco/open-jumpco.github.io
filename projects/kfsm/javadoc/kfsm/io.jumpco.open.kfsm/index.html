@@ -16,26 +16,8 @@
 <p><a href="-default-transition/index.html">DefaultTransition</a></p>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">DefaultTransition</span><span class="symbol">&lt;</span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-default-transition/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">S</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-default-transition/index.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-transition/index.html"><span class="identifier">Transition</span></a><span class="symbol">&lt;</span><a href="-default-transition/index.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="-default-transition/index.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="-default-transition/index.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span></code>
+<code><span class="keyword">class </span><span class="identifier">DefaultTransition</span><span class="symbol">&lt;</span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-default-transition/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-transition/index.html"><span class="identifier">Transition</span></a><span class="symbol">&lt;</span><a href="-default-transition/index.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="-default-transition/index.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="-default-transition/index.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span></code>
 <p>Represents a DefaultTransition</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="-dsl-state-machine-default-event-handler/index.html">DslStateMachineDefaultEventHandler</a></p>
-</td>
-<td>
-<code><span class="keyword">class </span><span class="identifier">DslStateMachineDefaultEventHandler</span><span class="symbol">&lt;</span><span class="identifier">S</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-dsl-state-machine-default-event-handler/index.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-dsl-state-machine-default-event-handler/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code>
-<p>This handler will be active inside the default section of the statemachine.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="-dsl-state-machine-event-handler/index.html">DslStateMachineEventHandler</a></p>
-</td>
-<td>
-<code><span class="keyword">class </span><span class="identifier">DslStateMachineEventHandler</span><span class="symbol">&lt;</span><span class="identifier">S</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-dsl-state-machine-event-handler/index.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-dsl-state-machine-event-handler/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code>
-<p>This class is used in dsl to handle the state declarations.</p>
 </td>
 </tr>
 <tr>
@@ -43,7 +25,34 @@
 <p><a href="-dsl-state-machine-handler/index.html">DslStateMachineHandler</a></p>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">DslStateMachineHandler</span><span class="symbol">&lt;</span><span class="identifier">S</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-dsl-state-machine-handler/index.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-dsl-state-machine-handler/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code>
+<code><span class="keyword">class </span><span class="identifier">DslStateMachineHandler</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-dsl-state-machine-handler/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code>
+<p>This handler will be active inside the top level of the stateMachine definition.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-dsl-state-map-default-event-handler/index.html">DslStateMapDefaultEventHandler</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">DslStateMapDefaultEventHandler</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-dsl-state-map-default-event-handler/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code>
+<p>This handler will be active inside the default section of the statemachine.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-dsl-state-map-event-handler/index.html">DslStateMapEventHandler</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">DslStateMapEventHandler</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-dsl-state-map-event-handler/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code>
+<p>This class is used in dsl to handle the state declarations.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-dsl-state-map-handler/index.html">DslStateMapHandler</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">DslStateMapHandler</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-dsl-state-map-handler/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code>
 <p>This handler will be active inside the top level of the stateMachine definition.</p>
 </td>
 </tr>
@@ -52,7 +61,7 @@
 <p><a href="-guarded-transition/index.html">GuardedTransition</a></p>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">GuardedTransition</span><span class="symbol">&lt;</span><span class="identifier">S</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-guarded-transition/index.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-guarded-transition/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-simple-transition/index.html"><span class="identifier">SimpleTransition</span></a><span class="symbol">&lt;</span><a href="-guarded-transition/index.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="-guarded-transition/index.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="-guarded-transition/index.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span></code>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">GuardedTransition</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-guarded-transition/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-simple-transition/index.html"><span class="identifier">SimpleTransition</span></a><span class="symbol">&lt;</span><a href="-guarded-transition/index.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="-guarded-transition/index.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="-guarded-transition/index.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span></code>
 <p>Represents a guarded transition. The transition will be considered if the guard expression is true</p>
 </td>
 </tr>
@@ -61,16 +70,23 @@
 <p><a href="-simple-transition/index.html">SimpleTransition</a></p>
 </td>
 <td>
-<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">SimpleTransition</span><span class="symbol">&lt;</span><span class="identifier">S</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-simple-transition/index.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-simple-transition/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-transition/index.html"><span class="identifier">Transition</span></a><span class="symbol">&lt;</span><a href="-simple-transition/index.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="-simple-transition/index.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="-simple-transition/index.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span></code>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">SimpleTransition</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-simple-transition/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-transition/index.html"><span class="identifier">Transition</span></a><span class="symbol">&lt;</span><a href="-simple-transition/index.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="-simple-transition/index.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="-simple-transition/index.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span></code>
 <p>Represents a transition from a given state and event.</p>
 </td>
+</tr>
+<tr>
+<td>
+<p><a href="-stack/index.html">Stack</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Stack</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
 <p><a href="-state-machine-builder/index.html">StateMachineBuilder</a></p>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">StateMachineBuilder</span><span class="symbol">&lt;</span><span class="identifier">S</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-state-machine-builder/index.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-state-machine-builder/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code>
+<code><span class="keyword">class </span><span class="identifier">StateMachineBuilder</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-state-machine-builder/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code>
 <p>This class represents the definition of a statemachine.</p>
 </td>
 </tr>
@@ -79,7 +95,7 @@
 <p><a href="-state-machine-definition/index.html">StateMachineDefinition</a></p>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">StateMachineDefinition</span><span class="symbol">&lt;</span><span class="identifier">S</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-state-machine-definition/index.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-state-machine-definition/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code>
+<code><span class="keyword">class </span><span class="identifier">StateMachineDefinition</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-state-machine-definition/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code>
 <p>This class represents an immutable definition of a state machine.</p>
 </td>
 </tr>
@@ -88,17 +104,38 @@
 <p><a href="-state-machine-instance/index.html">StateMachineInstance</a></p>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">StateMachineInstance</span><span class="symbol">&lt;</span><span class="identifier">S</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-state-machine-instance/index.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-state-machine-instance/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code>
+<code><span class="keyword">class </span><span class="identifier">StateMachineInstance</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-state-machine-instance/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code>
 <p>This class represents an instance of a state machine.
 It will process events, matching transitions, invoking entry, transition and exit actions.</p>
 </td>
 </tr>
 <tr>
 <td>
+<p><a href="-state-map-builder/index.html">StateMapBuilder</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">StateMapBuilder</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-state-map-builder/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-state-map-definition/index.html">StateMapDefinition</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">StateMapDefinition</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-state-map-definition/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-state-map-instance/index.html">StateMapInstance</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">StateMapInstance</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-state-map-instance/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
 <p><a href="-transition/index.html">Transition</a></p>
 </td>
 <td>
-<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Transition</span><span class="symbol">&lt;</span><span class="identifier">S</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-transition/index.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-transition/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Transition</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-transition/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code>
 <p>The base for all transitions.</p>
 </td>
 </tr>
@@ -107,9 +144,16 @@ It will process events, matching transitions, invoking entry, transition and exi
 <p><a href="-transition-rules/index.html">TransitionRules</a></p>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">TransitionRules</span><span class="symbol">&lt;</span><span class="identifier">S</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-transition-rules/index.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-transition-rules/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code>
+<code><span class="keyword">class </span><span class="identifier">TransitionRules</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-transition-rules/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code>
 <p>Represents a collection of rule with 1 transition and a list of guarded transitions.</p>
 </td>
+</tr>
+<tr>
+<td>
+<p><a href="-transition-type/index.html">TransitionType</a></p>
+</td>
+<td>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">TransitionType</span></code></td>
 </tr>
 <tr>
 <td>
@@ -171,6 +215,27 @@ They are internal transitions.</p>
 </tr>
 <tr>
 <td>
+<p><a href="-state-map-item.html">StateMapItem</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">StateMapItem</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;<span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">&lt;</span><a href="-state-map-item.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-state-map-list.html">StateMapList</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">StateMapList</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="-state-map-item.html"><span class="identifier">StateMapItem</span></a><span class="symbol">&lt;</span><a href="-state-map-list.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-state-map-query.html">StateMapQuery</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">StateMapQuery</span><span class="symbol">&lt;</span><span class="identifier">C</span><span class="symbol">, </span><span class="identifier">S</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="-state-map-query.html#C"><span class="identifier">C</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="-state-map-list.html"><span class="identifier">StateMapList</span></a><span class="symbol">&lt;</span><a href="-state-map-query.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
 <p><a href="-state-query.html">StateQuery</a></p>
 </td>
 <td>
@@ -197,7 +262,7 @@ statemachine multiple times during the lifecycle of a context represented by a p
 <p><a href="state-machine.html">stateMachine</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">S</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="state-machine.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="state-machine.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">stateMachine</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm$stateMachine(kotlin.reflect.KClass((io.jumpco.open.kfsm.stateMachine.S)), kotlin.reflect.KClass((io.jumpco.open.kfsm.stateMachine.E)), kotlin.reflect.KClass((io.jumpco.open.kfsm.stateMachine.C)), kotlin.Function1((io.jumpco.open.kfsm.DslStateMachineHandler((io.jumpco.open.kfsm.stateMachine.S, io.jumpco.open.kfsm.stateMachine.E, io.jumpco.open.kfsm.stateMachine.C)), kotlin.Unit)))/stateClass">stateClass</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html"><span class="identifier">KClass</span></a><span class="symbol">&lt;</span><a href="state-machine.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm$stateMachine(kotlin.reflect.KClass((io.jumpco.open.kfsm.stateMachine.S)), kotlin.reflect.KClass((io.jumpco.open.kfsm.stateMachine.E)), kotlin.reflect.KClass((io.jumpco.open.kfsm.stateMachine.C)), kotlin.Function1((io.jumpco.open.kfsm.DslStateMachineHandler((io.jumpco.open.kfsm.stateMachine.S, io.jumpco.open.kfsm.stateMachine.E, io.jumpco.open.kfsm.stateMachine.C)), kotlin.Unit)))/eventClass">eventClass</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html"><span class="identifier">KClass</span></a><span class="symbol">&lt;</span><a href="state-machine.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm$stateMachine(kotlin.reflect.KClass((io.jumpco.open.kfsm.stateMachine.S)), kotlin.reflect.KClass((io.jumpco.open.kfsm.stateMachine.E)), kotlin.reflect.KClass((io.jumpco.open.kfsm.stateMachine.C)), kotlin.Function1((io.jumpco.open.kfsm.DslStateMachineHandler((io.jumpco.open.kfsm.stateMachine.S, io.jumpco.open.kfsm.stateMachine.E, io.jumpco.open.kfsm.stateMachine.C)), kotlin.Unit)))/contextClass">contextClass</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html"><span class="identifier">KClass</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="state-machine.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm$stateMachine(kotlin.reflect.KClass((io.jumpco.open.kfsm.stateMachine.S)), kotlin.reflect.KClass((io.jumpco.open.kfsm.stateMachine.E)), kotlin.reflect.KClass((io.jumpco.open.kfsm.stateMachine.C)), kotlin.Function1((io.jumpco.open.kfsm.DslStateMachineHandler((io.jumpco.open.kfsm.stateMachine.S, io.jumpco.open.kfsm.stateMachine.E, io.jumpco.open.kfsm.stateMachine.C)), kotlin.Unit)))/handler">handler</span><span class="symbol">:</span>&nbsp;<a href="-dsl-state-machine-handler/index.html"><span class="identifier">DslStateMachineHandler</span></a><span class="symbol">&lt;</span><a href="state-machine.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="state-machine.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="state-machine.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-dsl-state-machine-handler/index.html"><span class="identifier">DslStateMachineHandler</span></a><span class="symbol">&lt;</span><a href="state-machine.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="state-machine.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="state-machine.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span></code>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="state-machine.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <span class="identifier">stateMachine</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm$stateMachine(kotlin.collections.Set((io.jumpco.open.kfsm.stateMachine.S)), kotlin.reflect.KClass((io.jumpco.open.kfsm.stateMachine.E)), kotlin.reflect.KClass((io.jumpco.open.kfsm.stateMachine.C)), kotlin.Function1((io.jumpco.open.kfsm.DslStateMachineHandler((io.jumpco.open.kfsm.stateMachine.S, io.jumpco.open.kfsm.stateMachine.E, io.jumpco.open.kfsm.stateMachine.C)), kotlin.Unit)))/validStates">validStates</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html"><span class="identifier">Set</span></a><span class="symbol">&lt;</span><a href="state-machine.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm$stateMachine(kotlin.collections.Set((io.jumpco.open.kfsm.stateMachine.S)), kotlin.reflect.KClass((io.jumpco.open.kfsm.stateMachine.E)), kotlin.reflect.KClass((io.jumpco.open.kfsm.stateMachine.C)), kotlin.Function1((io.jumpco.open.kfsm.DslStateMachineHandler((io.jumpco.open.kfsm.stateMachine.S, io.jumpco.open.kfsm.stateMachine.E, io.jumpco.open.kfsm.stateMachine.C)), kotlin.Unit)))/eventClass">eventClass</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html"><span class="identifier">KClass</span></a><span class="symbol">&lt;</span><a href="state-machine.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm$stateMachine(kotlin.collections.Set((io.jumpco.open.kfsm.stateMachine.S)), kotlin.reflect.KClass((io.jumpco.open.kfsm.stateMachine.E)), kotlin.reflect.KClass((io.jumpco.open.kfsm.stateMachine.C)), kotlin.Function1((io.jumpco.open.kfsm.DslStateMachineHandler((io.jumpco.open.kfsm.stateMachine.S, io.jumpco.open.kfsm.stateMachine.E, io.jumpco.open.kfsm.stateMachine.C)), kotlin.Unit)))/contextClass">contextClass</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html"><span class="identifier">KClass</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="state-machine.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm$stateMachine(kotlin.collections.Set((io.jumpco.open.kfsm.stateMachine.S)), kotlin.reflect.KClass((io.jumpco.open.kfsm.stateMachine.E)), kotlin.reflect.KClass((io.jumpco.open.kfsm.stateMachine.C)), kotlin.Function1((io.jumpco.open.kfsm.DslStateMachineHandler((io.jumpco.open.kfsm.stateMachine.S, io.jumpco.open.kfsm.stateMachine.E, io.jumpco.open.kfsm.stateMachine.C)), kotlin.Unit)))/handler">handler</span><span class="symbol">:</span>&nbsp;<a href="-dsl-state-machine-handler/index.html"><span class="identifier">DslStateMachineHandler</span></a><span class="symbol">&lt;</span><a href="state-machine.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="state-machine.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="state-machine.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-dsl-state-machine-handler/index.html"><span class="identifier">DslStateMachineHandler</span></a><span class="symbol">&lt;</span><a href="state-machine.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="state-machine.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="state-machine.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span></code>
 <p>Defines the start of a state machine DSL declaration</p>
 </td>
 </tr>
