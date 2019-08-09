@@ -493,6 +493,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#initial"><code>initial {}</code></a></li>
+<li><a href="#initialmap"><code>initialMap {}</code></a></li>
 <li><a href="#statecurrentstate-s"><code>state(currentState: S) {}</code></a>
 <ul class="sectlevel3">
 <li><a href="#default-2">default {}</a></li>
@@ -1210,7 +1211,7 @@ val definition = stateMachine(StateEnum.values().toSet(), EventEnum::class,Conte
 <div class="ulist">
 <ul>
 <li>
-<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/dsl-state-machine-handler/default.html">DslStateMachineHandler::default</a></p>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-handler/default.html">DslStateMachineHandler::default</a></p>
 </li>
 <li>
 <p>Mandatory: <em>Optional</em></p>
@@ -1245,7 +1246,7 @@ val definition = stateMachine(StateEnum.values().toSet(), EventEnum::class,Conte
 <div class="ulist">
 <ul>
 <li>
-<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-default-event-handler/action.html">DslStateMachineDefaultEventHandler::action</a></p>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-default-event-handler/action.html">DslStateMachineDefaultEventHandler::action</a></p>
 </li>
 <li>
 <p>Mandatory: <em>Optional</em></p>
@@ -1371,7 +1372,7 @@ transition(Event.EVENT to State.STATE) { args-&gt; // default external state act
 <div class="ulist">
 <ul>
 <li>
-<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-handler/initial.html">DslStateMachineHandler::initial</a></p>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-handler/initial.html">DslStateMachineHandler::initial</a></p>
 </li>
 <li>
 <p>Mandatory: <em>Optional</em></p>
@@ -1394,6 +1395,48 @@ transition(Event.EVENT to State.STATE) { args-&gt; // default external state act
         1 -&gt; State.S1
         2 -&gt; State.S2
         else -&gt; error("Invalid state")
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="initialmap"><code>initialMap {}</code></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-handler/initial-map.html">DslStateMachineHandler::initialMap</a></p>
+</li>
+<li>
+<p>Mandatory: <em>Optional</em></p>
+</li>
+<li>
+<p>Cardinality: <em>Single</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>One of <code>initial</code> or <code>initialMap</code> must be provided.
+When a state-machine has named maps the <code>initialMap</code> must be provied.</p>
+</div>
+<div class="paragraph">
+<p>Provide a lambda <code>C.() &#8594; StateMapList&lt;S&gt;</code> that will determine the state of the state machine and map names that should be placed on the stack.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">initialMap {
+    mutableListOf&lt;StateMapItem&lt;PayingTurnstileStates&gt;&gt;().apply {
+        if (locked) {
+            this.add(PayingTurnstileStates.LOCKED to "default")
+        } else {
+            this.add(PayingTurnstileStates.UNLOCKED to "default")
+        }
+        if (coins &gt; 0) {
+            this.add(PayingTurnstileStates.COINS to "coins")
+        }
     }
 }</code></pre>
 </div>
