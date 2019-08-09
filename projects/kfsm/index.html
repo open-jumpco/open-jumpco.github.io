@@ -493,12 +493,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#initial"><code>initial {}</code></a></li>
-<li><a href="#states"><code>state(S) {}</code></a>
+<li><a href="#statecurrentstate-s"><code>state(currentState: S) {}</code></a>
 <ul class="sectlevel3">
 <li><a href="#default-2">default {}</a></li>
 <li><a href="#entry-2">entry {}</a></li>
 <li><a href="#exit-2">exit {}</a></li>
-<li><a href="#transitione-to-sguard">transition(E [to S],[guard = {}]) {}</a></li>
+<li><a href="#automatictargetstate-s-guard">automatic(targetState: S [, guard:{}]) {}</a></li>
+<li><a href="#automaticpoptargetstate-s-guard">automaticPop(targetState: S [, guard:{}]) {}</a></li>
+<li><a href="#automaticpushtargetmap-string-targetstate-s-guard">automaticPush(targetMap: String, targetState: S [, guard:{}]) {}</a></li>
+<li><a href="#poptransitionevent-e-to-targetstate-stargetmap-string-targetstate-s-guard">popTransition(event: E [to targetState: S]|[,targetMap: String, targetState: S], [guard:{}]) {}</a></li>
+<li><a href="#pushtransitionevent-e-targetmap-string-targetstate-s-guard">pushTransition(event: E, targetMap: String, targetState: S [, guard:{}]) {}</a></li>
+<li><a href="#transitionevent-e-to-targetstate-sguard">transition(event: E [to targetState: S],[guard: {}]) {}</a></li>
 </ul>
 </li>
 </ul>
@@ -625,7 +630,7 @@ enum class TurnstileEvents {
 <div class="content">
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class TurnstileFSM(turnstile: Turnstile) {
     companion object {
-        private val definition = stateMachine(TurnstileStates::class, TurnstileEvents::class, Turnstile::class) {
+        private val definition = stateMachine(TurnstileStates.values().toSet(), TurnstileEvents::class, Turnstile::class) {
             initial {
             if (locked)
                 TurnstileStates.LOCKED
@@ -741,7 +746,8 @@ fsm.coin()
 </div>
 <div class="paragraph">
 <p>If we update the turnstile to include the value of the coin in the coin event we could implement the following:
-Various guard expression determine the specific transitions.</p>
+A named state where decisions regarding coins are made.
+We push to <code>coins</code> with COINS state and then the automatic states will be triggered if the guards are met.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -824,6 +830,11 @@ enum class PayingTurnstileEvents {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>We add a stateMap named <code>coins</code> with the state <code>COINS</code>.
+The statemap  will be entered when there are coins.
+The automatic transitions will be triggered based on the guard expressions.</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="state-machine-definition-packaged">State machine definition packaged</h4>
@@ -831,18 +842,21 @@ enum class PayingTurnstileEvents {
 <div class="content">
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class PayingTurnstileFSM(turnstile: PayingTurnstile) {
     companion object {
-        private val definition = stateMachine(
-            PayingTurnstileStates::class,
+        val definition = stateMachine(
+            setOf(PayingTurnstileStates.LOCKED, PayingTurnstileStates.UNLOCKED),
             PayingTurnstileEvents::class,
             PayingTurnstile::class
         ) {
-            initial {
-                when {
-                    coins &gt; 0 -&gt; PayingTurnstileStates.COINS
-                    locked -&gt;
-                        PayingTurnstileStates.LOCKED
-                    else -&gt;
-                        PayingTurnstileStates.UNLOCKED
+            initialMap {
+                mutableListOf&lt;StateMapItem&lt;PayingTurnstileStates&gt;&gt;().apply {
+                    if (locked) {
+                        this.add(PayingTurnstileStates.LOCKED to "default")
+                    } else {
+                        this.add(PayingTurnstileStates.UNLOCKED to "default")
+                    }
+                    if (coins &gt; 0) {
+                        this.add(PayingTurnstileStates.COINS to "coins")
+                    }
                 }
             }
             default {
@@ -855,72 +869,66 @@ enum class PayingTurnstileEvents {
                 }
                 action { state, event, args -&gt;
                     if (args.isNotEmpty()) {
-                        println("Default action for state($state) -&gt; event($event, ${args.toList()}) for $this")
+                        println("Default action for state($state) -&gt; on($event, ${args.toList()}) for $this")
                     } else {
-                        println("Default action for state($state) -&gt; event($event) for $this")
+                        println("Default action for state($state) -&gt; on($event) for $this")
                     }
                     alarm()
                 }
                 exit { startState, _, args -&gt;
                     if (args.isNotEmpty()) {
-                        println("entering:$startState (${args.toList()}) for $this")
+                        println("exiting:$startState (${args.toList()}) for $this")
                     } else {
                         println("exiting:$startState for $this")
                     }
                 }
             }
-            state(PayingTurnstileStates.LOCKED) {
-                // The coins add up to more than required
-                transition(PayingTurnstileEvents.COIN to PayingTurnstileStates.UNLOCKED,
-                    guard = { args -&gt; val value = args[0] as Int;
-                        value + this.coins &gt; this.requiredCoins
-                    }) { args -&gt; val value = args[0] as Int
-                    returnCoin(coin(value) - requiredCoins)
-                    unlock()
-                    reset()
-                }
-                // The coins add up to more than required
-                transition(PayingTurnstileEvents.COIN to PayingTurnstileStates.COINS,
-                    guard = { args -&gt; val value = args[0] as Int;
-                        value + this.coins &lt; this.requiredCoins
-                    }) { args -&gt; val value = args[0] as Int
-                    coin(value)
-                    println("Coins=$coins, Please add ${requiredCoins - coins}")
-                }
-                // The coin brings amount to exact amount
-                transition(PayingTurnstileEvents.COIN to PayingTurnstileStates.UNLOCKED) { args -&gt; val value = args[0] as Int
-                    coin(value)
-                    unlock()
-                    reset()
+            stateMap("coins", setOf(PayingTurnstileStates.COINS)) {
+                state(PayingTurnstileStates.COINS) {
+                    automaticPop(PayingTurnstileStates.UNLOCKED, guard = { coins &gt; requiredCoins }) {
+                        println("automaticPop:returnCoin")
+                        returnCoin(coins - requiredCoins)
+                        unlock()
+                        reset()
+                    }
+                    automaticPop(PayingTurnstileStates.UNLOCKED, guard = { coins == requiredCoins }) {
+                        println("automaticPop")
+                        unlock()
+                        reset()
+                    }
+                    transition(PayingTurnstileEvents.COIN) { args -&gt;
+                        val value = args[0] as Int
+                        coin(value)
+                        println("Coins=$coins")
+                        if (coins &lt; requiredCoins) {
+                            println("Please add ${requiredCoins - coins}")
+                        }
+                    }
                 }
             }
-            state(PayingTurnstileStates.COINS) {
-                // The coins add up to more than required.
-                transition(PayingTurnstileEvents.COIN to PayingTurnstileStates.UNLOCKED,
-                    guard = { args -&gt; val value = args[0] as Int
-                        value + this.coins &gt; this.requiredCoins
-                    }) { args -&gt; val value = args[0] as Int
-                    returnCoin(coin(value) - requiredCoins)
+            state(PayingTurnstileStates.LOCKED) {
+                // The coin brings amount to exact amount
+                pushTransition(PayingTurnstileEvents.COIN, "coins", PayingTurnstileStates.COINS) { args -&gt;
+                    val value = args[0] as Int
+                    coin(value)
                     unlock()
                     reset()
                 }
-                // The coins isn't enough to make total match required
-                transition(PayingTurnstileEvents.COIN to PayingTurnstileStates.COINS,
-                    guard = { args -&gt; val value = args[0] as Int;
+                // The coins add up to more than required
+                pushTransition(PayingTurnstileEvents.COIN, "coins", PayingTurnstileStates.COINS,
+                    guard = { args -&gt;
+                        val value = args[0] as Int;
                         value + this.coins &lt; this.requiredCoins
-                    }) { args -&gt; val value = args[0] as Int
+                    }) { args -&gt;
+                    val value = args[0] as Int
+                    println("PUSH TRANSITION")
                     coin(value)
                     println("Coins=$coins, Please add ${requiredCoins - coins}")
-                }
-                // The coin is exact amount required
-                transition(PayingTurnstileEvents.COIN to PayingTurnstileStates.UNLOCKED) { args -&gt; val value = args[0] as Int
-                    coin(value)
-                    unlock()
-                    reset()
                 }
             }
             state(PayingTurnstileStates.UNLOCKED) {
-                transition(PayingTurnstileEvents.COIN) { args -&gt; val value = args[0] as Int
+                transition(PayingTurnstileEvents.COIN) { args -&gt;
+                    val value = args[0] as Int
                     returnCoin(coin(value))
                 }
                 transition(PayingTurnstileEvents.PASS to PayingTurnstileStates.LOCKED) {
@@ -930,10 +938,20 @@ enum class PayingTurnstileEvents {
         }.build()
     }
 
-    private val fsm = definition.create(turnstile)
+    val fsm = definition.create(turnstile)
 
-    fun coin(value: Int) = fsm.sendEvent(PayingTurnstileEvents.COIN, value)
-    fun pass() = fsm.sendEvent(PayingTurnstileEvents.PASS)
+    fun coin(value: Int) {
+        println("sendEvent:COIN:$value")
+        fsm.sendEvent(PayingTurnstileEvents.COIN, value)
+    }
+
+    fun pass() {
+        println("sendEvent:PASS")
+        fsm.sendEvent(PayingTurnstileEvents.PASS)
+    }
+
+    fun allowedEvents() = fsm.allowed().map { it.name.toLowerCase() }.toSet()
+
 }</code></pre>
 </div>
 </div>
@@ -949,9 +967,14 @@ println("--coin1")
 fsm.coin(10)
 assertTrue(turnstile.locked)
 assertTrue(turnstile.coins == 10)
+assertTrue(
+    fsm.fsm.currentStateMap.name != null &amp;&amp; "coins" == fsm.fsm.currentStateMap.name,
+    "Expected coins map"
+)
 println("--coin2")
 fsm.coin(60)
 assertTrue(turnstile.coins == 0)
+assertTrue(fsm.fsm.currentStateMap.name == null, "Expected default map")
 assertTrue(!turnstile.locked)
 println("--pass1")
 fsm.pass()
@@ -975,35 +998,40 @@ assertTrue(!turnstile.locked)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code>--coin1
+sendEvent:COIN:10
 entering:LOCKED ([10]) for Turnstile(locked=true,coins=0)
-Value=10, Total=10
+PUSH TRANSITION
+Coin received=10, Total=10
 Coins=10, Please add 40
-entering:COINS ([10]) for Turnstile(locked=true,coins=10)
 --coin2
-entering:COINS ([60]) for Turnstile(locked=true,coins=10)
-Value=60, Total=70
+sendEvent:COIN:60
+Coin received=60, Total=70
 Return Coin:20
 Unlock
 Reset coins=0
 entering:UNLOCKED ([60]) for Turnstile(locked=false,coins=0)
 --pass1
+sendEvent:PASS
 exiting:UNLOCKED for Turnstile(locked=false,coins=0)
 Lock
 entering:LOCKED for Turnstile(locked=true,coins=0)
 --pass2
-Default action for state(LOCKED) -&gt; event(PASS) for Turnstile(locked=true,coins=0)
+sendEvent:PASS
+Default action for state(LOCKED) -&gt; on(PASS) for Turnstile(locked=true,coins=0)
 Alarm
 --pass3
-Default action for state(LOCKED) -&gt; event(PASS) for Turnstile(locked=true,coins=0)
+sendEvent:PASS
+Default action for state(LOCKED) -&gt; on(PASS) for Turnstile(locked=true,coins=0)
 Alarm
 --coin3
+sendEvent:COIN:40
 entering:LOCKED ([40]) for Turnstile(locked=true,coins=0)
-Value=40, Total=40
+PUSH TRANSITION
+Coin received=40, Total=40
 Coins=40, Please add 10
-entering:COINS ([40]) for Turnstile(locked=true,coins=40)
 --coin4
-entering:COINS ([10]) for Turnstile(locked=true,coins=40)
-Value=10, Total=50
+sendEvent:COIN:10
+Coin received=10, Total=50
 Unlock
 Reset coins=0
 entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
@@ -1018,6 +1046,9 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="repository">Repository</h3>
+<div class="paragraph">
+<p>Use this repository for SNAPSHOT builds. Releases are on Maven Central</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">repositories {
@@ -1035,7 +1066,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-jvm:0.9.0'
+    implementation 'io.jumpco.open:kfsm-jvm:0.9.1'
 }</code></pre>
 </div>
 </div>
@@ -1045,7 +1076,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-js:0.9.0'
+    implementation 'io.jumpco.open:kfsm-js:0.9.1'
 }</code></pre>
 </div>
 </div>
@@ -1055,7 +1086,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-wasm32:0.9.0'
+    implementation 'io.jumpco.open:kfsm-wasm32:0.9.1'
 }</code></pre>
 </div>
 </div>
@@ -1065,7 +1096,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-linuxX64:0.9.0'
+    implementation 'io.jumpco.open:kfsm-linuxX64:0.9.1'
 }</code></pre>
 </div>
 </div>
@@ -1075,7 +1106,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-mingwX64:0.9.0'
+    implementation 'io.jumpco.open:kfsm-mingwX64:0.9.1'
 }</code></pre>
 </div>
 </div>
@@ -1085,7 +1116,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-macosX64:0.9.0'
+    implementation 'io.jumpco.open:kfsm-macosX64:0.9.1'
 }</code></pre>
 </div>
 </div>
@@ -1114,6 +1145,15 @@ The statemachine supports:</p>
 <li>
 <p>Default actions per state and globally</p>
 </li>
+<li>
+<p>Named statemaps</p>
+</li>
+<li>
+<p>Push and pop transitions</p>
+</li>
+<li>
+<p>Automatic transitions</p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
@@ -1137,19 +1177,27 @@ The statemachine supports:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">// using builder function
-val definition = StateMachineBuilder&lt;StateEnum,EventEnum,ContextType&gt;().stateMachine {
+val definition = StateMachineBuilder&lt;StateEnum,EventEnum,ContextType&gt;(StateEnum.values().toSet()).stateMachine {
     default { // global defaults
     }
     initial { // initial state expression
+    }
+    initialMap { // define expression for deriving state stack for nested maps.
+    }
+    stateMap { // define named state map
     }
     state { // state definition
     }
 }.build()
 // using global function
-val definition = stateMachine(StateEnum::class, EventEnum::class,ContextType::class) {
+val definition = stateMachine(StateEnum.values().toSet(), EventEnum::class,ContextType::class) {
     default { // global defaults
     }
     initial { // initial state expression
+    }
+    initialMap { // define expression for deriving state stack for nested maps.
+    }
+    stateMap { // define named state map
     }
     state { // state definition
     }
@@ -1352,7 +1400,7 @@ transition(Event.EVENT to State.STATE) { args-&gt; // default external state act
 </div>
 </div>
 <div class="sect2">
-<h3 id="states"><code>state(S) {}</code></h3>
+<h3 id="statecurrentstate-s"><code>state(currentState: S) {}</code></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1388,6 +1436,20 @@ transition(Event.EVENT to State.STATE) { args-&gt; // default external state act
     transition(Event.EV1, guard = { flag == 2 }) { // internal transition with guard expression
     }
     transition(Event.EV1) { // internal guard expression
+    }
+    pushTransition(Event.EV2, "mapName", State.S1, gaurd = { flag == 1}) { // push transition to new map with guard expression
+    }
+    pushTransition(Event.EV2, "mapName", State.S1) { // push transition to new map
+    }
+    popTransition(Event.EV3) { // pop transition without targetState
+    }
+    popTransition(Event.EV3, State.S2) { // pop transition changing state while executing current action only
+    }
+    popTransition(Event.EV3, "newMap", State.S3) { // pop transition leading into new push transition while executing current action only
+    }
+    automatic(State.S1, guard = { flag == 1}) { // automatic transition to new state when guard is met
+    }
+    automatic(State.S1) { // automatic transition to new state
     }
 }</code></pre>
 </div>
@@ -1480,7 +1542,104 @@ transition(Event.EVENT to State.STATE) { args-&gt; // default external state act
 </div>
 </div>
 <div class="sect3">
-<h4 id="transitione-to-sguard">transition(E [to S],[guard = {}]) {}</h4>
+<h4 id="automatictargetstate-s-guard">automatic(targetState: S [, guard:{}]) {}</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-event-handler/automatic.html">DslStateMachineDefaultEventHandler::automatic</a></p>
+</li>
+<li>
+<p>Mandatory: <em>Optional</em></p>
+</li>
+<li>
+<p>Cardinality: <em>Multiple</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>There are 2 variations of automatic transitions: Those with and without guards.
+An automatic transition is exercises after the state machine has completed processing a transition.
+All automatic transitions attached to a given state will be invoked if their guards are met.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="automaticpoptargetstate-s-guard">automaticPop(targetState: S [, guard:{}]) {}</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-event-handler/automatic-pop.html">DslStateMachineDefaultEventHandler::automaticPop</a></p>
+</li>
+<li>
+<p>Mandatory: <em>Optional</em></p>
+</li>
+<li>
+<p>Cardinality: <em>Multiple</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>There are 6 variations of automatic transitions: Those with and without guards, those with and without targetMaps which will lead to a new push transition.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="automaticpushtargetmap-string-targetstate-s-guard">automaticPush(targetMap: String, targetState: S [, guard:{}]) {}</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-event-handler/automatic-push.html">DslStateMachineDefaultEventHandler::automaticPush</a></p>
+</li>
+<li>
+<p>Mandatory: <em>Optional</em></p>
+</li>
+<li>
+<p>Cardinality: <em>Multiple</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>There are 2 variations of automatic transitions: Those with and without guards</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="poptransitionevent-e-to-targetstate-stargetmap-string-targetstate-s-guard">popTransition(event: E [to targetState: S]|[,targetMap: String, targetState: S], [guard:{}]) {}</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-event-handler/pop-transition.html">DslStateMachineEventHandler::popTransition</a></p>
+</li>
+<li>
+<p>Mandatory: <em>Optional</em></p>
+</li>
+<li>
+<p>Cardinality: <em>Multiple</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>There are 6 variations of popTransitions to provide for with and without guards, with and without a new state and with and without a targetMap that will result in a new push transition.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="pushtransitionevent-e-targetmap-string-targetstate-s-guard">pushTransition(event: E, targetMap: String, targetState: S [, guard:{}]) {}</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-event-handler/push-transition.html">DslStateMachineEventHandler::pushTransition</a></p>
+</li>
+<li>
+<p>Mandatory: <em>Optional</em></p>
+</li>
+<li>
+<p>Cardinality: <em>Multiple</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>There are 2 variations of automatic transitions: Those with and without guards</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="transitionevent-e-to-targetstate-sguard">transition(event: E [to targetState: S],[guard: {}]) {}</h4>
 <div class="ulist">
 <ul>
 <li>

@@ -13,15 +13,6 @@
 <tbody>
 <tr>
 <td>
-<p><a href="-default-transition/index.html">DefaultTransition</a></p>
-</td>
-<td>
-<code><span class="keyword">class </span><span class="identifier">DefaultTransition</span><span class="symbol">&lt;</span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-default-transition/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-transition/index.html"><span class="identifier">Transition</span></a><span class="symbol">&lt;</span><a href="-default-transition/index.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="-default-transition/index.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="-default-transition/index.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span></code>
-<p>Represents a DefaultTransition</p>
-</td>
-</tr>
-<tr>
-<td>
 <p><a href="-dsl-state-machine-handler/index.html">DslStateMachineHandler</a></p>
 </td>
 <td>
@@ -58,28 +49,12 @@
 </tr>
 <tr>
 <td>
-<p><a href="-guarded-transition/index.html">GuardedTransition</a></p>
-</td>
-<td>
-<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">GuardedTransition</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-guarded-transition/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-simple-transition/index.html"><span class="identifier">SimpleTransition</span></a><span class="symbol">&lt;</span><a href="-guarded-transition/index.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="-guarded-transition/index.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="-guarded-transition/index.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span></code>
-<p>Represents a guarded transition. The transition will be considered if the guard expression is true</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="-simple-transition/index.html">SimpleTransition</a></p>
-</td>
-<td>
-<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">SimpleTransition</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-simple-transition/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-transition/index.html"><span class="identifier">Transition</span></a><span class="symbol">&lt;</span><a href="-simple-transition/index.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="-simple-transition/index.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="-simple-transition/index.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span></code>
-<p>Represents a transition from a given state and event.</p>
-</td>
-</tr>
-<tr>
-<td>
 <p><a href="-stack/index.html">Stack</a></p>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">Stack</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+<code><span class="keyword">class </span><span class="identifier">Stack</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code>
+<p>This class implements a simple generic stack.</p>
+</td>
 </tr>
 <tr>
 <td>
@@ -121,31 +96,8 @@ It will process events, matching transitions, invoking entry, transition and exi
 <p><a href="-state-map-definition/index.html">StateMapDefinition</a></p>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">StateMapDefinition</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-state-map-definition/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code></td>
-</tr>
-<tr>
-<td>
-<p><a href="-state-map-instance/index.html">StateMapInstance</a></p>
-</td>
-<td>
-<code><span class="keyword">class </span><span class="identifier">StateMapInstance</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-state-map-instance/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code></td>
-</tr>
-<tr>
-<td>
-<p><a href="-transition/index.html">Transition</a></p>
-</td>
-<td>
-<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Transition</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-transition/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code>
-<p>The base for all transitions.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="-transition-rules/index.html">TransitionRules</a></p>
-</td>
-<td>
-<code><span class="keyword">class </span><span class="identifier">TransitionRules</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-transition-rules/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code>
-<p>Represents a collection of rule with 1 transition and a list of guarded transitions.</p>
+<code><span class="keyword">class </span><span class="identifier">StateMapDefinition</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-state-map-definition/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code>
+<p>Contains the definition of a state map. A state machine has at least one top-level state map.</p>
 </td>
 </tr>
 <tr>
@@ -153,14 +105,9 @@ It will process events, matching transitions, invoking entry, transition and exi
 <p><a href="-transition-type/index.html">TransitionType</a></p>
 </td>
 <td>
-<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">TransitionType</span></code></td>
-</tr>
-<tr>
-<td>
-<p><a href="-turnstile-alternate/index.html">TurnstileAlternate</a></p>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">TransitionType</span></code>
+<p>Represents the different kinds of transitions.</p>
 </td>
-<td>
-<code><span class="keyword">class </span><span class="identifier">TurnstileAlternate</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -218,21 +165,27 @@ They are internal transitions.</p>
 <p><a href="-state-map-item.html">StateMapItem</a></p>
 </td>
 <td>
-<code><span class="keyword">typealias </span><span class="identifier">StateMapItem</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;<span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">&lt;</span><a href="-state-map-item.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code></td>
+<code><span class="keyword">typealias </span><span class="identifier">StateMapItem</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;<span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">&lt;</span><a href="-state-map-item.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
+<p>Alias for a pair of S, String</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="-state-map-list.html">StateMapList</a></p>
 </td>
 <td>
-<code><span class="keyword">typealias </span><span class="identifier">StateMapList</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="-state-map-item.html"><span class="identifier">StateMapItem</span></a><span class="symbol">&lt;</span><a href="-state-map-list.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+<code><span class="keyword">typealias </span><span class="identifier">StateMapList</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="-state-map-item.html"><span class="identifier">StateMapItem</span></a><span class="symbol">&lt;</span><a href="-state-map-list.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>Alias for a list of pairs of S,String</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="-state-map-query.html">StateMapQuery</a></p>
 </td>
 <td>
-<code><span class="keyword">typealias </span><span class="identifier">StateMapQuery</span><span class="symbol">&lt;</span><span class="identifier">C</span><span class="symbol">, </span><span class="identifier">S</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="-state-map-query.html#C"><span class="identifier">C</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="-state-map-list.html"><span class="identifier">StateMapList</span></a><span class="symbol">&lt;</span><a href="-state-map-query.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span></code></td>
+<code><span class="keyword">typealias </span><span class="identifier">StateMapQuery</span><span class="symbol">&lt;</span><span class="identifier">C</span><span class="symbol">, </span><span class="identifier">S</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="-state-map-query.html#C"><span class="identifier">C</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="-state-map-list.html"><span class="identifier">StateMapList</span></a><span class="symbol">&lt;</span><a href="-state-map-query.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span></code>
+<p>Alias for a lambda that will have the context as this and return a <code>StateMapList</code></p>
+</td>
 </tr>
 <tr>
 <td>
@@ -254,8 +207,11 @@ statemachine multiple times during the lifecycle of a context represented by a p
 <p><a href="if-apply.html">ifApply</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <a href="if-apply.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">ifApply</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm$ifApply(io.jumpco.open.kfsm.ifApply.T, kotlin.Boolean, kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)), kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)))/expression">expression</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm$ifApply(io.jumpco.open.kfsm.ifApply.T, kotlin.Boolean, kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)), kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)))/block">block</span><span class="symbol">:</span>&nbsp;<a href="if-apply.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm$ifApply(io.jumpco.open.kfsm.ifApply.T, kotlin.Boolean, kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)), kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)))/otherwise">otherwise</span><span class="symbol">:</span>&nbsp;<a href="if-apply.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="if-apply.html#T"><span class="identifier">T</span></a></code><br/>
-<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <a href="if-apply.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">ifApply</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm$ifApply(io.jumpco.open.kfsm.ifApply.T, kotlin.Boolean, kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)))/expression">expression</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm$ifApply(io.jumpco.open.kfsm.ifApply.T, kotlin.Boolean, kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)))/block">block</span><span class="symbol">:</span>&nbsp;<a href="if-apply.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="if-apply.html#T"><span class="identifier">T</span></a></code></td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <a href="if-apply.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">ifApply</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm$ifApply(io.jumpco.open.kfsm.ifApply.T, kotlin.Boolean, kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)), kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)))/expression">expression</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm$ifApply(io.jumpco.open.kfsm.ifApply.T, kotlin.Boolean, kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)), kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)))/block">block</span><span class="symbol">:</span>&nbsp;<a href="if-apply.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm$ifApply(io.jumpco.open.kfsm.ifApply.T, kotlin.Boolean, kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)), kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)))/otherwise">otherwise</span><span class="symbol">:</span>&nbsp;<a href="if-apply.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="if-apply.html#T"><span class="identifier">T</span></a></code>
+<p>An extension function that evaluates the expression and invokes the provided <code>block</code> if true or the <code>otherwise</code> block is false.</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <a href="if-apply.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">ifApply</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm$ifApply(io.jumpco.open.kfsm.ifApply.T, kotlin.Boolean, kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)))/expression">expression</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm$ifApply(io.jumpco.open.kfsm.ifApply.T, kotlin.Boolean, kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)))/block">block</span><span class="symbol">:</span>&nbsp;<a href="if-apply.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="if-apply.html#T"><span class="identifier">T</span></a></code>
+<p>An extension function that evaluates the expression and invokes the provided <code>block</code> if true.</p>
+</td>
 </tr>
 <tr>
 <td>
