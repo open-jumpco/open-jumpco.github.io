@@ -449,6 +449,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#simple-turnstile-example">Simple turnstile example</a>
 <ul class="sectlevel3">
 <li><a href="#state-diagram">State Diagram</a></li>
+<li><a href="#state-table">State Table</a></li>
 <li><a href="#context-class">Context class</a></li>
 <li><a href="#enums-for-states-and-events">Enums for States and Events</a></li>
 <li><a href="#packaged-definition-and-execution">Packaged definition and execution</a></li>
@@ -457,6 +458,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#advanced-features">Advanced Features</a>
 <ul class="sectlevel3">
+<li><a href="#state-table-2">State Table</a></li>
 <li><a href="#context-class-2">Context class</a></li>
 <li><a href="#states-and-events">States and Events</a></li>
 <li><a href="#state-machine-definition-packaged">State machine definition packaged</a></li>
@@ -479,6 +481,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#kotlinnative-projects-using-macos">Kotlin/Native Projects using macOS</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#operation">Operation</a>
+<ul class="sectlevel2">
+<li><a href="#send-event">Send Event</a></li>
+<li><a href="#named-maps-and-push-pop-transitions">Named Maps and Push / Pop Transitions</a></li>
 </ul>
 </li>
 <li><a href="#dsl">DSL</a>
@@ -574,6 +582,51 @@ We want to ensure that the <code>lock()</code> function is only called when the 
 <img src="turnstile_fsm.png" alt="LockStateDiagram">
 </div>
 </div>
+</div>
+<div class="sect3">
+<h4 id="state-table">State Table</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Start State</th>
+<th class="tableblock halign-left valign-top">Event</th>
+<th class="tableblock halign-left valign-top">End State</th>
+<th class="tableblock halign-left valign-top">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PASS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">alarm</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COIN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">unlock</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PASS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lock</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COIN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">returnCoin</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect3">
 <h4 id="context-class">Context class</h4>
@@ -756,6 +809,75 @@ We push to <code>coins</code> with COINS state and then the automatic states wil
 <div class="imageblock">
 <div class="content">
 <img src="paying_turnstile_fsm.png" alt="Paying Turnstile">
+</div>
+</div>
+<div class="sect3">
+<h4 id="state-table-2">State Table</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Start State</th>
+<th class="tableblock halign-left valign-top">Event</th>
+<th class="tableblock halign-left valign-top">Guard</th>
+<th class="tableblock halign-left valign-top">End State</th>
+<th class="tableblock halign-left valign-top">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PASS</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">alarm</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COIN</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COINS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">coin(value)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PASS</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lock</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COINS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COIN</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COINS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">coin(value)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COINS</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">coins == requiredCoins</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">unlock</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COINS</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">coins &gt; requiredCoins</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">returnCoin(coins-requiredCoins), unlock</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>When event is empty it is an automatic transition.
+We will further place COINS state in a named state map to illustrate how these can be composes to isolate or group behaviour.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1129,6 +1251,96 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 </div>
 </div>
 <div class="sect1">
+<h2 id="operation">Operation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The finite state machine follows a specific set of rules. This section describes the decision making and order of execution.</p>
+</div>
+<div class="paragraph">
+<p>The state machine will receive events constrained by set of events.</p>
+</div>
+<div class="paragraph">
+<p>The state machine will define one or more state maps each representing a subset of possible states of the same type.</p>
+</div>
+<div class="paragraph">
+<p>The state machine will apply actions to a context. The context represents the work that need to be performed.</p>
+</div>
+<div class="paragraph">
+<p>An event may have arguments.</p>
+</div>
+<div class="paragraph">
+<p>Transitions defines actions to apply when the state machine is in a specific state and receives a specific event.</p>
+</div>
+<div class="paragraph">
+<p>Guarded transitions has a guard expression that can be evaluated to allow execution of transition.</p>
+</div>
+<div class="paragraph">
+<p>Automatic transitions are associated with states and have no events. Automatic transitions will be executed if they apply after the exit action.</p>
+</div>
+<div class="paragraph">
+<p>For this implementation the events must be an <code>enum class</code> the state can be any type but we have been using <code>enum class</code> as well.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="statemachine_sequence.png" alt="FSM sequence">
+</div>
+</div>
+<div class="paragraph">
+<p>When sendEvent is called the state machine applies the event to the current state map.
+The current state map is usually top-level state map unless you have defined named maps and used push transitions.</p>
+</div>
+<div class="sect2">
+<h3 id="send-event">Send Event</h3>
+<div class="paragraph">
+<p>The normal operation is to invoke the following actions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>sendEvent</p>
+<div class="ulist">
+<ul>
+<li>
+<p>if(external) exitAction</p>
+</li>
+<li>
+<p>action</p>
+</li>
+<li>
+<p>if(external) entryAction</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The exit action is chosen from  <code>stateMap/state/exit</code> or <code>stateMap/state/default/exit</code> or <code>stateMap/default/exit</code>
+The action is chosen from <code>stateMap/state/transition</code> or <code>stateMap/state/default/action</code> or <code>stateMap/default/action</code>
+The entry action is chosen from  <code>stateMap/state/entry</code> or <code>stateMap/state/default/entry</code> or <code>stateMap/default/entry</code></p>
+</div>
+<div class="paragraph">
+<p>The combination of current state and event determines a set of transition rules that have been applied to that combination by one or more definitions.
+If the transition rules contains guard transitions the guard expressions are evaluated until one evaluates <code>true</code>.
+The <code>entry</code> and <code>exit</code> action are only invoked for <code>external</code> transitions.
+External transitions have an explicit target state defined. If the target state is not defined it is an internal transition.</p>
+</div>
+<div class="paragraph">
+<p>The currentState determines the <code>exit</code> action. The target state determines the <code>entry</code> action.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="named-maps-and-push-pop-transitions">Named Maps and Push / Pop Transitions</h3>
+<div class="paragraph">
+<p>A named map represents a set of states that is grouped together. Named maps can be visited by using a push transition and return using a pop transition.
+A push transition requires a map name and a target state along with the normal event and optional guard and action.
+The current state map will be pushed on a stack and a statemap instance will be created using the named definition.
+Events will be processed according to the transition rules of the named map.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="dsl">DSL</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -1188,7 +1400,7 @@ val definition = StateMachineBuilder&lt;StateEnum,EventEnum,ContextType&gt;(Stat
     }
     initialMap { // define expression for deriving state stack for nested maps.
     }
-    stateMap { // define named state map
+    stateMap { // define named statemap
     }
     state { // state definition
     }
@@ -1201,7 +1413,7 @@ val definition = stateMachine(StateEnum.values().toSet(), EventEnum::class,Conte
     }
     initialMap { // define expression for deriving state stack for nested maps.
     }
-    stateMap { // define named state map
+    stateMap { // define named statemap
     }
     state { // state definition
     }
