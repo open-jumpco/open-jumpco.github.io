@@ -695,6 +695,7 @@ enum class TurnstileEvents {
                 entry { startState, targetState, _ -&gt;
                     println("entering:$startState -&gt; $targetState for $this")
                 }
+                // default transition will invoke alarm
                 action { state, event, _ -&gt;
                     println("Default action for state($state) -&gt; event($event) for $this")
                     alarm()
@@ -703,15 +704,20 @@ enum class TurnstileEvents {
                     println("exiting:$startState -&gt; $targetState for $this")
                 }
             }
+            // when current state is LOCKED
             state(TurnstileStates.LOCKED) {
+                // external transition on COIN to UNLOCKED state
                 transition(TurnstileEvents.COIN to TurnstileStates.UNLOCKED) {
                     unlock()
                 }
             }
+            // when current state is UNLOCKED
             state(TurnstileStates.UNLOCKED) {
+                // internal transition on COIN
                 transition(TurnstileEvents.COIN) {
                     returnCoin()
                 }
+                // external transition on PASS to LOCKED state
                 transition(TurnstileEvents.PASS to TurnstileStates.LOCKED) {
                     lock()
                 }
@@ -725,14 +731,6 @@ enum class TurnstileEvents {
     fun pass() = fsm.sendEvent(TurnstileEvents.PASS)
 }</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>With this We are saying:
-When the state is <code>LOCKED</code> and on a <code>COIN</code> event then transition to <code>UNLOCKED</code> and execute the lambda which is treated
-as a member of the context <code>{ unlock() }</code></p>
-</div>
-<div class="paragraph">
-<p>When the state is <code>LOCKED</code> and on <code>event(PASS)</code> we are perform the action <code>alarm()</code> without changing the end state.</p>
 </div>
 </div>
 <div class="sect3">
