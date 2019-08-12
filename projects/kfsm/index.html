@@ -491,28 +491,28 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#dsl">DSL</a>
 <ul class="sectlevel2">
-<li><a href="#statemachine"><code>stateMachine {}</code></a></li>
-<li><a href="#default"><code>default {}</code></a>
+<li><a href="#statemachine"><code>stateMachine</code></a></li>
+<li><a href="#default"><code>default</code></a>
 <ul class="sectlevel3">
-<li><a href="#action">action {}</a></li>
-<li><a href="#entry">entry {}</a></li>
-<li><a href="#exit">exit {}</a></li>
-<li><a href="#transitione-to-s">transition(E [to S]) {}</a></li>
+<li><a href="#action"><code>action</code></a></li>
+<li><a href="#entry"><code>entry</code></a></li>
+<li><a href="#exit"><code>exit</code></a></li>
+<li><a href="#transition"><code>transition</code></a></li>
 </ul>
 </li>
-<li><a href="#initial"><code>initial {}</code></a></li>
-<li><a href="#initialmap"><code>initialMap {}</code></a></li>
-<li><a href="#statecurrentstate-s"><code>state(currentState: S) {}</code></a>
+<li><a href="#initial"><code>initial</code></a></li>
+<li><a href="#initialmap"><code>initialMap</code></a></li>
+<li><a href="#state"><code>state</code></a>
 <ul class="sectlevel3">
-<li><a href="#default-2">default {}</a></li>
-<li><a href="#entry-2">entry {}</a></li>
-<li><a href="#exit-2">exit {}</a></li>
-<li><a href="#automatictargetstate-s-guard">automatic(targetState: S [, guard:{}]) {}</a></li>
-<li><a href="#automaticpoptargetstate-s-guard">automaticPop(targetState: S [, guard:{}]) {}</a></li>
-<li><a href="#automaticpushtargetmap-string-targetstate-s-guard">automaticPush(targetMap: String, targetState: S [, guard:{}]) {}</a></li>
-<li><a href="#poptransitionevent-e-to-targetstate-stargetmap-string-targetstate-s-guard">popTransition(event: E [to targetState: S]|[,targetMap: String, targetState: S], [guard:{}]) {}</a></li>
-<li><a href="#pushtransitionevent-e-targetmap-string-targetstate-s-guard">pushTransition(event: E, targetMap: String, targetState: S [, guard:{}]) {}</a></li>
-<li><a href="#transitionevent-e-to-targetstate-sguard">transition(event: E [to targetState: S],[guard: {}]) {}</a></li>
+<li><a href="#default-2"><code>default</code></a></li>
+<li><a href="#entry-2"><code>entry</code></a></li>
+<li><a href="#exit-2"><code>exit</code></a></li>
+<li><a href="#automatic"><code>automatic</code></a></li>
+<li><a href="#automaticpop"><code>automaticPop</code></a></li>
+<li><a href="#automaticpush"><code>automaticPush</code></a></li>
+<li><a href="#poptransition"><code>popTransition</code></a></li>
+<li><a href="#pushtransition"><code>pushTransition</code></a></li>
+<li><a href="#transition-2"><code>transition</code></a></li>
 </ul>
 </li>
 </ul>
@@ -1419,7 +1419,7 @@ The statemachine supports:</p>
 <p>All configuration calls are eventually applied to <a href="javadoc/kfsm/io.jumpco.open.kfsm/-state-machine-builder/index.html">StateMachineBuilder</a></p>
 </div>
 <div class="sect2">
-<h3 id="statemachine"><code>stateMachine {}</code></h3>
+<h3 id="statemachine"><code>stateMachine</code></h3>
 <div class="paragraph">
 <p>The top level element is <code>stateMachine</code> either by using the function</p>
 </div>
@@ -1465,7 +1465,7 @@ val definition = stateMachine(StateEnum.values().toSet(), EventEnum::class,Conte
 </div>
 </div>
 <div class="sect2">
-<h3 id="default"><code>default {}</code></h3>
+<h3 id="default"><code>default</code></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1500,7 +1500,7 @@ val definition = stateMachine(StateEnum.values().toSet(), EventEnum::class,Conte
 </div>
 </div>
 <div class="sect3">
-<h4 id="action">action {}</h4>
+<h4 id="action"><code>action</code></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1530,7 +1530,7 @@ val definition = stateMachine(StateEnum.values().toSet(), EventEnum::class,Conte
 </div>
 </div>
 <div class="sect3">
-<h4 id="entry">entry {}</h4>
+<h4 id="entry"><code>entry</code></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1560,7 +1560,7 @@ Global entry actions will be called for all external transitions after state spe
 </div>
 </div>
 <div class="sect3">
-<h4 id="exit">exit {}</h4>
+<h4 id="exit"><code>exit</code></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1590,9 +1590,12 @@ Global exit actions will be called for all external transitions after state spec
 </div>
 </div>
 <div class="sect3">
-<h4 id="transitione-to-s">transition(E [to S]) {}</h4>
+<h4 id="transition"><code>transition</code></h4>
 <div class="ulist">
 <ul>
+<li>
+<p>Arguments: <code>(event: E [to targetState: S])</code></p>
+</li>
 <li>
 <p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-default-event-handler/transition.html">DslStateMachineDefaultEventHandler::transition</a></p>
 </li>
@@ -1626,7 +1629,7 @@ transition(Event.EVENT to State.STATE) { args-&gt; // default external state act
 </div>
 </div>
 <div class="sect2">
-<h3 id="initial"><code>initial {}</code></h3>
+<h3 id="initial"><code>initial</code></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1659,7 +1662,7 @@ transition(Event.EVENT to State.STATE) { args-&gt; // default external state act
 </div>
 </div>
 <div class="sect2">
-<h3 id="initialmap"><code>initialMap {}</code></h3>
+<h3 id="initialmap"><code>initialMap</code></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1701,9 +1704,12 @@ When a state-machine has named maps the <code>initialMap</code> must be provied.
 </div>
 </div>
 <div class="sect2">
-<h3 id="statecurrentstate-s"><code>state(currentState: S) {}</code></h3>
+<h3 id="state"><code>state</code></h3>
 <div class="ulist">
 <ul>
+<li>
+<p>Arguments: <code>(currentState: S)</code></p>
+</li>
 <li>
 <p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-handler/state.html">DslStateMachineHandler::state</a></p>
 </li>
@@ -1756,7 +1762,7 @@ When a state-machine has named maps the <code>initialMap</code> must be provied.
 </div>
 </div>
 <div class="sect3">
-<h4 id="default-2">default {}</h4>
+<h4 id="default-2"><code>default</code></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1785,7 +1791,7 @@ When a state-machine has named maps the <code>initialMap</code> must be provied.
 </div>
 </div>
 <div class="sect3">
-<h4 id="entry-2">entry {}</h4>
+<h4 id="entry-2"><code>entry</code></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1814,7 +1820,7 @@ When a state-machine has named maps the <code>initialMap</code> must be provied.
 </div>
 </div>
 <div class="sect3">
-<h4 id="exit-2">exit {}</h4>
+<h4 id="exit-2"><code>exit</code></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1843,9 +1849,12 @@ When a state-machine has named maps the <code>initialMap</code> must be provied.
 </div>
 </div>
 <div class="sect3">
-<h4 id="automatictargetstate-s-guard">automatic(targetState: S [, guard:{}]) {}</h4>
+<h4 id="automatic"><code>automatic</code></h4>
 <div class="ulist">
 <ul>
+<li>
+<p>Arguments: <code>(targetState: S [, guard:{}])</code></p>
+</li>
 <li>
 <p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-event-handler/automatic.html">DslStateMachineDefaultEventHandler::automatic</a></p>
 </li>
@@ -1862,11 +1871,27 @@ When a state-machine has named maps the <code>initialMap</code> must be provied.
 An automatic transition is exercises after the state machine has completed processing a transition.
 All automatic transitions attached to a given state will be invoked if their guards are met.</p>
 </div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">state(State.S1) {
+    automatic(State.S1, guard = { flag == 1}) { // automatic transition to new state when guard is met
+    }
+    automatic(State.S1) { // automatic transition to new state
+    }
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
-<h4 id="automaticpoptargetstate-s-guard">automaticPop(targetState: S [, guard:{}]) {}</h4>
+<h4 id="automaticpop"><code>automaticPop</code></h4>
 <div class="ulist">
 <ul>
+<li>
+<p>Arguments: <code>([targetMap: String,][,targetState: S] [, guard:{}])</code></p>
+</li>
 <li>
 <p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-event-handler/automatic-pop.html">DslStateMachineDefaultEventHandler::automaticPop</a></p>
 </li>
@@ -1881,11 +1906,35 @@ All automatic transitions attached to a given state will be invoked if their gua
 <div class="paragraph">
 <p>There are 6 variations of automatic transitions: Those with and without guards, those with and without targetMaps which will lead to a new push transition.</p>
 </div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">state(State.S1) {
+    automaticPop { // pop when S1
+    }
+    automaticPop(guard= { flag == 1 }) { // pop when S1 and guard is true
+    }
+    automaticPop(State.S2, guard = { flag == 1 }) { // automatic pop transition to new state when guard is met
+    }
+    automaticPop(State.S2) { // automatic pop transition to new state
+    }
+    automaticPop("map1", State.S2) { // automatic pop transition to push transition to new state in target map
+    }
+    automaticPop("map1", State.S2, guard={flag == 1 }) { // automatic pop transition to push transition to new state in target map
+    }
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
-<h4 id="automaticpushtargetmap-string-targetstate-s-guard">automaticPush(targetMap: String, targetState: S [, guard:{}]) {}</h4>
+<h4 id="automaticpush"><code>automaticPush</code></h4>
 <div class="ulist">
 <ul>
+<li>
+<p>Arguments: <code>(targetMap: String, targetState: S [, guard:{}])</code></p>
+</li>
 <li>
 <p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-event-handler/automatic-push.html">DslStateMachineDefaultEventHandler::automaticPush</a></p>
 </li>
@@ -1900,11 +1949,27 @@ All automatic transitions attached to a given state will be invoked if their gua
 <div class="paragraph">
 <p>There are 2 variations of automatic transitions: Those with and without guards</p>
 </div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">state(State.S1) {
+    automaticPush("map1", State.S2) { // automatic push transition to S2 in target map "map1"
+    }
+    automaticPush("map1", State.S2, guard={flag == 1 }) { // automatic push transition to S2 in target map "map1" if guard is true
+    }
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
-<h4 id="poptransitionevent-e-to-targetstate-stargetmap-string-targetstate-s-guard">popTransition(event: E [to targetState: S]|[,targetMap: String, targetState: S], [guard:{}]) {}</h4>
+<h4 id="poptransition"><code>popTransition</code></h4>
 <div class="ulist">
 <ul>
+<li>
+<p>Arguments: <code>(event: E [to targetState: S]|[,targetMap: String, targetState: S], [guard:{}])</code></p>
+</li>
 <li>
 <p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-event-handler/pop-transition.html">DslStateMachineEventHandler::popTransition</a></p>
 </li>
@@ -1919,11 +1984,35 @@ All automatic transitions attached to a given state will be invoked if their gua
 <div class="paragraph">
 <p>There are 6 variations of popTransitions to provide for with and without guards, with and without a new state and with and without a targetMap that will result in a new push transition.</p>
 </div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">state(State.S1) {
+    popTransition(Event.EV3) { // pop transition without targetState
+    }
+    popTransition(Event.EV3, guard={ flag == 1 }) { // pop transition without targetState and guard expression
+    }
+    popTransition(Event.EV3 to State.S2) { // pop transition on EV3 changing state to S2
+    }
+    popTransition(Event.EV3 to State.S2, guard={ flag == 1 }) { // pop transition on EV3 changing state to S2 with a guard expression
+    }
+    popTransition(Event.EV3, "newMap", State.S3) { // pop transition leading into new push transition to S3 in "newMap"
+    }
+    popTransition(Event.EV3, "newMap", State.S3, guard={ flag == 1 }) { // pop transition leading into new push transition to S3 in "newMap" with a guard expression
+    }
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect3">
-<h4 id="pushtransitionevent-e-targetmap-string-targetstate-s-guard">pushTransition(event: E, targetMap: String, targetState: S [, guard:{}]) {}</h4>
+<h4 id="pushtransition"><code>pushTransition</code></h4>
 <div class="ulist">
 <ul>
+<li>
+<p>Arguments: <code>(event: E, targetMap: String, targetState: S [, guard:{}])</code></p>
+</li>
 <li>
 <p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-event-handler/push-transition.html">DslStateMachineEventHandler::pushTransition</a></p>
 </li>
@@ -1936,13 +2025,27 @@ All automatic transitions attached to a given state will be invoked if their gua
 </ul>
 </div>
 <div class="paragraph">
-<p>There are 2 variations of automatic transitions: Those with and without guards</p>
+<p>There are 2 variations of automatic transitions: Those with and without guards
+Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">state(State.S1) {
+    pushTransition(Event.EV2, "mapName", State.S2) { // push transition to S2 in new map "mapName"
+    }
+    pushTransition(Event.EV2, "mapName", State.S2, gaurd = { flag == 1}) { // push transition to S2 in new map "mapName" with guard expression
+    }
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="transitionevent-e-to-targetstate-sguard">transition(event: E [to targetState: S],[guard: {}]) {}</h4>
+<h4 id="transition-2"><code>transition</code></h4>
 <div class="ulist">
 <ul>
+<li>
+<p>Arguments: <code>(event: E [to targetState: S],[guard: {}])</code></p>
+</li>
 <li>
 <p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-event-handler/transition.html">DslStateMachineEventHandler::transition</a></p>
 </li>
