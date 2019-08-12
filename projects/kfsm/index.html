@@ -473,7 +473,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#repository">Repository</a></li>
 <li><a href="#dependencies">Dependencies</a>
 <ul class="sectlevel3">
-<li><a href="#jvm-projects">JVM Projects</a></li>
+<li><a href="#kotlinjvm-projects">Kotlin/JVM Projects</a></li>
 <li><a href="#kotlinjs-projects">KotlinJS Projects</a></li>
 <li><a href="#kotlinnative-projects-using-wasm">Kotlin/Native Projects using WASM</a></li>
 <li><a href="#kotlinnative-projects-using-linuxx64">Kotlin/Native Projects using LinuxX64</a></li>
@@ -1186,7 +1186,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="sect2">
 <h3 id="dependencies">Dependencies</h3>
 <div class="sect3">
-<h4 id="jvm-projects">JVM Projects</h4>
+<h4 id="kotlinjvm-projects">Kotlin/JVM Projects</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
@@ -1255,10 +1255,10 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <p>The finite state machine follows a specific set of rules. This section describes the decision making and order of execution.</p>
 </div>
 <div class="paragraph">
-<p>The state machine will receive events constrained by set of events.</p>
+<p>The state machine will define one or more state maps each representing a subset of possible states of the same type.</p>
 </div>
 <div class="paragraph">
-<p>The state machine will define one or more state maps each representing a subset of possible states of the same type.</p>
+<p>The state machine will receive events, constrained by set of events. The events can only be an enum class.</p>
 </div>
 <div class="paragraph">
 <p>The state machine will apply actions to a context. The context represents the work that need to be performed.</p>
@@ -1267,16 +1267,16 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <p>An event may have arguments.</p>
 </div>
 <div class="paragraph">
-<p>Transitions defines actions to apply when the state machine is in a specific state and receives a specific event.</p>
+<p>An event may trigger a state transition which defines actions to apply when the state machine is in a specific state.</p>
 </div>
 <div class="paragraph">
-<p>Guarded transitions has a guard expression that can be evaluated to allow execution of transition.</p>
+<p>Guarded transitions has a guard expression that will be evaluated to allow execution of transition.</p>
 </div>
 <div class="paragraph">
-<p>Automatic transitions are associated with states and have no events. Automatic transitions will be executed if they apply after the exit action.</p>
+<p>Automatic transitions are associated with states and have no events. Automatic transitions will be executed if the specific state apply after the exit action.</p>
 </div>
 <div class="paragraph">
-<p>For this implementation the events must be an <code>enum class</code> the state can be any type but we have been using <code>enum class</code> as well.</p>
+<p>The state can be any type but we have been using <code>enum class</code> in all samples.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1285,7 +1285,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 </div>
 <div class="paragraph">
 <p>When sendEvent is called the state machine applies the event to the current state map.
-The current state map is usually top-level state map unless you have defined named maps and used push transitions.</p>
+The current state map is usually top-level state map unless you have defined named maps and used a push transition.</p>
 </div>
 <div class="sect2">
 <h3 id="send-event">Send Event</h3>
@@ -1313,15 +1313,60 @@ The current state map is usually top-level state map unless you have defined nam
 </ul>
 </div>
 <div class="paragraph">
-<p>The exit action is chosen from  <code>stateMap/state/exit</code> or <code>stateMap/state/default/exit</code> or <code>stateMap/default/exit</code>
-The action is chosen from <code>stateMap/state/transition</code> or <code>stateMap/state/default/action</code> or <code>stateMap/default/action</code>
-The entry action is chosen from  <code>stateMap/state/entry</code> or <code>stateMap/state/default/entry</code> or <code>stateMap/default/entry</code></p>
+<p>The exit action is chosen from one of:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>stateMap/state/exit</code></p>
+</li>
+<li>
+<p><code>stateMap/state/default/exit</code></p>
+</li>
+<li>
+<p><code>stateMap/default/exit</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The action is chosen from one of:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>stateMap/state/transition</code></p>
+</li>
+<li>
+<p><code>stateMap/state/default/action</code></p>
+</li>
+<li>
+<p><code>stateMap/default/action</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The entry action is chosen from one of:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>stateMap/state/entry</code></p>
+</li>
+<li>
+<p><code>stateMap/state/default/entry</code></p>
+</li>
+<li>
+<p><code>stateMap/default/entry</code></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>The combination of current state and event determines a set of transition rules that have been applied to that combination by one or more definitions.
 If the transition rules contains guard transitions the guard expressions are evaluated until one evaluates <code>true</code>.
-The <code>entry</code> and <code>exit</code> action are only invoked for <code>external</code> transitions.
-External transitions have an explicit target state defined. If the target state is not defined it is an internal transition.</p>
+The <code>entry</code> and <code>exit</code> action are only invoked for <code>external</code> transitions.</p>
+</div>
+<div class="paragraph">
+<p>External transitions have an explicit target state defined. If the target state is not defined it is an internal transition.</p>
 </div>
 <div class="paragraph">
 <p>The currentState determines the <code>exit</code> action. The target state determines the <code>entry</code> action.</p>
