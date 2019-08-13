@@ -89,7 +89,10 @@ It will process events, matching transitions, invoking entry, transition and exi
 <p><a href="-state-map-builder/index.html">StateMapBuilder</a></p>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">StateMapBuilder</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-state-map-builder/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code></td>
+<code><span class="keyword">class </span><span class="identifier">StateMapBuilder</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html"><span class="identifier">Enum</span></a><span class="symbol">&lt;</span><a href="-state-map-builder/index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">&gt;</span></code>
+<p>The build will be created to assist with create the top level or named state maps.
+All transitions are assigned to a state map.</p>
+</td>
 </tr>
 <tr>
 <td>
@@ -140,6 +143,15 @@ They are internal transitions.</p>
 <td>
 <code><span class="keyword">typealias </span><span class="identifier">EventState</span><span class="symbol">&lt;</span><span class="identifier">E</span><span class="symbol">, </span><span class="identifier">S</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;<span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">&lt;</span><a href="-event-state.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="-event-state.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span></code>
 <p>This represents an event and targetState pair that can be written as <code>event to state</code></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-external-state.html">ExternalState</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">ExternalState</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="-state-map-list.html"><span class="identifier">StateMapList</span></a><span class="symbol">&lt;</span><a href="-external-state.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span></code>
+<p>Represents the state of one or more pushed state maps and can be stored and used to initialise the state machine.</p>
 </td>
 </tr>
 <tr>

@@ -32,14 +32,18 @@
 <p><a href="default-state-map.html">defaultStateMap</a></p>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">defaultStateMap</span><span class="symbol">: </span><a href="../-state-map-definition/index.html"><span class="identifier">StateMapDefinition</span></a><span class="symbol">&lt;</span><a href="index.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span></code></td>
+<code><span class="keyword">val </span><span class="identifier">defaultStateMap</span><span class="symbol">: </span><a href="../-state-map-definition/index.html"><span class="identifier">StateMapDefinition</span></a><span class="symbol">&lt;</span><a href="index.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span></code>
+<p>The top level state map will be created when the state machine is created.</p>
+</td>
 </tr>
 <tr>
 <td>
 <p><a href="named-state-maps.html">namedStateMaps</a></p>
 </td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">namedStateMaps</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="../-state-map-definition/index.html"><span class="identifier">StateMapDefinition</span></a><span class="symbol">&lt;</span><a href="index.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+<code><span class="keyword">val </span><span class="identifier">namedStateMaps</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="../-state-map-definition/index.html"><span class="identifier">StateMapDefinition</span></a><span class="symbol">&lt;</span><a href="index.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code>
+<p>The named state maps can be accessed via a push transition.</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -51,7 +55,21 @@
 <p><a href="create.html">create</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">create</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm.StateMachineDefinition$create(io.jumpco.open.kfsm.StateMachineDefinition.C)/context">context</span><span class="symbol">:</span>&nbsp;<a href="index.html#C"><span class="identifier">C</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-state-machine-instance/index.html"><span class="identifier">StateMachineInstance</span></a><span class="symbol">&lt;</span><a href="index.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">create</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm.StateMachineDefinition$create(io.jumpco.open.kfsm.StateMachineDefinition.C, kotlin.collections.List((((io.jumpco.open.kfsm.StateMapItem.S, kotlin.String)))))/context">context</span><span class="symbol">:</span>&nbsp;<a href="index.html#C"><span class="identifier">C</span></a><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.StateMachineDefinition$create(io.jumpco.open.kfsm.StateMachineDefinition.C, kotlin.collections.List((((io.jumpco.open.kfsm.StateMapItem.S, kotlin.String)))))/initialExternalState">initialExternalState</span><span class="symbol">:</span>&nbsp;<a href="../-external-state.html"><span class="identifier">ExternalState</span></a><span class="symbol">&lt;</span><a href="index.html#S"><span class="identifier">S</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-state-machine-instance/index.html"><span class="identifier">StateMachineInstance</span></a><span class="symbol">&lt;</span><a href="index.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span></code>
+<p>This function will create a state machine instance and set it to the state to a previously externalised state.</p>
+<code><span class="keyword">fun </span><span class="identifier">create</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm.StateMachineDefinition$create(io.jumpco.open.kfsm.StateMachineDefinition.C, io.jumpco.open.kfsm.StateMachineDefinition.S)/context">context</span><span class="symbol">:</span>&nbsp;<a href="index.html#C"><span class="identifier">C</span></a><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.StateMachineDefinition$create(io.jumpco.open.kfsm.StateMachineDefinition.C, io.jumpco.open.kfsm.StateMachineDefinition.S)/initial">initial</span><span class="symbol">:</span>&nbsp;<a href="index.html#S"><span class="identifier">S</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><a href="../-state-machine-instance/index.html"><span class="identifier">StateMachineInstance</span></a><span class="symbol">&lt;</span><a href="index.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#E"><span class="identifier">E</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#C"><span class="identifier">C</span></a><span class="symbol">&gt;</span></code>
+<p>This function will create a state machine instance and set it to the initial state.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="possible-events.html">possibleEvents</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">possibleEvents</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm.StateMachineDefinition$possibleEvents(io.jumpco.open.kfsm.StateMachineDefinition.S, kotlin.Boolean)/state">state</span><span class="symbol">:</span>&nbsp;<a href="index.html#S"><span class="identifier">S</span></a><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.StateMachineDefinition$possibleEvents(io.jumpco.open.kfsm.StateMachineDefinition.S, kotlin.Boolean)/includeDefault">includeDefault</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html"><span class="identifier">Set</span></a><span class="symbol">&lt;</span><a href="index.html#E"><span class="identifier">E</span></a><span class="symbol">&gt;</span></code>
+<p>This function will provide a list of possible events given a specific state.
+The actual events may fail because of guard conditions or named state maps and the default state map behaviour being different.</p>
+</td>
 </tr>
 </tbody>
 </table>

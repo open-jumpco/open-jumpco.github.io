@@ -444,6 +444,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#source">Source</a></li>
 </ul>
 </li>
+<li><a href="#features">Features</a></li>
 <li><a href="#tutorial">Tutorial</a>
 <ul class="sectlevel2">
 <li><a href="#simple-turnstile-example">Simple turnstile example</a>
@@ -487,6 +488,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#send-event">Send Event</a></li>
 <li><a href="#named-maps-and-push-pop-transitions">Named Maps and Push / Pop Transitions</a></li>
+<li><a href="#life-cycle">Life-cycle</a></li>
 </ul>
 </li>
 <li><a href="#dsl">DSL</a>
@@ -560,6 +562,45 @@ a Kotlin DSL along with a simple implementation.</p>
 <div class="sect2">
 <h3 id="source"><a href="https://github.com/open-jumpco/kfsm">Source</a></h3>
 
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="features">Features</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This Finite state machine implementation has the following features:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Event driven state machine.</p>
+</li>
+<li>
+<p>External and internal transitions</p>
+</li>
+<li>
+<p>State entry and exit actions.</p>
+</li>
+<li>
+<p>Default state actions.</p>
+</li>
+<li>
+<p>Default entry and exit actions.</p>
+</li>
+<li>
+<p>Determine allowed events for current or given state.</p>
+</li>
+<li>
+<p>Multiple state maps with push / pop transitions</p>
+</li>
+<li>
+<p>Automatic transitions</p>
+</li>
+<li>
+<p>Externalisation of state.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -1190,7 +1231,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-jvm:0.9.1'
+    implementation 'io.jumpco.open:kfsm-jvm:0.9.2'
 }</code></pre>
 </div>
 </div>
@@ -1200,7 +1241,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-js:0.9.1'
+    implementation 'io.jumpco.open:kfsm-js:0.9.2'
 }</code></pre>
 </div>
 </div>
@@ -1210,7 +1251,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-wasm32:0.9.1'
+    implementation 'io.jumpco.open:kfsm-wasm32:0.9.2'
 }</code></pre>
 </div>
 </div>
@@ -1220,7 +1261,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-linuxX64:0.9.1'
+    implementation 'io.jumpco.open:kfsm-linuxX64:0.9.2'
 }</code></pre>
 </div>
 </div>
@@ -1230,7 +1271,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-mingwX64:0.9.1'
+    implementation 'io.jumpco.open:kfsm-mingwX64:0.9.2'
 }</code></pre>
 </div>
 </div>
@@ -1240,7 +1281,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-macosX64:0.9.1'
+    implementation 'io.jumpco.open:kfsm-macosX64:0.9.2'
 }</code></pre>
 </div>
 </div>
@@ -1252,7 +1293,8 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <h2 id="operation">Operation</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The finite state machine follows a specific set of rules. This section describes the decision making and order of execution.</p>
+<p>The finite state machine follows a specific set of rules.
+This section describes the decision making and order of execution.</p>
 </div>
 <div class="paragraph">
 <p>The state machine will define one or more state maps each representing a subset of possible states of the same type.</p>
@@ -1270,10 +1312,11 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <p>An event may trigger a state transition which defines actions to apply when the state machine is in a specific state.</p>
 </div>
 <div class="paragraph">
-<p>Guarded transitions has a guard expression that will be evaluated to allow execution of transition.</p>
+<p>Transitions may have a guard expression that has to evaluate to <code>true</code> to allow execution of transition.</p>
 </div>
 <div class="paragraph">
-<p>Automatic transitions are associated with states and have no events. Automatic transitions will be executed if the specific state apply after the exit action.</p>
+<p>Automatic transitions are associated with states and have no events.
+Automatic transitions will be executed if the specific state applies after the exit action.</p>
 </div>
 <div class="paragraph">
 <p>The state can be any type but we have been using <code>enum class</code> in all samples.</p>
@@ -1379,6 +1422,15 @@ The <code>entry</code> and <code>exit</code> action are only invoked for <code>e
 A push transition requires a map name and a target state along with the normal event and optional guard and action.
 The current state map will be pushed on a stack and a statemap instance will be created using the named definition.
 Events will be processed according to the transition rules of the named map.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="life-cycle">Life-cycle</h3>
+<div class="paragraph">
+<p>The philosophy behind the design is that the finite state machine can be used when needed by creating an instance and providing it with the context.
+The state machine can derive the current state from the context or it can be provided with a previously externalised state.
+Then events can be sent to the FSM which may trigger actions.
+The FSM can also be used to determine which events are allowed for a given state.</p>
 </div>
 </div>
 </div>
@@ -2089,7 +2141,7 @@ transition(Event.EV2 to State.S2) { args -&gt; // external transition
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-08-01 00:36:38 +0200
+Last updated 2019-08-13 10:18:07 +0200
 </div>
 </div>
 <script src="prism.js"></script>
