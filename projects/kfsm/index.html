@@ -724,6 +724,11 @@ enum class TurnstileEvents {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class TurnstileFSM(turnstile: Turnstile) {
+    private val fsm = definition.create(turnstile)
+
+    fun coin() = fsm.sendEvent(TurnstileEvents.COIN)
+    fun pass() = fsm.sendEvent(TurnstileEvents.PASS)
+
     companion object {
         private val definition = stateMachine(TurnstileStates.values().toSet(), TurnstileEvents::class, Turnstile::class) {
             initial {
@@ -765,11 +770,6 @@ enum class TurnstileEvents {
             }
         }.build()
     }
-
-    private val fsm = definition.create(turnstile)
-
-    fun coin() = fsm.sendEvent(TurnstileEvents.COIN)
-    fun pass() = fsm.sendEvent(TurnstileEvents.PASS)
 }</code></pre>
 </div>
 </div>
@@ -1006,6 +1006,20 @@ The automatic transitions will be triggered based on the guard expressions.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class PayingTurnstileFSM(turnstile: PayingTurnstile) {
+    val fsm = definition.create(turnstile)
+
+    fun coin(value: Int) {
+        println("sendEvent:COIN:$value")
+        fsm.sendEvent(PayingTurnstileEvents.COIN, value)
+    }
+
+    fun pass() {
+        println("sendEvent:PASS")
+        fsm.sendEvent(PayingTurnstileEvents.PASS)
+    }
+
+    fun allowedEvents() = fsm.allowed().map { it.name.toLowerCase() }.toSet()
+
     companion object {
         val definition = stateMachine(
             setOf(PayingTurnstileStates.LOCKED, PayingTurnstileStates.UNLOCKED),
@@ -1102,21 +1116,6 @@ The automatic transitions will be triggered based on the guard expressions.</p>
             }
         }.build()
     }
-
-    val fsm = definition.create(turnstile)
-
-    fun coin(value: Int) {
-        println("sendEvent:COIN:$value")
-        fsm.sendEvent(PayingTurnstileEvents.COIN, value)
-    }
-
-    fun pass() {
-        println("sendEvent:PASS")
-        fsm.sendEvent(PayingTurnstileEvents.PASS)
-    }
-
-    fun allowedEvents() = fsm.allowed().map { it.name.toLowerCase() }.toSet()
-
 }</code></pre>
 </div>
 </div>
@@ -1231,7 +1230,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-jvm:0.9.2'
+    implementation 'io.jumpco.open:kfsm-jvm:0.9.3'
 }</code></pre>
 </div>
 </div>
@@ -1241,7 +1240,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-js:0.9.2'
+    implementation 'io.jumpco.open:kfsm-js:0.9.3'
 }</code></pre>
 </div>
 </div>
@@ -1251,7 +1250,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-wasm32:0.9.2'
+    implementation 'io.jumpco.open:kfsm-wasm32:0.9.3'
 }</code></pre>
 </div>
 </div>
@@ -1261,7 +1260,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-linuxX64:0.9.2'
+    implementation 'io.jumpco.open:kfsm-linuxX64:0.9.3'
 }</code></pre>
 </div>
 </div>
@@ -1271,7 +1270,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-mingwX64:0.9.2'
+    implementation 'io.jumpco.open:kfsm-mingwX64:0.9.3'
 }</code></pre>
 </div>
 </div>
@@ -1281,7 +1280,7 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-macosX64:0.9.2'
+    implementation 'io.jumpco.open:kfsm-macosX64:0.9.3'
 }</code></pre>
 </div>
 </div>
