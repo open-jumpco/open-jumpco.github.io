@@ -434,6 +434,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <body class="article toc2 toc-left">
 <div id="header">
 <h1>KFSM - Kotlin Finite-state machine</h1>
+<div class="details">
+<span id="revnumber">version 0.9.4-SNAPSHOT</span>
+</div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -730,7 +733,10 @@ enum class TurnstileEvents {
     fun pass() = fsm.sendEvent(TurnstileEvents.PASS)
 
     companion object {
-        private val definition = stateMachine(TurnstileStates.values().toSet(), TurnstileEvents::class, Turnstile::class) {
+        private val definition = stateMachine(
+        TurnstileStates.values().toSet(),
+        TurnstileEvents::class,
+        Turnstile::class) {
             initial {
             if (locked)
                 TurnstileStates.LOCKED
@@ -2140,6 +2146,7 @@ transition(Event.EV2 to State.S2) { args -&gt; // external transition
 </div>
 <div id="footer">
 <div id="footer-text">
+Version 0.9.4-SNAPSHOT<br>
 Last updated 2019-08-13 10:18:07 +0200
 </div>
 </div>
