@@ -1493,7 +1493,9 @@ The statemachine supports:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">// using builder function
-val definition = StateMachineBuilder&lt;StateEnum,EventEnum,ContextType&gt;(StateEnum.values().toSet()).stateMachine {
+val definition = StateMachineBuilder&lt;StateEnum, EventEnum, ContextType&gt;(
+    StateEnum.values().toSet()
+).stateMachine {
     default { // global defaults
     }
     initial { // initial state expression
@@ -1506,7 +1508,11 @@ val definition = StateMachineBuilder&lt;StateEnum,EventEnum,ContextType&gt;(Stat
     }
 }.build()
 // using global function
-val definition = stateMachine(StateEnum.values().toSet(), EventEnum::class,ContextType::class) {
+val definition = stateMachine(
+    StateEnum.values().toSet(),
+    EventEnum::class,
+    ContextType::class
+) {
     default { // global defaults
     }
     initial { // initial state expression
