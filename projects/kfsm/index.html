@@ -435,7 +435,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>KFSM - Kotlin Finite-state machine</h1>
 <div class="details">
-<span id="revnumber">version 0.9.4-SNAPSHOT</span>
+<span id="revnumber">version 0.9.4</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1295,7 +1295,8 @@ class ProtocolSender : ProtocolHandler {
     }
 }
 
-class Packet(private val protocolHandler: ProtocolHandler) : PacketHandler, ProtocolHandler by protocolHandler {
+class Packet(private val protocolHandler: ProtocolHandler) : PacketHandler,
+    ProtocolHandler by protocolHandler {
     val fields = mutableListOf&lt;ByteArray&gt;()
     private var currentField: Block? = null
     private var _checksumValid: Boolean = false
@@ -1305,7 +1306,7 @@ class Packet(private val protocolHandler: ProtocolHandler) : PacketHandler, Prot
     private val checkSum = Block()
 
     override fun print() {
-        println("Checksum:${checksumValid}:Fields:${fields.size}")
+        println("Checksum:$checksumValid:Fields:${fields.size}")
         fields.forEachIndexed { index, bytes -&gt;
             print("FLD:$index:")
             bytes.forEach { byte -&gt;
@@ -1351,17 +1352,10 @@ class Packet(private val protocolHandler: ProtocolHandler) : PacketHandler, Prot
     }
 }
 
-enum class ReaderEvents(val code: Int) {
-    BYTE(0x00),
-    CTRL(0x01),
-    ESC(0x1b)
-}
-
-enum class ControlChars(val code: Int) {
-    SOH(0x01),
-    STX(0x02),
-    ETX(0x03),
-    EOT(0x04)
+enum class ReaderEvents {
+    BYTE,
+    CTRL,
+    ESC
 }
 
 enum class ReaderStates {
@@ -1375,11 +1369,22 @@ enum class ReaderStates {
     END
 }
 
+class CharacterConstants {
+    companion object {
+        const val SOH = 0x01
+        const val STX = 0x02
+        const val ETX = 0x03
+        const val EOT = 0x04
+        const val ESC = 0x1b
+    }
+}
+
 class PacketReaderFSM(private val packetHandler: PacketHandler) {
     companion object {
+
         private val definition = stateMachine(
             ReaderStates.values().toSet(),
-            ReaderEvents::class,
+            ReaderEvents.values().toSet(),
             PacketHandler::class
         ) {
             initial { ReaderStates.START }
@@ -1397,12 +1402,12 @@ class PacketReaderFSM(private val packetHandler: PacketHandler) {
             state(ReaderStates.START) {
                 transition(
                     ReaderEvents.CTRL to ReaderStates.RCVPCKT,
-                    guard = { args -&gt; args[0] as Int == ControlChars.SOH.code }) {}
+                    guard = { args -&gt; args[0] as Int == CharacterConstants.SOH }) {}
             }
             state(ReaderStates.RCVPCKT) {
                 transition(
                     ReaderEvents.CTRL to ReaderStates.RCVDATA,
-                    guard = { args -&gt; args[0] as Int == ControlChars.STX.code }) {
+                    guard = { args -&gt; args[0] as Int == CharacterConstants.STX }) {
                     addField()
                 }
                 transition(ReaderEvents.BYTE to ReaderStates.RCVCHK) { args -&gt;
@@ -1419,14 +1424,14 @@ class PacketReaderFSM(private val packetHandler: PacketHandler) {
                 }
                 transition(
                     ReaderEvents.CTRL to ReaderStates.RCVPCKT,
-                    guard = { args -&gt; args[0] as Int == ControlChars.ETX.code }) {
+                    guard = { args -&gt; args[0] as Int == CharacterConstants.ETX }) {
                     endField()
                 }
                 transition(ReaderEvents.ESC to ReaderStates.RCVESC) {}
             }
             state(ReaderStates.RCVESC) {
                 transition(ReaderEvents.ESC to ReaderStates.RCVDATA) {
-                    addByte(ReaderEvents.ESC.code)
+                    addByte(CharacterConstants.ESC)
                 }
                 transition(ReaderEvents.CTRL to ReaderStates.RCVDATA) { args -&gt;
                     require(args.isNotEmpty())
@@ -1442,7 +1447,7 @@ class PacketReaderFSM(private val packetHandler: PacketHandler) {
                 transition(ReaderEvents.ESC to ReaderStates.RCVCHKESC) {}
                 transition(
                     ReaderEvents.CTRL to ReaderStates.CHKSUM,
-                    guard = { args -&gt; args[0] as Int == ControlChars.EOT.code }) {
+                    guard = { args -&gt; args[0] as Int == CharacterConstants.EOT }) {
                     checksum()
                 }
             }
@@ -1456,7 +1461,7 @@ class PacketReaderFSM(private val packetHandler: PacketHandler) {
             }
             state(ReaderStates.RCVCHKESC) {
                 transition(ReaderEvents.ESC to ReaderStates.RCVCHK) {
-                    addChecksum(ReaderEvents.ESC.code)
+                    addChecksum(CharacterConstants.ESC)
                 }
                 transition(ReaderEvents.CTRL to ReaderStates.RCVCHK) { args -&gt;
                     require(args.isNotEmpty())
@@ -1469,11 +1474,11 @@ class PacketReaderFSM(private val packetHandler: PacketHandler) {
     private val fsm = definition.create(packetHandler)
     fun receiveByte(byte: Int) {
         when (byte) {
-            ReaderEvents.ESC.code -&gt; fsm.sendEvent(ReaderEvents.ESC, ReaderEvents.ESC.code)
-            ControlChars.SOH.code,
-            ControlChars.EOT.code,
-            ControlChars.ETX.code,
-            ControlChars.STX.code -&gt; fsm.sendEvent(ReaderEvents.CTRL, byte)
+            CharacterConstants.ESC -&gt; fsm.sendEvent(ReaderEvents.ESC, CharacterConstants.ESC)
+            CharacterConstants.SOH,
+            CharacterConstants.EOT,
+            CharacterConstants.ETX,
+            CharacterConstants.STX -&gt; fsm.sendEvent(ReaderEvents.CTRL, byte)
             else -&gt; fsm.sendEvent(ReaderEvents.BYTE, byte)
         }
     }
@@ -1488,14 +1493,14 @@ class PacketReaderTests {
         val fsm = PacketReaderFSM(packetReader)
         val stream =
             listOf(
-                ControlChars.SOH.code,
-                ControlChars.STX.code,
+                CharacterConstants.SOH,
+                CharacterConstants.STX,
                 'A'.toInt(),
                 'B'.toInt(),
                 'C'.toInt(),
-                ControlChars.ETX.code,
+                CharacterConstants.ETX,
                 'A'.toInt(),
-                ControlChars.EOT.code
+                CharacterConstants.EOT
             )
         stream.forEach { byte -&gt;
             fsm.receiveByte(byte)
@@ -1513,15 +1518,15 @@ class PacketReaderTests {
         val fsm = PacketReaderFSM(packetReader)
         val stream =
             listOf(
-                ControlChars.SOH.code,
-                ControlChars.STX.code,
+                CharacterConstants.SOH,
+                CharacterConstants.STX,
                 'A'.toInt(),
-                ReaderEvents.ESC.code,
-                ControlChars.EOT.code,
+                CharacterConstants.ESC,
+                CharacterConstants.EOT,
                 'C'.toInt(),
-                ControlChars.ETX.code,
+                CharacterConstants.ETX,
                 'A'.toInt(),
-                ControlChars.EOT.code
+                CharacterConstants.EOT
             )
         stream.forEach { byte -&gt;
             fsm.receiveByte(byte)
@@ -1531,7 +1536,7 @@ class PacketReaderTests {
         assertTrue { packetReader.checksumValid }
         assertTrue { packetReader.fields.size == 1 }
         assertTrue { packetReader.fields[0].size == 3 }
-        assertTrue { packetReader.fields[0][1].toInt() == ControlChars.EOT.code }
+        assertTrue { packetReader.fields[0][1].toInt() == CharacterConstants.EOT }
     }
 
     @Test
@@ -1542,14 +1547,14 @@ class PacketReaderTests {
         val fsm = PacketReaderFSM(packetReader)
         val stream =
             listOf(
-                ControlChars.SOH.code,
-                ControlChars.STX.code,
+                CharacterConstants.SOH,
+                CharacterConstants.STX,
                 'A'.toInt(),
-                ReaderEvents.ESC.code,
+                CharacterConstants.ESC,
                 'C'.toInt(),
-                ControlChars.ETX.code,
+                CharacterConstants.ETX,
                 'A'.toInt(),
-                ControlChars.EOT.code
+                CharacterConstants.EOT
             )
         stream.forEach { byte -&gt;
             fsm.receiveByte(byte)
@@ -1568,14 +1573,14 @@ class PacketReaderTests {
         val fsm = PacketReaderFSM(packetReader)
         val stream =
             listOf(
-                ControlChars.SOH.code,
-                ControlChars.STX.code,
+                CharacterConstants.SOH,
+                CharacterConstants.STX,
                 'A'.toInt(),
                 'B'.toInt(),
                 'C'.toInt(),
-                ControlChars.ETX.code,
+                CharacterConstants.ETX,
                 'B'.toInt(),
-                ControlChars.EOT.code
+                CharacterConstants.EOT
             )
         stream.forEach { byte -&gt;
             fsm.receiveByte(byte)
@@ -1593,20 +1598,20 @@ class PacketReaderTests {
         val fsm = PacketReaderFSM(packetReader)
         val stream =
             listOf(
-                ControlChars.SOH.code,
-                ControlChars.STX.code,
+                CharacterConstants.SOH,
+                CharacterConstants.STX,
                 'A'.toInt(),
                 'B'.toInt(),
                 'C'.toInt(),
-                ControlChars.ETX.code,
-                ControlChars.STX.code,
+                CharacterConstants.ETX,
+                CharacterConstants.STX,
                 'D'.toInt(),
                 'E'.toInt(),
                 'F'.toInt(),
-                ControlChars.ETX.code,
+                CharacterConstants.ETX,
                 'A'.toInt(),
                 'D'.toInt(),
-                ControlChars.EOT.code
+                CharacterConstants.EOT
             )
         stream.forEach { byte -&gt;
             fsm.receiveByte(byte)
@@ -1647,7 +1652,7 @@ class PacketReaderTests {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-jvm:0.9.3'
+    implementation 'io.jumpco.open:kfsm-jvm:0.9.4'
 }</code></pre>
 </div>
 </div>
@@ -1657,7 +1662,7 @@ class PacketReaderTests {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-js:0.9.3'
+    implementation 'io.jumpco.open:kfsm-js:0.9.4'
 }</code></pre>
 </div>
 </div>
@@ -1667,7 +1672,7 @@ class PacketReaderTests {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-wasm32:0.9.3'
+    implementation 'io.jumpco.open:kfsm-wasm32:0.9.4'
 }</code></pre>
 </div>
 </div>
@@ -1677,7 +1682,7 @@ class PacketReaderTests {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-linuxX64:0.9.3'
+    implementation 'io.jumpco.open:kfsm-linuxX64:0.9.4'
 }</code></pre>
 </div>
 </div>
@@ -1687,7 +1692,7 @@ class PacketReaderTests {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-mingwX64:0.9.3'
+    implementation 'io.jumpco.open:kfsm-mingwX64:0.9.4'
 }</code></pre>
 </div>
 </div>
@@ -1697,7 +1702,7 @@ class PacketReaderTests {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-macosX64:0.9.3'
+    implementation 'io.jumpco.open:kfsm-macosX64:0.9.4'
 }</code></pre>
 </div>
 </div>
@@ -2563,7 +2568,7 @@ transition(Event.EV2 to State.S2) { args -&gt; // external transition
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.9.4-SNAPSHOT<br>
+Version 0.9.4<br>
 Last updated 2019-08-13 10:18:07 +0200
 </div>
 </div>
