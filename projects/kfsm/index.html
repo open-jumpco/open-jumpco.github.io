@@ -470,6 +470,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#output">Output</a></li>
 </ul>
 </li>
+<li><a href="#packet-reader-example">Packet Reader Example</a></li>
 </ul>
 </li>
 <li><a href="#getting-started">Getting Started</a>
@@ -623,7 +624,7 @@ We want to ensure that the <code>lock()</code> function is only called when the 
 <h4 id="state-diagram">State Diagram</h4>
 <div class="imageblock">
 <div class="content">
-<img src="turnstile_fsm.png" alt="LockStateDiagram">
+<img src="turnstile-fsm.png" alt="LockStateDiagram">
 </div>
 </div>
 </div>
@@ -817,7 +818,7 @@ fsm.coin()
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="statemachine_model.png" alt="StateMachineModel">
+<img src="statemachine-model.png" alt="StateMachineModel">
 </div>
 </div>
 </div>
@@ -853,7 +854,7 @@ We push to <code>coins</code> with COINS state and then the automatic states wil
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="paying_turnstile_fsm.png" alt="Paying Turnstile">
+<img src="paying-turnstile-fsm.png" alt="Paying Turnstile">
 </div>
 </div>
 <div class="sect3">
@@ -870,7 +871,7 @@ We push to <code>coins</code> with COINS state and then the automatic states wil
 <tr>
 <th class="tableblock halign-left valign-top">Start State</th>
 <th class="tableblock halign-left valign-top">Event</th>
-<th class="tableblock halign-left valign-top">Guard</th>
+<th class="tableblock halign-left valign-top">Guard Expression</th>
 <th class="tableblock halign-left valign-top">End State</th>
 <th class="tableblock halign-left valign-top">Action</th>
 </tr>
@@ -1209,6 +1210,416 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="packet-reader-example">Packet Reader Example</h3>
+<div class="imageblock">
+<div class="content">
+<img src="packet-reader-fsm.png" alt="packet reader fsm">
+</div>
+</div>
+<div class="paragraph">
+<p>In real terms the above example combines multiple transitions into one for berevity.
+It is better when all control characters are one type of event with guard experessions.
+All events have a parameter which is the byte received and the event type is either BYTE, CTRL or ESC where:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>ESC is 0x1B</p>
+</li>
+<li>
+<p>CTRL is for SOH,STX,ETX,EOT</p>
+</li>
+<li>
+<p>BYTE all other characters</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="packet-reader-fsm-guard.png" alt="packet reader fsm guard">
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">/*
+ * Copyright (c) 2019. Open JumpCO
+ *
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public License along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+
+package io.jumpco.open.kfsm
+
+import io.mockk.Runs
+import io.mockk.every
+import io.mockk.just
+import io.mockk.mockk
+import io.mockk.verify
+import org.junit.Test
+import java.io.ByteArrayOutputStream
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
+
+class Block {
+    val byteArrayOutputStream = ByteArrayOutputStream(32)
+    fun addByte(byte: Int) {
+        byteArrayOutputStream.write(byte)
+    }
+}
+
+interface ProtocolHandler {
+    fun sendNACK()
+    fun sendACK()
+}
+
+interface PacketHandler : ProtocolHandler {
+    val checksumValid: Boolean
+    fun print()
+    fun addField()
+    fun endField()
+    fun addByte(byte: Int)
+    fun addChecksum(byte: Int)
+    fun checksum()
+}
+
+class ProtocolSender : ProtocolHandler {
+    override fun sendNACK() {
+        println("NACK")
+    }
+
+    override fun sendACK() {
+        println("ACK")
+    }
+}
+
+class Packet(private val protocolHandler: ProtocolHandler) : PacketHandler, ProtocolHandler by protocolHandler {
+    val fields = mutableListOf&lt;ByteArray&gt;()
+    private var currentField: Block? = null
+    private var _checksumValid: Boolean = false
+
+    override val checksumValid: Boolean
+        get() = _checksumValid
+    private val checkSum = Block()
+
+    override fun print() {
+        println("Checksum:${checksumValid}:Fields:${fields.size}")
+        fields.forEachIndexed { index, bytes -&gt;
+            print("FLD:$index:")
+            bytes.forEach { byte -&gt;
+                val hex = byte.toString(16).padStart(2, '0')
+                print(" $hex")
+            }
+            println()
+        }
+        println()
+    }
+
+    override fun addField() {
+        currentField = Block()
+    }
+
+    override fun endField() {
+        val field = currentField
+        require(field != null) { "expected currentField to have a value" }
+        fields.add(field.byteArrayOutputStream.toByteArray())
+        currentField = null
+    }
+
+    override fun addByte(byte: Int) {
+        val field = currentField
+        require(field != null) { "expected currentField to have a value" }
+        field.addByte(byte)
+    }
+
+    override fun addChecksum(byte: Int) {
+        checkSum.addByte(byte)
+    }
+
+    override fun checksum() {
+        require(checkSum.byteArrayOutputStream.size() &gt; 0)
+        val checksumBytes = checkSum.byteArrayOutputStream.toByteArray()
+        _checksumValid = if (checksumBytes.size == fields.size) {
+            checksumBytes.mapIndexed { index, cs -&gt;
+                cs == fields[index][0]
+            }.reduce { a, b -&gt; a &amp;&amp; b }
+        } else {
+            false
+        }
+    }
+}
+
+enum class ReaderEvents(val code: Int) {
+    BYTE(0x00),
+    CTRL(0x01),
+    ESC(0x1b)
+}
+
+enum class ControlChars(val code: Int) {
+    SOH(0x01),
+    STX(0x02),
+    ETX(0x03),
+    EOT(0x04)
+}
+
+enum class ReaderStates {
+    START,
+    RCVPCKT,
+    RCVDATA,
+    RCVESC,
+    RCVCHK,
+    RCVCHKESC,
+    CHKSUM,
+    END
+}
+
+class PacketReaderFSM(private val packetHandler: PacketHandler) {
+    companion object {
+        private val definition = stateMachine(
+            ReaderStates.values().toSet(),
+            ReaderEvents::class,
+            PacketHandler::class
+        ) {
+            initial { ReaderStates.START }
+            default {
+                transition(ReaderEvents.BYTE to ReaderStates.END) {
+                    sendNACK()
+                }
+                transition(ReaderEvents.CTRL to ReaderStates.END) {
+                    sendNACK()
+                }
+                transition(ReaderEvents.ESC to ReaderStates.END) {
+                    sendNACK()
+                }
+            }
+            state(ReaderStates.START) {
+                transition(
+                    ReaderEvents.CTRL to ReaderStates.RCVPCKT,
+                    guard = { args -&gt; args[0] as Int == ControlChars.SOH.code }) {}
+            }
+            state(ReaderStates.RCVPCKT) {
+                transition(
+                    ReaderEvents.CTRL to ReaderStates.RCVDATA,
+                    guard = { args -&gt; args[0] as Int == ControlChars.STX.code }) {
+                    addField()
+                }
+                transition(ReaderEvents.BYTE to ReaderStates.RCVCHK) { args -&gt;
+                    require(args.size == 1)
+                    val byte = args[0] as Int
+                    addChecksum(byte)
+                }
+            }
+            state(ReaderStates.RCVDATA) {
+                transition(ReaderEvents.BYTE) { args -&gt;
+                    require(args.size == 1)
+                    val byte = args[0] as Int
+                    addByte(byte)
+                }
+                transition(
+                    ReaderEvents.CTRL to ReaderStates.RCVPCKT,
+                    guard = { args -&gt; args[0] as Int == ControlChars.ETX.code }) {
+                    endField()
+                }
+                transition(ReaderEvents.ESC to ReaderStates.RCVESC) {}
+            }
+            state(ReaderStates.RCVESC) {
+                transition(ReaderEvents.ESC to ReaderStates.RCVDATA) {
+                    addByte(ReaderEvents.ESC.code)
+                }
+                transition(ReaderEvents.CTRL to ReaderStates.RCVDATA) { args -&gt;
+                    require(args.isNotEmpty())
+                    addByte(args[0] as Int)
+                }
+            }
+            state(ReaderStates.RCVCHK) {
+                transition(ReaderEvents.BYTE) { args -&gt;
+                    require(args.size == 1)
+                    val byte = args[0] as Int
+                    addChecksum(byte)
+                }
+                transition(ReaderEvents.ESC to ReaderStates.RCVCHKESC) {}
+                transition(
+                    ReaderEvents.CTRL to ReaderStates.CHKSUM,
+                    guard = { args -&gt; args[0] as Int == ControlChars.EOT.code }) {
+                    checksum()
+                }
+            }
+            state(ReaderStates.CHKSUM) {
+                automatic(ReaderStates.END, guard = { !checksumValid }) {
+                    sendNACK()
+                }
+                automatic(ReaderStates.END, guard = { checksumValid }) {
+                    sendACK()
+                }
+            }
+            state(ReaderStates.RCVCHKESC) {
+                transition(ReaderEvents.ESC to ReaderStates.RCVCHK) {
+                    addChecksum(ReaderEvents.ESC.code)
+                }
+                transition(ReaderEvents.CTRL to ReaderStates.RCVCHK) { args -&gt;
+                    require(args.isNotEmpty())
+                    addChecksum(args[0] as Int)
+                }
+            }
+        }.build()
+    }
+
+    private val fsm = definition.create(packetHandler)
+    fun receiveByte(byte: Int) {
+        when (byte) {
+            ReaderEvents.ESC.code -&gt; fsm.sendEvent(ReaderEvents.ESC, ReaderEvents.ESC.code)
+            ControlChars.SOH.code,
+            ControlChars.EOT.code,
+            ControlChars.ETX.code,
+            ControlChars.STX.code -&gt; fsm.sendEvent(ReaderEvents.CTRL, byte)
+            else -&gt; fsm.sendEvent(ReaderEvents.BYTE, byte)
+        }
+    }
+}
+
+class PacketReaderTests {
+    @Test
+    fun `test reader expect ACK`() {
+        val protocolHandler = mockk&lt;ProtocolHandler&gt;()
+        every { protocolHandler.sendACK() } just Runs
+        val packetReader = Packet(protocolHandler)
+        val fsm = PacketReaderFSM(packetReader)
+        val stream =
+            listOf(
+                ControlChars.SOH.code,
+                ControlChars.STX.code,
+                'A'.toInt(),
+                'B'.toInt(),
+                'C'.toInt(),
+                ControlChars.ETX.code,
+                'A'.toInt(),
+                ControlChars.EOT.code
+            )
+        stream.forEach { byte -&gt;
+            fsm.receiveByte(byte)
+        }
+        packetReader.print()
+        verify { protocolHandler.sendACK() }
+        assertTrue { packetReader.checksumValid }
+    }
+
+    @Test
+    fun `test reader ESC expect ACK`() {
+        val protocolHandler = mockk&lt;ProtocolHandler&gt;()
+        every { protocolHandler.sendACK() } just Runs
+        val packetReader = Packet(protocolHandler)
+        val fsm = PacketReaderFSM(packetReader)
+        val stream =
+            listOf(
+                ControlChars.SOH.code,
+                ControlChars.STX.code,
+                'A'.toInt(),
+                ReaderEvents.ESC.code,
+                ControlChars.EOT.code,
+                'C'.toInt(),
+                ControlChars.ETX.code,
+                'A'.toInt(),
+                ControlChars.EOT.code
+            )
+        stream.forEach { byte -&gt;
+            fsm.receiveByte(byte)
+        }
+        packetReader.print()
+        verify { protocolHandler.sendACK() }
+        assertTrue { packetReader.checksumValid }
+        assertTrue { packetReader.fields.size == 1 }
+        assertTrue { packetReader.fields[0].size == 3 }
+        assertTrue { packetReader.fields[0][1].toInt() == ControlChars.EOT.code }
+    }
+
+    @Test
+    fun `test reader ESC expect NACK`() {
+        val protocolHandler = mockk&lt;ProtocolHandler&gt;()
+        every { protocolHandler.sendNACK() } just Runs
+        val packetReader = Packet(protocolHandler)
+        val fsm = PacketReaderFSM(packetReader)
+        val stream =
+            listOf(
+                ControlChars.SOH.code,
+                ControlChars.STX.code,
+                'A'.toInt(),
+                ReaderEvents.ESC.code,
+                'C'.toInt(),
+                ControlChars.ETX.code,
+                'A'.toInt(),
+                ControlChars.EOT.code
+            )
+        stream.forEach { byte -&gt;
+            fsm.receiveByte(byte)
+        }
+        packetReader.print()
+        verify { protocolHandler.sendNACK() }
+        assertFalse { packetReader.checksumValid }
+        assertTrue { packetReader.fields.isEmpty() }
+    }
+
+    @Test
+    fun `test reader expect NACK`() {
+        val protocolHandler = mockk&lt;ProtocolHandler&gt;()
+        every { protocolHandler.sendNACK() } just Runs
+        val packetReader = Packet(protocolHandler)
+        val fsm = PacketReaderFSM(packetReader)
+        val stream =
+            listOf(
+                ControlChars.SOH.code,
+                ControlChars.STX.code,
+                'A'.toInt(),
+                'B'.toInt(),
+                'C'.toInt(),
+                ControlChars.ETX.code,
+                'B'.toInt(),
+                ControlChars.EOT.code
+            )
+        stream.forEach { byte -&gt;
+            fsm.receiveByte(byte)
+        }
+        packetReader.print()
+        verify { protocolHandler.sendNACK() }
+        assertFalse { packetReader.checksumValid }
+    }
+
+    @Test
+    fun `test reader multiple fields expect ACK`() {
+        val protocolHandler = mockk&lt;ProtocolHandler&gt;()
+        every { protocolHandler.sendACK() } just Runs
+        val packetReader = Packet(protocolHandler)
+        val fsm = PacketReaderFSM(packetReader)
+        val stream =
+            listOf(
+                ControlChars.SOH.code,
+                ControlChars.STX.code,
+                'A'.toInt(),
+                'B'.toInt(),
+                'C'.toInt(),
+                ControlChars.ETX.code,
+                ControlChars.STX.code,
+                'D'.toInt(),
+                'E'.toInt(),
+                'F'.toInt(),
+                ControlChars.ETX.code,
+                'A'.toInt(),
+                'D'.toInt(),
+                ControlChars.EOT.code
+            )
+        stream.forEach { byte -&gt;
+            fsm.receiveByte(byte)
+        }
+        packetReader.print()
+        verify { protocolHandler.sendACK() }
+        assertTrue { packetReader.checksumValid }
+        assertTrue { packetReader.fields.size == 2 }
+    }
+}</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1328,7 +1739,7 @@ Automatic transitions will be executed if the specific state applies after the e
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="statemachine_sequence.png" alt="FSM sequence">
+<img src="statemachine-sequence.png" alt="FSM sequence">
 </div>
 </div>
 <div class="paragraph">
@@ -1617,7 +2028,7 @@ Global entry actions will be called for all external transitions after state spe
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">entry { fromState, targetState, args -&gt;
-    println("Entering:$targetState from $fromState with ${args.toList()}")
+    entryAction()
 }</code></pre>
 </div>
 </div>
@@ -1647,7 +2058,7 @@ Global exit actions will be called for all external transitions after state spec
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">exit { fromState, targetState, args -&gt;
-    println("Exiting:$fromState to $targetState with ${args.toList()}")
+    exitAction()
 }</code></pre>
 </div>
 </div>
