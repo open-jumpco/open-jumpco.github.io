@@ -435,7 +435,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>KFSM - Kotlin Finite-state machine</h1>
 <div class="details">
-<span id="revnumber">version 0.9.4</span>
+<span id="revnumber">version 0.9.5-SNAPSHOT</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -501,24 +501,24 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#default"><code>default</code></a>
 <ul class="sectlevel3">
 <li><a href="#action"><code>action</code></a></li>
-<li><a href="#entry"><code>entry</code></a></li>
-<li><a href="#exit"><code>exit</code></a></li>
-<li><a href="#transition"><code>transition</code></a></li>
+<li><a href="#onentry"><code>onEntry</code></a></li>
+<li><a href="#onexit"><code>onExit</code></a></li>
+<li><a href="#onevent"><code>onEvent</code></a></li>
 </ul>
 </li>
-<li><a href="#initial"><code>initial</code></a></li>
-<li><a href="#initialmap"><code>initialMap</code></a></li>
-<li><a href="#state"><code>state</code></a>
+<li><a href="#initialstate"><code>initialState</code></a></li>
+<li><a href="#initialstates"><code>initialStates</code></a></li>
+<li><a href="#whenstate"><code>whenState</code></a>
 <ul class="sectlevel3">
 <li><a href="#default-2"><code>default</code></a></li>
-<li><a href="#entry-2"><code>entry</code></a></li>
-<li><a href="#exit-2"><code>exit</code></a></li>
+<li><a href="#onentry-2"><code>onEntry</code></a></li>
+<li><a href="#onexit-2"><code>onExit</code></a></li>
 <li><a href="#automatic"><code>automatic</code></a></li>
 <li><a href="#automaticpop"><code>automaticPop</code></a></li>
 <li><a href="#automaticpush"><code>automaticPush</code></a></li>
-<li><a href="#poptransition"><code>popTransition</code></a></li>
-<li><a href="#pushtransition"><code>pushTransition</code></a></li>
-<li><a href="#transition-2"><code>transition</code></a></li>
+<li><a href="#onevent-2"><code>onEvent</code></a></li>
+<li><a href="#oneventpush"><code>onEventPush</code></a></li>
+<li><a href="#oneventpop"><code>onEventPop</code></a></li>
 </ul>
 </li>
 </ul>
@@ -738,14 +738,14 @@ enum class TurnstileEvents {
         TurnstileStates.values().toSet(),
         TurnstileEvents::class,
         Turnstile::class) {
-            initial {
+            initialState {
             if (locked)
                 TurnstileStates.LOCKED
             else
                 TurnstileStates.UNLOCKED
             }
             default {
-                entry { startState, targetState, _ -&gt;
+                onEntry { startState, targetState, _ -&gt;
                     println("entering:$startState -&gt; $targetState for $this")
                 }
                 // default transition will invoke alarm
@@ -753,25 +753,25 @@ enum class TurnstileEvents {
                     println("Default action for state($state) -&gt; event($event) for $this")
                     alarm()
                 }
-                exit { startState, targetState, _ -&gt;
+                onExit { startState, targetState, _ -&gt;
                     println("exiting:$startState -&gt; $targetState for $this")
                 }
             }
             // when current state is LOCKED
-            state(TurnstileStates.LOCKED) {
+            whenState(TurnstileStates.LOCKED) {
                 // external transition on COIN to UNLOCKED state
-                transition(TurnstileEvents.COIN to TurnstileStates.UNLOCKED) {
+                onEvent(TurnstileEvents.COIN to TurnstileStates.UNLOCKED) {
                     unlock()
                 }
             }
             // when current state is UNLOCKED
-            state(TurnstileStates.UNLOCKED) {
+            whenState(TurnstileStates.UNLOCKED) {
                 // internal transition on COIN
-                transition(TurnstileEvents.COIN) {
+                onEvent(TurnstileEvents.COIN) {
                     returnCoin()
                 }
                 // external transition on PASS to LOCKED state
-                transition(TurnstileEvents.PASS to TurnstileStates.LOCKED) {
+                onEvent(TurnstileEvents.PASS to TurnstileStates.LOCKED) {
                     lock()
                 }
             }
@@ -841,7 +841,7 @@ fsm.coin()
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">transition(EVENT1) { args -&gt;
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">onEvent(EVENT1) { args -&gt;
     val value = args[0] as Int
     // use value
 }</code></pre>
@@ -1033,7 +1033,7 @@ The automatic transitions will be triggered based on the guard expressions.</p>
             PayingTurnstileEvents::class,
             PayingTurnstile::class
         ) {
-            initialMap {
+            initialStates {
                 mutableListOf&lt;StateMapItem&lt;PayingTurnstileStates&gt;&gt;().apply {
                     if (locked) {
                         this.add(PayingTurnstileStates.LOCKED to "default")
@@ -1046,7 +1046,7 @@ The automatic transitions will be triggered based on the guard expressions.</p>
                 }
             }
             default {
-                entry { _, targetState, args -&gt;
+                onEntry { _, targetState, args -&gt;
                     if (args.isNotEmpty()) {
                         println("entering:$targetState (${args.toList()}) for $this")
                     } else {
@@ -1061,7 +1061,7 @@ The automatic transitions will be triggered based on the guard expressions.</p>
                     }
                     alarm()
                 }
-                exit { startState, _, args -&gt;
+                onExit { startState, _, args -&gt;
                     if (args.isNotEmpty()) {
                         println("exiting:$startState (${args.toList()}) for $this")
                     } else {
@@ -1070,7 +1070,7 @@ The automatic transitions will be triggered based on the guard expressions.</p>
                 }
             }
             stateMap("coins", setOf(PayingTurnstileStates.COINS)) {
-                state(PayingTurnstileStates.COINS) {
+                whenState(PayingTurnstileStates.COINS) {
                     automaticPop(PayingTurnstileStates.UNLOCKED, guard = { coins &gt; requiredCoins }) {
                         println("automaticPop:returnCoin")
                         returnCoin(coins - requiredCoins)
@@ -1082,7 +1082,7 @@ The automatic transitions will be triggered based on the guard expressions.</p>
                         unlock()
                         reset()
                     }
-                    transition(PayingTurnstileEvents.COIN) { args -&gt;
+                    onEvent(PayingTurnstileEvents.COIN) { args -&gt;
                         val value = args[0] as Int
                         coin(value)
                         println("Coins=$coins")
@@ -1092,16 +1092,16 @@ The automatic transitions will be triggered based on the guard expressions.</p>
                     }
                 }
             }
-            state(PayingTurnstileStates.LOCKED) {
+            whenState(PayingTurnstileStates.LOCKED) {
                 // The coin brings amount to exact amount
-                pushTransition(PayingTurnstileEvents.COIN, "coins", PayingTurnstileStates.COINS) { args -&gt;
+                onEventPush(PayingTurnstileEvents.COIN, "coins", PayingTurnstileStates.COINS) { args -&gt;
                     val value = args[0] as Int
                     coin(value)
                     unlock()
                     reset()
                 }
                 // The coins add up to more than required
-                pushTransition(PayingTurnstileEvents.COIN, "coins", PayingTurnstileStates.COINS,
+                onEventPush(PayingTurnstileEvents.COIN, "coins", PayingTurnstileStates.COINS,
                     guard = { args -&gt;
                         val value = args[0] as Int;
                         value + this.coins &lt; this.requiredCoins
@@ -1112,12 +1112,12 @@ The automatic transitions will be triggered based on the guard expressions.</p>
                     println("Coins=$coins, Please add ${requiredCoins - coins}")
                 }
             }
-            state(PayingTurnstileStates.UNLOCKED) {
-                transition(PayingTurnstileEvents.COIN) { args -&gt;
+            whenState(PayingTurnstileStates.UNLOCKED) {
+                onEvent(PayingTurnstileEvents.COIN) { args -&gt;
                     val value = args[0] as Int
                     returnCoin(coin(value))
                 }
-                transition(PayingTurnstileEvents.PASS to PayingTurnstileStates.LOCKED) {
+                onEvent(PayingTurnstileEvents.PASS to PayingTurnstileStates.LOCKED) {
                     lock()
                 }
             }
@@ -1366,71 +1366,71 @@ class PacketReaderFSM(private val packetHandler: PacketHandler) {
             ReaderEvents.values().toSet(),
             PacketHandler::class
         ) {
-            initial { ReaderStates.START }
+            initialState { ReaderStates.START }
             default {
-                transition(ReaderEvents.BYTE to ReaderStates.END) {
+                onEvent(ReaderEvents.BYTE to ReaderStates.END) {
                     sendNACK()
                 }
-                transition(ReaderEvents.CTRL to ReaderStates.END) {
+                onEvent(ReaderEvents.CTRL to ReaderStates.END) {
                     sendNACK()
                 }
-                transition(ReaderEvents.ESC to ReaderStates.END) {
+                onEvent(ReaderEvents.ESC to ReaderStates.END) {
                     sendNACK()
                 }
             }
-            state(ReaderStates.START) {
-                transition(
+            whenState(ReaderStates.START) {
+                onEvent(
                     ReaderEvents.CTRL to ReaderStates.RCVPCKT,
                     guard = { args -&gt; args[0] as Int == CharacterConstants.SOH }) {}
             }
-            state(ReaderStates.RCVPCKT) {
-                transition(
+            whenState(ReaderStates.RCVPCKT) {
+                onEvent(
                     ReaderEvents.CTRL to ReaderStates.RCVDATA,
                     guard = { args -&gt; args[0] as Int == CharacterConstants.STX }) {
                     addField()
                 }
-                transition(ReaderEvents.BYTE to ReaderStates.RCVCHK) { args -&gt;
+                onEvent(ReaderEvents.BYTE to ReaderStates.RCVCHK) { args -&gt;
                     require(args.size == 1)
                     val byte = args[0] as Int
                     addChecksum(byte)
                 }
             }
-            state(ReaderStates.RCVDATA) {
-                transition(ReaderEvents.BYTE) { args -&gt;
+            whenState(ReaderStates.RCVDATA) {
+                onEvent(ReaderEvents.BYTE) { args -&gt;
                     require(args.size == 1)
                     val byte = args[0] as Int
                     addByte(byte)
                 }
-                transition(
+                onEvent(
                     ReaderEvents.CTRL to ReaderStates.RCVPCKT,
                     guard = { args -&gt; args[0] as Int == CharacterConstants.ETX }) {
                     endField()
                 }
-                transition(ReaderEvents.ESC to ReaderStates.RCVESC) {}
+                onEvent(ReaderEvents.ESC to ReaderStates.RCVESC) {}
             }
-            state(ReaderStates.RCVESC) {
-                transition(ReaderEvents.ESC to ReaderStates.RCVDATA) {
+            whenState(ReaderStates.RCVESC) {
+                onEvent(ReaderEvents.ESC to ReaderStates.RCVDATA) {
                     addByte(CharacterConstants.ESC)
                 }
-                transition(ReaderEvents.CTRL to ReaderStates.RCVDATA) { args -&gt;
+                onEvent(ReaderEvents.CTRL to ReaderStates.RCVDATA) { args -&gt;
                     require(args.isNotEmpty())
                     addByte(args[0] as Int)
                 }
             }
-            state(ReaderStates.RCVCHK) {
-                transition(ReaderEvents.BYTE) { args -&gt;
+            whenState(ReaderStates.RCVCHK) {
+                onEvent(ReaderEvents.BYTE) { args -&gt;
                     require(args.size == 1)
                     val byte = args[0] as Int
                     addChecksum(byte)
                 }
-                transition(ReaderEvents.ESC to ReaderStates.RCVCHKESC) {}
-                transition(
+                onEvent(ReaderEvents.ESC to ReaderStates.RCVCHKESC) {}
+                onEvent(
                     ReaderEvents.CTRL to ReaderStates.CHKSUM,
                     guard = { args -&gt; args[0] as Int == CharacterConstants.EOT }) {
                     checksum()
                 }
             }
-            state(ReaderStates.CHKSUM) {
+            whenState(ReaderStates.CHKSUM) {
                 automatic(ReaderStates.END, guard = { !checksumValid }) {
                     sendNACK()
                 }
@@ -1438,11 +1438,11 @@ class PacketReaderFSM(private val packetHandler: PacketHandler) {
                     sendACK()
                 }
             }
-            state(ReaderStates.RCVCHKESC) {
-                transition(ReaderEvents.ESC to ReaderStates.RCVCHK) {
+            whenState(ReaderStates.RCVCHKESC) {
+                onEvent(ReaderEvents.ESC to ReaderStates.RCVCHK) {
                     addChecksum(CharacterConstants.ESC)
                 }
-                transition(ReaderEvents.CTRL to ReaderStates.RCVCHK) { args -&gt;
+                onEvent(ReaderEvents.CTRL to ReaderStates.RCVCHK) { args -&gt;
                     require(args.isNotEmpty())
                     addChecksum(args[0] as Int)
                 }
@@ -1700,7 +1700,8 @@ This section describes the decision making and order of execution.</p>
 <p>The state machine will define one or more state maps each representing a subset of possible states of the same type.</p>
 </div>
 <div class="paragraph">
-<p>The state machine will receive events, constrained by set of events. The events can only be an enum class.</p>
+<p>The state machine will receive events, constrained by set of events. The events no longer have to be an enum class,
+only a type with equals and hashCode implementations.</p>
 </div>
 <div class="paragraph">
 <p>The state machine will apply actions to a context. The context represents the work that need to be performed.</p>
@@ -1719,7 +1720,7 @@ This section describes the decision making and order of execution.</p>
 Automatic transitions will be executed if the specific state applies after the exit action.</p>
 </div>
 <div class="paragraph">
-<p>The state can be any type but we have been using <code>enum class</code> in all samples.</p>
+<p>The state can be any type, even though we have been using <code>enum class</code> in all samples.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1761,13 +1762,13 @@ The current state map is usually top-level state map unless you have defined nam
 <div class="ulist">
 <ul>
 <li>
-<p><code>stateMap/state/exit</code></p>
+<p><code>stateMap/whenState/onExit</code></p>
 </li>
 <li>
-<p><code>stateMap/state/default/exit</code></p>
+<p><code>stateMap/whenState/default/onExit</code></p>
 </li>
 <li>
-<p><code>stateMap/default/exit</code></p>
+<p><code>stateMap/default/onExit</code></p>
 </li>
 </ul>
 </div>
@@ -1777,10 +1778,10 @@ The current state map is usually top-level state map unless you have defined nam
 <div class="ulist">
 <ul>
 <li>
-<p><code>stateMap/state/transition</code></p>
+<p><code>stateMap/whenState/onEvent</code></p>
 </li>
 <li>
-<p><code>stateMap/state/default/action</code></p>
+<p><code>stateMap/whenState/default/action</code></p>
 </li>
 <li>
 <p><code>stateMap/default/action</code></p>
@@ -1793,26 +1794,26 @@ The current state map is usually top-level state map unless you have defined nam
 <div class="ulist">
 <ul>
 <li>
-<p><code>stateMap/state/entry</code></p>
+<p><code>stateMap/whenState/onEntry</code></p>
 </li>
 <li>
-<p><code>stateMap/state/default/entry</code></p>
+<p><code>stateMap/whenState/default/onEntry</code></p>
 </li>
 <li>
-<p><code>stateMap/default/entry</code></p>
+<p><code>stateMap/default/onEntry</code></p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
 <p>The combination of current state and event determines a set of transition rules that have been applied to that combination by one or more definitions.
 If the transition rules contains guard transitions the guard expressions are evaluated until one evaluates <code>true</code>.
-The <code>entry</code> and <code>exit</code> action are only invoked for <code>external</code> transitions.</p>
+The <code>onEntry</code> and <code>onExit</code> action are only invoked for <code>external</code> transitions.</p>
 </div>
 <div class="paragraph">
 <p>External transitions have an explicit target state defined. If the target state is not defined it is an internal transition.</p>
 </div>
 <div class="paragraph">
-<p>The currentState determines the <code>exit</code> action. The target state determines the <code>entry</code> action.</p>
+<p>The currentState determines the exit action. The target state determines the entry action.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1889,34 +1890,35 @@ The statemachine supports:</p>
 <div class="content">
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">// using builder function
 val definition = StateMachineBuilder&lt;StateEnum, EventEnum, ContextType&gt;(
-    StateEnum.values().toSet()
+    StateEnum.values().toSet(),
+    EventEnum.values().toSet()
 ).stateMachine {
     default { // global defaults
     }
-    initial { // initial state expression
+    initialState { // initial state expression
     }
-    initialMap { // define expression for deriving state stack for nested maps.
+    initialStates { // define expression for deriving state stack for nested maps.
     }
     stateMap { // define named statemap
     }
-    state { // state definition
+    whenState { // state definition
     }
 }.build()
 // using global function
 val definition = stateMachine(
     StateEnum.values().toSet(),
-    EventEnum::class,
+    EventEnum.values().toSet(),
     ContextType::class
 ) {
     default { // global defaults
     }
-    initial { // initial state expression
+    initialState { // initial state expression
     }
-    initialMap { // define expression for deriving state stack for nested maps.
+    initialStates { // define expression for deriving state stack for nested maps.
     }
     stateMap { // define named statemap
     }
-    state { // state definition
+    whenState { // state definition
     }
 }.build()</code></pre>
 </div>
@@ -1948,11 +1950,11 @@ val definition = stateMachine(
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">default {
     action { // global action
     }
-    entry { // global state entry action
+    onEntry { // global state entry action
     }
-    exit { // global state exit action
+    onExit { // global state exit action
     }
-    transition { // default transitions
+    onEvent { // default transitions
     }
 }</code></pre>
 </div>
@@ -1988,11 +1990,11 @@ val definition = stateMachine(
 </div>
 </div>
 <div class="sect3">
-<h4 id="entry"><code>entry</code></h4>
+<h4 id="onentry"><code>onEntry</code></h4>
 <div class="ulist">
 <ul>
 <li>
-<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-default-event-handler/entry.html">DslStateMachineDefaultEventHandler::entry</a></p>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-default-event-handler/on-entry.html">DslStateMachineDefaultEventHandler::onEntry</a></p>
 </li>
 <li>
 <p>Mandatory: <em>Optional</em></p>
@@ -2011,18 +2013,18 @@ Global entry actions will be called for all external transitions after state spe
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">entry { fromState, targetState, args -&gt;
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">onEntry { fromState, targetState, args -&gt;
     entryAction()
 }</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="exit"><code>exit</code></h4>
+<h4 id="onexit"><code>onExit</code></h4>
 <div class="ulist">
 <ul>
 <li>
-<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-default-event-handler/exit.html">DslStateMachineDefaultEventHandler::exit</a></p>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-default-event-handler/on-exit.html">DslStateMachineDefaultEventHandler::onExit</a></p>
 </li>
 <li>
 <p>Mandatory: <em>Optional</em></p>
@@ -2041,21 +2043,21 @@ Global exit actions will be called for all external transitions after state spec
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">exit { fromState, targetState, args -&gt;
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">onExit { fromState, targetState, args -&gt;
     exitAction()
 }</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="transition"><code>transition</code></h4>
+<h4 id="onevent"><code>onEvent</code></h4>
 <div class="ulist">
 <ul>
 <li>
 <p>Arguments: <code>(event: E [to targetState: S])</code></p>
 </li>
 <li>
-<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-default-event-handler/transition.html">DslStateMachineDefaultEventHandler::transition</a></p>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-default-event-handler/on-event.html">DslStateMachineDefaultEventHandler::onEvent</a></p>
 </li>
 <li>
 <p>Mandatory: <em>Optional</em></p>
@@ -2075,11 +2077,11 @@ In both cases the lambda type is <code>C.(Array&lt;out Any) &#8594; Unit</code><
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">transition(Event.EVENT) { args -&gt; // default internal state action for given event
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">onEvent(Event.EVENT) { args -&gt; // default internal state action for given event
     someFunction()
 }
 
-transition(Event.EVENT to State.STATE) { args-&gt; // default external state action for given event
+onEvent(Event.EVENT to State.STATE) { args-&gt; // default external state action for given event
     anotherFunction()
 }</code></pre>
 </div>
@@ -2087,11 +2089,11 @@ transition(Event.EVENT to State.STATE) { args-&gt; // default external state act
 </div>
 </div>
 <div class="sect2">
-<h3 id="initial"><code>initial</code></h3>
+<h3 id="initialstate"><code>initialState</code></h3>
 <div class="ulist">
 <ul>
 <li>
-<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-handler/initial.html">DslStateMachineHandler::initial</a></p>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-handler/initial-state.html">DslStateMachineHandler::initialState</a></p>
 </li>
 <li>
 <p>Mandatory: <em>Optional</em></p>
@@ -2109,7 +2111,7 @@ transition(Event.EVENT to State.STATE) { args-&gt; // default external state act
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">initial {
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">initialState {
     when(flag) {
         1 -&gt; State.S1
         2 -&gt; State.S2
@@ -2120,11 +2122,11 @@ transition(Event.EVENT to State.STATE) { args-&gt; // default external state act
 </div>
 </div>
 <div class="sect2">
-<h3 id="initialmap"><code>initialMap</code></h3>
+<h3 id="initialstates"><code>initialStates</code></h3>
 <div class="ulist">
 <ul>
 <li>
-<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-handler/initial-map.html">DslStateMachineHandler::initialMap</a></p>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-handler/initial-states.html">DslStateMachineHandler::initialStates</a></p>
 </li>
 <li>
 <p>Mandatory: <em>Optional</em></p>
@@ -2135,8 +2137,8 @@ transition(Event.EVENT to State.STATE) { args-&gt; // default external state act
 </ul>
 </div>
 <div class="paragraph">
-<p>One of <code>initial</code> or <code>initialMap</code> must be provided.
-When a state-machine has named maps the <code>initialMap</code> must be provied.</p>
+<p>One of <code>initialState</code> or <code>initialStates</code> must be provided.
+When a state-machine has named maps the <code>initialStates</code> must be provided.</p>
 </div>
 <div class="paragraph">
 <p>Provide a lambda <code>C.() &#8594; StateMapList&lt;S&gt;</code> that will determine the state of the state machine and map names that should be placed on the stack.</p>
@@ -2146,7 +2148,7 @@ When a state-machine has named maps the <code>initialMap</code> must be provied.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">initialMap {
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">initialStates {
     mutableListOf&lt;StateMapItem&lt;PayingTurnstileStates&gt;&gt;().apply {
         if (locked) {
             this.add(PayingTurnstileStates.LOCKED to "default")
@@ -2156,20 +2158,20 @@ When a state-machine has named maps the <code>initialMap</code> must be provied.
         if (coins &gt; 0) {
             this.add(PayingTurnstileStates.COINS to "coins")
         }
-    }
+    }.toMap()
 }</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="state"><code>state</code></h3>
+<h3 id="whenstate"><code>whenState</code></h3>
 <div class="ulist">
 <ul>
 <li>
 <p>Arguments: <code>(currentState: S)</code></p>
 </li>
 <li>
-<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-handler/state.html">DslStateMachineHandler::state</a></p>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-handler/when-state.html">DslStateMachineHandler::whenState</a></p>
 </li>
 <li>
 <p>Mandatory: <em>Mandatory</em></p>
@@ -2180,37 +2182,37 @@ When a state-machine has named maps the <code>initialMap</code> must be provied.
 </ul>
 </div>
 <div class="paragraph">
-<p>Each <code>state</code> block decribes the transitions for a given state.</p>
+<p>Each <code>whenState</code> block decribes the transitions for a given state.</p>
 </div>
 <div class="paragraph">
 <p>Example:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">state(State.STATE) {
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">whenState(State.STATE) {
     default { // default action for State.STATE
     }
-    entry { // entry action for State.STATE
+    onEntry { // entry action for State.STATE
     }
-    exit { // exit action for State.STATE
+    onExit { // exit action for State.STATE
     }
-    transition(Event.EV2 to State.S1, guard = {flag == 1 }) { // external transition with guard expression
+    onEvent(Event.EV2 to State.S1, guard = {flag == 1 }) { // external transition with guard expression
     }
-    transition(Event.EV2 to State.S1) { // external transition
+    onEvent(Event.EV2 to State.S1) { // external transition
     }
-    transition(Event.EV1, guard = { flag == 2 }) { // internal transition with guard expression
+    onEvent(Event.EV1, guard = { flag == 2 }) { // internal transition with guard expression
     }
-    transition(Event.EV1) { // internal guard expression
+    onEvent(Event.EV1) { // internal guard expression
     }
-    pushTransition(Event.EV2, "mapName", State.S1, gaurd = { flag == 1}) { // push transition to new map with guard expression
+    onEventPush(Event.EV2, "mapName", State.S1, gaurd = { flag == 1}) { // push transition to new map with guard expression
     }
-    pushTransition(Event.EV2, "mapName", State.S1) { // push transition to new map
+    onEventPush(Event.EV2, "mapName", State.S1) { // push transition to new map
     }
-    popTransition(Event.EV3) { // pop transition without targetState
+    onEventPop(Event.EV3) { // pop transition without targetState
     }
-    popTransition(Event.EV3, State.S2) { // pop transition changing state while executing current action only
+    onEventPop(Event.EV3, State.S2) { // pop transition changing state while executing current action only
     }
-    popTransition(Event.EV3, "newMap", State.S3) { // pop transition leading into new push transition while executing current action only
+    onEventPop(Event.EV3, "newMap", State.S3) { // pop transition leading into new push transition while executing current action only
     }
     automatic(State.S1, guard = { flag == 1}) { // automatic transition to new state when guard is met
     }
@@ -2249,11 +2251,11 @@ When a state-machine has named maps the <code>initialMap</code> must be provied.
 </div>
 </div>
 <div class="sect3">
-<h4 id="entry-2"><code>entry</code></h4>
+<h4 id="onentry-2"><code>onEntry</code></h4>
 <div class="ulist">
 <ul>
 <li>
-<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-event-handler/entry.html">DslStateMachineEventHandler::entry</a></p>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-event-handler/on-entry.html">DslStateMachineEventHandler::onEntry</a></p>
 </li>
 <li>
 <p>Mandatory: <em>Optional</em></p>
@@ -2271,18 +2273,18 @@ When a state-machine has named maps the <code>initialMap</code> must be provied.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">entry { fromState, targetState, args -&gt; // state entry action
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">onEntry { fromState, targetState, args -&gt; // state entry action
     println("Entering:$targetState from $fromState with ${args.toList()}")
 }</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="exit-2"><code>exit</code></h4>
+<h4 id="onexit-2"><code>onExit</code></h4>
 <div class="ulist">
 <ul>
 <li>
-<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-event-handler/exit.html">DslStateMachineEventHandler::exit</a></p>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-event-handler/on-exit.html">DslStateMachineEventHandler::onExit</a></p>
 </li>
 <li>
 <p>Mandatory: <em>Optional</em></p>
@@ -2300,7 +2302,7 @@ When a state-machine has named maps the <code>initialMap</code> must be provied.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">exit { fromState, targetState, args -&gt; // state exit action
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">onExit { fromState, targetState, args -&gt; // state exit action
     println("Exiting:$fromState to $targetState with ${args.toList()}")
 }</code></pre>
 </div>
@@ -2334,7 +2336,7 @@ All automatic transitions attached to a given state will be invoked if their gua
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">state(State.S1) {
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">whenState(State.S1) {
     automatic(State.S1, guard = { flag == 1}) { // automatic transition to new state when guard is met
     }
     automatic(State.S1) { // automatic transition to new state
@@ -2369,7 +2371,7 @@ All automatic transitions attached to a given state will be invoked if their gua
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">state(State.S1) {
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">whenState(State.S1) {
     automaticPop { // pop when S1
     }
     automaticPop(guard= { flag == 1 }) { // pop when S1 and guard is true
@@ -2412,7 +2414,7 @@ All automatic transitions attached to a given state will be invoked if their gua
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">state(State.S1) {
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">whenState(State.S1) {
     automaticPush("map1", State.S2) { // automatic push transition to S2 in target map "map1"
     }
     automaticPush("map1", State.S2, guard={flag == 1 }) { // automatic push transition to S2 in target map "map1" if guard is true
@@ -2422,83 +2424,7 @@ All automatic transitions attached to a given state will be invoked if their gua
 </div>
 </div>
 <div class="sect3">
-<h4 id="poptransition"><code>popTransition</code></h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Arguments: <code>(event: E [to targetState: S]|[,targetMap: String, targetState: S], [guard:{}])</code></p>
-</li>
-<li>
-<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-event-handler/pop-transition.html">DslStateMachineEventHandler::popTransition</a></p>
-</li>
-<li>
-<p>Mandatory: <em>Optional</em></p>
-</li>
-<li>
-<p>Cardinality: <em>Multiple</em></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>There are 6 variations of popTransitions to provide for with and without guards, with and without a new state and with and without a targetMap that will result in a new push transition.</p>
-</div>
-<div class="paragraph">
-<p>Example:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">state(State.S1) {
-    popTransition(Event.EV3) { // pop transition without targetState
-    }
-    popTransition(Event.EV3, guard={ flag == 1 }) { // pop transition without targetState and guard expression
-    }
-    popTransition(Event.EV3 to State.S2) { // pop transition on EV3 changing state to S2
-    }
-    popTransition(Event.EV3 to State.S2, guard={ flag == 1 }) { // pop transition on EV3 changing state to S2 with a guard expression
-    }
-    popTransition(Event.EV3, "newMap", State.S3) { // pop transition leading into new push transition to S3 in "newMap"
-    }
-    popTransition(Event.EV3, "newMap", State.S3, guard={ flag == 1 }) { // pop transition leading into new push transition to S3 in "newMap" with a guard expression
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="pushtransition"><code>pushTransition</code></h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Arguments: <code>(event: E, targetMap: String, targetState: S [, guard:{}])</code></p>
-</li>
-<li>
-<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-event-handler/push-transition.html">DslStateMachineEventHandler::pushTransition</a></p>
-</li>
-<li>
-<p>Mandatory: <em>Optional</em></p>
-</li>
-<li>
-<p>Cardinality: <em>Multiple</em></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>There are 2 variations of automatic transitions: Those with and without guards
-Example:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">state(State.S1) {
-    pushTransition(Event.EV2, "mapName", State.S2) { // push transition to S2 in new map "mapName"
-    }
-    pushTransition(Event.EV2, "mapName", State.S2, gaurd = { flag == 1}) { // push transition to S2 in new map "mapName" with guard expression
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="transition-2"><code>transition</code></h4>
+<h4 id="onevent-2"><code>onEvent</code></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -2530,13 +2456,89 @@ Their may be only one transition without a guard expression.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">transition(Event.EV1, guard = { flag == 1 }) { args -&gt; // internal transition with guard expression
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">onEvent(Event.EV1, guard = { flag == 1 }) { args -&gt; // internal transition with guard expression
 }
-transition(Event.EV1 to State.S2, guard = { flag == 2}) { args -&gt; // external transition with guard expression
+onEvent(Event.EV1 to State.S2, guard = { flag == 2}) { args -&gt; // external transition with guard expression
 }
-transition(Event.EV1) { args -&gt; // internal transition
+onEvent(Event.EV1) { args -&gt; // internal transition
 }
-transition(Event.EV2 to State.S2) { args -&gt; // external transition
+onEvent(Event.EV2 to State.S2) { args -&gt; // external transition
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="oneventpush"><code>onEventPush</code></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Arguments: <code>(event: E, targetMap: String, targetState: S [, guard:{}])</code></p>
+</li>
+<li>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-event-handler/on-event-push.html">DslStateMachineEventHandler::onEventPush</a></p>
+</li>
+<li>
+<p>Mandatory: <em>Optional</em></p>
+</li>
+<li>
+<p>Cardinality: <em>Multiple</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>There are 2 variations of automatic transitions: Those with and without guards
+Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">whenState(State.S1) {
+    onEventPush(Event.EV2, "mapName", State.S2) { // push transition to S2 in new map "mapName"
+    }
+    onEventPush(Event.EV2, "mapName", State.S2, gaurd = { flag == 1}) { // push transition to S2 in new map "mapName" with guard expression
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="oneventpop"><code>onEventPop</code></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Arguments: <code>(event: E [to targetState: S]|[,targetMap: String, targetState: S], [guard:{}])</code></p>
+</li>
+<li>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-map-event-handler/on-event-pop.html">DslStateMachineEventHandler::onEventPop</a></p>
+</li>
+<li>
+<p>Mandatory: <em>Optional</em></p>
+</li>
+<li>
+<p>Cardinality: <em>Multiple</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>There are 6 variations of popTransitions to provide for with and without guards, with and without a new state and with and without a targetMap that will result in a new push transition.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">whenState(State.S1) {
+    onEventPop(Event.EV3) { // pop transition without targetState
+    }
+    onEventPop(Event.EV3, guard={ flag == 1 }) { // pop transition without targetState and guard expression
+    }
+    onEventPop(Event.EV3 to State.S2) { // pop transition on EV3 changing state to S2
+    }
+    onEventPop(Event.EV3 to State.S2, guard={ flag == 1 }) { // pop transition on EV3 changing state to S2 with a guard expression
+    }
+    onEventPop(Event.EV3, "newMap", State.S3) { // pop transition leading into new push transition to S3 in "newMap"
+    }
+    onEventPop(Event.EV3, "newMap", State.S3, guard={ flag == 1 }) { // pop transition leading into new push transition to S3 in "newMap" with a guard expression
+    }
 }</code></pre>
 </div>
 </div>
@@ -2547,7 +2549,7 @@ transition(Event.EV2 to State.S2) { args -&gt; // external transition
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.9.4<br>
+Version 0.9.5-SNAPSHOT<br>
 Last updated 2019-08-13 10:18:07 +0200
 </div>
 </div>

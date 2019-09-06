@@ -17,34 +17,34 @@
                 TurnstileEvents.values().toSet(),
                 Turnstile::class
             ) {
-                initial {
+                initialState {
                     if (locked)
                         TurnstileStates.LOCKED
                     else
                         TurnstileStates.UNLOCKED
                 }
                 default {
-                    entry { startState, targetState, _ -&gt;
+                    onEntry { startState, targetState, _ -&gt;
                         println("entering:$startState -&gt; $targetState for $this")
                     }
                     action { state, event, _ -&gt;
                         println("Default action for state($state) -&gt; on($event) for $this")
                         alarm()
                     }
-                    exit { startState, targetState, _ -&gt;
+                    onExit { startState, targetState, _ -&gt;
                         println("exiting:$startState -&gt; $targetState for $this")
                     }
                 }
-                state(TurnstileStates.LOCKED) {
-                    transition(TurnstileEvents.COIN to TurnstileStates.UNLOCKED) {
+                whenState(TurnstileStates.LOCKED) {
+                    onEvent(TurnstileEvents.COIN to TurnstileStates.UNLOCKED) {
                         unlock()
                     }
                 }
-                state(TurnstileStates.UNLOCKED) {
-                    transition(TurnstileEvents.COIN) {
+                whenState(TurnstileStates.UNLOCKED) {
+                    onEvent(TurnstileEvents.COIN) {
                         returnCoin()
                     }
-                    transition(TurnstileEvents.PASS to TurnstileStates.LOCKED) {
+                    onEvent(TurnstileEvents.PASS to TurnstileStates.LOCKED) {
                         lock()
                     }
                 }
