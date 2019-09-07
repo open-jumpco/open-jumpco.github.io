@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        mavenLocal()
         maven {
             url 'https://plugins.gradle.org/m2/'
         }
@@ -20,7 +21,7 @@ configurations {
 }
 
 dependencies {
-    externalDocs 'io.jumpco.open:kfsm:0.9.4-SNAPSHOT:doc@zip'
+    externalDocs 'io.jumpco.open:kfsm:0.9.5:doc@zip'
 }
 
 gitPublish {
