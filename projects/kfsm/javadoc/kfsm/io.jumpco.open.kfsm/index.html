@@ -119,13 +119,6 @@ All transitions are assigned to a state map.</p>
 <tbody>
 <tr>
 <td>
-<p><a href="-any-default-change-action.html">AnyDefaultChangeAction</a></p>
-</td>
-<td>
-<code><span class="keyword">typealias </span><span class="identifier">AnyDefaultChangeAction</span><span class="symbol">&lt;</span><span class="identifier">C</span><span class="symbol">, </span><span class="identifier">S</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="-any-default-change-action.html#C"><span class="identifier">C</span></a><span class="symbol">.</span><span class="symbol">(</span><a href="-any-default-change-action.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="-any-default-change-action.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">?</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">?</span></code></td>
-</tr>
-<tr>
-<td>
 <p><a href="-any-state-machine-builder.html">AnyStateMachineBuilder</a></p>
 </td>
 <td>
@@ -140,19 +133,12 @@ All transitions are assigned to a state map.</p>
 </tr>
 <tr>
 <td>
-<p><a href="-default-change-action.html">DefaultChangeAction</a></p>
-</td>
-<td>
-<code><span class="keyword">typealias </span><span class="identifier">DefaultChangeAction</span><span class="symbol">&lt;</span><span class="identifier">C</span><span class="symbol">, </span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">A</span><span class="symbol">, </span><span class="identifier">R</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="-default-change-action.html#C"><span class="identifier">C</span></a><span class="symbol">.</span><span class="symbol">(</span><a href="-default-change-action.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="-default-change-action.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="-default-change-action.html#A"><span class="identifier">A</span></a><span class="symbol">?</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="-default-change-action.html#R"><span class="identifier">R</span></a><span class="symbol">?</span></code>
-<p>This represents a default action that will be invoked on a change in state as defined with entry or exit.</p>
-</td>
-</tr>
-<tr>
-<td>
 <p><a href="-default-entry-exit-action.html">DefaultEntryExitAction</a></p>
 </td>
 <td>
-<code><span class="keyword">typealias </span><span class="identifier">DefaultEntryExitAction</span><span class="symbol">&lt;</span><span class="identifier">C</span><span class="symbol">, </span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">A</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="-default-entry-exit-action.html#C"><span class="identifier">C</span></a><span class="symbol">.</span><span class="symbol">(</span><a href="-default-entry-exit-action.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="-default-entry-exit-action.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="-default-entry-exit-action.html#A"><span class="identifier">A</span></a><span class="symbol">?</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">typealias </span><span class="identifier">DefaultEntryExitAction</span><span class="symbol">&lt;</span><span class="identifier">C</span><span class="symbol">, </span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">A</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="-default-entry-exit-action.html#C"><span class="identifier">C</span></a><span class="symbol">.</span><span class="symbol">(</span><a href="-default-entry-exit-action.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="-default-entry-exit-action.html#S"><span class="identifier">S</span></a><span class="symbol">,</span>&nbsp;<a href="-default-entry-exit-action.html#A"><span class="identifier">A</span></a><span class="symbol">?</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>This represents a default action that will be invoked when entering or exiting a state with an external state transitions.</p>
+</td>
 </tr>
 <tr>
 <td>
