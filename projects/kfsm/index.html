@@ -1966,6 +1966,15 @@ An interface/class exposed to the substate instead of the full context.
 In this example <code>Block</code> will be exposed to the stateMap. The stateMap can then pop after adding the byte.
 In the case of an invalid character the statemap will still transition to the end state.</p>
 </div>
+<div class="paragraph">
+<p>The Secure Turnstile is an example of where a timeout would be useful. Allowing override should only be active for a limited period.
+This means it could be done by creating a timer that when triggered will cancel the override.
+The allow override could also be handled with a statemap which behaves differently but the states in this state map will all have timeouts associated.
+The timeout will trigger an optional transition and action.</p>
+</div>
+<div class="paragraph">
+<p>A requirement for timeout handling is correct concurrent handling of events.</p>
+</div>
 </div>
 </div>
 </div>
