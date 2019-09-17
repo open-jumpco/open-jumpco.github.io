@@ -435,7 +435,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>KFSM - Kotlin Finite-state machine</h1>
 <div class="details">
-<span id="revnumber">version 0.9.6</span>
+<span id="revnumber">version 0.9.7-SNAPSHOT</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -470,10 +470,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#output">Output</a></li>
 </ul>
 </li>
+<li><a href="#secure-turnstile-example">Secure Turnstile Example</a>
+<ul class="sectlevel3">
+<li><a href="#state-table-3">State Table</a></li>
+<li><a href="#context-class-3">Context class</a></li>
+<li><a href="#states-and-events-2">States and Events</a></li>
+<li><a href="#state-machine-definition-packaged-2">State machine definition packaged</a></li>
+<li><a href="#test-2">Test</a></li>
+</ul>
+</li>
 <li><a href="#packet-reader-example">Packet Reader Example</a>
 <ul class="sectlevel3">
 <li><a href="#context-classes">Context Classes</a></li>
-<li><a href="#states-and-events-2">States and Events</a></li>
+<li><a href="#states-and-events-3">States and Events</a></li>
 <li><a href="#packaged-fsm">Packaged FSM</a></li>
 <li><a href="#tests">Tests</a></li>
 </ul>
@@ -1283,6 +1292,260 @@ entering:UNLOCKED ([10]) for Turnstile(locked=false,coins=0)</code></pre>
 </div>
 </div>
 <div class="sect2">
+<h3 id="secure-turnstile-example">Secure Turnstile Example</h3>
+<div class="paragraph">
+<p>Unless you grew up in a city with a subway you may not be familiar with a turnstile accepting counts.
+You may be familiar with turnstile that responds to RFID or NFC cards.</p>
+</div>
+<div class="paragraph">
+<p>We would add a complexity that allows for an override card to allow cards to pass even if they are invalid.</p>
+</div>
+<div class="paragraph">
+<p>We will use guard expressions to identify the override card and the validity of the card.
+When the override card is tapped a 2nd time it will cancel the override or lock the turnstile depending on the state.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="secure-turnstile-fsm.png" alt="Secure Turnstile FSM">
+</div>
+</div>
+<div class="sect3">
+<h4 id="state-table-3">State Table</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Start State</th>
+<th class="tableblock halign-left valign-top">Event</th>
+<th class="tableblock halign-left valign-top">Guard Expression</th>
+<th class="tableblock halign-left valign-top">End State</th>
+<th class="tableblock halign-left valign-top">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CARD(id)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">isOverrideCard(id) and overrideActive</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cancelOverride()</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CARD(id)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">isOverrideCard(id)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">activateOverride()</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CARD(id)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">overrideActive or isValidCard(id)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">unlock()</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CARD(id)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">not isValidVard(id)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">invalidCard()</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PASS</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lock()</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>default</strong></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">buzzer()</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="context-class-3">Context class</h4>
+<div class="paragraph">
+<p>The context class doesn&#8217;t make decisions about the behaviour of the turnstile.
+The context will provide information about the state of turnstile and validity of cards
+The context class stores values and will update value in very specific ways.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class SecureTurnstile {
+    var locked: Boolean = true
+        private set
+    var overrideActive: Boolean = false
+        private set
+
+    fun activateOverride() {
+        overrideActive = true
+        println("override activated")
+    }
+
+    fun cancelOverride() {
+        overrideActive = false
+        println("override canceled")
+    }
+
+    fun lock() {
+        println("lock")
+        locked = true
+        overrideActive = false
+    }
+
+    fun unlock() {
+        println("unlock")
+        locked = false
+        overrideActive = false
+    }
+
+    fun buzzer() {
+        println("BUZZER")
+    }
+
+    fun invalidCard(cardId: Int) {
+        println("Invalid card $cardId")
+    }
+
+    fun isOverrideCard(cardId: Int): Boolean {
+        return cardId == 42
+    }
+
+    fun isValidCard(cardId: Int): Boolean {
+        return cardId % 2 == 1
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="states-and-events-2">States and Events</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">enum class SecureTurnstileEvents {
+    CARD,
+    PASS
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="state-machine-definition-packaged-2">State machine definition packaged</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class SecureTurnstileFSM(private val secureTurnstile: SecureTurnstile) {
+    companion object {
+        private val definition = stateMachine(
+            SecureTurnstileStates.values().toSet(),
+            SecureTurnstileEvents.values().toSet(),
+            SecureTurnstile::class,
+            Int::class
+        ) {
+            initialState { if (locked) SecureTurnstileStates.LOCKED else SecureTurnstileStates.UNLOCKED }
+            default {
+                action { _, _, _ -&gt;
+                    buzzer()
+                }
+            }
+            whenState(SecureTurnstileStates.LOCKED) {
+                onEvent(SecureTurnstileEvents.CARD, guard = { cardId -&gt; requireNotNull(cardId)
+                    isOverrideCard(cardId) &amp;&amp; overrideActive
+                }) {
+                    cancelOverride()
+                }
+                onEvent(SecureTurnstileEvents.CARD, guard = { cardId -&gt; requireNotNull(cardId)
+                    isOverrideCard(cardId)
+                }) {
+                    activateOverride()
+                }
+                onEvent(SecureTurnstileEvents.CARD to SecureTurnstileStates.UNLOCKED,
+                    guard = { cardId -&gt; requireNotNull(cardId)
+                        overrideActive || isValidCard(cardId)
+                    }) {
+                    unlock()
+                }
+                onEvent(SecureTurnstileEvents.CARD, guard = { cardId -&gt;
+                    requireNotNull(cardId) { "cardId is required" }
+                    !isValidCard(cardId)
+                }) { cardId -&gt; requireNotNull(cardId)
+                    invalidCard(cardId)
+                }
+            }
+            whenState(SecureTurnstileStates.UNLOCKED) {
+                onEvent(SecureTurnstileEvents.CARD to SecureTurnstileStates.LOCKED, guard = { cardId -&gt; requireNotNull(cardId)
+                    isOverrideCard(cardId)
+                }) {
+                    lock()
+                }
+                onEvent(SecureTurnstileEvents.PASS to SecureTurnstileStates.LOCKED) {
+                    lock()
+                }
+            }
+        }.build()
+    }
+
+    private val fsm = definition.create(secureTurnstile)
+    fun card(cardId: Int) = fsm.sendEvent(SecureTurnstileEvents.CARD, cardId)
+    fun pass() = fsm.sendEvent(SecureTurnstileEvents.PASS)
+    fun allowEvent(): Set&lt;String&gt; = fsm.allowed().map { it.name.toLowerCase() }.toSet()
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="test-2">Test</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">        val turnstile = PayingTurnstile(50)
+        val fsm = PayingTurnstileFSM(turnstile)
+        assertTrue(turnstile.locked)
+        println("External:${fsm.externalState()}")
+        println("--coin1")
+        fsm.coin(10)
+        assertTrue(turnstile.locked)
+        assertTrue(turnstile.coins == 10)
+        assertTrue(
+            fsm.fsm.currentStateMap.name != null &amp;&amp; "coins" == fsm.fsm.currentStateMap.name,
+            "Expected coins map"
+        )
+        println("--coin2")
+        println("External:${fsm.externalState()}")
+        fsm.coin(60)
+        assertTrue(turnstile.coins == 0)
+        assertTrue(!turnstile.locked)
+        println("External:${fsm.externalState()}")
+        assertTrue(fsm.fsm.currentStateMap.name == null, "Expected default map not ${fsm.fsm.currentStateMap.name}")
+        println("--pass1")
+        fsm.pass()
+        assertTrue(turnstile.locked)
+        println("--pass2")
+        fsm.pass()
+        println("--pass3")
+        fsm.pass()
+        println("--coin3")
+        fsm.coin(40)
+        assertTrue(turnstile.coins == 40)
+        println("--coin4")
+        fsm.coin(10)
+        assertTrue(turnstile.coins == 0)
+        assertTrue(!turnstile.locked)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="packet-reader-example">Packet Reader Example</h3>
 <div class="imageblock">
 <div class="content">
@@ -1411,7 +1674,7 @@ class Packet(private val protocolHandler: ProtocolHandler) : PacketHandler,
 </div>
 </div>
 <div class="sect3">
-<h4 id="states-and-events-2">States and Events</h4>
+<h4 id="states-and-events-3">States and Events</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class CharacterConstants {
@@ -2654,7 +2917,7 @@ Example:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.9.6<br>
+Version 0.9.7-SNAPSHOT<br>
 Last updated 2019-08-13 10:18:07 +0200
 </div>
 </div>
