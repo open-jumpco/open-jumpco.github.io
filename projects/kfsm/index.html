@@ -448,6 +448,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#features">Features</a></li>
+<li><a href="#todo">Todo</a></li>
 <li><a href="#tutorial">Tutorial</a>
 <ul class="sectlevel2">
 <li><a href="#simple-turnstile-example">Simple turnstile example</a>
@@ -485,6 +486,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#states-and-events-3">States and Events</a></li>
 <li><a href="#packaged-fsm">Packaged FSM</a></li>
 <li><a href="#tests">Tests</a></li>
+</ul>
+</li>
+<li><a href="#immutable-context-example">Immutable Context Example</a>
+<ul class="sectlevel3">
+<li><a href="#immutable-context">Immutable Context</a></li>
+<li><a href="#definition">Definition</a></li>
+<li><a href="#usage-2">Usage</a></li>
 </ul>
 </li>
 <li><a href="#further-thoughts">Further thoughts</a></li>
@@ -620,6 +628,21 @@ a Kotlin DSL along with a simple implementation.</p>
 </li>
 <li>
 <p>Externalisation of state.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="todo">Todo</h2>
+<div class="sectionbody">
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p>&#10063; Timeouts and Timers</p>
+</li>
+<li>
+<p>&#10063; Coroutines</p>
 </li>
 </ul>
 </div>
@@ -1957,6 +1980,157 @@ enum class ReaderStates {
 </div>
 </div>
 <div class="sect2">
+<h3 id="immutable-context-example">Immutable Context Example</h3>
+<div class="paragraph">
+<p>In the case where you want a pure functional context that is immutable the following example will provide what you need:</p>
+</div>
+<div class="sect3">
+<h4 id="immutable-context">Immutable Context</h4>
+<div class="paragraph">
+<p>The immutable context doesn&#8217;t modify a variable. It returns a copy containing the new context</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">data class ImmutableLock(val locked: Int = 1) {
+
+    fun lock(): ImmutableLock {
+        require(locked == 0)
+        println("Lock")
+        return copy(locked + 1)
+    }
+
+    fun doubleLock(): ImmutableLock {
+        require(locked == 1)
+        println("DoubleLock")
+        return copy(locked + 1)
+    }
+
+    fun unlock(): ImmutableLock {
+        require(locked == 1)
+        println("Unlock")
+        return copy(locked - 1)
+    }
+
+    fun doubleUnlock(): ImmutableLock {
+        require(locked == 2)
+        println("DoubleUnlock")
+        return copy(locked - 1)
+    }
+
+    override fun toString(): String {
+        return "Lock(locked=$locked)"
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="definition">Definition</h4>
+<div class="paragraph">
+<p>The definition only exposes one method to handle an event given a context and return the new context.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class ImmutableLockFSM() {
+
+    companion object {
+        fun handleEvent(context: ImmutableLock, event: LockEvents): ImmutableLock {
+            val fsm = definition.create(context)
+            return fsm.sendEvent(event, context) ?: error("Expected context not null")
+        }
+
+        private val definition = functionalStateMachine(
+            LockStates.values().toSet(),
+            LockEvents.values().toSet(),
+            ImmutableLock::class
+        ) {
+            initialState {
+                when (locked) {
+                    0 -&gt; LockStates.UNLOCKED
+                    1 -&gt; LockStates.LOCKED
+                    2 -&gt; LockStates.DOUBLE_LOCKED
+                    else -&gt; error("Invalid state locked=$locked")
+                }
+            }
+            default {
+                action { state, event, _ -&gt;
+                    println("Default action for state($state) -&gt; on($event) for $this")
+                    this
+                }
+                onEntry { startState, targetState, _ -&gt;
+                    println("entering:$startState -&gt; $targetState for $this")
+                }
+                onExit { startState, targetState, _ -&gt;
+                    println("exiting:$startState -&gt; $targetState for $this")
+                }
+            }
+            whenState(LockStates.LOCKED) {
+                onEvent(LockEvents.LOCK to LockStates.DOUBLE_LOCKED) {
+                    doubleLock()
+                }
+                onEvent(LockEvents.UNLOCK to LockStates.UNLOCKED) {
+                    unlock()
+                }
+            }
+            whenState(LockStates.DOUBLE_LOCKED) {
+                onEvent(LockEvents.UNLOCK to LockStates.LOCKED) {
+                    doubleUnlock()
+                }
+            }
+            whenState(LockStates.UNLOCKED) {
+                onEvent(LockEvents.LOCK to LockStates.LOCKED) {
+                    lock()
+                }
+            }
+        }.build()
+    }
+}
+
+operator fun ImmutableLock.plus(event: LockEvents): ImmutableLock {
+    return ImmutableLockFSM.handleEvent(this, event)
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="usage-2">Usage</h4>
+<div class="paragraph">
+<p>We also added an overloaded plus operator. The provides for a way of signaling the application of event to context.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">        val lock = ImmutableLock(0)
+        val locked = lock + LockEvents.LOCK
+        assertEquals(locked.locked, 1)
+        val doubleLocked = locked + LockEvents.LOCK
+        assertEquals(doubleLocked.locked, 2)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the case where the argument to the state action will be something other than the context you can use a <code>Pair</code> and even when the state is needed separately:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">    val locked = ImmutablePayingTurnstile(50)
+    val (state, newTurnStile) = locked + (COIN to 10)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This assumes the argument is defined as type <code>Int</code> and the return as <code>Pair&lt;LockStates,ImmutablePayingTurnstile&gt;</code>
+The <code>handleEventMethod</code> will be:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">    fun handleEvent(context: ImmutablePayingTurnstile, event: Pair&lt;LockEvents, Int&gt;): Pair&lt;LockStates,ImmutablePayingTurnstile&gt; {
+        val fsm = definition.create(context)
+        val result = fsm.sendEvent(event.first, event.second) ?: error("Expected context not null")
+        return Pair(fsm.currentState, result)
+    }</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="further-thoughts">Further thoughts</h3>
 <div class="paragraph">
 <p>The escape handling from the packet reader could be a separate statemap.
@@ -2927,7 +3101,7 @@ Example:</p>
 <div id="footer">
 <div id="footer-text">
 Version 0.9.7-SNAPSHOT<br>
-Last updated 2019-08-13 10:18:07 +0200
+Last updated 2020-01-10 21:02:29 +0200
 </div>
 </div>
 <script src="prism.js"></script>
