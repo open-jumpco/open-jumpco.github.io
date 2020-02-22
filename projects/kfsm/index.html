@@ -435,7 +435,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>KFSM - Kotlin Finite-state machine</h1>
 <div class="details">
-<span id="revnumber">version 1.0.0-SNAPSHOT</span>
+<span id="revnumber">version 1.0.1-SNAPSHOT</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -496,6 +496,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#further-thoughts">Further thoughts</a></li>
+</ul>
+</li>
+<li><a href="#visualization">Visualization</a>
+<ul class="sectlevel2">
+<li><a href="#visualization-2">Visualization</a>
+<ul class="sectlevel3">
+<li><a href="#simple-visualization">Simple Visualization</a></li>
+<li><a href="#detail-visualisation">Detail Visualisation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#getting-started">Getting Started</a>
@@ -628,6 +638,15 @@ a Kotlin DSL along with a simple implementation.</p>
 </li>
 <li>
 <p>Externalisation of state.</p>
+</li>
+<li>
+<p>Simple Visualization.</p>
+</li>
+<li>
+<p>Detailed Visualization.</p>
+</li>
+<li>
+<p>Visualization Gradle Plugin</p>
 </li>
 </ul>
 </div>
@@ -808,6 +827,7 @@ enum class PayingTurnstileEvents {
             PayingTurnstile::class,
             Int::class
         ) {
+            defaultInitialState = PayingTurnstileStates.LOCKED
             default {
                 onEntry { _, targetState, arg -&gt;
                     if (arg != null) {
@@ -845,7 +865,8 @@ enum class PayingTurnstileEvents {
                         unlock()
                         reset()
                     }
-                    onEvent(PayingTurnstileEvents.COIN) { value -&gt; require(value != null) { "argument required for COIN" }
+                    onEvent(PayingTurnstileEvents.COIN) { value -&gt;
+                        require(value != null) { "argument required for COIN" }
                         coin(value)
                         println("Coins=$coins")
                         if (coins &lt; requiredCoins) {
@@ -856,23 +877,27 @@ enum class PayingTurnstileEvents {
             }
             whenState(PayingTurnstileStates.LOCKED) {
                 // The coin brings amount to exact amount
-                onEventPush(PayingTurnstileEvents.COIN, "coins", PayingTurnstileStates.COINS) { value -&gt; require(value != null) { "argument required for COIN" }
+                onEventPush(PayingTurnstileEvents.COIN, "coins", PayingTurnstileStates.COINS) { value -&gt;
+                    require(value != null) { "argument required for COIN" }
                     coin(value)
                     unlock()
                     reset()
                 }
                 // The coins add up to more than required
                 onEventPush(PayingTurnstileEvents.COIN, "coins", PayingTurnstileStates.COINS,
-                    guard = { value -&gt; require(value != null) { "argument required for COIN" }
+                    guard = { value -&gt;
+                        require(value != null) { "argument required for COIN" }
                         value + coins &lt; requiredCoins
-                    }) { value -&gt; require(value != null) { "argument required for COIN" }
+                    }) { value -&gt;
+                    require(value != null) { "argument required for COIN" }
                     println("PUSH TRANSITION")
                     coin(value)
                     println("Coins=$coins, Please add ${requiredCoins - coins}")
                 }
             }
             whenState(PayingTurnstileStates.UNLOCKED) {
-                onEvent(PayingTurnstileEvents.COIN) { value -&gt; require(value != null) { "argument required for COIN" }
+                onEvent(PayingTurnstileEvents.COIN) { value -&gt;
+                    require(value != null) { "argument required for COIN" }
                     returnCoin(coin(value))
                 }
                 onEvent(PayingTurnstileEvents.PASS to PayingTurnstileStates.LOCKED) {
@@ -1151,6 +1176,7 @@ The automatic transitions will be triggered based on the guard expressions.</p>
             PayingTurnstile::class,
             Int::class
         ) {
+            defaultInitialState = PayingTurnstileStates.LOCKED
             default {
                 onEntry { _, targetState, arg -&gt;
                     if (arg != null) {
@@ -1188,7 +1214,8 @@ The automatic transitions will be triggered based on the guard expressions.</p>
                         unlock()
                         reset()
                     }
-                    onEvent(PayingTurnstileEvents.COIN) { value -&gt; require(value != null) { "argument required for COIN" }
+                    onEvent(PayingTurnstileEvents.COIN) { value -&gt;
+                        require(value != null) { "argument required for COIN" }
                         coin(value)
                         println("Coins=$coins")
                         if (coins &lt; requiredCoins) {
@@ -1199,23 +1226,27 @@ The automatic transitions will be triggered based on the guard expressions.</p>
             }
             whenState(PayingTurnstileStates.LOCKED) {
                 // The coin brings amount to exact amount
-                onEventPush(PayingTurnstileEvents.COIN, "coins", PayingTurnstileStates.COINS) { value -&gt; require(value != null) { "argument required for COIN" }
+                onEventPush(PayingTurnstileEvents.COIN, "coins", PayingTurnstileStates.COINS) { value -&gt;
+                    require(value != null) { "argument required for COIN" }
                     coin(value)
                     unlock()
                     reset()
                 }
                 // The coins add up to more than required
                 onEventPush(PayingTurnstileEvents.COIN, "coins", PayingTurnstileStates.COINS,
-                    guard = { value -&gt; require(value != null) { "argument required for COIN" }
+                    guard = { value -&gt;
+                        require(value != null) { "argument required for COIN" }
                         value + coins &lt; requiredCoins
-                    }) { value -&gt; require(value != null) { "argument required for COIN" }
+                    }) { value -&gt;
+                    require(value != null) { "argument required for COIN" }
                     println("PUSH TRANSITION")
                     coin(value)
                     println("Coins=$coins, Please add ${requiredCoins - coins}")
                 }
             }
             whenState(PayingTurnstileStates.UNLOCKED) {
-                onEvent(PayingTurnstileEvents.COIN) { value -&gt; require(value != null) { "argument required for COIN" }
+                onEvent(PayingTurnstileEvents.COIN) { value -&gt;
+                    require(value != null) { "argument required for COIN" }
                     returnCoin(coin(value))
                 }
                 onEvent(PayingTurnstileEvents.PASS to PayingTurnstileStates.LOCKED) {
@@ -1470,12 +1501,13 @@ The context class stores values and will update value in very specific ways.</p>
 <div class="content">
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class SecureTurnstileFSM(private val secureTurnstile: SecureTurnstile) {
     companion object {
-        private val definition = stateMachine(
+        val definition = stateMachine(
             SecureTurnstileStates.values().toSet(),
             SecureTurnstileEvents.values().toSet(),
             SecureTurnstile::class,
             Int::class
         ) {
+            defaultInitialState = SecureTurnstileStates.LOCKED
             initialState { if (locked) SecureTurnstileStates.LOCKED else SecureTurnstileStates.UNLOCKED }
             default {
                 action { _, _, _ -&gt;
@@ -1742,13 +1774,13 @@ enum class ReaderStates {
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class PacketReaderFSM(private val packetHandler: PacketHandler) {
     companion object {
 
-        private val definition = stateMachine(
+        val definition = stateMachine(
             ReaderStates.values().toSet(),
             ReaderEvents.values().toSet(),
             PacketHandler::class,
             Int::class
         ) {
-            initialState { ReaderStates.START }
+            defaultInitialState = ReaderStates.START
             default {
                 onEvent(ReaderEvents.BYTE to ReaderStates.END) {
                     sendNACK()
@@ -1761,18 +1793,22 @@ enum class ReaderStates {
                 }
             }
             whenState(ReaderStates.START) {
-                onEvent(ReaderEvents.CTRL to ReaderStates.RCVPCKT, guard = { byte -&gt; byte == CharacterConstants.SOH }) {}
+                onEvent(
+                    ReaderEvents.CTRL to ReaderStates.RCVPCKT,
+                    guard = { byte -&gt; byte == CharacterConstants.SOH }) {}
             }
             whenState(ReaderStates.RCVPCKT) {
                 onEvent(ReaderEvents.CTRL to ReaderStates.RCVDATA, guard = { byte -&gt; byte == CharacterConstants.STX }) {
                     addField()
                 }
-                onEvent(ReaderEvents.BYTE to ReaderStates.RCVCHK) { byte -&gt; require(byte != null)
+                onEvent(ReaderEvents.BYTE to ReaderStates.RCVCHK) { byte -&gt;
+                    require(byte != null)
                     addChecksum(byte)
                 }
             }
             whenState(ReaderStates.RCVDATA) {
-                onEvent(ReaderEvents.BYTE) { byte -&gt; require(byte != null)
+                onEvent(ReaderEvents.BYTE) { byte -&gt;
+                    require(byte != null)
                     addByte(byte)
                 }
                 onEvent(ReaderEvents.CTRL to ReaderStates.RCVPCKT, guard = { byte -&gt; byte == CharacterConstants.ETX }) {
@@ -1784,12 +1820,14 @@ enum class ReaderStates {
                 onEvent(ReaderEvents.ESC to ReaderStates.RCVDATA) {
                     addByte(CharacterConstants.ESC)
                 }
-                onEvent(ReaderEvents.CTRL to ReaderStates.RCVDATA) { byte -&gt; require(byte != null)
+                onEvent(ReaderEvents.CTRL to ReaderStates.RCVDATA) { byte -&gt;
+                    require(byte != null)
                     addByte(byte)
                 }
             }
             whenState(ReaderStates.RCVCHK) {
-                onEvent(ReaderEvents.BYTE) { byte -&gt; require(byte != null)
+                onEvent(ReaderEvents.BYTE) { byte -&gt;
+                    require(byte != null)
                     addChecksum(byte)
                 }
                 onEvent(ReaderEvents.ESC to ReaderStates.RCVCHKESC) {}
@@ -1809,7 +1847,8 @@ enum class ReaderStates {
                 onEvent(ReaderEvents.ESC to ReaderStates.RCVCHK) {
                     addChecksum(CharacterConstants.ESC)
                 }
-                onEvent(ReaderEvents.CTRL to ReaderStates.RCVCHK) { byte -&gt; require(byte != null)
+                onEvent(ReaderEvents.CTRL to ReaderStates.RCVCHK) { byte -&gt;
+                    require(byte != null)
                     addChecksum(byte)
                 }
             }
@@ -2044,6 +2083,7 @@ enum class ReaderStates {
             LockEvents.values().toSet(),
             ImmutableLock::class
         ) {
+            defaultInitialState = LockStates.LOCKED
             initialState {
                 when (locked) {
                     0 -&gt; LockStates.UNLOCKED
@@ -2148,6 +2188,75 @@ The timeout will trigger an optional transition and action.</p>
 </div>
 <div class="paragraph">
 <p>A requirement for timeout handling is correct concurrent handling of events.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="visualization">Visualization</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="visualization-2">Visualization</h3>
+<div class="paragraph">
+<p>State Definitions can be generated as <a href="https://plantuml.com/">PlantUML</a> state diagrams or <a href="https://asciidoctor.org/">Asciidoc</a> formatted state tables.</p>
+</div>
+<div class="sect3">
+<h4 id="simple-visualization">Simple Visualization</h4>
+<div class="paragraph">
+<p>The simple visualization uses the resulting definition and can render states and transitions.
+You will typically add a method to a unit test class as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">@Test
+fun produceVisualizationTurnstileFSM() {
+    println("== TurnStile")
+    val visualization = visualize(TurnstileFSM.definition) // <b class="conum">(1)</b>
+    File("generated", "turnstile.plantuml").writeText(plantUml(visualization)) // <b class="conum">(2)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>TurnstileFSM.definition</code> is the definition that will be rendered.</p>
+</li>
+<li>
+<p>The <code>plantuml</code> method accepts the output of <code>visualize</code> and produces a state diagram in the plantuml format.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="detail-visualisation">Detail Visualisation</h4>
+<div class="paragraph">
+<p>You may invoke the parser from a unit test similar to the simple case.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">@Test
+fun produceVisualizationTurnstileFSM() {
+    println("== TurnStile")
+    val visualization = parseStateMachine("TurnstileFSM", File("src/test/kotlin/Turnstile.kt")) // <b class="conum">(1)</b>
+    println(visualization)
+    File("generated-parsed", "turnstile.plantuml").writeText(plantUml(visualization)) // <b class="conum">(2)</b>
+    File("generated-parsed", "turnstile.adoc").writeText(asciiDoc(visualization)) // <b class="conum">(3)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Provide classname for the class holding the definition DSL and the sourcefile where the class may be found.</p>
+</li>
+<li>
+<p>Use the <code>plantuml</code> method to generate the text for a plantuml state diagram.</p>
+</li>
+<li>
+<p>Use the <code>asciidoc</code> method to generate an Asciidoc formatted state table.</p>
+</li>
+</ol>
+</div>
 </div>
 </div>
 </div>
@@ -3100,8 +3209,8 @@ Example:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.0.0-SNAPSHOT<br>
-Last updated 2020-01-10 21:02:29 +0200
+Version 1.0.1-SNAPSHOT<br>
+Last updated 2020-02-22 12:13:24 +0200
 </div>
 </div>
 <script src="prism.js"></script>
