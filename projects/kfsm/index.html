@@ -500,10 +500,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#visualization">Visualization</a>
 <ul class="sectlevel2">
-<li><a href="#visualization-2">Visualization</a>
-<ul class="sectlevel3">
 <li><a href="#simple-visualization">Simple Visualization</a></li>
-<li><a href="#detail-visualisation">Detail Visualisation</a></li>
+<li><a href="#detail-visualisation">Detail Visualisation</a>
+<ul class="sectlevel3">
 <li><a href="#detail-visualization-with-gradle-plugin">Detail Visualization with Gradle Plugin</a></li>
 </ul>
 </li>
@@ -2196,13 +2195,11 @@ The timeout will trigger an optional transition and action.</p>
 <div class="sect1">
 <h2 id="visualization">Visualization</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="visualization-2">Visualization</h3>
 <div class="paragraph">
 <p>State Definitions can be generated as <a href="https://plantuml.com/">PlantUML</a> state diagrams or <a href="https://asciidoctor.org/">Asciidoc</a> formatted state tables.</p>
 </div>
-<div class="sect3">
-<h4 id="simple-visualization">Simple Visualization</h4>
+<div class="sect2">
+<h3 id="simple-visualization">Simple Visualization</h3>
 <div class="paragraph">
 <p>The simple visualization uses the resulting definition and can render states and transitions.
 You will typically add a method to a unit test class as follows:</p>
@@ -2228,8 +2225,8 @@ fun produceVisualizationTurnstileFSM() {
 </ol>
 </div>
 </div>
-<div class="sect3">
-<h4 id="detail-visualisation">Detail Visualisation</h4>
+<div class="sect2">
+<h3 id="detail-visualisation">Detail Visualisation</h3>
 <div class="paragraph">
 <p>You may invoke the parser from a unit test similar to the simple case.</p>
 </div>
@@ -2258,16 +2255,58 @@ fun produceVisualizationTurnstileFSM() {
 </li>
 </ol>
 </div>
-</div>
 <div class="sect3">
 <h4 id="detail-visualization-with-gradle-plugin">Detail Visualization with Gradle Plugin</h4>
+<div class="sect4">
+<h5 id="configuration">Configuration</h5>
+<div class="sect5">
+<h6 id="gradle-groovy-dsl">Gradle Groovy DSL</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-groovy" data-lang="groovy">plugins {
-    id 'io.jumpco.open.kfsm.viz-plugin' version '1.0.0'
-}
-
-kfsmViz {
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">kfsmViz {
+    fsm('PacketReaderFSM') {
+        input = file('src/main/kotlin/PacketReader.kt') // <b class="conum">(1)</b>
+        isGeneratePlantUml = true // <b class="conum">(2)</b>
+        isGenerateAsciidoc = true // <b class="conum">(3)</b>
+        output = 'packet-reader' // <b class="conum">(4)</b>
+        outputFolder = file('generated') // <b class="conum">(5)</b>
+        plantUmlName = 'packet-reader-statediagram.plantuml' // <b class="conum">(6)</b>
+        asciidocName = 'packet-reader-state-table.adoc'      // <b class="conum">(7)</b>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>input: File</code>: Required, fully qualified filename of relevant source file</p>
+</li>
+<li>
+<p><code>isGeneratePlantUml: Boolean</code>: Required default is false</p>
+</li>
+<li>
+<p><code>isGenerateAsciidoc: Boolean</code>: Required default is false</p>
+</li>
+<li>
+<p><code>output: String</code>: Optional filename base. The default is the classname</p>
+</li>
+<li>
+<p><code>outputFolder: File</code>: Optional directory for output file. Default is <code>$buildDir/generated</code></p>
+</li>
+<li>
+<p><code>plantUmlName: String</code>: Optional filename for plantuml output. Default is <code>$output.plantuml</code></p>
+</li>
+<li>
+<p><code>asciidocName: String</code>: Optional name of Asciidoc output file. Default is <code>$output.adoc</code></p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect5">
+<h6 id="example-with-multiple-state-machines">Example with multiple state machines.</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">kfsmViz {
     fsm('TurnstileFSM') {
         input = file('resources/Turnstile.kt')
         output = 'turnstile'
@@ -2283,6 +2322,8 @@ kfsmViz {
         isGenerateAsciidoc = true
     }
 }</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -3238,7 +3279,7 @@ Example:</p>
 <div id="footer">
 <div id="footer-text">
 Version 1.0.2-SNAPSHOT<br>
-Last updated 2020-02-22 12:13:24 +0200
+Last updated 2020-02-22 21:48:21 +0200
 </div>
 </div>
 <script src="prism.js"></script>
