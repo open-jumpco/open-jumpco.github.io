@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>KFSM-VIZ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content="JBake">
+
+    <!-- Le styles -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/asciidoctor.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/prettify.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <link rel="shortcut icon" href="../favicon.ico">
+  </head>
+  <body onload="prettyPrint()">
+    <div id="wrap">
+
+<!-- Fixed navbar -->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../">
+                <img height="32px" src="../img/jumpco-open-32.png" alt="Open
+            JumpCO logo"/></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <!--
+                <li><a href="../feed.xml">Subscribe</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Nav header</li>
+                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+                -->
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+<div class="container">
+
+    <div class="page-header">
+        <h1>KFSM-VIZ</h1>
+    </div>
+
+<p><em>22 February 2020</em></p>
+
+<p><div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>State Definitions can be generated as <a href="https://plantuml.com/">PlantUML</a> state diagrams or <a href="https://asciidoctor.org/">Asciidoc</a> formatted state tables.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_simple_visualization">Simple Visualization</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The simple visualization uses the resulting definition and can render states and transitions.
+You will typically add a method to a unit test class as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">@Test
+fun produceVisualizationTurnstileFSM() {
+    println("== TurnStile")
+    val visualization = visualize(TurnstileFSM.definition) // <b class="conum">(1)</b>
+    File("generated", "turnstile.plantuml").writeText(plantUml(visualization)) // <b class="conum">(2)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>TurnstileFSM.definition</code> is the definition that will be rendered.</p>
+</li>
+<li>
+<p>The <code>plantuml</code> method accepts the output of <code>visualize</code> and produces a state diagram in the plantuml format.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_detail_visualisation">Detail Visualisation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You may invoke the parser from a unit test similar to the simple case.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">@Test
+fun produceVisualizationTurnstileFSM() {
+    println("== TurnStile")
+    val visualization = parseStateMachine("TurnstileFSM", File("src/test/kotlin/Turnstile.kt")) // <b class="conum">(1)</b>
+    println(visualization)
+    File("generated-parsed", "turnstile.plantuml").writeText(plantUml(visualization)) // <b class="conum">(2)</b>
+    File("generated-parsed", "turnstile.adoc").writeText(asciiDoc(visualization)) // <b class="conum">(3)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Provide classname for the class holding the definition DSL and the sourcefile where the class may be found.</p>
+</li>
+<li>
+<p>Use the <code>plantuml</code> method to generate the text for a plantuml state diagram.</p>
+</li>
+<li>
+<p>Use the <code>asciidoc</code> method to generate an Asciidoc formatted state table.</p>
+</li>
+</ol>
+</div>
+<div class="sect2">
+<h3 id="_detail_visualization_with_gradle_plugin">Detail Visualization with Gradle Plugin</h3>
+<div class="sect3">
+<h4 id="_configuration">Configuration</h4>
+<div class="sect4">
+<h5 id="_gradle_groovy_dsl">Gradle Groovy DSL</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">plugins {
+    id 'io.jumpco.open.kfsm.gradle.viz-plugin' version '1.0.3'
+}
+
+kfsmViz {
+    fsm('PacketReaderFSM') {
+        input = file('src/main/kotlin/PacketReader.kt') // <b class="conum">(1)</b>
+        isGeneratePlantUml = true // <b class="conum">(2)</b>
+        isGenerateAsciidoc = true // <b class="conum">(3)</b>
+        output = 'packet-reader' // <b class="conum">(4)</b>
+        outputFolder = file('generated') // <b class="conum">(5)</b>
+        plantUmlName = 'packet-reader-statediagram.plantuml' // <b class="conum">(6)</b>
+        asciidocName = 'packet-reader-state-table.adoc'      // <b class="conum">(7)</b>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>input: File</code>: Required, fully qualified filename of relevant source file</p>
+</li>
+<li>
+<p><code>isGeneratePlantUml: Boolean</code>: Required default is false</p>
+</li>
+<li>
+<p><code>isGenerateAsciidoc: Boolean</code>: Required default is false</p>
+</li>
+<li>
+<p><code>output: String</code>: Optional filename base. The default is the classname</p>
+</li>
+<li>
+<p><code>outputFolder: File</code>: Optional directory for output file. Default is <code>$buildDir/generated</code></p>
+</li>
+<li>
+<p><code>plantUmlName: String</code>: Optional filename for plantuml output. Default is <code>$output.plantuml</code></p>
+</li>
+<li>
+<p><code>asciidocName: String</code>: Optional name of Asciidoc output file. Default is <code>$output.adoc</code></p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_example_with_multiple_state_machines">Example with multiple state machines.</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">kfsmViz {
+    fsm('TurnstileFSM') {
+        input = file('resources/Turnstile.kt')
+        output = 'turnstile'
+        outputFolder = file('generated')
+        isGeneratePlantUml = true
+        isGenerateAsciidoc = true
+    }
+    fsm('PacketReaderFSM') {
+        input = file('resources/PacketReader.kt')
+        output = 'packet-reader'
+        outputFolder = file('generated')
+        isGeneratePlantUml = true
+        isGenerateAsciidoc = true
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_examples">Examples</h3>
+<div class="paragraph">
+<p>Many examples can be found at:
+<a href="https://github.com/open-jumpco/kfsm-viz" class="bare">https://github.com/open-jumpco/kfsm-viz</a></p>
+</div>
+</div>
+</div>
+</div></p>
+
+<hr />
+
+		</div>
+		<div id="push"></div>
+    </div>
+    
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">&copy; 2019 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a
+                    href="http://jbake.org">JBake v2.6.4</a></p>
+      </div>
+    </div>
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../js/jquery-1.11.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/prettify.js"></script>
+    
+  </body>
+</html>
