@@ -1,0 +1,10 @@
+title=Release 1.0.1
+date=2020-02-22
+type=post
+tags=blog,open-source,jumpco,release,fsm
+summary=OpenJumpCO releases KFSM 1.0.1
+~~~~~~
+
+We are excited to announce the release of KFSM 1.0.1
+This release includes Visualization using the link:https://github.com/open-jumpco/kfsm-viz[kfsm-viz] module and the
+link:https://github.com/open-jumpco/kfsm-viz-plugin[kfsm-viz-plugin] for Gradle.
