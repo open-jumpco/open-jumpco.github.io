@@ -15,7 +15,7 @@
 <tbody>
 <tr>
 <td>
-<p><a href="-n-o-r-m-a-l.html">NORMAL</a></p>
+<h4><a href="-n-o-r-m-a-l.html">NORMAL</a></h4>
 </td>
 <td>
 <p>Transitions are triggered and may change to a new state or remain at the same state while performing an action.</p>
@@ -23,7 +23,7 @@
 </tr>
 <tr>
 <td>
-<p><a href="-p-u-s-h.html">PUSH</a></p>
+<h4><a href="-p-u-s-h.html">PUSH</a></h4>
 </td>
 <td>
 <p>A push transition will place the current state map on a stack and make the named statemap the current map and change to the given state,</p>
@@ -31,7 +31,7 @@
 </tr>
 <tr>
 <td>
-<p><a href="-p-o-p.html">POP</a></p>
+<h4><a href="-p-o-p.html">POP</a></h4>
 </td>
 <td>
 <p>A pop transition will pop the stack and make the transition current. If the pop transition provided a new targetMap or targetState that will result in push or normal transition behaviour.</p>
@@ -39,26 +39,10 @@
 </tr>
 <tr>
 <td>
-<p><a href="-d-e-f-a-u-l-t.html">DEFAULT</a></p>
+<h4><a href="-d-e-f-a-u-l-t.html">DEFAULT</a></h4>
 </td>
 <td>
 <p>A default transition will take place when no configured state/event pair matches.</p>
-</td>
-</tr>
-</tbody>
-</table>
-<h3>Extension Functions</h3>
-<table>
-<tbody>
-<tr>
-<td>
-<p><a href="../if-apply.html">ifApply</a></p>
-</td>
-<td>
-<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <a href="../if-apply.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">ifApply</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm$ifApply(io.jumpco.open.kfsm.ifApply.T, kotlin.Boolean, kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)), kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)))/expression">expression</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm$ifApply(io.jumpco.open.kfsm.ifApply.T, kotlin.Boolean, kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)), kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)))/block">block</span><span class="symbol">:</span>&nbsp;<a href="../if-apply.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm$ifApply(io.jumpco.open.kfsm.ifApply.T, kotlin.Boolean, kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)), kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)))/otherwise">otherwise</span><span class="symbol">:</span>&nbsp;<a href="../if-apply.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../if-apply.html#T"><span class="identifier">T</span></a></code>
-<p>An extension function that evaluates the expression and invokes the provided <code>block</code> if true or the <code>otherwise</code> block is false.</p>
-<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <a href="../if-apply.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">ifApply</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm$ifApply(io.jumpco.open.kfsm.ifApply.T, kotlin.Boolean, kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)))/expression">expression</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm$ifApply(io.jumpco.open.kfsm.ifApply.T, kotlin.Boolean, kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)))/block">block</span><span class="symbol">:</span>&nbsp;<a href="../if-apply.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../if-apply.html#T"><span class="identifier">T</span></a></code>
-<p>An extension function that evaluates the expression and invokes the provided <code>block</code> if true.</p>
 </td>
 </tr>
 </tbody>
