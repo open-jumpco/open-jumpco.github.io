@@ -9,6 +9,9 @@ summary=KFSM - A Kotlin finite-state machine
 The KFSM project started as an attempt to learn Kotlin DSL and apply to the problem of producing a finite-state machine implementation
 along the lines of link:http://smc.sourceforge.net/[SMC] the State Machine Compiler.
 
+
+image:kfsm-fsm.png[]
+
 * link:kfsm/index.html[Documentation]
 * link:kfsm/javadoc/kfsm/index.html[API Docs]
 * link:https://github.com/open-jumpco/kfsm[Source]

@@ -6,7 +6,8 @@ summary=KFSM - Visualization of definitions
 ~~~~~~
 = KFSM Visualization
 
-State Definitions can be generated as link:https://plantuml.com/[PlantUML] state diagrams or link:https://asciidoctor.org/[Asciidoc] formatted state tables.
+link:kfsm.html[KFSM] State Definitions can be generated as link:https://plantuml.com[PlantUML] state diagrams or
+link:https://asciidoctor.org[Asciidoc] formatted state tables.
 
 == Simple Visualization
 
@@ -101,3 +102,7 @@ kfsmViz {
 
 Many examples can be found at:
 https://github.com/open-jumpco/kfsm-viz
+
+=== Resources
+* Source link:https://github.com/open-jumpco/kfsm-viz[kfsm-viz]
+* Gradle Plugin link:https://github.com/open-jumpco/kfsm-viz-plugin[kfsm-viz-plugin for Gradle]
