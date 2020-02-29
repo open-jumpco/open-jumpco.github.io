@@ -1,0 +1,107 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AsyncTransition - kfsm</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kfsm</a>&nbsp;/&nbsp;<a href="../index.html">io.jumpco.open.kfsm.async</a>&nbsp;/&nbsp;<a href="./index.html">AsyncTransition</a><br/>
+<br/>
+<h1>AsyncTransition</h1>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">AsyncTransition</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">, </span><span class="identifier">A</span><span class="symbol">, </span><span class="identifier">R</span><span class="symbol">&gt;</span></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<code><span class="identifier">AsyncTransition</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm.async.AsyncTransition$<init>(io.jumpco.open.kfsm.async.AsyncTransition.S, kotlin.String, kotlin.Boolean, io.jumpco.open.kfsm.TransitionType, kotlin.coroutines.SuspendFunction2((io.jumpco.open.kfsm.async.AsyncTransition.C, io.jumpco.open.kfsm.async.AsyncTransition.A, io.jumpco.open.kfsm.async.AsyncTransition.R)))/targetState">targetState</span><span class="symbol">:</span>&nbsp;<span class="identifier">S</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.async.AsyncTransition$<init>(io.jumpco.open.kfsm.async.AsyncTransition.S, kotlin.String, kotlin.Boolean, io.jumpco.open.kfsm.TransitionType, kotlin.coroutines.SuspendFunction2((io.jumpco.open.kfsm.async.AsyncTransition.C, io.jumpco.open.kfsm.async.AsyncTransition.A, io.jumpco.open.kfsm.async.AsyncTransition.R)))/targetMap">targetMap</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.async.AsyncTransition$<init>(io.jumpco.open.kfsm.async.AsyncTransition.S, kotlin.String, kotlin.Boolean, io.jumpco.open.kfsm.TransitionType, kotlin.coroutines.SuspendFunction2((io.jumpco.open.kfsm.async.AsyncTransition.C, io.jumpco.open.kfsm.async.AsyncTransition.A, io.jumpco.open.kfsm.async.AsyncTransition.R)))/automatic">automatic</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.async.AsyncTransition$<init>(io.jumpco.open.kfsm.async.AsyncTransition.S, kotlin.String, kotlin.Boolean, io.jumpco.open.kfsm.TransitionType, kotlin.coroutines.SuspendFunction2((io.jumpco.open.kfsm.async.AsyncTransition.C, io.jumpco.open.kfsm.async.AsyncTransition.A, io.jumpco.open.kfsm.async.AsyncTransition.R)))/type">type</span><span class="symbol">:</span>&nbsp;<a href="../../io.jumpco.open.kfsm/-transition-type/index.html"><span class="identifier">TransitionType</span></a>&nbsp;<span class="symbol">=</span>&nbsp;TransitionType.NORMAL<span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.async.AsyncTransition$<init>(io.jumpco.open.kfsm.async.AsyncTransition.S, kotlin.String, kotlin.Boolean, io.jumpco.open.kfsm.TransitionType, kotlin.coroutines.SuspendFunction2((io.jumpco.open.kfsm.async.AsyncTransition.C, io.jumpco.open.kfsm.async.AsyncTransition.A, io.jumpco.open.kfsm.async.AsyncTransition.R)))/action">action</span><span class="symbol">:</span>&nbsp;<a href="../../io.jumpco.open.kfsm/-async-state-action.html"><span class="identifier">AsyncStateAction</span></a><span class="symbol">&lt;</span><span class="identifier">C</span><span class="symbol">,</span>&nbsp;<span class="identifier">A</span><span class="symbol">,</span>&nbsp;<span class="identifier">R</span><span class="symbol">&gt;</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="action.html">action</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">action</span><span class="symbol">: </span><a href="../../io.jumpco.open.kfsm/-async-state-action.html"><span class="identifier">AsyncStateAction</span></a><span class="symbol">&lt;</span><span class="identifier">C</span><span class="symbol">,</span>&nbsp;<span class="identifier">A</span><span class="symbol">,</span>&nbsp;<span class="identifier">R</span><span class="symbol">&gt;</span><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="automatic.html">automatic</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">automatic</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="target-map.html">targetMap</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">targetMap</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="target-state.html">targetState</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">targetState</span><span class="symbol">: </span><span class="identifier">S</span><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="type.html">type</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">type</span><span class="symbol">: </span><a href="../../io.jumpco.open.kfsm/-transition-type/index.html"><span class="identifier">TransitionType</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="execute.html">execute</a></h4>
+</td>
+<td>
+<p>Executed exit, optional and entry actions specific in the transition.</p>
+<code><span class="keyword">open</span> <span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">execute</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm.async.AsyncTransition$execute(io.jumpco.open.kfsm.async.AsyncTransition.C, io.jumpco.open.kfsm.async.AsyncStateMapInstance((io.jumpco.open.kfsm.async.AsyncTransition.S, io.jumpco.open.kfsm.async.AsyncTransition.E, io.jumpco.open.kfsm.async.AsyncTransition.C, io.jumpco.open.kfsm.async.AsyncTransition.A, io.jumpco.open.kfsm.async.AsyncTransition.R)), io.jumpco.open.kfsm.async.AsyncTransition.A)/context">context</span><span class="symbol">:</span>&nbsp;<span class="identifier">C</span><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.async.AsyncTransition$execute(io.jumpco.open.kfsm.async.AsyncTransition.C, io.jumpco.open.kfsm.async.AsyncStateMapInstance((io.jumpco.open.kfsm.async.AsyncTransition.S, io.jumpco.open.kfsm.async.AsyncTransition.E, io.jumpco.open.kfsm.async.AsyncTransition.C, io.jumpco.open.kfsm.async.AsyncTransition.A, io.jumpco.open.kfsm.async.AsyncTransition.R)), io.jumpco.open.kfsm.async.AsyncTransition.A)/instance">instance</span><span class="symbol">:</span>&nbsp;<a href="../-async-state-map-instance/index.html"><span class="identifier">AsyncStateMapInstance</span></a><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">,</span>&nbsp;<span class="identifier">E</span><span class="symbol">,</span>&nbsp;<span class="identifier">C</span><span class="symbol">,</span>&nbsp;<span class="identifier">A</span><span class="symbol">,</span>&nbsp;<span class="identifier">R</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.async.AsyncTransition$execute(io.jumpco.open.kfsm.async.AsyncTransition.C, io.jumpco.open.kfsm.async.AsyncStateMapInstance((io.jumpco.open.kfsm.async.AsyncTransition.S, io.jumpco.open.kfsm.async.AsyncTransition.E, io.jumpco.open.kfsm.async.AsyncTransition.C, io.jumpco.open.kfsm.async.AsyncTransition.A, io.jumpco.open.kfsm.async.AsyncTransition.R)), io.jumpco.open.kfsm.async.AsyncTransition.A)/arg">arg</span><span class="symbol">:</span>&nbsp;<span class="identifier">A</span><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">R</span><span class="symbol">?</span></code><br/>
+<code><span class="keyword">open</span> <span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">execute</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm.async.AsyncTransition$execute(io.jumpco.open.kfsm.async.AsyncTransition.C, io.jumpco.open.kfsm.async.AsyncStateMapInstance((io.jumpco.open.kfsm.async.AsyncTransition.S, io.jumpco.open.kfsm.async.AsyncTransition.E, io.jumpco.open.kfsm.async.AsyncTransition.C, io.jumpco.open.kfsm.async.AsyncTransition.A, io.jumpco.open.kfsm.async.AsyncTransition.R)), io.jumpco.open.kfsm.async.AsyncStateMapInstance((io.jumpco.open.kfsm.async.AsyncTransition.S, io.jumpco.open.kfsm.async.AsyncTransition.E, io.jumpco.open.kfsm.async.AsyncTransition.C, io.jumpco.open.kfsm.async.AsyncTransition.A, io.jumpco.open.kfsm.async.AsyncTransition.R)), io.jumpco.open.kfsm.async.AsyncTransition.A)/context">context</span><span class="symbol">:</span>&nbsp;<span class="identifier">C</span><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.async.AsyncTransition$execute(io.jumpco.open.kfsm.async.AsyncTransition.C, io.jumpco.open.kfsm.async.AsyncStateMapInstance((io.jumpco.open.kfsm.async.AsyncTransition.S, io.jumpco.open.kfsm.async.AsyncTransition.E, io.jumpco.open.kfsm.async.AsyncTransition.C, io.jumpco.open.kfsm.async.AsyncTransition.A, io.jumpco.open.kfsm.async.AsyncTransition.R)), io.jumpco.open.kfsm.async.AsyncStateMapInstance((io.jumpco.open.kfsm.async.AsyncTransition.S, io.jumpco.open.kfsm.async.AsyncTransition.E, io.jumpco.open.kfsm.async.AsyncTransition.C, io.jumpco.open.kfsm.async.AsyncTransition.A, io.jumpco.open.kfsm.async.AsyncTransition.R)), io.jumpco.open.kfsm.async.AsyncTransition.A)/sourceMap">sourceMap</span><span class="symbol">:</span>&nbsp;<a href="../-async-state-map-instance/index.html"><span class="identifier">AsyncStateMapInstance</span></a><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">,</span>&nbsp;<span class="identifier">E</span><span class="symbol">,</span>&nbsp;<span class="identifier">C</span><span class="symbol">,</span>&nbsp;<span class="identifier">A</span><span class="symbol">,</span>&nbsp;<span class="identifier">R</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.async.AsyncTransition$execute(io.jumpco.open.kfsm.async.AsyncTransition.C, io.jumpco.open.kfsm.async.AsyncStateMapInstance((io.jumpco.open.kfsm.async.AsyncTransition.S, io.jumpco.open.kfsm.async.AsyncTransition.E, io.jumpco.open.kfsm.async.AsyncTransition.C, io.jumpco.open.kfsm.async.AsyncTransition.A, io.jumpco.open.kfsm.async.AsyncTransition.R)), io.jumpco.open.kfsm.async.AsyncStateMapInstance((io.jumpco.open.kfsm.async.AsyncTransition.S, io.jumpco.open.kfsm.async.AsyncTransition.E, io.jumpco.open.kfsm.async.AsyncTransition.C, io.jumpco.open.kfsm.async.AsyncTransition.A, io.jumpco.open.kfsm.async.AsyncTransition.R)), io.jumpco.open.kfsm.async.AsyncTransition.A)/targetMap">targetMap</span><span class="symbol">:</span>&nbsp;<a href="../-async-state-map-instance/index.html"><span class="identifier">AsyncStateMapInstance</span></a><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">,</span>&nbsp;<span class="identifier">E</span><span class="symbol">,</span>&nbsp;<span class="identifier">C</span><span class="symbol">,</span>&nbsp;<span class="identifier">A</span><span class="symbol">,</span>&nbsp;<span class="identifier">R</span><span class="symbol">&gt;</span><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.async.AsyncTransition$execute(io.jumpco.open.kfsm.async.AsyncTransition.C, io.jumpco.open.kfsm.async.AsyncStateMapInstance((io.jumpco.open.kfsm.async.AsyncTransition.S, io.jumpco.open.kfsm.async.AsyncTransition.E, io.jumpco.open.kfsm.async.AsyncTransition.C, io.jumpco.open.kfsm.async.AsyncTransition.A, io.jumpco.open.kfsm.async.AsyncTransition.R)), io.jumpco.open.kfsm.async.AsyncStateMapInstance((io.jumpco.open.kfsm.async.AsyncTransition.S, io.jumpco.open.kfsm.async.AsyncTransition.E, io.jumpco.open.kfsm.async.AsyncTransition.C, io.jumpco.open.kfsm.async.AsyncTransition.A, io.jumpco.open.kfsm.async.AsyncTransition.R)), io.jumpco.open.kfsm.async.AsyncTransition.A)/arg">arg</span><span class="symbol">:</span>&nbsp;<span class="identifier">A</span><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">R</span><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="is-external.html">isExternal</a></h4>
+</td>
+<td>
+<p>This function provides an indicator if a Transition is internal or external.
+When there is no targetState defined a Transition is considered internal and will not trigger entry or exit actions.</p>
+<code><span class="keyword">fun </span><span class="identifier">isExternal</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="../-default-async-transition/index.html">DefaultAsyncTransition</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">DefaultAsyncTransition</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">, </span><span class="identifier">A</span><span class="symbol">, </span><span class="identifier">R</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AsyncTransition</span></a><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">,</span>&nbsp;<span class="identifier">E</span><span class="symbol">,</span>&nbsp;<span class="identifier">C</span><span class="symbol">,</span>&nbsp;<span class="identifier">A</span><span class="symbol">,</span>&nbsp;<span class="identifier">R</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../-simple-async-transition/index.html">SimpleAsyncTransition</a></h4>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">SimpleAsyncTransition</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">, </span><span class="identifier">A</span><span class="symbol">, </span><span class="identifier">R</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AsyncTransition</span></a><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">,</span>&nbsp;<span class="identifier">E</span><span class="symbol">,</span>&nbsp;<span class="identifier">C</span><span class="symbol">,</span>&nbsp;<span class="identifier">A</span><span class="symbol">,</span>&nbsp;<span class="identifier">R</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

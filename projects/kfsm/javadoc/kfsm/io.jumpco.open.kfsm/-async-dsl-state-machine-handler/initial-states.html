@@ -1,0 +1,29 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AsyncDslStateMachineHandler.initialStates - kfsm</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kfsm</a>&nbsp;/&nbsp;<a href="../index.html">io.jumpco.open.kfsm</a>&nbsp;/&nbsp;<a href="index.html">AsyncDslStateMachineHandler</a>&nbsp;/&nbsp;<a href="./initial-states.html">initialStates</a><br/>
+<br/>
+<h1>initialStates</h1>
+<a name="io.jumpco.open.kfsm.AsyncDslStateMachineHandler$initialStates(kotlin.Function1((io.jumpco.open.kfsm.AsyncDslStateMachineHandler.C, kotlin.collections.List((kotlin.Pair((io.jumpco.open.kfsm.AsyncDslStateMachineHandler.S, kotlin.String)))))))"></a>
+<code><span class="keyword">fun </span><span class="identifier">initialStates</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm.AsyncDslStateMachineHandler$initialStates(kotlin.Function1((io.jumpco.open.kfsm.AsyncDslStateMachineHandler.C, kotlin.collections.List((kotlin.Pair((io.jumpco.open.kfsm.AsyncDslStateMachineHandler.S, kotlin.String)))))))/deriveInitialMap">deriveInitialMap</span><span class="symbol">:</span>&nbsp;<a href="../-state-map-query.html"><span class="identifier">StateMapQuery</span></a><span class="symbol">&lt;</span><span class="identifier">C</span><span class="symbol">,</span>&nbsp;<span class="identifier">S</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="index.html"><span class="identifier">AsyncDslStateMachineHandler</span></a><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">,</span>&nbsp;<span class="identifier">E</span><span class="symbol">,</span>&nbsp;<span class="identifier">C</span><span class="symbol">,</span>&nbsp;<span class="identifier">A</span><span class="symbol">,</span>&nbsp;<span class="identifier">R</span><span class="symbol">&gt;</span></code>
+<p>Provides for a list of pairs with state and map name that will be pushed and the last entry will be popped and become the current map.
+This is required when using state machine with named maps.</p>
+<pre><code>initialStates {
+mutableListOf&lt;StateMapItem&lt;PayingTurnstileStates&gt;&gt;().apply {
+if (locked) {
+this.add(PayingTurnstileStates.LOCKED to "default")
+} else {
+this.add(PayingTurnstileStates.UNLOCKED to "default")
+}
+if (coins &gt; 0) {
+this.add(PayingTurnstileStates.COINS to "coins")
+}
+}
+}
+</code></pre>
+</BODY>
+</HTML>

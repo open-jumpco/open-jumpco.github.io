@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>KFSM-VIZ-PLUGIN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content="JBake">
+
+    <!-- Le styles -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/asciidoctor.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/prettify.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <link rel="shortcut icon" href="../favicon.ico">
+  </head>
+  <body onload="prettyPrint()">
+    <div id="wrap">
+
+<!-- Fixed navbar -->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../">
+                <img height="32px" src="../img/jumpco-open-32.png" alt="Open
+            JumpCO logo"/></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <!--
+                <li><a href="../feed.xml">Subscribe</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Nav header</li>
+                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+                -->
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+<div class="container">
+
+    <div class="page-header">
+        <h1>KFSM-VIZ-PLUGIN</h1>
+    </div>
+
+<p><em>28 February 2020</em></p>
+
+<p><div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Gradle plugin provided for parsing configured files containing the DSL in order to construct a model of the FSM for visual
+representation.
+This model includes the content of the lambdas used in guards and actions.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getting_started">Getting Started</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Plugin Id: io.jumpco.open.kfsm.viz-plugin
+Version: 1.0.4-SNAPSHOT</p>
+</div>
+<div class="sect2">
+<h3 id="_gradle_groovy_dsl">Gradle Groovy DSL</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">plugins {
+    id 'io.jumpco.open.kfsm.viz-plugin' version '1.0.3'
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration">Configuration</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_gradle_groovy_dsl_2">Gradle Groovy DSL</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">kfsmViz {
+  fsm('PacketReaderFSM') {
+    input = file('src/main/kotlin/PacketReader.kt') // <b class="conum">(1)</b>
+    isGeneratePlantUml = true // <b class="conum">(2)</b>
+    isGenerateAsciidoc = true // <b class="conum">(3)</b>
+    output = 'packet-reader' // <b class="conum">(4)</b>
+    outputFolder = file('generated') // <b class="conum">(5)</b>
+    plantUmlName = 'packet-reader-statediagram.plantuml' // <b class="conum">(6)</b>
+    asciidocName = 'packet-reader-state-table.adoc'      // <b class="conum">(7)</b>
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p><code>input: File</code>: Required, fully qualified filename of relevant source file</p>
+</li>
+<li>
+<p><code>isGeneratePlantUml: Boolean</code>: Required default is false</p>
+</li>
+<li>
+<p><code>isGenerateAsciidoc: Boolean</code>: Required default is false</p>
+</li>
+<li>
+<p><code>output: String</code>: Optional filename base. The default is the classname</p>
+</li>
+<li>
+<p><code>outputFolder: File</code>: Optional directory for output file. Default is <code>$buildDir/generated</code></p>
+</li>
+<li>
+<p><code>plantUmlName: String</code>: Optional filename for plantuml output. Default is <code>$output.plantuml</code></p>
+</li>
+<li>
+<p><code>asciidocName: String</code>: Optional name of Asciidoc output file. Default is <code>$output.adoc</code></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_resources">Resources</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/open-jumpco/kfsm-viz-plugin">Source</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div></p>
+
+<hr />
+
+		</div>
+		<div id="push"></div>
+    </div>
+    
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">&copy; 2019 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a
+                    href="http://jbake.org">JBake v2.6.4</a></p>
+      </div>
+    </div>
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../js/jquery-1.11.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/prettify.js"></script>
+    
+  </body>
+</html>

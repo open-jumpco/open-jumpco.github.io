@@ -27,6 +27,20 @@
 </tr>
 <tr>
 <td>
+<h4><a href="-async-state-action.html">AsyncStateAction</a></h4>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">AsyncStateAction</span><span class="symbol">&lt;</span><span class="identifier">C</span><span class="symbol">, </span><span class="identifier">A</span><span class="symbol">, </span><span class="identifier">R</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;<span class="keyword">suspend </span><span class="identifier">C</span><span class="symbol">.</span><span class="symbol">(</span><span class="identifier">A</span><span class="symbol">?</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">R</span><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-default-async-state-action.html">DefaultAsyncStateAction</a></h4>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">DefaultAsyncStateAction</span><span class="symbol">&lt;</span><span class="identifier">C</span><span class="symbol">, </span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span><span class="symbol">, </span><span class="identifier">A</span><span class="symbol">, </span><span class="identifier">R</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;<span class="keyword">suspend </span><span class="identifier">C</span><span class="symbol">.</span><span class="symbol">(</span><span class="identifier">S</span><span class="symbol">,</span>&nbsp;<span class="identifier">E</span><span class="symbol">,</span>&nbsp;<span class="identifier">A</span><span class="symbol">?</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">R</span><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
 <h4><a href="-default-entry-exit-action.html">DefaultEntryExitAction</a></h4>
 </td>
 <td>
@@ -156,14 +170,6 @@ They are internal transitions.</p>
 </tr>
 <tr>
 <td>
-<h4><a href="-state-action.html">StateAction</a></h4>
-</td>
-<td>
-<p>This represents an action that may be invoked during a transition.</p>
-<code><span class="keyword">typealias </span><span class="identifier">StateAction</span><span class="symbol">&lt;</span><span class="identifier">C</span><span class="symbol">, </span><span class="identifier">A</span><span class="symbol">, </span><span class="identifier">R</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;<span class="identifier">C</span><span class="symbol">.</span><span class="symbol">(</span><span class="identifier">A</span><span class="symbol">?</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">R</span><span class="symbol">?</span></code></td>
-</tr>
-<tr>
-<td>
 <h4><a href="-state-guard.html">StateGuard</a></h4>
 </td>
 <td>
@@ -247,6 +253,14 @@ statemachine multiple times during the lifecycle of a context represented by a p
 </tr>
 <tr>
 <td>
+<h4><a href="-sync-state-action.html">SyncStateAction</a></h4>
+</td>
+<td>
+<p>This represents an action that may be invoked during a transition.</p>
+<code><span class="keyword">typealias </span><span class="identifier">SyncStateAction</span><span class="symbol">&lt;</span><span class="identifier">C</span><span class="symbol">, </span><span class="identifier">A</span><span class="symbol">, </span><span class="identifier">R</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;<span class="identifier">C</span><span class="symbol">.</span><span class="symbol">(</span><span class="identifier">A</span><span class="symbol">?</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">R</span><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
 <h4><a href="-test-functional-lock/index.html">TestFunctionalLock</a></h4>
 </td>
 <td>
@@ -277,8 +291,6 @@ statemachine multiple times during the lifecycle of a context represented by a p
 <h4><a href="if-apply.html">ifApply</a></h4>
 </td>
 <td>
-<p>An extension function that evaluates the expression and invokes the provided <code>block</code> if true or the <code>otherwise</code> block is false.</p>
-<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">T</span><span class="symbol">.</span><span class="identifier">ifApply</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm$ifApply(io.jumpco.open.kfsm.ifApply.T, kotlin.Boolean, kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)), kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)))/expression">expression</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm$ifApply(io.jumpco.open.kfsm.ifApply.T, kotlin.Boolean, kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)), kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)))/block">block</span><span class="symbol">:</span>&nbsp;<span class="identifier">T</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm$ifApply(io.jumpco.open.kfsm.ifApply.T, kotlin.Boolean, kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)), kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)))/otherwise">otherwise</span><span class="symbol">:</span>&nbsp;<span class="identifier">T</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code>
 <p>An extension function that evaluates the expression and invokes the provided <code>block</code> if true.</p>
 <code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span> <span class="identifier">T</span><span class="symbol">.</span><span class="identifier">ifApply</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm$ifApply(io.jumpco.open.kfsm.ifApply.T, kotlin.Boolean, kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)))/expression">expression</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm$ifApply(io.jumpco.open.kfsm.ifApply.T, kotlin.Boolean, kotlin.Function1((io.jumpco.open.kfsm.ifApply.T, kotlin.Unit)))/block">block</span><span class="symbol">:</span>&nbsp;<span class="identifier">T</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code></td>
 </tr>

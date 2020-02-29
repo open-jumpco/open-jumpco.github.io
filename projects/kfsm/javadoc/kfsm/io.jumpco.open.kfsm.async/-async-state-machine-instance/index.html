@@ -1,0 +1,84 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AsyncStateMachineInstance - kfsm</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">kfsm</a>&nbsp;/&nbsp;<a href="../index.html">io.jumpco.open.kfsm.async</a>&nbsp;/&nbsp;<a href="./index.html">AsyncStateMachineInstance</a><br/>
+<br/>
+<h1>AsyncStateMachineInstance</h1>
+<code><span class="keyword">class </span><span class="identifier">AsyncStateMachineInstance</span><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">, </span><span class="identifier">E</span><span class="symbol">, </span><span class="identifier">C</span><span class="symbol">, </span><span class="identifier">A</span><span class="symbol">, </span><span class="identifier">R</span><span class="symbol">&gt;</span></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>Create a state machine using a specific definition and a previous externalised state.</p>
+<code><span class="identifier">AsyncStateMachineInstance</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm.async.AsyncStateMachineInstance$<init>(io.jumpco.open.kfsm.async.AsyncStateMachineInstance.C, io.jumpco.open.kfsm.async.AsyncStateMachineDefinition((io.jumpco.open.kfsm.async.AsyncStateMachineInstance.S, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.E, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.C, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.A, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.R)), kotlin.collections.List((kotlin.Pair((io.jumpco.open.kfsm.async.AsyncStateMachineInstance.S, kotlin.String)))))/context">context</span><span class="symbol">:</span>&nbsp;<span class="identifier">C</span><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.async.AsyncStateMachineInstance$<init>(io.jumpco.open.kfsm.async.AsyncStateMachineInstance.C, io.jumpco.open.kfsm.async.AsyncStateMachineDefinition((io.jumpco.open.kfsm.async.AsyncStateMachineInstance.S, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.E, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.C, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.A, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.R)), kotlin.collections.List((kotlin.Pair((io.jumpco.open.kfsm.async.AsyncStateMachineInstance.S, kotlin.String)))))/definition">definition</span><span class="symbol">:</span>&nbsp;<a href="../-async-state-machine-definition/index.html"><span class="identifier">AsyncStateMachineDefinition</span></a><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">,</span>&nbsp;<span class="identifier">E</span><span class="symbol">,</span>&nbsp;<span class="identifier">C</span><span class="symbol">,</span>&nbsp;<span class="identifier">A</span><span class="symbol">,</span>&nbsp;<span class="identifier">R</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.async.AsyncStateMachineInstance$<init>(io.jumpco.open.kfsm.async.AsyncStateMachineInstance.C, io.jumpco.open.kfsm.async.AsyncStateMachineDefinition((io.jumpco.open.kfsm.async.AsyncStateMachineInstance.S, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.E, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.C, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.A, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.R)), kotlin.collections.List((kotlin.Pair((io.jumpco.open.kfsm.async.AsyncStateMachineInstance.S, kotlin.String)))))/initialExternalState">initialExternalState</span><span class="symbol">:</span>&nbsp;<a href="../../io.jumpco.open.kfsm/-external-state.html"><span class="identifier">ExternalState</span></a><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">&gt;</span><span class="symbol">)</span></code><code><span class="identifier">AsyncStateMachineInstance</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm.async.AsyncStateMachineInstance$<init>(io.jumpco.open.kfsm.async.AsyncStateMachineInstance.C, io.jumpco.open.kfsm.async.AsyncStateMachineDefinition((io.jumpco.open.kfsm.async.AsyncStateMachineInstance.S, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.E, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.C, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.A, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.R)), io.jumpco.open.kfsm.async.AsyncStateMachineInstance.S, kotlin.collections.List((kotlin.Pair((io.jumpco.open.kfsm.async.AsyncStateMachineInstance.S, kotlin.String)))))/context">context</span><span class="symbol">:</span>&nbsp;<span class="identifier">C</span><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.async.AsyncStateMachineInstance$<init>(io.jumpco.open.kfsm.async.AsyncStateMachineInstance.C, io.jumpco.open.kfsm.async.AsyncStateMachineDefinition((io.jumpco.open.kfsm.async.AsyncStateMachineInstance.S, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.E, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.C, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.A, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.R)), io.jumpco.open.kfsm.async.AsyncStateMachineInstance.S, kotlin.collections.List((kotlin.Pair((io.jumpco.open.kfsm.async.AsyncStateMachineInstance.S, kotlin.String)))))/definition">definition</span><span class="symbol">:</span>&nbsp;<a href="../-async-state-machine-definition/index.html"><span class="identifier">AsyncStateMachineDefinition</span></a><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">,</span>&nbsp;<span class="identifier">E</span><span class="symbol">,</span>&nbsp;<span class="identifier">C</span><span class="symbol">,</span>&nbsp;<span class="identifier">A</span><span class="symbol">,</span>&nbsp;<span class="identifier">R</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.async.AsyncStateMachineInstance$<init>(io.jumpco.open.kfsm.async.AsyncStateMachineInstance.C, io.jumpco.open.kfsm.async.AsyncStateMachineDefinition((io.jumpco.open.kfsm.async.AsyncStateMachineInstance.S, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.E, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.C, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.A, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.R)), io.jumpco.open.kfsm.async.AsyncStateMachineInstance.S, kotlin.collections.List((kotlin.Pair((io.jumpco.open.kfsm.async.AsyncStateMachineInstance.S, kotlin.String)))))/initialState">initialState</span><span class="symbol">:</span>&nbsp;<span class="identifier">S</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.async.AsyncStateMachineInstance$<init>(io.jumpco.open.kfsm.async.AsyncStateMachineInstance.C, io.jumpco.open.kfsm.async.AsyncStateMachineDefinition((io.jumpco.open.kfsm.async.AsyncStateMachineInstance.S, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.E, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.C, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.A, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.R)), io.jumpco.open.kfsm.async.AsyncStateMachineInstance.S, kotlin.collections.List((kotlin.Pair((io.jumpco.open.kfsm.async.AsyncStateMachineInstance.S, kotlin.String)))))/initialExternalState">initialExternalState</span><span class="symbol">:</span>&nbsp;<a href="../../io.jumpco.open.kfsm/-external-state.html"><span class="identifier">ExternalState</span></a><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">&gt;</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="current-state.html">currentState</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">currentState</span><span class="symbol">: </span><span class="identifier">S</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="definition.html">definition</a></h4>
+</td>
+<td>
+<p>The Immutable definition of the state machine.</p>
+<code><span class="keyword">val </span><span class="identifier">definition</span><span class="symbol">: </span><a href="../-async-state-machine-definition/index.html"><span class="identifier">AsyncStateMachineDefinition</span></a><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">,</span>&nbsp;<span class="identifier">E</span><span class="symbol">,</span>&nbsp;<span class="identifier">C</span><span class="symbol">,</span>&nbsp;<span class="identifier">A</span><span class="symbol">,</span>&nbsp;<span class="identifier">R</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="allowed.html">allowed</a></h4>
+</td>
+<td>
+<p>This function will provide the set of allowed events given a specific state. It isn't a guarantee that a
+subsequent transition will be successful since a guard may prevent a transition. Default state handlers are not considered.</p>
+<code><span class="keyword">fun </span><span class="identifier">allowed</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm.async.AsyncStateMachineInstance$allowed(kotlin.Boolean)/includeDefault">includeDefault</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html"><span class="identifier">Set</span></a><span class="symbol">&lt;</span><span class="identifier">E</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="event-allowed.html">eventAllowed</a></h4>
+</td>
+<td>
+<p>This function will return an indicator if the given event is allowed given the current state.</p>
+<code><span class="keyword">fun </span><span class="identifier">eventAllowed</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm.async.AsyncStateMachineInstance$eventAllowed(io.jumpco.open.kfsm.async.AsyncStateMachineInstance.E, kotlin.Boolean)/event">event</span><span class="symbol">:</span>&nbsp;<span class="identifier">E</span><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.async.AsyncStateMachineInstance$eventAllowed(io.jumpco.open.kfsm.async.AsyncStateMachineInstance.E, kotlin.Boolean)/includeDefault">includeDefault</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="external-state.html">externalState</a></h4>
+</td>
+<td>
+<p>This function will provide the external state that can be use when creating the instance at a later time.</p>
+<code><span class="keyword">fun </span><span class="identifier">externalState</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../io.jumpco.open.kfsm/-external-state.html"><span class="identifier">ExternalState</span></a><span class="symbol">&lt;</span><span class="identifier">S</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="send-event.html">sendEvent</a></h4>
+</td>
+<td>
+<p>This function will process the on and advance the state machine according to the FSM definition.</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">sendEvent</span><span class="symbol">(</span><span class="identifier" id="io.jumpco.open.kfsm.async.AsyncStateMachineInstance$sendEvent(io.jumpco.open.kfsm.async.AsyncStateMachineInstance.E, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.A)/event">event</span><span class="symbol">:</span>&nbsp;<span class="identifier">E</span><span class="symbol">, </span><span class="identifier" id="io.jumpco.open.kfsm.async.AsyncStateMachineInstance$sendEvent(io.jumpco.open.kfsm.async.AsyncStateMachineInstance.E, io.jumpco.open.kfsm.async.AsyncStateMachineInstance.A)/arg">arg</span><span class="symbol">:</span>&nbsp;<span class="identifier">A</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">R</span><span class="symbol">?</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

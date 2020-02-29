@@ -2,4 +2,5 @@ $dokka.format:html
 $dokka.linkExtension:html
 
 io.jumpco.open.kfsm
+io.jumpco.open.kfsm.async
 io.jumpco.open.kfsm.viz
