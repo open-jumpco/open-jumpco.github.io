@@ -522,7 +522,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#dsl">DSL</a>
 <ul class="sectlevel2">
 <li><a href="#statemachine"><code>stateMachine</code></a></li>
+<li><a href="#functionalstatemachine"><code>functionalStateMachine</code></a></li>
 <li><a href="#asyncstatemachine"><code>asyncStateMachine</code></a></li>
+<li><a href="#asyncfunctionalstatemachine"><code>asyncFunctionalStateMachine</code></a></li>
 <li><a href="#default"><code>default</code></a>
 <ul class="sectlevel3">
 <li><a href="#action"><code>action</code></a></li>
@@ -545,6 +547,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#oneventpush"><code>onEventPush</code></a></li>
 <li><a href="#oneventpop"><code>onEventPop</code></a></li>
 <li><a href="#timeout"><code>timeout</code></a></li>
+<li><a href="#timeoutpop"><code>timeoutPop</code></a></li>
+<li><a href="#timeoutpush"><code>timeoutPush</code></a></li>
 </ul>
 </li>
 </ul>
@@ -2467,6 +2471,45 @@ val definition = stateMachine(
     ArgType::class,
     ReturnType::class
 ) {
+    defaultInitialState = State.S1 // optional start state
+    default { // global defaults
+    }
+    initialState { // initial state expression
+    }
+    initialStates { // define expression for deriving state stack for nested maps.
+    }
+    stateMap { // define named statemap
+    }
+    whenState { // state definition
+    }
+}.build()</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="functionalstatemachine"><code>functionalStateMachine</code></h3>
+<div class="paragraph">
+<p>The top level element is <code>functionalStateMachine</code> either by using the function</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="javadoc/kfsm/io.jumpco.open.kfsm/functional-state-machine.html">functionalStateMachine</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>It provides the same as <code>stateMachine</code> but in this case the Context, argument and return types are all the same.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">// using global function
+val definition = stateMachine(
+    State.values().toSet(),
+    Event.values().toSet(),
+    ContextType::class
+) {
+    defaultInitialState = State.S1 // optional start state
     default { // global defaults
     }
     initialState { // initial state expression
@@ -2510,6 +2553,42 @@ val definition = asyncStateMachine(
     ArgType::class,
     ReturnType::class
 ) {
+    defaultInitialState = State.S1 // optional
+    default { // global defaults
+    }
+    initialState { // initial state expression
+    }
+    initialStates { // define expression for deriving state stack for nested maps.
+    }
+    stateMap { // define named statemap
+    }
+    whenState { // state definition
+    }
+}.build()</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="asyncfunctionalstatemachine"><code>asyncFunctionalStateMachine</code></h3>
+<div class="paragraph">
+<p>This is the same as <code>asyncStateMachine</code> except that Context, argument and return types are all the same.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="javadoc/kfsm/io.jumpco.open.kfsm.async/async-functional-state-machine.html">asyncFunctionalStateMachine</a></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">// using global function
+val definition = asyncFunctionalStateMachine(
+    State.values().toSet(),
+    Event.values().toSet(),
+    ContextType::class
+) {
+    defaultInitialState = State.S1 // optional
     default { // global defaults
     }
     initialState { // initial state expression
@@ -2804,11 +2883,12 @@ When a state-machine has named maps the <code>initialStates</code> must be provi
     }
     automatic(State.S1, guard = { flag == 1}) { // automatic transition to new state when guard is met
     }
-    timeout(State.S1, timeout, gaurd = { expression }) { // transition to S1 when timeout is triggered and guard is true
+    // timeout is limited to AsyncStateMachineBuilder
+    timeout(State.S1, timeout, [guard = { expression }]) { // transition to S1 when timeout is triggered and guard is true
     }
-    timeoutPop(State.S1, timeout, gaurd = { expression }) { // transition to S1 when timeout is triggered and guard is true
+    timeoutPop(State.S1, timeout, [guard = { expression }]) { // transition to S1 when timeout is triggered and guard is true
     }
-    timeoutPush(State.S1, "mapName",  timeout, gaurd = { expression }) { // transition to S1 when timeout is triggered and guard is true
+    timeoutPush(State.S1, "mapName",  timeout, [guard = { expression }]) { // transition to S1 when timeout is triggered and guard is true
     }
 }</code></pre>
 </div>
@@ -3155,6 +3235,51 @@ Example:</p>
 </div>
 <div class="paragraph">
 <p>There are 2 versions. One adds the support for a guard expression that will be evaluated and the action will only trigger if the guard evaluates true.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="timeoutpop"><code>timeoutPop</code></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Arguments: <code>([targetMap: String], targetState: S, timeout: Long, [guard:{}])</code></p>
+</li>
+<li>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm.async/-async-dsl-state-map-event-handler/timeout-pop.html">AsyncDslStateMapEventHandler::timeoutPop</a></p>
+</li>
+<li>
+<p>Mandatory: <em>Optional</em></p>
+</li>
+<li>
+<p>Cardinality: <em>Multiple</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>There are 5 versions.
+Combinations exist to add the optional guard expression and the targetMap.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="timeoutpush"><code>timeoutPush</code></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Arguments: <code>(targetMap: String, targetState: S, timeout: Long, [guard:{}])</code></p>
+</li>
+<li>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm.async/-async-dsl-state-map-event-handler/timeout-push.html">AsyncDslStateMapEventHandler::timeoutPush</a></p>
+</li>
+<li>
+<p>Mandatory: <em>Optional</em></p>
+</li>
+<li>
+<p>Cardinality: <em>Multiple</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>There are 2 variations, the 2nd adds the optional guard expression.</p>
 </div>
 </div>
 </div>
