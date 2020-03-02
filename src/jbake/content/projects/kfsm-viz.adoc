@@ -53,7 +53,7 @@ fun produceVisualizationTurnstileFSM() {
 [source,groovy]
 ----
 plugins {
-    id 'io.jumpco.open.kfsm.gradle.viz-plugin' version '1.0.3'
+    id 'io.jumpco.open.kfsm.gradle.viz-plugin' version '1.0.7'
 }
 
 kfsmViz {
