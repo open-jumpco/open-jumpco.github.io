@@ -435,7 +435,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>KFSM - Kotlin Finite-state machine</h1>
 <div class="details">
-<span id="revnumber">version 1.0.2-SNAPSHOT</span>
+<span id="revnumber">version 1.0.2</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -448,7 +448,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#features">Features</a></li>
-<li><a href="#todo">Todo</a></li>
 <li><a href="#tutorial">Tutorial</a>
 <ul class="sectlevel2">
 <li><a href="#simple-turnstile-example">Simple turnstile example</a>
@@ -638,20 +637,11 @@ a Kotlin DSL along with a simple implementation.</p>
 <li>
 <p>Visualization Gradle Plugin</p>
 </li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="todo">Todo</h2>
-<div class="sectionbody">
-<div class="ulist checklist">
-<ul class="checklist">
 <li>
-<p>&#10063; Timeouts and Timers</p>
+<p>Coroutines</p>
 </li>
 <li>
-<p>&#10063; Coroutines</p>
+<p>Timeout Transitions</p>
 </li>
 </ul>
 </div>
@@ -2207,7 +2197,7 @@ The timeout will trigger an optional transition and action.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-jvm:1.0.1'
+    implementation 'io.jumpco.open:kfsm-jvm:1.0.2'
 }</code></pre>
 </div>
 </div>
@@ -2217,7 +2207,7 @@ The timeout will trigger an optional transition and action.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-js:1.0.1'
+    implementation 'io.jumpco.open:kfsm-js:1.0.2'
 }</code></pre>
 </div>
 </div>
@@ -2227,7 +2217,7 @@ The timeout will trigger an optional transition and action.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-wasm32:1.0.1'
+    implementation 'io.jumpco.open:kfsm-wasm32:1.0.2'
 }</code></pre>
 </div>
 </div>
@@ -2237,7 +2227,7 @@ The timeout will trigger an optional transition and action.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-linuxX64:1.0.1'
+    implementation 'io.jumpco.open:kfsm-linuxX64:1.0.2'
 }</code></pre>
 </div>
 </div>
@@ -2247,7 +2237,7 @@ The timeout will trigger an optional transition and action.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-mingwX64:1.0.1'
+    implementation 'io.jumpco.open:kfsm-mingwX64:1.0.2'
 }</code></pre>
 </div>
 </div>
@@ -2257,7 +2247,7 @@ The timeout will trigger an optional transition and action.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-macosX64:1.0.1'
+    implementation 'io.jumpco.open:kfsm-macosX64:1.0.2'
 }</code></pre>
 </div>
 </div>
@@ -2467,26 +2457,10 @@ The statemachine supports:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">// using builder function
-val definition = StateMachineBuilder&lt;StateEnum, EventEnum, ContextType, ArgType, ReturnType&gt;(
-    StateEnum.values().toSet(),
-    EventEnum.values().toSet()
-).stateMachine {
-    default { // global defaults
-    }
-    initialState { // initial state expression
-    }
-    initialStates { // define expression for deriving state stack for nested maps.
-    }
-    stateMap { // define named statemap
-    }
-    whenState { // state definition
-    }
-}.build()
-// using global function
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">// using global function
 val definition = stateMachine(
-    StateEnum.values().toSet(),
-    EventEnum.values().toSet(),
+    State.values().toSet(),
+    Event.values().toSet(),
     ContextType::class,
     ArgType::class,
     ReturnType::class
@@ -2779,25 +2753,17 @@ When a state-machine has named maps the <code>initialStates</code> must be provi
     }
     onEvent(Event.EV2 to State.S1, guard = {flag == 1 }) { // external transition with guard expression
     }
-    onEvent(Event.EV2 to State.S1) { // external transition
-    }
-    onEvent(Event.EV1, guard = { flag == 2 }) { // internal transition with guard expression
-    }
-    onEvent(Event.EV1) { // internal guard expression
-    }
     onEventPush(Event.EV2, "mapName", State.S1, gaurd = { flag == 1}) { // push transition to new map with guard expression
-    }
-    onEventPush(Event.EV2, "mapName", State.S1) { // push transition to new map
-    }
-    onEventPop(Event.EV3) { // pop transition without targetState
-    }
-    onEventPop(Event.EV3, State.S2) { // pop transition changing state while executing current action only
     }
     onEventPop(Event.EV3, "newMap", State.S3) { // pop transition leading into new push transition while executing current action only
     }
     automatic(State.S1, guard = { flag == 1}) { // automatic transition to new state when guard is met
     }
-    automatic(State.S1) { // automatic transition to new state
+    timeout(State.S1, timeout, gaurd = { expression }) { // transition to S1 when timeout is triggered and guard is true
+    }
+    timeoutPop(State.S1, timeout, gaurd = { expression }) { // transition to S1 when timeout is triggered and guard is true
+    }
+    timeoutPush(State.S1, "mapName",  timeout, gaurd = { expression }) { // transition to S1 when timeout is triggered and guard is true
     }
 }</code></pre>
 </div>
@@ -3130,8 +3096,8 @@ Example:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.0.2-SNAPSHOT<br>
-Last updated 2020-02-22 22:08:12 +0200
+Version 1.0.2<br>
+Last updated 2020-03-02 10:24:33 +0200
 </div>
 </div>
 <script src="prism.js"></script>
