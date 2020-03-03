@@ -497,6 +497,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#secure-turnstile-with-timeout-example">Secure Turnstile with Timeout Example</a>
 <ul class="sectlevel3">
 <li><a href="#state-table-4">State Table</a></li>
+</ul>
+</li>
+<li><a href="#timersecureturnstilefsm-state-map">TimerSecureTurnstileFSM State Map</a>
+<ul class="sectlevel3">
 <li><a href="#context-class-4">Context class</a></li>
 <li><a href="#states-and-events-4">States and Events</a></li>
 <li><a href="#state-machine-definition-packaged-3">State machine definition packaged</a></li>
@@ -558,6 +562,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#timeout"><code>timeout</code></a></li>
 <li><a href="#timeoutpop"><code>timeoutPop</code></a></li>
 <li><a href="#timeoutpush"><code>timeoutPush</code></a></li>
+</ul>
+</li>
+<li><a href="#notes-on-concurrency-and-coroutines">Notes on concurrency and coroutines.</a>
+<ul class="sectlevel3">
+<li><a href="#jvm">JVM</a></li>
+<li><a href="#javascript">JavaScript</a></li>
 </ul>
 </li>
 </ul>
@@ -678,7 +688,7 @@ We want to ensure that the <code>lock()</code> function is only called when the 
 <h4 id="state-diagram">State Diagram</h4>
 <div class="imageblock">
 <div class="content">
-<img src="turnstile-fsm.png" alt="LockStateDiagram">
+<img src="turnstile_detail.png" alt="LockStateDiagram">
 </div>
 </div>
 </div>
@@ -978,7 +988,7 @@ We push to <code>coins</code> with COINS state and then the automatic states wil
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="paying-turnstile-fsm.png" alt="Paying Turnstile">
+<img src="paying_turnstile_detail.png" alt="Paying Turnstile">
 </div>
 </div>
 <div class="sect3">
@@ -1355,7 +1365,7 @@ When the override card is tapped a 2nd time it will cancel the override or lock 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="secure-turnstile-fsm.png" alt="Secure Turnstile FSM">
+<img src="secure_turnstile_detail.png" alt="Secure Turnstile FSM">
 </div>
 </div>
 <div class="sect3">
@@ -1622,7 +1632,7 @@ All events have a parameter which is the byte received and the event type is eit
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="packet-reader-fsm-guard.png" alt="packet reader fsm guard">
+<img src="packet_reader_detail.png" alt="packet reader detail">
 </div>
 </div>
 <div class="sect3">
@@ -2168,78 +2178,124 @@ The <code>handleEventMethod</code> will be:</p>
 <div class="sect2">
 <h3 id="secure-turnstile-with-timeout-example">Secure Turnstile with Timeout Example</h3>
 <div class="paragraph">
-<p>We updated the Secure Turnstile with a timeout condition</p>
+<p>We updated the Secure Turnstile with a timeout condition.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="secure-turnstile-fsm.png" alt="Secure Turnstile FSM">
+<img src="timeout_turnstile_detail.png" alt="Timeout Secure Turnstile FSM">
 </div>
 </div>
 <div class="sect3">
 <h4 id="state-table-4">State Table</h4>
+
+</div>
+</div>
+<div class="sect2">
+<h3 id="timersecureturnstilefsm-state-map">TimerSecureTurnstileFSM State Map</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Start State</th>
-<th class="tableblock halign-left valign-top">Event</th>
-<th class="tableblock halign-left valign-top">Guard Expression</th>
-<th class="tableblock halign-left valign-top">End State</th>
+<th class="tableblock halign-left valign-top">Start</th>
+<th class="tableblock halign-left valign-top">Event[Guard]</th>
+<th class="tableblock halign-left valign-top">Target</th>
 <th class="tableblock halign-left valign-top">Action</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CARD(id)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">isOverrideCard(id) and overrideActive</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">cancelOverride()</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CARD <code>[{cardId&#8594;requireNotNull(cardId);isOverrideCard(cardId)&amp;&overrideActive;}]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">{
+cancelOverride()
+}</code></pre>
+</div>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CARD(id)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">isOverrideCard(id)</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">activateOverride()</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CARD <code>[{cardId&#8594;requireNotNull(cardId);isOverrideCard(cardId);}]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">{
+activateOverride()
+}</code></pre>
+</div>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CARD(id)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">overrideActive or isValidCard(id)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CARD <code>[{cardId&#8594;requireNotNull(cardId);overrideActive||isValidCard(cardId);}]</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">unlock()</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">{
+unlock()
+}</code></pre>
+</div>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CARD(id)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">not isValidVard(id)</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">invalidCard()</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CARD <code>[{cardId&#8594;requireNotNull(cardId){"cardId is required"};!isValidCard(cardId);}]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">{cardId-&gt;
+requireNotNull(cardId)
+invalidCard(cardId)
+}</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;timeout = 500&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">{
+println("Timeout. Locking")
+lock()
+}</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CARD <code>[{cardId&#8594;requireNotNull(cardId);isOverrideCard(cardId);}]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">{
+lock()
+}</code></pre>
+</div>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PASS</p></td>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">lock()</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>default</strong></p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">buzzer()</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">{
+lock()
+}</code></pre>
+</div>
+</div></div></td>
 </tr>
 </tbody>
 </table>
-</div>
 <div class="sect3">
 <h4 id="context-class-4">Context class</h4>
 <div class="paragraph">
@@ -2249,7 +2305,7 @@ The context class stores values and will update value in very specific ways.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class SecureTurnstile {
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class TimerSecureTurnstile {
     var locked: Boolean = true
         private set
     var overrideActive: Boolean = false
@@ -2311,12 +2367,12 @@ The context class stores values and will update value in very specific ways.</p>
 <h4 id="state-machine-definition-packaged-3">State machine definition packaged</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class SecureTurnstileFSM(private val secureTurnstile: SecureTurnstile) {
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class TimerSecureTurnstileFSM(private val secureTurnstile: TimerSecureTurnstile) {
     companion object {
-        val definition = stateMachine(
+        val definition = asyncStateMachine(
             SecureTurnstileStates.values().toSet(),
             SecureTurnstileEvents.values().toSet(),
-            SecureTurnstile::class,
+            TimerSecureTurnstile::class,
             Int::class
         ) {
             defaultInitialState = SecureTurnstileStates.LOCKED
@@ -2327,18 +2383,21 @@ The context class stores values and will update value in very specific ways.</p>
                 }
             }
             whenState(SecureTurnstileStates.LOCKED) {
-                onEvent(SecureTurnstileEvents.CARD, guard = { cardId -&gt; requireNotNull(cardId)
+                onEvent(SecureTurnstileEvents.CARD, guard = { cardId -&gt;
+                    requireNotNull(cardId)
                     isOverrideCard(cardId) &amp;&amp; overrideActive
                 }) {
                     cancelOverride()
                 }
-                onEvent(SecureTurnstileEvents.CARD, guard = { cardId -&gt; requireNotNull(cardId)
+                onEvent(SecureTurnstileEvents.CARD, guard = { cardId -&gt;
+                    requireNotNull(cardId)
                     isOverrideCard(cardId)
                 }) {
                     activateOverride()
                 }
                 onEvent(SecureTurnstileEvents.CARD to SecureTurnstileStates.UNLOCKED,
-                    guard = { cardId -&gt; requireNotNull(cardId)
+                    guard = { cardId -&gt;
+                        requireNotNull(cardId)
                         overrideActive || isValidCard(cardId)
                     }) {
                     unlock()
@@ -2346,12 +2405,18 @@ The context class stores values and will update value in very specific ways.</p>
                 onEvent(SecureTurnstileEvents.CARD, guard = { cardId -&gt;
                     requireNotNull(cardId) { "cardId is required" }
                     !isValidCard(cardId)
-                }) { cardId -&gt; requireNotNull(cardId)
+                }) { cardId -&gt;
+                    requireNotNull(cardId)
                     invalidCard(cardId)
                 }
             }
             whenState(SecureTurnstileStates.UNLOCKED) {
-                onEvent(SecureTurnstileEvents.CARD to SecureTurnstileStates.LOCKED, guard = { cardId -&gt; requireNotNull(cardId)
+                timeout(SecureTurnstileStates.LOCKED, 500L) {
+                    println("Timeout. Locking")
+                    lock()
+                }
+                onEvent(SecureTurnstileEvents.CARD to SecureTurnstileStates.LOCKED, guard = { cardId -&gt;
+                    requireNotNull(cardId)
                     isOverrideCard(cardId)
                 }) {
                     lock()
@@ -2364,8 +2429,8 @@ The context class stores values and will update value in very specific ways.</p>
     }
 
     private val fsm = definition.create(secureTurnstile)
-    fun card(cardId: Int) = fsm.sendEvent(SecureTurnstileEvents.CARD, cardId)
-    fun pass() = fsm.sendEvent(SecureTurnstileEvents.PASS)
+    suspend fun card(cardId: Int) = fsm.sendEvent(SecureTurnstileEvents.CARD, cardId)
+    suspend fun pass() = fsm.sendEvent(SecureTurnstileEvents.PASS)
     fun allowEvent(): Set&lt;String&gt; = fsm.allowed().map { it.name.toLowerCase() }.toSet()
 }</code></pre>
 </div>
@@ -2375,39 +2440,22 @@ The context class stores values and will update value in very specific ways.</p>
 <h4 id="test-3">Test</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">        val turnstile = PayingTurnstile(50)
-        val fsm = PayingTurnstileFSM(turnstile)
-        assertTrue(turnstile.locked)
-        println("External:${fsm.externalState()}")
-        println("--coin1")
-        fsm.coin(10)
-        assertTrue(turnstile.locked)
-        assertTrue(turnstile.coins == 10)
-        assertTrue(
-            fsm.fsm.currentStateMap.name != null &amp;&amp; "coins" == fsm.fsm.currentStateMap.name,
-            "Expected coins map"
-        )
-        println("--coin2")
-        println("External:${fsm.externalState()}")
-        fsm.coin(60)
-        assertTrue(turnstile.coins == 0)
-        assertTrue(!turnstile.locked)
-        println("External:${fsm.externalState()}")
-        assertTrue(fsm.fsm.currentStateMap.name == null, "Expected default map not ${fsm.fsm.currentStateMap.name}")
-        println("--pass1")
-        fsm.pass()
-        assertTrue(turnstile.locked)
-        println("--pass2")
-        fsm.pass()
-        println("--pass3")
-        fsm.pass()
-        println("--coin3")
-        fsm.coin(40)
-        assertTrue(turnstile.coins == 40)
-        println("--coin4")
-        fsm.coin(10)
-        assertTrue(turnstile.coins == 0)
-        assertTrue(!turnstile.locked)</code></pre>
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">    @Test
+    fun `test timeout`() {
+        val turnstile = TimerSecureTurnstile()
+        val fsm = TimerSecureTurnstileFSM(turnstile)
+        assertTrue { turnstile.locked }
+        println("Card 1")
+        runBlocking {
+            fsm.card(1)
+            println("Assertion")
+            assertTrue { !turnstile.locked }
+            println("Delay")
+            delay(1000L)
+            println("Assertion")
+            assertTrue { turnstile.locked }
+        }
+    }</code></pre>
 </div>
 </div>
 </div>
@@ -2421,15 +2469,6 @@ It may be worthwhile to have a mechanism for providing a different substate cont
 An interface/class exposed to the substate instead of the full context.
 In this example <code>Block</code> will be exposed to the stateMap. The stateMap can then pop after adding the byte.
 In the case of an invalid character the statemap will still transition to the end state.</p>
-</div>
-<div class="paragraph">
-<p>The Secure Turnstile is an example of where a timeout would be useful. Allowing override should only be active for a limited period.
-This means it could be done by creating a timer that when triggered will cancel the override.
-The allow override could also be handled with a statemap which behaves differently but the states in this state map will all have timeouts associated.
-The timeout will trigger an optional transition and action.</p>
-</div>
-<div class="paragraph">
-<p>A requirement for timeout handling is correct concurrent handling of events.</p>
 </div>
 </div>
 </div>
@@ -3536,6 +3575,24 @@ Combinations exist to add the optional guard expression and the targetMap.</p>
 </div>
 <div class="paragraph">
 <p>There are 2 variations, the 2nd adds the optional guard expression.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="notes-on-concurrency-and-coroutines">Notes on concurrency and coroutines.</h3>
+<div class="paragraph">
+<p>The implementations of the AsyncTimer on the different platform work slightly differently depending on the platform.</p>
+</div>
+<div class="sect3">
+<h4 id="jvm">JVM</h4>
+<div class="paragraph">
+<p>The code in the JVM implemenetation uses <code>CoroutineScope(Dispatchers.Default)</code> to <code>launch</code> the trigger. Your action will be responsible for ensuring proper handling if a UI thread is impacted.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="javascript">JavaScript</h4>
+<div class="paragraph">
+<p>The current code assumes you are executing in the browser in uses <code>window.setTimeout to configure a function that will use `GlobalScope</code> to <code>launch</code> the trigger.</p>
 </div>
 </div>
 </div>
