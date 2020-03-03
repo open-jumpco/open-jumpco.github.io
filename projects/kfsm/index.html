@@ -2606,17 +2606,17 @@ The current state map is usually top-level state map unless you have defined nam
 <div class="ulist">
 <ul>
 <li>
-<p>sendEvent</p>
+<p><code>sendEvent</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>if(external) exitAction</p>
+<p><code>if(external) exitAction()</code></p>
 </li>
 <li>
-<p>action</p>
+<p><code>action()</code></p>
 </li>
 <li>
-<p>if(external) entryAction</p>
+<p><code>if(external) entryAction()</code></p>
 </li>
 </ul>
 </div>
@@ -2698,7 +2698,8 @@ Events will be processed according to the transition rules of the named map.</p>
 <p>The philosophy behind the design is that the finite state machine can be used when needed by creating an instance and providing it with the context.
 The state machine can derive the current state from the context or it can be provided with a previously externalised state.
 Then events can be sent to the FSM which may trigger actions.
-The FSM can also be used to determine which events are allowed for a given state.</p>
+The FSM can also be used to determine which events are allowed for a given state.
+If the FSM is expected to provide timeout transitions the instance will need to remain active. This is typically only used in UI or interactive applications.</p>
 </div>
 </div>
 </div>
@@ -2732,6 +2733,12 @@ The statemachine supports:</p>
 </li>
 <li>
 <p>Automatic transitions</p>
+</li>
+<li>
+<p>Timeout transitions</p>
+</li>
+<li>
+<p>Actions as <code>suspend</code> functions.</p>
 </li>
 </ul>
 </div>
@@ -3586,13 +3593,13 @@ Combinations exist to add the optional guard expression and the targetMap.</p>
 <div class="sect3">
 <h4 id="jvm">JVM</h4>
 <div class="paragraph">
-<p>The code in the JVM implemenetation uses <code>CoroutineScope(Dispatchers.Default)</code> to <code>launch</code> the trigger. Your action will be responsible for ensuring proper handling if a UI thread is impacted.</p>
+<p>The code in the JVM implementation uses <code>CoroutineScope(Dispatchers.Default)</code> to <code>launch</code> the trigger. Your action will be responsible for ensuring proper handling if a UI thread is impacted.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="javascript">JavaScript</h4>
 <div class="paragraph">
-<p>The current code assumes you are executing in the browser in uses <code>window.setTimeout to configure a function that will use `GlobalScope</code> to <code>launch</code> the trigger.</p>
+<p>The current code assumes you are executing in the browser it uses <code>window.setTimeout to configure a function that will use `GlobalScope</code> to <code>launch</code> the trigger.</p>
 </div>
 </div>
 </div>
