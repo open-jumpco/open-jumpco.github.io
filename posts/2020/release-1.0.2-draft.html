@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>KFSM</title>
+    <title>Release 1.0.2</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -10,14 +10,14 @@
     <meta name="generator" content="JBake">
 
     <!-- Le styles -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/asciidoctor.css" rel="stylesheet">
-    <link href="../css/base.css" rel="stylesheet">
-    <link href="../css/prettify.css" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/asciidoctor.css" rel="stylesheet">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link href="../../css/prettify.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-      <script src="../js/html5shiv.min.js"></script>
+      <script src="../../js/html5shiv.min.js"></script>
     <![endif]-->
 
     <!-- Fav and touch icons -->
@@ -25,11 +25,11 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
-    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="shortcut icon" href="../../favicon.ico">
   </head>
   <body onload="prettyPrint()">
     <div id="wrap">
-
+	
 <!-- Fixed navbar -->
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
@@ -40,16 +40,16 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="../">
-                <img height="32px" src="../img/jumpco-open-32.png" alt="Open
+            <a class="navbar-brand" href="../../">
+                <img height="32px" src="../../img/jumpco-open-32.png" alt="Open
             JumpCO logo"/></a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../about.html">About</a></li>
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../about.html">About</a></li>
                 <!--
-                <li><a href="../feed.xml">Subscribe</a></li>
+                <li><a href="../../feed.xml">Subscribe</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -69,33 +69,33 @@
 </div>
 <div class="container">
 
-    <div class="page-header">
-        <h1>KFSM</h1>
-    </div>
+	<div class="page-header">
+		<h1>Release 1.0.2</h1>
+	</div>
 
-<p><div class="paragraph">
-<p>The KFSM project started as an attempt to learn Kotlin DSL and apply to the problem of producing a finite-state machine implementation
-along the lines of <a href="http://smc.sourceforge.net/">SMC</a> the State Machine Compiler.</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="kfsm-fsm.png" alt="kfsm fsm"></span></p>
+	<p><em>01 March 2020</em></p>
+
+	<p><div class="paragraph">
+<p>We are excited to announce the release of KFSM 1.0.2</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="kfsm/index.html">Documentation</a></p>
+<p>This release adds support for suspending functions. This will allow for async functions and use in UI frameworks.</p>
 </li>
 <li>
-<p><a href="kfsm/javadoc/kfsm/index.html">API Docs</a></p>
+<p>This release also adds a timeout transition. This type of transition will create a timer when the relevant state is entered and trigger
+when the timeout has been reached. The transition can also include a guard that will determine if the transition will actually trigger.</p>
 </li>
 <li>
-<p><a href="https://github.com/open-jumpco/kfsm">Source</a></p>
+<p>This release finalizes the Gradle plugin for the Visualization link:https://github
+.com/open-jumpco/kfsm-viz-plugin[kfsm-viz-plugin]</p>
 </li>
 </ul>
 </div></p>
 
-<hr />
-
+	<hr />
+	
 		</div>
 		<div id="push"></div>
     </div>
@@ -110,9 +110,9 @@ along the lines of <a href="http://smc.sourceforge.net/">SMC</a> the State Machi
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../js/jquery-1.11.1.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/prettify.js"></script>
+    <script src="../../js/jquery-1.11.1.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/prettify.js"></script>
     
   </body>
 </html>
