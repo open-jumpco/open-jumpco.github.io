@@ -150,86 +150,17 @@ fun produceVisualizationTurnstileFSM() {
 </ol>
 </div>
 <div class="sect2">
-<h3 id="_detail_visualization_with_gradle_plugin">Detail Visualization with Gradle Plugin</h3>
-<div class="sect3">
-<h4 id="_configuration">Configuration</h4>
-<div class="sect4">
-<h5 id="_gradle_groovy_dsl">Gradle Groovy DSL</h5>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">plugins {
-    id 'io.jumpco.open.kfsm.gradle.viz-plugin' version '1.0.9'
-}
-
-kfsmViz {
-    fsm('PacketReaderFSM') {
-        input = file('src/main/kotlin/PacketReader.kt') // <b class="conum">(1)</b>
-        isGeneratePlantUml = true // <b class="conum">(2)</b>
-        isGenerateAsciidoc = true // <b class="conum">(3)</b>
-        output = 'packet-reader' // <b class="conum">(4)</b>
-        outputFolder = file('generated') // <b class="conum">(5)</b>
-        plantUmlName = 'packet-reader-statediagram.plantuml' // <b class="conum">(6)</b>
-        asciidocName = 'packet-reader-state-table.adoc'      // <b class="conum">(7)</b>
-    }
-}</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<ol>
-<li>
-<p><code>input: File</code>: Required, fully qualified filename of relevant source file</p>
-</li>
-<li>
-<p><code>isGeneratePlantUml: Boolean</code>: Required default is false</p>
-</li>
-<li>
-<p><code>isGenerateAsciidoc: Boolean</code>: Required default is false</p>
-</li>
-<li>
-<p><code>output: String</code>: Optional filename base. The default is the classname</p>
-</li>
-<li>
-<p><code>outputFolder: File</code>: Optional directory for output file. Default is <code>$buildDir/generated</code></p>
-</li>
-<li>
-<p><code>plantUmlName: String</code>: Optional filename for plantuml output. Default is <code>$output.plantuml</code></p>
-</li>
-<li>
-<p><code>asciidocName: String</code>: Optional name of Asciidoc output file. Default is <code>$output.adoc</code></p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_example_with_multiple_state_machines">Example with multiple state machines.</h5>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">kfsmViz {
-    fsm('TurnstileFSM') {
-        input = file('resources/Turnstile.kt')
-        output = 'turnstile'
-        outputFolder = file('generated')
-        isGeneratePlantUml = true
-        isGenerateAsciidoc = true
-    }
-    fsm('PacketReaderFSM') {
-        input = file('resources/PacketReader.kt')
-        output = 'packet-reader'
-        outputFolder = file('generated')
-        isGeneratePlantUml = true
-        isGenerateAsciidoc = true
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
 <h3 id="_examples">Examples</h3>
 <div class="paragraph">
 <p>Many examples can be found at:
 <a href="https://github.com/open-jumpco/kfsm-viz" class="bare">https://github.com/open-jumpco/kfsm-viz</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_gradle_plugin">Gradle Plugin</h3>
+<div class="paragraph">
+<p>Use the <a href="https://github.com/open-jumpco/kfsm-viz-plugin">kfsm-viz-plugin for Gradle</a> to make the visualization part of your build without
+writing code.</p>
 </div>
 </div>
 <div class="sect2">
@@ -238,9 +169,6 @@ kfsmViz {
 <ul>
 <li>
 <p>Source <a href="https://github.com/open-jumpco/kfsm-viz">kfsm-viz</a></p>
-</li>
-<li>
-<p>Gradle Plugin <a href="https://github.com/open-jumpco/kfsm-viz-plugin">kfsm-viz-plugin for Gradle</a></p>
 </li>
 </ul>
 </div>

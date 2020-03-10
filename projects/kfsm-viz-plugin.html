@@ -148,6 +148,29 @@ Version: 1.0.9</p>
 </ol>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_example_with_multiple_state_machines">Example with multiple state machines.</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">kfsmViz {
+    fsm('TurnstileFSM') {
+        input = file('resources/Turnstile.kt')
+        output = 'turnstile'
+        outputFolder = file('generated')
+        isGeneratePlantUml = true
+        isGenerateAsciidoc = true
+    }
+    fsm('PacketReaderFSM') {
+        input = file('resources/PacketReader.kt')
+        output = 'packet-reader'
+        outputFolder = file('generated')
+        isGeneratePlantUml = true
+        isGenerateAsciidoc = true
+    }
+}</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
