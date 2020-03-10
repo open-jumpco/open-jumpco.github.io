@@ -174,6 +174,264 @@ Version: 1.0.9</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_expected_output">Expected output</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_turnstile_state_table">Turnstile State Table</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Start</th>
+<th class="tableblock halign-left valign-top">Event[Guard]</th>
+<th class="tableblock halign-left valign-top">Target</th>
+<th class="tableblock halign-left valign-top">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COIN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">{
+unlock()
+}</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COIN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">{
+returnCoin()
+}</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PASS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">{
+lock()
+}</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_turnstile_state_diagram">Turnstile State Diagram</h3>
+<div class="paragraph">
+<p><span class="image"><img src="turnstile.png" alt="turnstile"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_packetreader_state_table">PacketReader State Table</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Start</th>
+<th class="tableblock halign-left valign-top">Event[Guard]</th>
+<th class="tableblock halign-left valign-top">Target</th>
+<th class="tableblock halign-left valign-top">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[*]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CTRL <code>[{it == CharacterConstants.SOH}]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCVPCKT</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCVPCKT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CTRL <code>[{it == CharacterConstants.STX}]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCVDATA</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">{
+addField()
+}</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCVPCKT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BYTE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCVCHK</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">{
+addChecksum(it)
+}</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCVDATA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BYTE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCVDATA</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">{
+addByte(it)
+}</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCVDATA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CTRL <code>[{it == CharacterConstants.ETX}]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCVPCKT</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">{
+endField()
+}</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCVDATA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ESC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCVESC</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCVESC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ESC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCVDATA</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">{
+addByte(CharacterConstants.ESC)
+}</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCVESC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CTRL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCVDATA</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">{
+addByte(it)
+}</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCVCHK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BYTE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCVCHK</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">{
+addChecksum(it)
+}</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCVCHK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ESC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCVCHKESC</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCVCHK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CTRL <code>[{it == CharacterConstants.EOT}]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CHKSUM</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">{
+checksum()
+}</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CHKSUM</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;automatic&gt;&gt; <code>[{!checksumValid}]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[*]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">{
+sendNACK()
+}</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CHKSUM</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;automatic&gt;&gt; <code>[{checksumValid}]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[*]</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">{
+sendACK()
+}</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCVCHKESC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ESC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCVCHK</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">{
+addChecksum(CharacterConstants.ESC)
+}</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCVCHKESC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CTRL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCVCHK</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">{byte-&gt;
+require(byte != null)
+addChecksum(byte)
+}</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_packetreader_state_diagram">PacketReader State Diagram</h3>
+<div class="paragraph">
+<p><span class="image"><img src="packet_reader.png" alt="packet reader"></span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_resources">Resources</h2>
 <div class="sectionbody">
 <div class="ulist">

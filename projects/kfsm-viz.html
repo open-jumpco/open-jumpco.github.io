@@ -149,29 +149,103 @@ fun produceVisualizationTurnstileFSM() {
 </li>
 </ol>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_expected_output">Expected output</h2>
+<div class="sectionbody">
 <div class="sect2">
-<h3 id="_examples">Examples</h3>
+<h3 id="_turnstile_state_table">Turnstile State Table</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Start</th>
+<th class="tableblock halign-left valign-top">Event[Guard]</th>
+<th class="tableblock halign-left valign-top">Target</th>
+<th class="tableblock halign-left valign-top">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COIN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">{
+unlock()
+}</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COIN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">{
+returnCoin()
+}</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PASS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">{
+lock()
+}</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_turnstile_state_diagram">Turnstile State Diagram</h3>
+<div class="paragraph">
+<p><span class="image"><img src="turnstile.png" alt="turnstile"></span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_examples">Examples</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Many examples can be found at:
 <a href="https://github.com/open-jumpco/kfsm-viz" class="bare">https://github.com/open-jumpco/kfsm-viz</a></p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_gradle_plugin">Gradle Plugin</h3>
+</div>
+<div class="sect1">
+<h2 id="_gradle_plugin">Gradle Plugin</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Use the <a href="https://github.com/open-jumpco/kfsm-viz-plugin">kfsm-viz-plugin for Gradle</a> to make the visualization part of your build without
 writing code.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_resources">Resources</h3>
+</div>
+<div class="sect1">
+<h2 id="_resources">Resources</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
 <p>Source <a href="https://github.com/open-jumpco/kfsm-viz">kfsm-viz</a></p>
 </li>
 </ul>
-</div>
 </div>
 </div>
 </div></p>
