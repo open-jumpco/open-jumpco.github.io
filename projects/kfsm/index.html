@@ -525,11 +525,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </li>
-<li><a href="#operation">Operation</a>
+<li><a href="#finite-state-machines">Finite state machines.</a>
 <ul class="sectlevel2">
-<li><a href="#send-event">Send Event</a></li>
+<li><a href="#definition-2">Definition</a></li>
+<li><a href="#instance">Instance</a></li>
 <li><a href="#named-maps-and-push-pop-transitions">Named Maps and Push / Pop Transitions</a></li>
-<li><a href="#life-cycle">Life-cycle</a></li>
 </ul>
 </li>
 <li><a href="#dsl">DSL</a>
@@ -564,6 +564,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#timeoutpush"><code>timeoutPush</code></a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#operation">Operation</a>
+<ul class="sectlevel2">
+<li><a href="#send-event">Send Event</a></li>
 <li><a href="#notes-on-concurrency-and-coroutines">Notes on concurrency and coroutines.</a>
 <ul class="sectlevel3">
 <li><a href="#jvm">JVM</a></li>
@@ -1146,6 +1151,10 @@ The automatic transitions will be triggered based on the guard expressions.</p>
 </div>
 <div class="sect3">
 <h4 id="state-machine-definition-packaged">State machine definition packaged</h4>
+<div class="paragraph">
+<p>This includes an example of externalizing the state and creating an instance using a previously externalized state.
+The <code>externalState</code> method provides a list of states for the case where there are nested statemaps.</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class PayingTurnstileFSM(
@@ -2557,24 +2566,33 @@ In the case of an invalid character the statemap will still transition to the en
 </div>
 </div>
 <div class="sect1">
-<h2 id="operation">Operation</h2>
+<h2 id="finite-state-machines">Finite state machines.</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The finite state machine follows a specific set of rules.
-This section describes the decision making and order of execution.</p>
+<p>This section will describe the life-cycle and philosophy behind this implementation of Finite state machines.</p>
+</div>
+<div class="sect2">
+<h3 id="definition-2">Definition</h3>
+<div class="paragraph">
+<p>An FSM is defined using a DSL as described further in this document.</p>
+</div>
+<div class="paragraph">
+<p>During this definition the user describes state types, events types as well as the behaviour of the FSM to events and how it will operate on a provided context.</p>
+</div>
+<div class="paragraph">
+<p>The state and event types should be a value types.</p>
+</div>
+<div class="paragraph">
+<p>The events may receive an argument and may return a value. The argument for all event must be the same type. However sealed classes can be used to simplify the representation of different argument types.</p>
 </div>
 <div class="paragraph">
 <p>The state machine will define one or more state maps each representing a subset of possible states of the same type.</p>
 </div>
 <div class="paragraph">
-<p>The state machine will receive events, constrained by set of events. The events no longer have to be an enum class,
-only a type with equals and hashCode implementations.</p>
+<p>The state machine will receive events, constrained by set of events. The events does not have to be enum, only a value with <code>equals</code> and <code>hashCode</code> implementations.</p>
 </div>
 <div class="paragraph">
 <p>The state machine will apply actions to a context. The context represents the work that need to be performed.</p>
-</div>
-<div class="paragraph">
-<p>An event may have arguments.</p>
 </div>
 <div class="paragraph">
 <p>An event may trigger a state transition which defines actions to apply when the state machine is in a specific state.</p>
@@ -2583,104 +2601,33 @@ only a type with equals and hashCode implementations.</p>
 <p>Transitions may have a guard expression that has to evaluate to <code>true</code> to allow execution of transition.</p>
 </div>
 <div class="paragraph">
-<p>Automatic transitions are associated with states and have no events.
-Automatic transitions will be executed if the specific state applies after the exit action.</p>
+<p>An automatic transition can be defined on a state and has no events. Automatic transitions will be executed if the specific state is current after the exit action.</p>
 </div>
 <div class="paragraph">
-<p>The state can be any type, even though we have been using <code>enum class</code> in all samples.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="statemachine-sequence.png" alt="FSM sequence">
-</div>
+<p>A timeout transition can be defined on a state and is triggered a configured amount of time after the entry into the state. The transition will be trigger upon timeout unless a configured guard expression doesn&#8217;t evaluate to <code>true</code>.</p>
 </div>
 <div class="paragraph">
-<p>When sendEvent is called the state machine applies the event to the current state map.
-The current state map is usually top-level state map unless you have defined named maps and used a push transition.</p>
+<p>The state can be any value type providing <code>equals</code> and <code>hashCode</code>, even though we have been using <code>enum class</code> most examples.</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="send-event">Send Event</h3>
+<h3 id="instance">Instance</h3>
 <div class="paragraph">
-<p>The normal operation is to invoke the following actions:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>sendEvent</code></p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>if(external) exitAction()</code></p>
-</li>
-<li>
-<p><code>action()</code></p>
-</li>
-<li>
-<p><code>if(external) entryAction()</code></p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
+<p>The philosophy behind the design is that the finite state machine can be used when needed by creating an instance using the definition and providing it with the context and optionally a previously externalized state.
+The state machine can also be defined to derive the current state from the provided context.</p>
 </div>
 <div class="paragraph">
-<p>The exit action is chosen from one of:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>stateMap/whenState/onExit</code></p>
-</li>
-<li>
-<p><code>stateMap/whenState/default/onExit</code></p>
-</li>
-<li>
-<p><code>stateMap/default/onExit</code></p>
-</li>
-</ul>
+<p>Then events are sent to the FSM with an argument if needed and this may trigger the defined actions.</p>
 </div>
 <div class="paragraph">
-<p>The action is chosen from one of:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>stateMap/whenState/onEvent</code></p>
-</li>
-<li>
-<p><code>stateMap/whenState/default/action</code></p>
-</li>
-<li>
-<p><code>stateMap/default/action</code></p>
-</li>
-</ul>
+<p>The FSM provides for a query to determine which events are allowed for the current or a given state. This is useful when user interaction controls need to be disabled or in the case of a back-end application using HATEOAS can add links limited to allowed events.</p>
 </div>
 <div class="paragraph">
-<p>The entry action is chosen from one of:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>stateMap/whenState/onEntry</code></p>
-</li>
-<li>
-<p><code>stateMap/whenState/default/onEntry</code></p>
-</li>
-<li>
-<p><code>stateMap/default/onEntry</code></p>
-</li>
-</ul>
+<p>If the FSM is configured with timeout transitions the instance will need to remain active. This is typically only used in UI or embedded interactive applications.</p>
 </div>
 <div class="paragraph">
-<p>The combination of current state and event determines a set of transition rules that have been applied to that combination by one or more definitions.
-If the transition rules contains guard transitions the guard expressions are evaluated until one evaluates <code>true</code>.
-The <code>onEntry</code> and <code>onExit</code> action are only invoked for <code>external</code> transitions.</p>
-</div>
-<div class="paragraph">
-<p>External transitions have an explicit target state defined. If the target state is not defined it is an internal transition.</p>
-</div>
-<div class="paragraph">
-<p>The currentState determines the exit action. The target state determines the entry action.</p>
+<p>If the FSM is used in a stateless environment that is driven by requests or events the state can be externalised after use if it isn&#8217;t derived from the provided context.
+The externalised state is a list of pairs making up the state type and the name of the associated statemap.</p>
 </div>
 </div>
 <div class="sect2">
@@ -2690,16 +2637,6 @@ The <code>onEntry</code> and <code>onExit</code> action are only invoked for <co
 A push transition requires a map name and a target state along with the normal event and optional guard and action.
 The current state map will be pushed on a stack and a statemap instance will be created using the named definition.
 Events will be processed according to the transition rules of the named map.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="life-cycle">Life-cycle</h3>
-<div class="paragraph">
-<p>The philosophy behind the design is that the finite state machine can be used when needed by creating an instance and providing it with the context.
-The state machine can derive the current state from the context or it can be provided with a previously externalised state.
-Then events can be sent to the FSM which may trigger actions.
-The FSM can also be used to determine which events are allowed for a given state.
-If the FSM is expected to provide timeout transitions the instance will need to remain active. This is typically only used in UI or interactive applications.</p>
 </div>
 </div>
 </div>
@@ -2715,6 +2652,13 @@ The statemachine supports:</p>
 <ul>
 <li>
 <p>Transitions: internal and external</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Transitions are external when the target state is defined even if the target is same as current.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p>Guard expressions</p>
@@ -3583,6 +3527,108 @@ Combinations exist to add the optional guard expression and the targetMap.</p>
 <div class="paragraph">
 <p>There are 2 variations, the 2nd adds the optional guard expression.</p>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="operation">Operation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When the FSM was defined and instance can be created providing a context and optional externalized stated.</p>
+</div>
+<div class="paragraph">
+<p>When sendEvent is called the state machine applies the event to the current state map.
+The current state map is usually top-level state map unless you have defined named maps and used a push transition.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="statemachine-sequence.png" alt="FSM sequence">
+</div>
+</div>
+<div class="sect2">
+<h3 id="send-event">Send Event</h3>
+<div class="paragraph">
+<p>The normal operation is to invoke the following actions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>sendEvent</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>if(external) exitAction()</code></p>
+</li>
+<li>
+<p><code>action()</code></p>
+</li>
+<li>
+<p><code>if(external) entryAction()</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The exit action is chosen from one of:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>stateMap/whenState/onExit</code></p>
+</li>
+<li>
+<p><code>stateMap/whenState/default/onExit</code></p>
+</li>
+<li>
+<p><code>stateMap/default/onExit</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The action is chosen from one of:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>stateMap/whenState/onEvent</code></p>
+</li>
+<li>
+<p><code>stateMap/whenState/default/action</code></p>
+</li>
+<li>
+<p><code>stateMap/default/action</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The entry action is chosen from one of:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>stateMap/whenState/onEntry</code></p>
+</li>
+<li>
+<p><code>stateMap/whenState/default/onEntry</code></p>
+</li>
+<li>
+<p><code>stateMap/default/onEntry</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The combination of current state and event determines a set of transition rules that have been applied to that combination by one or more definitions.
+If the transition rules contains guard transitions the guard expressions are evaluated until one evaluates <code>true</code>.
+The <code>onEntry</code> and <code>onExit</code> action are only invoked for <code>external</code> transitions.</p>
+</div>
+<div class="paragraph">
+<p>External transitions have an explicit target state defined. If the target state is not defined it is an internal transition.</p>
+</div>
+<div class="paragraph">
+<p>The currentState determines the exit action. The target state determines the entry action.</p>
 </div>
 </div>
 <div class="sect2">
