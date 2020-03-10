@@ -14,8 +14,8 @@ This model includes the content of the lambdas used in guards and actions.
 
 == Getting Started
 
-Plugin Id: io.jumpco.open.kfsm.viz-plugin
-Version: 1.0.9
+Plugin Id: `io.jumpco.open.kfsm.viz-plugin`
+Version: `1.0.9`
 
 === Gradle Groovy DSL
 [source,groovy]

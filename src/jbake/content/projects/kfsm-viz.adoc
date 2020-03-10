@@ -96,11 +96,10 @@ image:turnstile.png[]
 
 == Examples
 
-Many examples can be found at:
-https://github.com/open-jumpco/kfsm-viz
+More examples can be found at: link:https://github.com/open-jumpco/kfsm-viz[kfsm-viz]
 
 == Gradle Plugin
-Use the link:https://github.com/open-jumpco/kfsm-viz-plugin[kfsm-viz-plugin for Gradle] to make the visualization part of your build without
+Use the link:kfsm-viz-plugin.html[kfsm-viz-plugin for Gradle] to make the visualization part of your build without
 writing code.
 
 == Resources
