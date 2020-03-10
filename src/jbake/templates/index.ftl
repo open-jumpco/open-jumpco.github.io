@@ -6,12 +6,15 @@
     <h1>Projects</h1>
 </div>
 
-<#list projects as project>
+<#list projects?sort_by("title") as project>
     <#if (project.status == "published")>
-        <div class="jumbotron">
-            <h2><#escape x as x?xml>${project.title}</#escape></h2>
-            <p>${project.summary}</p>
-            <p><a class="btn btn-primary btn-lg" href="${project.uri}">Learn more</a></p>
+        <div class="panel panel-primary">
+            <div class="panel-heading"><#escape x as x?xml>${project.title}</#escape></div>
+            <div class="panel-body">
+                <p>Version: ${project.version}</p>
+                <p>${project.summary}</p>
+                <p><a class="btn btn-primary" href="${project.uri}">Learn more</a></p>
+            </div>
         </div>
     </#if>
 </#list>

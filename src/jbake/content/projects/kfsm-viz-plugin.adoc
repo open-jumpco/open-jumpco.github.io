@@ -3,6 +3,7 @@ date=2020-02-28
 type=project
 status=published
 summary=KFSM - Visualization Gradle plugin
+version=1.0.9
 ~~~~~~
 = KFSM Visualization Gradle plugin
 
@@ -48,6 +49,214 @@ kfsmViz {
 <5> `outputFolder: File`: Optional directory for output file. Default is `$buildDir/generated`
 <6> `plantUmlName: String`: Optional filename for plantuml output. Default is `$output.plantuml`
 <7> `asciidocName: String`: Optional name of Asciidoc output file. Default is `$output.adoc`
+
+=== Example with multiple state machines.
+[source,groovy]
+----
+kfsmViz {
+    fsm('TurnstileFSM') {
+        input = file('resources/Turnstile.kt')
+        output = 'turnstile'
+        outputFolder = file('generated')
+        isGeneratePlantUml = true
+        isGenerateAsciidoc = true
+    }
+    fsm('PacketReaderFSM') {
+        input = file('resources/PacketReader.kt')
+        output = 'packet-reader'
+        outputFolder = file('generated')
+        isGeneratePlantUml = true
+        isGenerateAsciidoc = true
+    }
+}
+
+----
+
+== Expected output
+
+=== Turnstile State Table
+|===
+| Start | Event[Guard] | Target | Action
+
+| LOCKED
+| COIN
+| UNLOCKED
+a| [source,kotlin]
+----
+{
+unlock()
+}
+----
+
+| UNLOCKED
+| COIN
+| UNLOCKED
+a| [source,kotlin]
+----
+{
+returnCoin()
+}
+----
+
+| UNLOCKED
+| PASS
+| LOCKED
+a| [source,kotlin]
+----
+{
+lock()
+}
+----
+|===
+
+=== Turnstile State Diagram
+
+image:turnstile.png[]
+
+=== PacketReader State Table
+|===
+| Start | Event[Guard] | Target | Action
+
+| [*]
+| CTRL `[{it == CharacterConstants.SOH}]`
+| RCVPCKT
+a|
+
+| RCVPCKT
+| CTRL `[{it == CharacterConstants.STX}]`
+| RCVDATA
+a| [source,kotlin]
+----
+{
+addField()
+}
+----
+
+| RCVPCKT
+| BYTE
+| RCVCHK
+a| [source,kotlin]
+----
+{
+addChecksum(it)
+}
+----
+
+| RCVDATA
+| BYTE
+| RCVDATA
+a| [source,kotlin]
+----
+{
+addByte(it)
+}
+----
+
+| RCVDATA
+| CTRL `[{it == CharacterConstants.ETX}]`
+| RCVPCKT
+a| [source,kotlin]
+----
+{
+endField()
+}
+----
+
+| RCVDATA
+| ESC
+| RCVESC
+a|
+
+| RCVESC
+| ESC
+| RCVDATA
+a| [source,kotlin]
+----
+{
+addByte(CharacterConstants.ESC)
+}
+----
+
+| RCVESC
+| CTRL
+| RCVDATA
+a| [source,kotlin]
+----
+{
+addByte(it)
+}
+----
+
+| RCVCHK
+| BYTE
+| RCVCHK
+a| [source,kotlin]
+----
+{
+addChecksum(it)
+}
+----
+
+| RCVCHK
+| ESC
+| RCVCHKESC
+a|
+
+| RCVCHK
+| CTRL `[{it == CharacterConstants.EOT}]`
+| CHKSUM
+a| [source,kotlin]
+----
+{
+checksum()
+}
+----
+
+| CHKSUM
+| \<<automatic>> `[{!checksumValid}]`
+| [*]
+a| [source,kotlin]
+----
+{
+sendNACK()
+}
+----
+
+| CHKSUM
+| \<<automatic>> `[{checksumValid}]`
+| [*]
+a| [source,kotlin]
+----
+{
+sendACK()
+}
+----
+
+| RCVCHKESC
+| ESC
+| RCVCHK
+a| [source,kotlin]
+----
+{
+addChecksum(CharacterConstants.ESC)
+}
+----
+
+| RCVCHKESC
+| CTRL
+| RCVCHK
+a| [source,kotlin]
+----
+{byte->
+require(byte != null)
+addChecksum(byte)
+}
+----
+|===
+
+=== PacketReader State Diagram
+
+image:packet_reader.png[]
 
 == Resources
 
