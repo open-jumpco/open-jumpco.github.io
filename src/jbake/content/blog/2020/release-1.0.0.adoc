@@ -2,6 +2,7 @@ title=Release 1.0.0
 date=2020-01-28
 type=post
 tags=blog,open-source,jumpco,release,fsm
+status=published
 summary=OpenJumpCO releases KFSM 1.0.0
 ~~~~~~
 
