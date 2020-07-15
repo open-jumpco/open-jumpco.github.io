@@ -435,7 +435,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>KFSM - Kotlin Finite-state machine</h1>
 <div class="details">
-<span id="revnumber">version 1.0.2</span>
+<span id="revnumber">version 1.0.3-SNAPSHOT</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1091,16 +1091,15 @@ The <code>externalState</code> method provides a list of states for the case whe
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class PayingTurnstileFSM(
-    turnstile: PayingTurnstile,
-    initialState: ExternalState&lt;PayingTurnstileStates&gt;? = null
+    requiredCoins: Int,
+    savedState: PayingTurnstileFSMExternalState? = null
 ) {
-    val fsm = if (initialState != null) {
-        definition.create(turnstile, initialState)
+    // not private for visibility for tests
+    val turnstile: PayingTurnstile = PayingTurnstile(requiredCoins, savedState?.locked ?: true, savedState?.coins ?: 0)
+    val fsm = if (savedState != null) {
+        definition.create(turnstile, savedState.initialState)
     } else {
-        definition.create(
-            turnstile,
-            PayingTurnstileStates.LOCKED
-        )
+        definition.create(turnstile)
     }
 
     fun coin(value: Int) {
@@ -1114,7 +1113,9 @@ The <code>externalState</code> method provides a list of states for the case whe
     }
 
     fun allowedEvents() = fsm.allowed().map { it.name.toLowerCase() }.toSet()
-    fun externalState() = fsm.externalState()
+    fun externalState(): PayingTurnstileFSMExternalState {
+        return PayingTurnstileFSMExternalState(turnstile.coins, turnstile.locked, fsm.externalState())
+    }
 
     companion object {
         val definition = stateMachine(
@@ -1210,39 +1211,36 @@ The <code>externalState</code> method provides a list of states for the case whe
 <h4 id="test">Test</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">        val turnstile = PayingTurnstile(50)
-        val fsm = PayingTurnstileFSM(turnstile)
-        assertTrue(turnstile.locked)
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">        val fsm = PayingTurnstileFSM(50)
+        assertTrue(fsm.turnstile.locked)
         println("External:${fsm.externalState()}")
         println("--coin1")
         fsm.coin(10)
-        assertTrue(turnstile.locked)
-        assertTrue(turnstile.coins == 10)
-        assertTrue(
-            fsm.fsm.currentStateMap.name != null &amp;&amp; "coins" == fsm.fsm.currentStateMap.name,
-            "Expected coins map"
-        )
+        assertTrue(fsm.turnstile.locked)
+        assertTrue(fsm.turnstile.coins == 10)
         println("--coin2")
         println("External:${fsm.externalState()}")
-        fsm.coin(60)
-        assertTrue(turnstile.coins == 0)
-        assertTrue(!turnstile.locked)
-        println("External:${fsm.externalState()}")
-        assertTrue(fsm.fsm.currentStateMap.name == null, "Expected default map not ${fsm.fsm.currentStateMap.name}")
-        println("--pass1")
-        fsm.pass()
-        assertTrue(turnstile.locked)
-        println("--pass2")
-        fsm.pass()
-        println("--pass3")
-        fsm.pass()
-        println("--coin3")
-        fsm.coin(40)
-        assertTrue(turnstile.coins == 40)
-        println("--coin4")
-        fsm.coin(10)
-        assertTrue(turnstile.coins == 0)
-        assertTrue(!turnstile.locked)</code></pre>
+        val externalState = fsm.externalState()
+        PayingTurnstileFSM(50, externalState).apply {
+            coin(60)
+            assertTrue(turnstile.coins == 0)
+            assertTrue(!turnstile.locked)
+            println("External:${externalState()}")
+            println("--pass1")
+            pass()
+            assertTrue(turnstile.locked)
+            println("--pass2")
+            pass()
+            println("--pass3")
+            pass()
+            println("--coin3")
+            coin(40)
+            assertTrue(turnstile.coins == 40)
+            println("--coin4")
+            coin(10)
+            assertTrue(turnstile.coins == 0)
+            assertTrue(!turnstile.locked)
+        }</code></pre>
 </div>
 </div>
 </div>
@@ -1510,39 +1508,36 @@ The context class stores values and will update value in very specific ways.</p>
 <h4 id="test-2">Test</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">        val turnstile = PayingTurnstile(50)
-        val fsm = PayingTurnstileFSM(turnstile)
-        assertTrue(turnstile.locked)
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">        val fsm = PayingTurnstileFSM(50)
+        assertTrue(fsm.turnstile.locked)
         println("External:${fsm.externalState()}")
         println("--coin1")
         fsm.coin(10)
-        assertTrue(turnstile.locked)
-        assertTrue(turnstile.coins == 10)
-        assertTrue(
-            fsm.fsm.currentStateMap.name != null &amp;&amp; "coins" == fsm.fsm.currentStateMap.name,
-            "Expected coins map"
-        )
+        assertTrue(fsm.turnstile.locked)
+        assertTrue(fsm.turnstile.coins == 10)
         println("--coin2")
         println("External:${fsm.externalState()}")
-        fsm.coin(60)
-        assertTrue(turnstile.coins == 0)
-        assertTrue(!turnstile.locked)
-        println("External:${fsm.externalState()}")
-        assertTrue(fsm.fsm.currentStateMap.name == null, "Expected default map not ${fsm.fsm.currentStateMap.name}")
-        println("--pass1")
-        fsm.pass()
-        assertTrue(turnstile.locked)
-        println("--pass2")
-        fsm.pass()
-        println("--pass3")
-        fsm.pass()
-        println("--coin3")
-        fsm.coin(40)
-        assertTrue(turnstile.coins == 40)
-        println("--coin4")
-        fsm.coin(10)
-        assertTrue(turnstile.coins == 0)
-        assertTrue(!turnstile.locked)</code></pre>
+        val externalState = fsm.externalState()
+        PayingTurnstileFSM(50, externalState).apply {
+            coin(60)
+            assertTrue(turnstile.coins == 0)
+            assertTrue(!turnstile.locked)
+            println("External:${externalState()}")
+            println("--pass1")
+            pass()
+            assertTrue(turnstile.locked)
+            println("--pass2")
+            pass()
+            println("--pass3")
+            pass()
+            println("--coin3")
+            coin(40)
+            assertTrue(turnstile.coins == 40)
+            println("--coin4")
+            coin(10)
+            assertTrue(turnstile.coins == 0)
+            assertTrue(!turnstile.locked)
+        }</code></pre>
 </div>
 </div>
 </div>
@@ -3587,7 +3582,7 @@ The <code>onEntry</code> and <code>onExit</code> action are only invoked for <co
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.0.2<br>
+Version 1.0.3-SNAPSHOT<br>
 Last updated 2020-03-02 10:24:33 +0200
 </div>
 </div>
