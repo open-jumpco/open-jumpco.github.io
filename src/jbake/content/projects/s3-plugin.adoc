@@ -1,0 +1,15 @@
+title=S3 Plugin
+date=2020-09-11
+type=project
+status=published
+summary=Gradle S3 Plugin
+version=1.1.1
+~~~~~~
+= Gradle S3 Plugin
+
+This project is a fork of link:https://github.com/mygrocerydeals/gradle-s3-plugin[mygrocerydeals/gradle-s3-plugin] after experiencing all kinds of issues.
+
+* link:https://github.com/open-jumpco/s3-plugin[Source and Documentation]
+
+
+
