@@ -435,7 +435,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>KFSM - Kotlin Finite-state machine</h1>
 <div class="details">
-<span id="revnumber">version 1.0.3-SNAPSHOT</span>
+<span id="revnumber">version 1.4.0</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1090,7 +1090,13 @@ The <code>externalState</code> method provides a list of states for the case whe
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class PayingTurnstileFSM(
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">data class PayingTurnstileFSMExternalState(
+    val coins: Int,
+    val locked: Boolean,
+    val initialState: ExternalState&lt;PayingTurnstileStates&gt;
+)
+
+class PayingTurnstileFSM(
     requiredCoins: Int,
     savedState: PayingTurnstileFSMExternalState? = null
 ) {
@@ -1163,7 +1169,7 @@ The <code>externalState</code> method provides a list of states for the case whe
                         reset()
                     }
                     onEvent(PayingTurnstileEvents.COIN) { value -&gt;
-                        require(value != null) { "argument required for COIN" }
+                        requireNotNull(value) { "argument required for COIN" }
                         coin(value)
                         println("Coins=$coins")
                         if (coins &lt; requiredCoins) {
@@ -1175,7 +1181,7 @@ The <code>externalState</code> method provides a list of states for the case whe
             whenState(PayingTurnstileStates.LOCKED) {
                 // The coin brings amount to exact amount
                 onEventPush(PayingTurnstileEvents.COIN, "coins", PayingTurnstileStates.COINS) { value -&gt;
-                    require(value != null) { "argument required for COIN" }
+                    requireNotNull(value) { "argument required for COIN" }
                     coin(value)
                     unlock()
                     reset()
@@ -1183,10 +1189,10 @@ The <code>externalState</code> method provides a list of states for the case whe
                 // The coins add up to more than required
                 onEventPush(PayingTurnstileEvents.COIN, "coins", PayingTurnstileStates.COINS,
                     guard = { value -&gt;
-                        require(value != null) { "argument required for COIN" }
+                        requireNotNull(value) { "argument required for COIN" }
                         value + coins &lt; requiredCoins
                     }) { value -&gt;
-                    require(value != null) { "argument required for COIN" }
+                    requireNotNull(value) { "argument required for COIN" }
                     println("PUSH TRANSITION")
                     coin(value)
                     println("Coins=$coins, Please add ${requiredCoins - coins}")
@@ -1194,7 +1200,7 @@ The <code>externalState</code> method provides a list of states for the case whe
             }
             whenState(PayingTurnstileStates.UNLOCKED) {
                 onEvent(PayingTurnstileEvents.COIN) { value -&gt;
-                    require(value != null) { "argument required for COIN" }
+                    requireNotNull(value) { "argument required for COIN" }
                     returnCoin(coin(value))
                 }
                 onEvent(PayingTurnstileEvents.PASS to PayingTurnstileStates.LOCKED) {
@@ -1640,14 +1646,14 @@ class Packet(private val protocolHandler: ProtocolHandler) : PacketHandler,
 
     override fun endField() {
         val field = currentField
-        require(field != null) { "expected currentField to have a value" }
+        requireNotNull(field) { "expected currentField to have a value" }
         fields.add(field.byteArrayOutputStream.toByteArray())
         currentField = null
     }
 
     override fun addByte(byte: Int) {
         val field = currentField
-        require(field != null) { "expected currentField to have a value" }
+        requireNotNull(field) { "expected currentField to have a value" }
         field.addByte(byte)
     }
 
@@ -1744,13 +1750,13 @@ enum class ReaderStates {
                     addField()
                 }
                 onEvent(ReaderEvents.BYTE to ReaderStates.RCVCHK) { byte -&gt;
-                    require(byte != null)
+                    requireNotNull(byte)
                     addChecksum(byte)
                 }
             }
             whenState(ReaderStates.RCVDATA) {
                 onEvent(ReaderEvents.BYTE) { byte -&gt;
-                    require(byte != null)
+                    requireNotNull(byte)
                     addByte(byte)
                 }
                 onEvent(ReaderEvents.CTRL to ReaderStates.RCVPCKT, guard = { byte -&gt; byte == CharacterConstants.ETX }) {
@@ -1763,13 +1769,13 @@ enum class ReaderStates {
                     addByte(CharacterConstants.ESC)
                 }
                 onEvent(ReaderEvents.CTRL to ReaderStates.RCVDATA) { byte -&gt;
-                    require(byte != null)
+                    requireNotNull(byte)
                     addByte(byte)
                 }
             }
             whenState(ReaderStates.RCVCHK) {
                 onEvent(ReaderEvents.BYTE) { byte -&gt;
-                    require(byte != null)
+                    requireNotNull(byte)
                     addChecksum(byte)
                 }
                 onEvent(ReaderEvents.ESC to ReaderStates.RCVCHKESC) {}
@@ -1790,7 +1796,7 @@ enum class ReaderStates {
                     addChecksum(CharacterConstants.ESC)
                 }
                 onEvent(ReaderEvents.CTRL to ReaderStates.RCVCHK) { byte -&gt;
-                    require(byte != null)
+                    requireNotNull(byte)
                     addChecksum(byte)
                 }
             }
@@ -2435,7 +2441,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-jvm:1.0.2'
+    implementation 'io.jumpco.open:kfsm-jvm:1.4.0'
 }</code></pre>
 </div>
 </div>
@@ -2445,7 +2451,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-js:1.0.2'
+    implementation 'io.jumpco.open:kfsm-js:1.4.0'
 }</code></pre>
 </div>
 </div>
@@ -2455,7 +2461,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-wasm32:1.0.2'
+    implementation 'io.jumpco.open:kfsm-wasm32:1.4.0'
 }</code></pre>
 </div>
 </div>
@@ -2465,7 +2471,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-linuxX64:1.0.2'
+    implementation 'io.jumpco.open:kfsm-linuxX64:1.4.0'
 }</code></pre>
 </div>
 </div>
@@ -2475,7 +2481,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-mingwX64:1.0.2'
+    implementation 'io.jumpco.open:kfsm-mingwX64:1.4.0'
 }</code></pre>
 </div>
 </div>
@@ -2485,7 +2491,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-macosX64:1.0.2'
+    implementation 'io.jumpco.open:kfsm-macosX64:1.4.0'
 }</code></pre>
 </div>
 </div>
@@ -3582,7 +3588,7 @@ The <code>onEntry</code> and <code>onExit</code> action are only invoked for <co
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.0.3-SNAPSHOT<br>
+Version 1.4.0<br>
 Last updated 2020-03-02 10:24:33 +0200
 </div>
 </div>

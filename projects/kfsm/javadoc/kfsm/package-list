@@ -1,6 +1,12 @@
-$dokka.format:html
+$dokka.format:html-v1
 $dokka.linkExtension:html
-
+$dokka.location:io.jumpco.open.kfsm.async/AsyncTimer/active/#/PointingToDeclaration/io.jumpco.open.kfsm.async/-async-timer/[mingw]active.html
+$dokka.location:io.jumpco.open.kfsm.async/AsyncTimer/arg/#/PointingToDeclaration/io.jumpco.open.kfsm.async/-async-timer/[mingw]arg.html
+$dokka.location:io.jumpco.open.kfsm.async/AsyncTimer/context/#/PointingToDeclaration/io.jumpco.open.kfsm.async/-async-timer/[mingw]context.html
+$dokka.location:io.jumpco.open.kfsm.async/AsyncTimer/definition/#/PointingToDeclaration/io.jumpco.open.kfsm.async/-async-timer/[mingw]definition.html
+$dokka.location:io.jumpco.open.kfsm.async/AsyncTimer/parentFsm/#/PointingToDeclaration/io.jumpco.open.kfsm.async/-async-timer/[mingw]parent-fsm.html
+$dokka.location:io.jumpco.open.kfsm.async/AsyncTimer/timer/#/PointingToDeclaration/io.jumpco.open.kfsm.async/-async-timer/[jvm]timer.html
 io.jumpco.open.kfsm
 io.jumpco.open.kfsm.async
 io.jumpco.open.kfsm.viz
+
