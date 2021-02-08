@@ -1,0 +1,14 @@
+title=Release 1.4.0
+date=2021-02-09
+type=post
+tags=blog,open-source,jumpco,release,fsm
+status=published
+summary=OpenJumpCO releases KFSM 1.4.0
+~~~~~~
+
+Why did we skip from 1.0.2 to 1.4.0?
+
+* We decided to switch it up to use the 1.4 to denote the version of Kotlin we rely on.
+* This release doesn't add any new features and should provide for upgrading without any impact.
+
+We plan to start testing with Kotlin 1.4.30 before looking any new features.

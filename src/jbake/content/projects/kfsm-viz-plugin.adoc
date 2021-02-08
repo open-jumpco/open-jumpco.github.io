@@ -3,7 +3,7 @@ date=2020-02-28
 type=project
 status=published
 summary=KFSM - Visualization Gradle plugin
-version=1.0.9
+version=1.4.0
 ~~~~~~
 = KFSM Visualization Gradle plugin
 
