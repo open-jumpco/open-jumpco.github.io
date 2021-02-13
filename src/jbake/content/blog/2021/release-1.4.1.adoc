@@ -1,0 +1,6 @@
+title=Release 1.4.0 date=2021-02-09 type=post tags=blog,open-source,jumpco,release,fsm status=published summary=OpenJumpCO releases KFSM 1.4.1 ~~~~~~
+
+In this release:
+
+* We added a handler for state changes. The handler will be invoked after a transition to a new state is completed.
+
