@@ -6,8 +6,8 @@
     <atom:link href="./feed.xml" rel="self" type="application/rss+xml" />
     <description>Open JumpCO Feed</description>
     <language>en-gb</language>
-    <pubDate>Mon, 8 Feb 2021 13:04:39 +0200</pubDate>
-    <lastBuildDate>Mon, 8 Feb 2021 13:04:39 +0200</lastBuildDate>
+    <pubDate>Sat, 13 Feb 2021 11:24:56 +0200</pubDate>
+    <lastBuildDate>Sat, 13 Feb 2021 11:24:56 +0200</lastBuildDate>
 
     <item>
       <title>Release 1.4.0</title>
