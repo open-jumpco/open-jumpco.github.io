@@ -435,7 +435,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>KFSM - Kotlin Finite-state machine</h1>
 <div class="details">
-<span id="revnumber">version 1.4.0</span>
+<span id="revnumber">version 1.4.1</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -548,6 +548,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#initialstate"><code>initialState</code></a></li>
 <li><a href="#initialstates"><code>initialStates</code></a></li>
+<li><a href="#onstatechange"><code>onStateChange</code></a></li>
 <li><a href="#whenstate"><code>whenState</code></a>
 <ul class="sectlevel3">
 <li><a href="#default-2"><code>default</code></a></li>
@@ -672,6 +673,9 @@ a Kotlin DSL along with a simple implementation.</p>
 </li>
 <li>
 <p>Timeout Transitions</p>
+</li>
+<li>
+<p>StateChange notification action</p>
 </li>
 </ul>
 </div>
@@ -824,6 +828,9 @@ enum class TurnstileEvents {
                         TurnstileStates.LOCKED
                     else
                         TurnstileStates.UNLOCKED
+                }
+                onStateChange { oldState, newState -&gt;
+                    println("onStateChange:$oldState -&gt; $newState")
                 }
                 default {
                     onEntry { startState, targetState, _ -&gt;
@@ -1131,6 +1138,9 @@ class PayingTurnstileFSM(
             Int::class
         ) {
             defaultInitialState = PayingTurnstileStates.LOCKED
+            onStateChange { oldState, newState -&gt;
+                println("onStateChange:$oldState -&gt; $newState")
+            }
             default {
                 onEntry { _, targetState, arg -&gt;
                     if (arg != null) {
@@ -1465,6 +1475,9 @@ The context class stores values and will update value in very specific ways.</p>
                     buzzer()
                 }
             }
+            onStateChange { oldState, newState -&gt;
+                println("onStateChange:$oldState -&gt; $newState")
+            }
             whenState(SecureTurnstileStates.LOCKED) {
                 onEvent(SecureTurnstileEvents.CARD, guard = { cardId -&gt; requireNotNull(cardId)
                     isOverrideCard(cardId) &amp;&amp; overrideActive
@@ -1729,6 +1742,9 @@ enum class ReaderStates {
             Int::class
         ) {
             defaultInitialState = ReaderStates.START
+            onStateChange { oldState, newState -&gt;
+                println("onStateChange:$oldState -&gt; $newState")
+            }
             default {
                 onEvent(ReaderEvents.BYTE to ReaderStates.END) {
                     sendNACK()
@@ -2040,6 +2056,9 @@ enum class ReaderStates {
                     else -&gt; error("Invalid state locked=$locked")
                 }
             }
+            onStateChange { oldState, newState -&gt;
+                println("onStateChange:$oldState -&gt; $newState")
+            }
             default {
                 action { state, event, _ -&gt;
                     println("Default action for state($state) -&gt; on($event) for $this")
@@ -2324,6 +2343,9 @@ The context class stores values and will update value in very specific ways.</p>
                 action { _, _, _ -&gt;
                     buzzer()
                 }
+            }
+            onStateChange { oldState, newState -&gt;
+                println("onStateChange:$oldState -&gt; $newState")
             }
             whenState(SecureTurnstileStates.LOCKED) {
                 onEvent(SecureTurnstileEvents.CARD, guard = { cardId -&gt;
@@ -2658,6 +2680,9 @@ val definition = stateMachine(
     }
     initialStates { // define expression for deriving state stack for nested maps.
     }
+    onStateChange { // define an event handler to be invoked after a transition when the state has changed.
+
+    }
     stateMap { // define named statemap
     }
     whenState { // state definition
@@ -2695,6 +2720,9 @@ val definition = stateMachine(
     initialState { // initial state expression
     }
     initialStates { // define expression for deriving state stack for nested maps.
+    }
+    onStateChange { // define an event handler to be invoked after a transition when the state has changed.
+
     }
     stateMap { // define named statemap
     }
@@ -2740,6 +2768,9 @@ val definition = asyncStateMachine(
     }
     initialStates { // define expression for deriving state stack for nested maps.
     }
+    onStateChange { // define an event handler to be invoked after a transition when the state has changed.
+
+    }
     stateMap { // define named statemap
     }
     whenState { // state definition
@@ -2774,6 +2805,9 @@ val definition = asyncFunctionalStateMachine(
     initialState { // initial state expression
     }
     initialStates { // define expression for deriving state stack for nested maps.
+    }
+    onStateChange { // define an event handler to be invoked after a transition when the state has changed.
+
     }
     stateMap { // define named statemap
     }
@@ -3020,6 +3054,25 @@ When a state-machine has named maps the <code>initialStates</code> must be provi
     }.toMap()
 }</code></pre>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="onstatechange"><code>onStateChange</code></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Handler: <a href="javadoc/kfsm/io.jumpco.open.kfsm/-dsl-state-machine-handler/on-state-change.html">DslStateMachineHandler::onStateChange</a></p>
+</li>
+<li>
+<p>Mandatory: <em>Optional</em></p>
+</li>
+<li>
+<p>Cardinality: <em>Single</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>onStateChange</code> handler will be invoked after a transition has complete and the new state has taken effect. onExit and onEntry are invoked before a state change and checking allow within those handlers still relfect the previous state.</p>
 </div>
 </div>
 <div class="sect2">
@@ -3588,8 +3641,8 @@ The <code>onEntry</code> and <code>onExit</code> action are only invoked for <co
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.4.0<br>
-Last updated 2020-03-02 10:24:33 +0200
+Version 1.4.1<br>
+Last updated 2021-02-13 11:06:22 +0200
 </div>
 </div>
 <script src="prism.js"></script>
