@@ -21,7 +21,7 @@ configurations {
 }
 
 dependencies {
-    externalDocs 'io.jumpco.open:kfsm:1.4.0:doc@zip'
+    externalDocs 'io.jumpco.open:kfsm:1.4.1:doc@zip'
 }
 
 gitPublish {
