@@ -435,7 +435,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>KFSM - Kotlin Finite-state machine</h1>
 <div class="details">
-<span id="revnumber">version 1.4.1</span>
+<span id="revnumber">version 1.4.3.1</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1197,11 +1197,15 @@ class PayingTurnstileFSM(
                     reset()
                 }
                 // The coins add up to more than required
-                onEventPush(PayingTurnstileEvents.COIN, "coins", PayingTurnstileStates.COINS,
+                onEventPush(
+                    PayingTurnstileEvents.COIN,
+                    "coins",
+                    PayingTurnstileStates.COINS,
                     guard = { value -&gt;
                         requireNotNull(value) { "argument required for COIN" }
                         value + coins &lt; requiredCoins
-                    }) { value -&gt;
+                    }
+                ) { value -&gt;
                     requireNotNull(value) { "argument required for COIN" }
                     println("PUSH TRANSITION")
                     coin(value)
@@ -1479,33 +1483,52 @@ The context class stores values and will update value in very specific ways.</p>
                 println("onStateChange:$oldState -&gt; $newState")
             }
             whenState(SecureTurnstileStates.LOCKED) {
-                onEvent(SecureTurnstileEvents.CARD, guard = { cardId -&gt; requireNotNull(cardId)
-                    isOverrideCard(cardId) &amp;&amp; overrideActive
-                }) {
+                onEvent(
+                    SecureTurnstileEvents.CARD,
+                    guard = { cardId -&gt;
+                        requireNotNull(cardId)
+                        isOverrideCard(cardId) &amp;&amp; overrideActive
+                    }
+                ) {
                     cancelOverride()
                 }
-                onEvent(SecureTurnstileEvents.CARD, guard = { cardId -&gt; requireNotNull(cardId)
-                    isOverrideCard(cardId)
-                }) {
+                onEvent(
+                    SecureTurnstileEvents.CARD,
+                    guard = { cardId -&gt;
+                        requireNotNull(cardId)
+                        isOverrideCard(cardId)
+                    }
+                ) {
                     activateOverride()
                 }
-                onEvent(SecureTurnstileEvents.CARD to SecureTurnstileStates.UNLOCKED,
-                    guard = { cardId -&gt; requireNotNull(cardId)
+                onEvent(
+                    SecureTurnstileEvents.CARD to SecureTurnstileStates.UNLOCKED,
+                    guard = { cardId -&gt;
+                        requireNotNull(cardId)
                         overrideActive || isValidCard(cardId)
-                    }) {
+                    }
+                ) {
                     unlock()
                 }
-                onEvent(SecureTurnstileEvents.CARD, guard = { cardId -&gt;
-                    requireNotNull(cardId) { "cardId is required" }
-                    !isValidCard(cardId)
-                }) { cardId -&gt; requireNotNull(cardId)
+                onEvent(
+                    SecureTurnstileEvents.CARD,
+                    guard = { cardId -&gt;
+                        requireNotNull(cardId) { "cardId is required" }
+                        !isValidCard(cardId)
+                    }
+                ) { cardId -&gt;
+                    requireNotNull(cardId)
                     invalidCard(cardId)
                 }
             }
             whenState(SecureTurnstileStates.UNLOCKED) {
-                onEvent(SecureTurnstileEvents.CARD to SecureTurnstileStates.LOCKED, guard = { cardId -&gt; requireNotNull(cardId)
-                    isOverrideCard(cardId)
-                }) {
+                onEvent(
+                    SecureTurnstileEvents.CARD to SecureTurnstileStates.LOCKED,
+                    guard = { cardId -&gt;
+                        requireNotNull(cardId)
+                        isOverrideCard(cardId)
+                    }
+                ) {
                     lock()
                 }
                 onEvent(SecureTurnstileEvents.PASS to SecureTurnstileStates.LOCKED) {
@@ -1630,7 +1653,8 @@ class ProtocolSender : ProtocolHandler {
     }
 }
 
-class Packet(private val protocolHandler: ProtocolHandler) : PacketHandler,
+class Packet(private val protocolHandler: ProtocolHandler) :
+    PacketHandler,
     ProtocolHandler by protocolHandler {
     val fields = mutableListOf&lt;ByteArray&gt;()
     private var currentField: Block? = null
@@ -1759,7 +1783,8 @@ enum class ReaderStates {
             whenState(ReaderStates.START) {
                 onEvent(
                     ReaderEvents.CTRL to ReaderStates.RCVPCKT,
-                    guard = { byte -&gt; byte == CharacterConstants.SOH }) {}
+                    guard = { byte -&gt; byte == CharacterConstants.SOH }
+                ) {}
             }
             whenState(ReaderStates.RCVPCKT) {
                 onEvent(ReaderEvents.CTRL to ReaderStates.RCVDATA, guard = { byte -&gt; byte == CharacterConstants.STX }) {
@@ -2348,29 +2373,40 @@ The context class stores values and will update value in very specific ways.</p>
                 println("onStateChange:$oldState -&gt; $newState")
             }
             whenState(SecureTurnstileStates.LOCKED) {
-                onEvent(SecureTurnstileEvents.CARD, guard = { cardId -&gt;
-                    requireNotNull(cardId)
-                    isOverrideCard(cardId) &amp;&amp; overrideActive
-                }) {
+                onEvent(
+                    SecureTurnstileEvents.CARD,
+                    guard = { cardId -&gt;
+                        requireNotNull(cardId)
+                        isOverrideCard(cardId) &amp;&amp; overrideActive
+                    }
+                ) {
                     cancelOverride()
                 }
-                onEvent(SecureTurnstileEvents.CARD, guard = { cardId -&gt;
-                    requireNotNull(cardId)
-                    isOverrideCard(cardId)
-                }) {
+                onEvent(
+                    SecureTurnstileEvents.CARD,
+                    guard = { cardId -&gt;
+                        requireNotNull(cardId)
+                        isOverrideCard(cardId)
+                    }
+                ) {
                     activateOverride()
                 }
-                onEvent(SecureTurnstileEvents.CARD to SecureTurnstileStates.UNLOCKED,
+                onEvent(
+                    SecureTurnstileEvents.CARD to SecureTurnstileStates.UNLOCKED,
                     guard = { cardId -&gt;
                         requireNotNull(cardId)
                         overrideActive || isValidCard(cardId)
-                    }) {
+                    }
+                ) {
                     unlock()
                 }
-                onEvent(SecureTurnstileEvents.CARD, guard = { cardId -&gt;
-                    requireNotNull(cardId) { "cardId is required" }
-                    !isValidCard(cardId)
-                }) { cardId -&gt;
+                onEvent(
+                    SecureTurnstileEvents.CARD,
+                    guard = { cardId -&gt;
+                        requireNotNull(cardId) { "cardId is required" }
+                        !isValidCard(cardId)
+                    }
+                ) { cardId -&gt;
                     requireNotNull(cardId)
                     invalidCard(cardId)
                 }
@@ -2380,10 +2416,13 @@ The context class stores values and will update value in very specific ways.</p>
                     println("Timeout. Locking")
                     lock()
                 }
-                onEvent(SecureTurnstileEvents.CARD to SecureTurnstileStates.LOCKED, guard = { cardId -&gt;
-                    requireNotNull(cardId)
-                    isOverrideCard(cardId)
-                }) {
+                onEvent(
+                    SecureTurnstileEvents.CARD to SecureTurnstileStates.LOCKED,
+                    guard = { cardId -&gt;
+                        requireNotNull(cardId)
+                        isOverrideCard(cardId)
+                    }
+                ) {
                     lock()
                 }
                 onEvent(SecureTurnstileEvents.PASS to SecureTurnstileStates.LOCKED) {
@@ -3641,8 +3680,8 @@ The <code>onEntry</code> and <code>onExit</code> action are only invoked for <co
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.4.1<br>
-Last updated 2021-02-13 11:06:22 +0200
+Version 1.4.3.1<br>
+Last updated 2021-02-13 11:29:36 +0200
 </div>
 </div>
 <script src="prism.js"></script>
