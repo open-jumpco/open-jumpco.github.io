@@ -27,7 +27,7 @@ dependencies {
 gitPublish {
     def siteDir = file("$buildDir/jbake")
     repoUri = 'https://github.com/open-jumpco/open-jumpco.github.io.git'
-    branch = 'master'
+    branch = 'trunk'
 
     contents {
         from(siteDir) {
