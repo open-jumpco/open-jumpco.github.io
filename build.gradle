@@ -6,10 +6,15 @@ buildscript {
         }
     }
 }
+
 plugins {
     id 'org.jbake.site' version '5.0.0'
     id 'org.ajoberstar.git-publish' version '2.1.1'
 }
+
+group 'kfsm-docs'
+version '1.4.31'
+
 repositories {
     mavenLocal()
     jcenter()
@@ -21,12 +26,12 @@ configurations {
 }
 
 dependencies {
-    externalDocs 'io.jumpco.open:kfsm:1.4.3.1:doc@zip'
+    externalDocs 'io.jumpco.open:kfsm:1.4.31:doc@zip'
 }
 
 gitPublish {
     def siteDir = file("$buildDir/jbake")
-    repoUri = 'https://github.com/open-jumpco/open-jumpco.github.io.git'
+    repoUri = 'git@github.com:open-jumpco/open-jumpco.github.io.git'
     branch = 'trunk'
 
     contents {
