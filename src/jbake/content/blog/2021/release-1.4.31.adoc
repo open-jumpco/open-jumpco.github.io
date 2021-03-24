@@ -1,0 +1,12 @@
+title=Release 1.4.3.1
+date=2021-02-16
+type=post
+tags=blog,open-source,jumpco,release,fsm
+status=published
+summary=OpenJumpCO releases KFSM 1.4.31
+~~~~~~
+
+In this release:
+
+* We updated the release for Kotlin 1.4.31 and ensure `onStateChange` uses a suspend lambda.
+
