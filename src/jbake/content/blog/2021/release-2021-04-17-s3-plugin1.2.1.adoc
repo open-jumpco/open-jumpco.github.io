@@ -1,0 +1,12 @@
+title=Release 1.2.1
+date=2021-04-17
+type=post
+tags=blog,open-source,jumpco,release,s3,gradle
+status=published
+summary=OpenJumpCO releases S3 gradle Plugin 1.2.1
+~~~~~~
+
+In this release:
+
+* We added a configuration option named `compareContent` that will compare the loacal and remote content before updating. This is an alternative to `overwite = true` will always update and `overwrite - false` will always ignore updates if the remote already exists. *`overwrite = true` will take precedence to `compareContent = true`*
+
