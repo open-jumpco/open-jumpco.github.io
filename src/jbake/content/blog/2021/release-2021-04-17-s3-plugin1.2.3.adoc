@@ -1,0 +1,12 @@
+title=Release 1.2.3
+date=2021-04-18
+type=post
+tags=blog,open-source,jumpco,release,s3,gradle
+status=published
+summary=OpenJumpCO releases S3 gradle Plugin 1.2.3
+~~~~~~
+
+In this release:
+
+* Improved logging and fix multiple files.
+
