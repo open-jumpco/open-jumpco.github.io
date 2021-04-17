@@ -6,9 +6,27 @@
     <atom:link href="./feed.xml" rel="self" type="application/rss+xml" />
     <description>Open JumpCO Feed</description>
     <language>en-gb</language>
-    <pubDate>Sat, 17 Apr 2021 23:49:36 +0200</pubDate>
-    <lastBuildDate>Sat, 17 Apr 2021 23:49:36 +0200</lastBuildDate>
+    <pubDate>Sat, 17 Apr 2021 23:57:05 +0200</pubDate>
+    <lastBuildDate>Sat, 17 Apr 2021 23:57:05 +0200</lastBuildDate>
 
+    <item>
+      <title>Release 1.2.1</title>
+      <link>./blog/2021/release-2021-04-17-s3-plugin1.2.1.html</link>
+      <pubDate>Sat, 17 Apr 2021 00:00:00 +0200</pubDate>
+      <guid isPermaLink="false">blog/2021/release-2021-04-17-s3-plugin1.2.1.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In this release:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;We added a configuration option named &lt;code&gt;compareContent&lt;/code&gt; that will compare the loacal and remote content before updating. This is an alternative to &lt;code&gt;overwite = true&lt;/code&gt; will always update and &lt;code&gt;overwrite - false&lt;/code&gt; will always ignore updates if the remote already exists. &lt;strong&gt;&lt;code&gt;overwrite = true&lt;/code&gt; will take precedence to &lt;code&gt;compareContent = true&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+	</description>
+    </item>
     <item>
       <title>Release 1.4.31</title>
       <link>./blog/2021/release-2021-02-16-kfsm-1.4.31.html</link>
