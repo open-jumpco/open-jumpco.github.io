@@ -1,0 +1,12 @@
+title=Release 1.2.4
+date=2021-05-19
+type=post
+tags=blog,open-source,jumpco,release,s3,gradle
+status=published
+summary=OpenJumpCO releases S3 gradle Plugin 1.2.4
+~~~~~~
+
+In this release:
+
+* https://github.com/sanmibuh[David Belmez Vicente] contributed `skipError` for the download task and we added it to the base config and upload task as well.
+
