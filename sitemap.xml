@@ -57,19 +57,19 @@
         <lastmod>2019-07-29</lastmod>
     </url>
     <url>
-        <loc>./projects/s3-plugin.html</loc>
-        <lastmod>2021-04-17</lastmod>
-    </url>
-    <url>
-        <loc>./projects/kfsm-viz-plugin.html</loc>
-        <lastmod>2021-03-22</lastmod>
+        <loc>./projects/kfsm.html</loc>
+        <lastmod>2021-05-24</lastmod>
     </url>
     <url>
         <loc>./projects/kfsm-viz.html</loc>
-        <lastmod>2020-02-22</lastmod>
+        <lastmod>2021-05-24</lastmod>
     </url>
     <url>
-        <loc>./projects/kfsm.html</loc>
-        <lastmod>2019-07-29</lastmod>
+        <loc>./projects/kfsm-viz-plugin.html</loc>
+        <lastmod>2021-05-24</lastmod>
+    </url>
+    <url>
+        <loc>./projects/s3-plugin.html</loc>
+        <lastmod>2021-04-17</lastmod>
     </url>
 </urlset>
