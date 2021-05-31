@@ -1,0 +1,12 @@
+title=Release 1.4.32.1
+date=2021-05-31
+type=post
+tags=blog,open-source,jumpco,release,fsm
+status=published
+summary=OpenJumpCO releases KFSM Viz Gradle plugin 1.4.32.1
+~~~~~~
+
+In this release:
+
+* We updated KFSM-Viz and the Gradle plugin to support `invariant` expressions.
+
