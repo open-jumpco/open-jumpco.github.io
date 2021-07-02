@@ -1,0 +1,20 @@
+title=License Update
+date=2021-07-02
+type=post
+tags=blog,open-source,jumpco,release,fsm
+status=published
+summary=OpenJumpCO updates license for KFSM and related content
+~~~~~~
+
+After careful consideration the initial choice of using a GPL 3 doesn't fit the aim of this project.
+
+The aim of this project is to provide a useful set of tools for development unencumbered by restrictive licensing similar to projects like the Spring Framework.
+
+We have update the licensing as follows:
+
+* `kfsm` - link:https://www.apache.org/licenses/LICENSE-2.0.html[Apache License 2.0]
+* `kfsm-viz` - link:https://www.apache.org/licenses/LICENSE-2.0.html[Apache License 2.0]
+* `kfsm-viz-plugin` - link:https://www.apache.org/licenses/LICENSE-2.0.html[Apache License 2.0]
+* `s3-plugin` - Will retain the MIT license of the original project we forked.
+* All samples - link:http://creativecommons.org/licenses/by-sa/4.0/[Creative Commons Attribution-ShareAlike 4.0 International License]
+
