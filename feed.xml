@@ -6,9 +6,45 @@
     <atom:link href="./feed.xml" rel="self" type="application/rss+xml" />
     <description>Open JumpCO Feed</description>
     <language>en-gb</language>
-    <pubDate>Mon, 31 May 2021 09:33:46 +0200</pubDate>
-    <lastBuildDate>Mon, 31 May 2021 09:33:46 +0200</lastBuildDate>
+    <pubDate>Fri, 2 Jul 2021 12:09:32 +0200</pubDate>
+    <lastBuildDate>Fri, 2 Jul 2021 12:09:32 +0200</lastBuildDate>
 
+    <item>
+      <title>License Update</title>
+      <link>./blog/2021/release-2021-07-02-license-update.html</link>
+      <pubDate>Fri, 2 Jul 2021 00:00:00 +0200</pubDate>
+      <guid isPermaLink="false">blog/2021/release-2021-07-02-license-update.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;After careful consideration the initial choice of using a GPL 3 doesn&amp;#8217;t fit the aim of this project.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The aim of this project is to provide a useful set of tools for development unencumbered by restrictive licensing similar to projects like the Spring Framework.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;We have update the licensing as follows:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;kfsm&lt;/code&gt; - &lt;a href=&quot;https://www.apache.org/licenses/LICENSE-2.0.html&quot;&gt;Apache License 2.0&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;kfsm-viz&lt;/code&gt; - &lt;a href=&quot;https://www.apache.org/licenses/LICENSE-2.0.html&quot;&gt;Apache License 2.0&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;kfsm-viz-plugin&lt;/code&gt; - &lt;a href=&quot;https://www.apache.org/licenses/LICENSE-2.0.html&quot;&gt;Apache License 2.0&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;s3-plugin&lt;/code&gt; - Will retain the MIT license of the original project we forked.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;All samples - &lt;a href=&quot;http://creativecommons.org/licenses/by-sa/4.0/&quot;&gt;Creative Commons Attribution-ShareAlike 4.0 International License&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+	</description>
+    </item>
     <item>
       <title>Release 1.4.32.1</title>
       <link>./blog/2021/release-2021-05-23-kfsm-viz-plugin-1.4.32.1.html</link>
