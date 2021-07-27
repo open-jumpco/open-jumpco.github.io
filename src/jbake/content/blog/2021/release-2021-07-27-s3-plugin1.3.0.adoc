@@ -1,0 +1,12 @@
+title=Release 1.3.0
+date=2021-07-27
+type=post
+tags=blog,open-source,jumpco,release,s3,gradle
+status=published
+summary=OpenJumpCO releases S3 gradle Plugin 1.3.0
+~~~~~~
+
+In this release:
+
+* https://github.com/sanmibuh[David Belmez Vicente] contributed updates for Gradle 7.x.
+
