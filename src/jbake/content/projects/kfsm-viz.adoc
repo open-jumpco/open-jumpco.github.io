@@ -1,9 +1,9 @@
 title=KFSM-VIZ
-date=2021-05-24
+date=2021-08-07
 type=project
 status=published
 summary=KFSM - Visualization of definitions
-version=1.4.32.1
+version=1.5.0
 ~~~~~~
 = KFSM Visualization
 
@@ -34,7 +34,7 @@ You may invoke the parser from a unit test similar to the simple case.
 [source,groovy]
 ----
 dependencies {
-    testImplementation 'io.jumpco.open:kfsm-viz:1.4.31'
+    testImplementation 'io.jumpco.open:kfsm-viz:1.5.0'
 }
 ----
 

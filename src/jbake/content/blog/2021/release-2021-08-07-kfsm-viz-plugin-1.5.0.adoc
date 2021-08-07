@@ -1,0 +1,12 @@
+title=Release 1.5.0
+date=2021-08-07
+type=post
+tags=blog,open-source,jumpco,release,fsm
+status=published
+summary=OpenJumpCO releases KFSM Viz Gradle plugin 1.5.0
+~~~~~~
+
+In this release:
+
+* We updated KFSM-Viz and the Gradle plugin to support a string representation of the `timeout`.
+
