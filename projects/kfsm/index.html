@@ -435,7 +435,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>KFSM - Kotlin Finite-state machine</h1>
 <div class="details">
-<span id="revnumber">version 1.4.31</span>
+<span id="revnumber">version 1.5.1</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1138,9 +1138,11 @@ class PayingTurnstileFSM(
             Int::class
         ) {
             defaultInitialState = PayingTurnstileStates.LOCKED
+            invariant("negative coins") { coins &gt;= 0 }
             onStateChange { oldState, newState -&gt;
                 println("onStateChange:$oldState -&gt; $newState")
             }
+            invariant("negative coins") { coins &gt;= 0 }
             default {
                 onEntry { _, targetState, arg -&gt;
                     if (arg != null) {
@@ -1464,7 +1466,7 @@ The context class stores values and will update value in very specific ways.</p>
 <h4 id="state-machine-definition-packaged-2">State machine definition packaged</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class SecureTurnstileFSM(private val secureTurnstile: SecureTurnstile) {
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class SecureTurnstileFSM(secureTurnstile: SecureTurnstile) {
     companion object {
         val definition = stateMachine(
             SecureTurnstileStates.values().toSet(),
@@ -1756,7 +1758,7 @@ enum class ReaderStates {
 <h4 id="packaged-fsm">Packaged FSM</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class PacketReaderFSM(private val packetHandler: PacketHandler) {
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class PacketReaderFSM(packetHandler: PacketHandler) {
     companion object {
 
         val definition = stateMachine(
@@ -2024,25 +2026,25 @@ enum class ReaderStates {
     fun lock(): ImmutableLock {
         require(locked == 0)
         println("Lock")
-        return copy(locked + 1)
+        return copy(locked = locked + 1)
     }
 
     fun doubleLock(): ImmutableLock {
         require(locked == 1)
         println("DoubleLock")
-        return copy(locked + 1)
+        return copy(locked = locked + 1)
     }
 
     fun unlock(): ImmutableLock {
         require(locked == 1)
         println("Unlock")
-        return copy(locked - 1)
+        return copy(locked = locked - 1)
     }
 
     fun doubleUnlock(): ImmutableLock {
         require(locked == 2)
         println("DoubleUnlock")
-        return copy(locked - 1)
+        return copy(locked = locked - 1)
     }
 
     override fun toString(): String {
@@ -2059,7 +2061,7 @@ enum class ReaderStates {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class ImmutableLockFSM() {
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class ImmutableLockFSM {
 
     companion object {
         fun handleEvent(context: ImmutableLock, event: LockEvents): ImmutableLock {
@@ -2081,6 +2083,7 @@ enum class ReaderStates {
                     else -&gt; error("Invalid state locked=$locked")
                 }
             }
+            invariant("invalid locked value") { locked in 0..2 }
             onStateChange { oldState, newState -&gt;
                 println("onStateChange:$oldState -&gt; $newState")
             }
@@ -2297,7 +2300,7 @@ The context class stores values and will update value in very specific ways.</p>
         private set
     var overrideActive: Boolean = false
         private set
-
+    val timeout = 500L
     fun activateOverride() {
         overrideActive = true
         println("override activated")
@@ -2354,7 +2357,7 @@ The context class stores values and will update value in very specific ways.</p>
 <h4 id="state-machine-definition-packaged-3">State machine definition packaged</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class TimerSecureTurnstileFSM(private val secureTurnstile: TimerSecureTurnstile) {
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class TimerSecureTurnstileFSM(secureTurnstile: TimerSecureTurnstile) {
     companion object {
         val definition = asyncStateMachine(
             SecureTurnstileStates.values().toSet(),
@@ -2412,7 +2415,7 @@ The context class stores values and will update value in very specific ways.</p>
                 }
             }
             whenState(SecureTurnstileStates.UNLOCKED) {
-                timeout(SecureTurnstileStates.LOCKED, 500L) {
+                timeout(SecureTurnstileStates.LOCKED, { timeout }) {
                     println("Timeout. Locking")
                     lock()
                 }
@@ -2454,7 +2457,10 @@ The context class stores values and will update value in very specific ways.</p>
             fsm.card(1)
             println("Assertion")
             assertTrue { !turnstile.locked }
-            println("Delay")
+            println("Delay:100")
+            delay(100L)
+            assertTrue { !turnstile.locked }
+            println("Delay:1000")
             delay(1000L)
             println("Assertion")
             assertTrue { turnstile.locked }
@@ -3680,7 +3686,7 @@ The <code>onEntry</code> and <code>onExit</code> action are only invoked for <co
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.4.31<br>
+Version 1.5.1<br>
 Last updated 2021-02-13 11:29:36 +0200
 </div>
 </div>
