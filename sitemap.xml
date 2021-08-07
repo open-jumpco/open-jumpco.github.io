@@ -5,6 +5,14 @@
         <lastmod>2019-07-29</lastmod>
     </url>
     <url>
+        <loc>./blog/2021/release-2021-08-07-kfsm-viz-plugin-1.5.0.html</loc>
+        <lastmod>2021-08-07</lastmod>
+    </url>
+    <url>
+        <loc>./blog/2021/release-2021-08-07-kfsm-1.5.0.html</loc>
+        <lastmod>2021-08-07</lastmod>
+    </url>
+    <url>
         <loc>./blog/2021/release-2021-07-27-s3-plugin1.3.0.html</loc>
         <lastmod>2021-07-27</lastmod>
     </url>
@@ -69,19 +77,19 @@
         <lastmod>2019-07-29</lastmod>
     </url>
     <url>
-        <loc>./projects/s3-plugin.html</loc>
-        <lastmod>2021-07-27</lastmod>
-    </url>
-    <url>
         <loc>./projects/kfsm.html</loc>
-        <lastmod>2021-05-24</lastmod>
+        <lastmod>2021-08-07</lastmod>
     </url>
     <url>
         <loc>./projects/kfsm-viz.html</loc>
-        <lastmod>2021-05-24</lastmod>
+        <lastmod>2021-08-07</lastmod>
     </url>
     <url>
         <loc>./projects/kfsm-viz-plugin.html</loc>
-        <lastmod>2021-05-24</lastmod>
+        <lastmod>2021-08-07</lastmod>
+    </url>
+    <url>
+        <loc>./projects/s3-plugin.html</loc>
+        <lastmod>2021-07-27</lastmod>
     </url>
 </urlset>
