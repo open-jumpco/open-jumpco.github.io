@@ -120,7 +120,7 @@ fun produceVisualizationTurnstileFSM() {
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    testImplementation 'io.jumpco.open:kfsm-viz:1.5.2'
+    testImplementation 'io.jumpco.open:kfsm-viz:1.5.2.1'
 }</code></pre>
 </div>
 </div>
@@ -128,11 +128,11 @@ fun produceVisualizationTurnstileFSM() {
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">@Test
 fun produceVisualizationTurnstileFSM() {
-    println("== TurnStile")
-    val visualization = parseStateMachine("TurnstileFSM", File("src/test/kotlin/Turnstile.kt")) // <b class="conum">(1)</b>
+    println("== Simple TurnStile")
+    val visualization = parseStateMachine("SimpleTurnstileFSM", File("src/test/kotlin/SimpleTurnstile.kt")) // <b class="conum">(1)</b>
     println(visualization)
-    File("generated-parsed", "turnstile.plantuml").writeText(plantUml(visualization)) // <b class="conum">(2)</b>
-    File("generated-parsed", "turnstile.adoc").writeText(asciiDoc(visualization)) // <b class="conum">(3)</b>
+    File("generated-parsed", "simple-turnstile.plantuml").writeText(plantUml(visualization)) // <b class="conum">(2)</b>
+    File("generated-parsed", "simple-turnstile.adoc").writeText(asciiDoc(visualization)) // <b class="conum">(3)</b>
 }</code></pre>
 </div>
 </div>
@@ -154,8 +154,14 @@ fun produceVisualizationTurnstileFSM() {
 <div class="sect1">
 <h2 id="_expected_output">Expected output</h2>
 <div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_simpleturnstilefsm_state_chart">SimpleTurnstileFSM State Chart</h2>
+<div class="sectionbody">
 <div class="sect2">
-<h3 id="_turnstile_state_table">Turnstile State Table</h3>
+<h3 id="_simpleturnstilefsm_state_map">SimpleTurnstileFSM State Map</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -186,18 +192,6 @@ unlock()
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">COIN</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">{
-returnCoin()
-}</code></pre>
-</div>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PASS</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
@@ -208,13 +202,25 @@ lock()
 </div>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COIN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">{
+returnCoin()
+}</code></pre>
+</div>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 </div>
 <div class="sect2">
-<h3 id="_turnstile_state_diagram">Turnstile State Diagram</h3>
+<h3 id="_simple_turnstile_state_diagram">Simple Turnstile State Diagram</h3>
 <div class="paragraph">
-<p><span class="image"><img src="turnstile.png" alt="turnstile"></span></p>
+<p><span class="image"><img src="simple-turnstile.svg" alt="simple turnstile"></span></p>
 </div>
 </div>
 </div>
