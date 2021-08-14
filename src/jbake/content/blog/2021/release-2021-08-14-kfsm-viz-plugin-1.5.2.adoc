@@ -1,0 +1,12 @@
+title=Release 1.5.2
+date=2021-08-14
+type=post
+tags=blog,open-source,jumpco,release,fsm
+status=published
+summary=OpenJumpCO releases KFSM Viz Gradle plugin 1.5.2
+~~~~~~
+
+In this release:
+
+* KFSM-Viz now provides a simple version as well the the previous detailed version of the state diagram that doesn't display the guards or actions.
+

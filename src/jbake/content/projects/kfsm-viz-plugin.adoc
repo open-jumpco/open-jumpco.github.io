@@ -1,9 +1,9 @@
 title=KFSM-VIZ-PLUGIN
-date=2021-08-07
+date=2021-08-14
 type=project
 status=published
 summary=KFSM - Visualization Gradle plugin
-version=1.5.0
+version=1.5.2.1
 ~~~~~~
 = KFSM Visualization Gradle plugin
 
@@ -15,13 +15,13 @@ This model includes the content of the lambdas used in guards and actions.
 == Getting Started
 
 Plugin Id: `io.jumpco.open.kfsm.viz-plugin`
-Version: `1.5.0`
+Version: `1.5.2.1`
 
 === Gradle Groovy DSL
 [source,groovy]
 ----
 plugins {
-    id 'io.jumpco.open.kfsm.viz-plugin' version '1.5.0'
+    id 'io.jumpco.open.kfsm.viz-plugin' version '1.5.2.1'
 }
 ----
 
@@ -111,7 +111,7 @@ lock()
 
 === Turnstile State Diagram
 
-image:turnstile.png[]
+image:simple-turnstile.svg[]
 
 === PacketReader State Table
 |===
@@ -256,7 +256,7 @@ addChecksum(byte)
 
 === PacketReader State Diagram
 
-image:packet_reader.png[]
+image:packet-reader.svg[]
 
 == Resources
 

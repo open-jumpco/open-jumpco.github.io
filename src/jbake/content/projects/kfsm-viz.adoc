@@ -1,9 +1,9 @@
 title=KFSM-VIZ
-date=2021-08-07
+date=2021-08-14
 type=project
 status=published
 summary=KFSM - Visualization of definitions
-version=1.5.0
+version=1.5.2.1
 ~~~~~~
 = KFSM Visualization
 
@@ -34,7 +34,7 @@ You may invoke the parser from a unit test similar to the simple case.
 [source,groovy]
 ----
 dependencies {
-    testImplementation 'io.jumpco.open:kfsm-viz:1.5.0'
+    testImplementation 'io.jumpco.open:kfsm-viz:1.5.2.1'
 }
 ----
 
@@ -42,11 +42,11 @@ dependencies {
 ----
 @Test
 fun produceVisualizationTurnstileFSM() {
-    println("== TurnStile")
-    val visualization = parseStateMachine("TurnstileFSM", File("src/test/kotlin/Turnstile.kt")) // <1>
+    println("== Simple TurnStile")
+    val visualization = parseStateMachine("SimpleTurnstileFSM", File("src/test/kotlin/SimpleTurnstile.kt")) // <1>
     println(visualization)
-    File("generated-parsed", "turnstile.plantuml").writeText(plantUml(visualization)) // <2>
-    File("generated-parsed", "turnstile.adoc").writeText(asciiDoc(visualization)) // <3>
+    File("generated-parsed", "simple-turnstile.plantuml").writeText(plantUml(visualization)) // <2>
+    File("generated-parsed", "simple-turnstile.adoc").writeText(asciiDoc(visualization)) // <3>
 }
 ----
 <1> Provide classname for the class holding the definition DSL and the sourcefile where the class may be found.
@@ -55,7 +55,10 @@ fun produceVisualizationTurnstileFSM() {
 
 == Expected output
 
-=== Turnstile State Table
+== SimpleTurnstileFSM State Chart
+
+=== SimpleTurnstileFSM State Map
+
 |===
 | Start | Event[Guard] | Target | Action
 
@@ -70,16 +73,6 @@ unlock()
 ----
 
 | UNLOCKED
-| COIN
-| UNLOCKED
-a| [source,kotlin]
-----
-{
-returnCoin()
-}
-----
-
-| UNLOCKED
 | PASS
 | LOCKED
 a| [source,kotlin]
@@ -88,11 +81,22 @@ a| [source,kotlin]
 lock()
 }
 ----
+
+| UNLOCKED
+| COIN
+| UNLOCKED
+a| [source,kotlin]
+----
+{
+returnCoin()
+}
+----
 |===
 
-=== Turnstile State Diagram
 
-image:turnstile.png[]
+=== Simple Turnstile State Diagram
+
+image:simple-turnstile.svg[]
 
 == Examples
 
