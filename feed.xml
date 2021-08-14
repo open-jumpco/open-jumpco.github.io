@@ -6,8 +6,8 @@
     <atom:link href="./feed.xml" rel="self" type="application/rss+xml" />
     <description>Open JumpCO Feed</description>
     <language>en-gb</language>
-    <pubDate>Sat, 14 Aug 2021 13:14:02 +0200</pubDate>
-    <lastBuildDate>Sat, 14 Aug 2021 13:14:02 +0200</lastBuildDate>
+    <pubDate>Sat, 14 Aug 2021 13:16:14 +0200</pubDate>
+    <lastBuildDate>Sat, 14 Aug 2021 13:16:14 +0200</lastBuildDate>
 
     <item>
       <title>Release 1.5.2</title>
@@ -22,6 +22,24 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;KFSM-Viz now provides a simple version as well the the previous detailed version of the state diagram that doesn&amp;#8217;t display the guards or actions.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+	</description>
+    </item>
+    <item>
+      <title>Release 1.5.2.1</title>
+      <link>./blog/2021/release-2021-08-14-kfsm-viz-plugin-1.5.2.1.html</link>
+      <pubDate>Sat, 14 Aug 2021 00:00:00 +0200</pubDate>
+      <guid isPermaLink="false">blog/2021/release-2021-08-14-kfsm-viz-plugin-1.5.2.1.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In this release:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Improved the representation to monochrome and fixed indenting of actions and guard expressions.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
