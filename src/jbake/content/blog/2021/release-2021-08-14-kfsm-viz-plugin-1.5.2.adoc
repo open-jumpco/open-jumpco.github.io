@@ -1,4 +1,4 @@
-title=Release 1.5.2
+title=KFSM-Viz Plugin Release 1.5.2
 date=2021-08-14
 type=post
 tags=blog,open-source,jumpco,release,fsm

@@ -3,7 +3,7 @@ date=2021-08-14
 type=project
 status=published
 summary=KFSM - Visualization Gradle plugin
-version=1.5.2.3
+version=1.5.2.4
 ~~~~~~
 = KFSM Visualization Gradle plugin
 
@@ -15,20 +15,20 @@ This model includes the content of the lambdas used in guards and actions.
 == Getting Started
 
 Plugin Id: `io.jumpco.open.kfsm.viz-plugin`
-Version: `1.5.2.3`
+Version: `1.5.2.4`
 
 === Gradle Groovy DSL
 [source,groovy]
 ----
 plugins {
-    id 'io.jumpco.open.kfsm.viz-plugin' version '1.5.2.3'
+    id 'io.jumpco.open.kfsm.viz-plugin' version '1.5.2.4'
 }
 ----
 === Gradle Kotlin DSL
 [source,kotlin]
 ----
 plugins {
-    id("io.jumpco.open.kfsm.viz-plugin") version "1.5.2.3"
+    id("io.jumpco.open.kfsm.viz-plugin") version "1.5.2.4"
 }
 ----
 

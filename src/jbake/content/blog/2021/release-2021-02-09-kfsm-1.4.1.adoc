@@ -1,4 +1,4 @@
-title=Release 1.4.0
+title=KFSM Release 1.4.0
 date=2021-02-09
 type=post
 tags=blog,open-source,jumpco,release,fsm

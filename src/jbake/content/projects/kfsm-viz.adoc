@@ -3,7 +3,7 @@ date=2021-08-14
 type=project
 status=published
 summary=KFSM - Visualization of definitions
-version=1.5.2.3
+version=1.5.2.4
 ~~~~~~
 = KFSM Visualization
 
@@ -31,17 +31,20 @@ fun produceVisualizationTurnstileFSM() {
 
 You may invoke the parser from a unit test similar to the simple case.
 
+=== Dependencies
+
+==== Gradle Groovy DSL
 [source,groovy]
 ----
 dependencies {
-    testImplementation 'io.jumpco.open:kfsm-viz:1.5.2.3'
+    testImplementation 'io.jumpco.open:kfsm-viz:1.5.2.4'
 }
 ----
-
+==== Gradle Kotlin DSL
 [source,kotlin]
 ----
 dependencies {
-    testImplementation("io.jumpco.open:kfsm-viz:1.5.2.3")
+    testImplementation("io.jumpco.open:kfsm-viz:1.5.2.4")
 }
 ----
 

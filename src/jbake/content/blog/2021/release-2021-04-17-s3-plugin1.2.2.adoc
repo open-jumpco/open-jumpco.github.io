@@ -1,4 +1,4 @@
-title=Release 1.2.2
+title=S3 Gradle Plugin Release 1.2.2
 date=2021-04-17
 type=post
 tags=blog,open-source,jumpco,release,s3,gradle
