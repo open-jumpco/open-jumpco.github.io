@@ -517,7 +517,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel3">
 <li><a href="#kotlinjvm-projects">Kotlin/JVM Projects</a></li>
 <li><a href="#kotlinjs-projects">KotlinJS Projects</a></li>
-<li><a href="#kotlinnative-projects-using-wasm">Kotlin/Native Projects using WASM</a></li>
 <li><a href="#kotlinnative-projects-using-linuxx64">Kotlin/Native Projects using LinuxX64</a></li>
 <li><a href="#kotlinnative-projects-using-mingw64">Kotlin/Native Projects using MinGW64</a></li>
 <li><a href="#kotlinnative-projects-using-macos">Kotlin/Native Projects using macOS</a></li>
@@ -2505,6 +2504,8 @@ In the case of an invalid character the statemap will still transition to the en
 <h3 id="dependencies">Dependencies</h3>
 <div class="sect3">
 <h4 id="kotlinjvm-projects">Kotlin/JVM Projects</h4>
+<div class="sect4">
+<h5 id="gradle-groovy-dsl">Gradle Groovy DSL</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
@@ -2513,8 +2514,21 @@ In the case of an invalid character the statemap will still transition to the en
 </div>
 </div>
 </div>
+<div class="sect4">
+<h5 id="gradle-kotlin-dsl">Gradle Kotlin DSL</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">dependencies {
+    implementation("io.jumpco.open:kfsm-jvm:1.5.1")
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
 <div class="sect3">
 <h4 id="kotlinjs-projects">KotlinJS Projects</h4>
+<div class="sect4">
+<h5 id="gradle-groovy-dsl-2">Gradle Groovy DSL</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
@@ -2523,18 +2537,21 @@ In the case of an invalid character the statemap will still transition to the en
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="kotlinnative-projects-using-wasm">Kotlin/Native Projects using WASM</h4>
+<div class="sect4">
+<h5 id="gradle-kotlin-dsl-2">Gradle Kotlin DSL</h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-wasm32:1.5.1'
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">dependencies {
+    implementation("io.jumpco.open:kfsm-js:1.5.1")
 }</code></pre>
+</div>
 </div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="kotlinnative-projects-using-linuxx64">Kotlin/Native Projects using LinuxX64</h4>
+<div class="sect4">
+<h5 id="gradle-groovy-dsl-3">Gradle Groovy DSL</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
@@ -2543,8 +2560,21 @@ In the case of an invalid character the statemap will still transition to the en
 </div>
 </div>
 </div>
+<div class="sect4">
+<h5 id="gradle-kotlin-dsl-3">Gradle Kotlin DSL</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">dependencies {
+    implementation("io.jumpco.open:kfsm-linuxX64:1.5.1")
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
 <div class="sect3">
 <h4 id="kotlinnative-projects-using-mingw64">Kotlin/Native Projects using MinGW64</h4>
+<div class="sect4">
+<h5 id="gradle-groovy-dsl-4">Gradle Groovy DSL</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
@@ -2553,13 +2583,37 @@ In the case of an invalid character the statemap will still transition to the en
 </div>
 </div>
 </div>
+<div class="sect4">
+<h5 id="gradle-kotlin-dsl-4">Gradle Kotlin DSL</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">dependencies {
+    implementation("io.jumpco.open:kfsm-mingwX64:1.5.1")
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
 <div class="sect3">
 <h4 id="kotlinnative-projects-using-macos">Kotlin/Native Projects using macOS</h4>
+<div class="sect4">
+<h5 id="gradle-groovy-dsl-5">Gradle Groovy DSL</h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
     implementation 'io.jumpco.open:kfsm-macosX64:1.5.1'
 }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="gradle-kotlin-dsl-5">Gradle Kotlin DSL</h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">dependencies {
+    implementation("io.jumpco.open:kfsm-macosX64:1.5.1")
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -2582,6 +2636,9 @@ In the case of an invalid character the statemap will still transition to the en
 </div>
 <div class="paragraph">
 <p>The state and event types should be a value types.</p>
+</div>
+<div class="paragraph">
+<p>The names <code>START</code> and <code>END</code> as states will be used the the start and end states when a state diagram is generated by <code>kfsm-viz</code></p>
 </div>
 <div class="paragraph">
 <p>The events may receive an argument and may return a value. The argument for all event must be the same type. However sealed classes can be used to simplify the representation of different argument types.</p>
@@ -2627,7 +2684,7 @@ The state machine can also be defined to derive the current state from the provi
 <p>If the FSM is configured with timeout transitions the instance will need to remain active. This is typically only used in UI or embedded interactive applications.</p>
 </div>
 <div class="paragraph">
-<p>If the FSM is used in a stateless environment that is driven by requests or events the state can be externalised after use if it isn&#8217;t derived from the provided context.
+<p>If the FSM is used in a stateless environment that is driven by requests or events, the state can be externalised after use if it isn&#8217;t derived from the provided context.
 The externalised state is a list of pairs making up the state type and the name of the associated statemap.</p>
 </div>
 </div>
@@ -2685,6 +2742,9 @@ The statemachine supports:</p>
 <li>
 <p>Actions as <code>suspend</code> functions.</p>
 </li>
+<li>
+<p>State machine <code>invariant</code> will be evaluated on all events and throw an <code>InvariantException</code> if not true</p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
@@ -2719,6 +2779,7 @@ val definition = stateMachine(
     ReturnType::class
 ) {
     defaultInitialState = State.S1 // optional start state
+    invariant { } // invariant for stateMachine
     default { // global defaults
     }
     initialState { // initial state expression
@@ -2760,6 +2821,7 @@ val definition = stateMachine(
     ContextType::class
 ) {
     defaultInitialState = State.S1 // optional start state
+    invariant { } // invariant for stateMachine
     default { // global defaults
     }
     initialState { // initial state expression
@@ -2807,6 +2869,7 @@ val definition = asyncStateMachine(
     ReturnType::class
 ) {
     defaultInitialState = State.S1 // optional
+    invariant { } // invariant for stateMachine
     default { // global defaults
     }
     initialState { // initial state expression
@@ -2845,6 +2908,7 @@ val definition = asyncFunctionalStateMachine(
     ContextType::class
 ) {
     defaultInitialState = State.S1 // optional
+    invariant { } // invariant for stateMachine
     default { // global defaults
     }
     initialState { // initial state expression
