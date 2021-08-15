@@ -3,7 +3,7 @@ date=2021-08-14
 type=project
 status=published
 summary=KFSM - Visualization Gradle plugin
-version=1.5.2.1
+version=1.5.2.3
 ~~~~~~
 = KFSM Visualization Gradle plugin
 
@@ -15,13 +15,20 @@ This model includes the content of the lambdas used in guards and actions.
 == Getting Started
 
 Plugin Id: `io.jumpco.open.kfsm.viz-plugin`
-Version: `1.5.2.1`
+Version: `1.5.2.3`
 
 === Gradle Groovy DSL
 [source,groovy]
 ----
 plugins {
-    id 'io.jumpco.open.kfsm.viz-plugin' version '1.5.2.1'
+    id 'io.jumpco.open.kfsm.viz-plugin' version '1.5.2.3'
+}
+----
+=== Gradle Kotlin DSL
+[source,kotlin]
+----
+plugins {
+    id("io.jumpco.open.kfsm.viz-plugin") version "1.5.2.3"
 }
 ----
 
@@ -42,13 +49,30 @@ kfsmViz {
   }
 }
 ----
-<1> `input: File`: Required, fully qualified filename of relevant source file
-<2> `isGeneratePlantUml: Boolean`: Required default is false
-<3> `isGenerateAsciidoc: Boolean`: Required default is false
-<4> `output: String`: Optional filename base. The default is the classname
-<5> `outputFolder: File`: Optional directory for output file. Default is `$buildDir/generated`
-<6> `plantUmlName: String`: Optional filename for plantuml output. Default is `$output.plantuml`
-<7> `asciidocName: String`: Optional name of Asciidoc output file. Default is `$output.adoc`
+=== Gradle Kotlin DSL
+[source,kotlin]
+----
+import io.jumpco.open.kfsm.gradle.VizPluginExtension
+configure<VizPluginExtension> {
+  fsm("PacketReaderFSM") {
+    input = file("src/main/kotlin/PacketReader.kt") // <1>
+    isGeneratePlantUml = true // <2>
+    isGenerateAsciidoc = true // <3>
+    output = "packet-reader" // <4>
+    outputFolder = file("generated") // <5>
+    plantUmlName = "packet-reader-statediagram.plantuml" // <6>
+    asciidocName = "packet-reader-state-table.adoc"      // <7>
+  }
+}
+----
+
+<1> `input: File`: *Required*, relative path/name of relevant source file
+<2> `isGeneratePlantUml: Boolean`: *Required* default is false
+<3> `isGenerateAsciidoc: Boolean`: *Required* default is false
+<4> `output: String`: _Optional_ filename base. The default is the classname
+<5> `outputFolder: File`: _Optional_ directory for output file. Default is `$buildDir/generated`
+<6> `plantUmlName: String`: _Optional_ filename for plantuml output. Default is `$output.plantuml`
+<7> `asciidocName: String`: _Optional_ name of Asciidoc output file. Default is `$output.adoc`
 
 === Example with multiple state machines.
 [source,groovy]

@@ -1,0 +1,12 @@
+title=Release 1.5.2.3
+date=2021-08-15
+type=post
+tags=blog,open-source,jumpco,release,fsm
+status=published
+summary=OpenJumpCO releases KFSM Viz Gradle plugin 1.5.2.3
+~~~~~~
+
+In this release:
+
+* Added extra check to produce start state in diagrams.
+
