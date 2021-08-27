@@ -1,0 +1,12 @@
+title=KFSM Release 1.5.2
+date=2021-08-27
+type=post
+tags=blog,open-source,jumpco,release,fsm
+status=published
+summary=OpenJumpCO releases KFSM 1.5.2
+~~~~~~
+
+In this release:
+
+* Change timer to `async` in suspend.
+
