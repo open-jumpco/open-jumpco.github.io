@@ -1,0 +1,11 @@
+title=Local Properties Plugin
+date=2021-11-06
+type=project
+status=published
+summary=Gradle Local Properties Plugin
+version=1.0.0
+~~~~~~ = Gradle Local Properties Plugin
+
+This project provides a plugin that will load properties from `gradle.local.properties` to provide the user with a separate properties file they can exclude from committed code.
+
+* link:https://github.com/open-jumpco/local-propertie-plugin[Source and Documentation]
