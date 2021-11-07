@@ -6,9 +6,27 @@
     <atom:link href="./feed.xml" rel="self" type="application/rss+xml" />
     <description>Open JumpCO Feed</description>
     <language>en-gb</language>
-    <pubDate>Sat, 6 Nov 2021 16:00:05 +0200</pubDate>
-    <lastBuildDate>Sat, 6 Nov 2021 16:00:05 +0200</lastBuildDate>
+    <pubDate>Sun, 7 Nov 2021 14:51:59 +0200</pubDate>
+    <lastBuildDate>Sun, 7 Nov 2021 14:51:59 +0200</lastBuildDate>
 
+    <item>
+      <title>Local Properties Plugin 1.0.0</title>
+      <link>./blog/2021/release-2021-11-07-local-properties-plugin-1.0.1.html</link>
+      <pubDate>Sun, 7 Nov 2021 00:00:00 +0200</pubDate>
+      <guid isPermaLink="false">blog/2021/release-2021-11-07-local-properties-plugin-1.0.1.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In this release:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Update the logging to show warning when in use.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+	</description>
+    </item>
     <item>
       <title>Local Properties Plugin 1.0.0</title>
       <link>./blog/2021/release-2021-11-06-local-properties-plugin-1.0.0.html</link>
