@@ -29,157 +29,19 @@
   <div>
     <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace">inline fun &lt;<a href="state-machine.html">S</a>, <a href="state-machine.html">E</a>, <a href="state-machine.html">C</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>, <a href="state-machine.html">A</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>, <a href="state-machine.html">R</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="state-machine.html">stateMachine</a>(validStates: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="state-machine.html">S</a>&gt;, validEvents: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="state-machine.html">E</a>&gt;, contextClass: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html">KClass</a>&lt;out <a href="state-machine.html">C</a>&gt;, argumentClass: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html">KClass</a>&lt;out <a href="state-machine.html">A</a>&gt;, returnClass: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html">KClass</a>&lt;out <a href="state-machine.html">R</a>&gt;, handler: <a href="-dsl-state-machine-handler/index.html">DslStateMachineHandler</a>&lt;<a href="state-machine.html">S</a>, <a href="state-machine.html">E</a>, <a href="state-machine.html">C</a>, <a href="state-machine.html">A</a>, <a href="state-machine.html">R</a>&gt;.() -&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>): <a href="-dsl-state-machine-handler/index.html">DslStateMachineHandler</a>&lt;<a href="state-machine.html">S</a>, <a href="state-machine.html">E</a>, <a href="state-machine.html">C</a>, <a href="state-machine.html">A</a>, <a href="state-machine.html">R</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
   </div>
-<p class="paragraph">Defines the start of a state machine DSL declaration</p><h4 class="">Author</h4><p class="paragraph">Corneil du Plessis</p><h2 class="">Samples</h2><div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Samples"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="sample-container"><code class="runnablesample monospace" theme="idea"><pre>
-fun main() { 
-   //sampleStart 
-   val definition =
-            stateMachine(
-                TurnstileStates.values().toSet(),
-                TurnstileEvents.values().toSet(),
-                Turnstile::class
-            ) {
-                defaultInitialState = TurnstileStates.LOCKED
-                initialState {
-                    if (locked)
-                        TurnstileStates.LOCKED
-                    else
-                        TurnstileStates.UNLOCKED
-                }
-                onStateChange { oldState, newState -&gt;
-                    println(&quot;onStateChange:$oldState -&gt; $newState&quot;)
-                }
-                default {
-                    onEntry { startState, targetState, _ -&gt;
-                        println(&quot;entering:$startState -&gt; $targetState for $this&quot;)
-                    }
-                    action { state, event, _ -&gt;
-                        println(&quot;Default action for state($state) -&gt; on($event) for $this&quot;)
-                        alarm()
-                    }
-                    onExit { startState, targetState, _ -&gt;
-                        println(&quot;exiting:$startState -&gt; $targetState for $this&quot;)
-                    }
-                }
-                whenState(TurnstileStates.LOCKED) {
-                    onEvent(TurnstileEvents.COIN to TurnstileStates.UNLOCKED) {
-                        unlock()
-                    }
-                }
-                whenState(TurnstileStates.UNLOCKED) {
-                    onEvent(TurnstileEvents.COIN) {
-                        returnCoin()
-                    }
-                    onEvent(TurnstileEvents.PASS to TurnstileStates.LOCKED) {
-                        lock()
-                    }
-                }
-            }.build() 
-   //sampleEnd
-}</pre></code></div></div></div><h2 class="">Parameters</h2><div data-togglable="Parameters"><div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="Parameters"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">validStates</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">A set of the possible states supported by the top-level state map</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">validEvents</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The class of the possible events</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">contextClass</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The class of the context</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">argumentClass</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The class of the argument to events/actions</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">returnClass</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The class of the return type of events/actions</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">handler</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">Statemachine handler</p></div></div></div></div></div></div></div></div></div></div></div>
+<p class="paragraph">Defines the start of a state machine DSL declaration</p><h4 class="">Author</h4><p class="paragraph">Corneil du Plessis</p><h2 class="">Samples</h2><div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Samples"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain">io.jumpco.open.kfsm.TurnstileFSM.definition</div></div><h2 class="">Parameters</h2><div data-togglable="Parameters"><div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="Parameters"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">validStates</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">A set of the possible states supported by the top-level state map</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">validEvents</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The class of the possible events</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">contextClass</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The class of the context</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">argumentClass</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The class of the argument to events/actions</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">returnClass</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The class of the return type of events/actions</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">handler</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">Statemachine handler</p></div></div></div></div></div></div></div></div></div></div></div>
 <div class="divergent-group" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right"></span></div>
 
   <div>
     <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace">inline fun &lt;<a href="state-machine.html">S</a>, <a href="state-machine.html">E</a>, <a href="state-machine.html">C</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>, <a href="state-machine.html">A</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="state-machine.html">stateMachine</a>(validStates: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="state-machine.html">S</a>&gt;, validEvents: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="state-machine.html">E</a>&gt;, contextClass: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html">KClass</a>&lt;out <a href="state-machine.html">C</a>&gt;, argumentClass: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html">KClass</a>&lt;out <a href="state-machine.html">A</a>&gt;, handler: <a href="-dsl-state-machine-handler/index.html">DslStateMachineHandler</a>&lt;<a href="state-machine.html">S</a>, <a href="state-machine.html">E</a>, <a href="state-machine.html">C</a>, <a href="state-machine.html">A</a>, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;.() -&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>): <a href="-dsl-state-machine-handler/index.html">DslStateMachineHandler</a>&lt;<a href="state-machine.html">S</a>, <a href="state-machine.html">E</a>, <a href="state-machine.html">C</a>, <a href="state-machine.html">A</a>, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
   </div>
-<p class="paragraph">Defines the start of a state machine DSL declaration with <code>Any</code> as the return type</p><h2 class="">Samples</h2><div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Samples"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="sample-container"><code class="runnablesample monospace" theme="idea"><pre>
-fun main() { 
-   //sampleStart 
-   val definition =
-            stateMachine(
-                TurnstileStates.values().toSet(),
-                TurnstileEvents.values().toSet(),
-                Turnstile::class
-            ) {
-                defaultInitialState = TurnstileStates.LOCKED
-                initialState {
-                    if (locked)
-                        TurnstileStates.LOCKED
-                    else
-                        TurnstileStates.UNLOCKED
-                }
-                onStateChange { oldState, newState -&gt;
-                    println(&quot;onStateChange:$oldState -&gt; $newState&quot;)
-                }
-                default {
-                    onEntry { startState, targetState, _ -&gt;
-                        println(&quot;entering:$startState -&gt; $targetState for $this&quot;)
-                    }
-                    action { state, event, _ -&gt;
-                        println(&quot;Default action for state($state) -&gt; on($event) for $this&quot;)
-                        alarm()
-                    }
-                    onExit { startState, targetState, _ -&gt;
-                        println(&quot;exiting:$startState -&gt; $targetState for $this&quot;)
-                    }
-                }
-                whenState(TurnstileStates.LOCKED) {
-                    onEvent(TurnstileEvents.COIN to TurnstileStates.UNLOCKED) {
-                        unlock()
-                    }
-                }
-                whenState(TurnstileStates.UNLOCKED) {
-                    onEvent(TurnstileEvents.COIN) {
-                        returnCoin()
-                    }
-                    onEvent(TurnstileEvents.PASS to TurnstileStates.LOCKED) {
-                        lock()
-                    }
-                }
-            }.build() 
-   //sampleEnd
-}</pre></code></div></div></div><h2 class="">Parameters</h2><div data-togglable="Parameters"><div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="Parameters"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">validStates</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">A set of the possible states supported by the top-level state map</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">eventClass</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The class of the possible events</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">contextClass</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The class of the context</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">argumentClass</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The class of the argument to events/actions</p></div></div></div></div></div></div></div></div></div></div></div>
+<p class="paragraph">Defines the start of a state machine DSL declaration with <code>Any</code> as the return type</p><h2 class="">Samples</h2><div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Samples"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain">io.jumpco.open.kfsm.TurnstileFSM.definition</div></div><h2 class="">Parameters</h2><div data-togglable="Parameters"><div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="Parameters"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">validStates</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">A set of the possible states supported by the top-level state map</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">eventClass</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The class of the possible events</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">contextClass</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The class of the context</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">argumentClass</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The class of the argument to events/actions</p></div></div></div></div></div></div></div></div></div></div></div>
 <div class="divergent-group" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="with-platform-tags"><span class="pull-right"></span></div>
 
   <div>
     <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace">inline fun &lt;<a href="state-machine.html">S</a>, <a href="state-machine.html">E</a>, <a href="state-machine.html">C</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="state-machine.html">stateMachine</a>(validStates: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="state-machine.html">S</a>&gt;, validEvents: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a>&lt;<a href="state-machine.html">E</a>&gt;, contextClass: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html">KClass</a>&lt;out <a href="state-machine.html">C</a>&gt;, handler: <a href="-dsl-state-machine-handler/index.html">DslStateMachineHandler</a>&lt;<a href="state-machine.html">S</a>, <a href="state-machine.html">E</a>, <a href="state-machine.html">C</a>, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;.() -&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>): <a href="-dsl-state-machine-handler/index.html">DslStateMachineHandler</a>&lt;<a href="state-machine.html">S</a>, <a href="state-machine.html">E</a>, <a href="state-machine.html">C</a>, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
   </div>
-<p class="paragraph">Defines the start of a state machine DSL declaration with <code>Any</code> as the type of arguments and returns types for events/actions</p><h2 class="">Samples</h2><div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Samples"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="sample-container"><code class="runnablesample monospace" theme="idea"><pre>
-fun main() { 
-   //sampleStart 
-   val definition =
-            stateMachine(
-                TurnstileStates.values().toSet(),
-                TurnstileEvents.values().toSet(),
-                Turnstile::class
-            ) {
-                defaultInitialState = TurnstileStates.LOCKED
-                initialState {
-                    if (locked)
-                        TurnstileStates.LOCKED
-                    else
-                        TurnstileStates.UNLOCKED
-                }
-                onStateChange { oldState, newState -&gt;
-                    println(&quot;onStateChange:$oldState -&gt; $newState&quot;)
-                }
-                default {
-                    onEntry { startState, targetState, _ -&gt;
-                        println(&quot;entering:$startState -&gt; $targetState for $this&quot;)
-                    }
-                    action { state, event, _ -&gt;
-                        println(&quot;Default action for state($state) -&gt; on($event) for $this&quot;)
-                        alarm()
-                    }
-                    onExit { startState, targetState, _ -&gt;
-                        println(&quot;exiting:$startState -&gt; $targetState for $this&quot;)
-                    }
-                }
-                whenState(TurnstileStates.LOCKED) {
-                    onEvent(TurnstileEvents.COIN to TurnstileStates.UNLOCKED) {
-                        unlock()
-                    }
-                }
-                whenState(TurnstileStates.UNLOCKED) {
-                    onEvent(TurnstileEvents.COIN) {
-                        returnCoin()
-                    }
-                    onEvent(TurnstileEvents.PASS to TurnstileStates.LOCKED) {
-                        lock()
-                    }
-                }
-            }.build() 
-   //sampleEnd
-}</pre></code></div></div></div><h2 class="">Parameters</h2><div data-togglable="Parameters"><div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="Parameters"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">validStates</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">A set of the possible states supported by the top-level state map</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">validEvents</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The class of the possible events</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">contextClass</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The class of the context</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">handler</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The DSL handler</p></div></div></div></div></div></div></div></div></div></div></div>
+<p class="paragraph">Defines the start of a state machine DSL declaration with <code>Any</code> as the type of arguments and returns types for events/actions</p><h2 class="">Samples</h2><div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Samples"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain">io.jumpco.open.kfsm.TurnstileFSM.definition</div></div><h2 class="">Parameters</h2><div data-togglable="Parameters"><div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="Parameters"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">validStates</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">A set of the possible states supported by the top-level state map</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">validEvents</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The class of the possible events</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">contextClass</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The class of the context</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">handler</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The DSL handler</p></div></div></div></div></div></div></div></div></div></div></div>
         </div>
         <div class="footer"><span class="go-to-top-icon"><a href="#content"></a></span><span>© 2021 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span></div>
       </div>

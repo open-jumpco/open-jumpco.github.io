@@ -435,7 +435,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>KFSM - Kotlin Finite-state machine</h1>
 <div class="details">
-<span id="revnumber">version 1.5.1</span>
+<span id="revnumber">version 1.5.2</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -812,7 +812,7 @@ enum class TurnstileEvents {
     fun externalState() = fsm.currentState
     fun coin() = fsm.sendEvent(TurnstileEvents.COIN)
     fun pass() = fsm.sendEvent(TurnstileEvents.PASS)
-    fun allowedEvents() = fsm.allowed().map { it.name.toLowerCase() }.toSet()
+    fun allowedEvents() = fsm.allowed().map { it.name.lowercase() }.toSet()
 
     companion object {
         val definition =
@@ -1124,7 +1124,7 @@ class PayingTurnstileFSM(
         fsm.sendEvent(PayingTurnstileEvents.PASS)
     }
 
-    fun allowedEvents() = fsm.allowed().map { it.name.toLowerCase() }.toSet()
+    fun allowedEvents() = fsm.allowed().map { it.name.lowercase() }.toSet()
     fun externalState(): PayingTurnstileFSMExternalState {
         return PayingTurnstileFSMExternalState(turnstile.coins, turnstile.locked, fsm.externalState())
     }
@@ -1542,7 +1542,7 @@ The context class stores values and will update value in very specific ways.</p>
     private val fsm = definition.create(secureTurnstile)
     fun card(cardId: Int) = fsm.sendEvent(SecureTurnstileEvents.CARD, cardId)
     fun pass() = fsm.sendEvent(SecureTurnstileEvents.PASS)
-    fun allowEvent(): Set&lt;String&gt; = fsm.allowed().map { it.name.toLowerCase() }.toSet()
+    fun allowEvent(): Set&lt;String&gt; = fsm.allowed().map { it.name.lowercase() }.toSet()
 }</code></pre>
 </div>
 </div>
@@ -2345,7 +2345,7 @@ The context class stores values and will update value in very specific ways.</p>
 <h4 id="states-and-events-4">States and Events</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">enum class SecureTurnstileEvents {
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">enum class TimeoutSecureTurnstileEvents {
     CARD,
     PASS
 }</code></pre>
@@ -2359,13 +2359,13 @@ The context class stores values and will update value in very specific ways.</p>
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class TimerSecureTurnstileFSM(secureTurnstile: TimerSecureTurnstile) {
     companion object {
         val definition = asyncStateMachine(
-            SecureTurnstileStates.values().toSet(),
-            SecureTurnstileEvents.values().toSet(),
+            TimeoutSecureTurnstileStates.values().toSet(),
+            TimeoutSecureTurnstileEvents.values().toSet(),
             TimerSecureTurnstile::class,
             Int::class
         ) {
-            defaultInitialState = SecureTurnstileStates.LOCKED
-            initialState { if (locked) SecureTurnstileStates.LOCKED else SecureTurnstileStates.UNLOCKED }
+            defaultInitialState = TimeoutSecureTurnstileStates.LOCKED
+            initialState { if (locked) TimeoutSecureTurnstileStates.LOCKED else TimeoutSecureTurnstileStates.UNLOCKED }
             default {
                 action { _, _, _ -&gt;
                     buzzer()
@@ -2374,9 +2374,9 @@ The context class stores values and will update value in very specific ways.</p>
             onStateChange { oldState, newState -&gt;
                 println("onStateChange:$oldState -&gt; $newState")
             }
-            whenState(SecureTurnstileStates.LOCKED) {
+            whenState(TimeoutSecureTurnstileStates.LOCKED) {
                 onEvent(
-                    SecureTurnstileEvents.CARD,
+                    TimeoutSecureTurnstileEvents.CARD,
                     guard = { cardId -&gt;
                         requireNotNull(cardId)
                         isOverrideCard(cardId) &amp;&amp; overrideActive
@@ -2385,7 +2385,7 @@ The context class stores values and will update value in very specific ways.</p>
                     cancelOverride()
                 }
                 onEvent(
-                    SecureTurnstileEvents.CARD,
+                    TimeoutSecureTurnstileEvents.CARD,
                     guard = { cardId -&gt;
                         requireNotNull(cardId)
                         isOverrideCard(cardId)
@@ -2394,7 +2394,7 @@ The context class stores values and will update value in very specific ways.</p>
                     activateOverride()
                 }
                 onEvent(
-                    SecureTurnstileEvents.CARD to SecureTurnstileStates.UNLOCKED,
+                    TimeoutSecureTurnstileEvents.CARD to TimeoutSecureTurnstileStates.UNLOCKED,
                     guard = { cardId -&gt;
                         requireNotNull(cardId)
                         overrideActive || isValidCard(cardId)
@@ -2403,7 +2403,7 @@ The context class stores values and will update value in very specific ways.</p>
                     unlock()
                 }
                 onEvent(
-                    SecureTurnstileEvents.CARD,
+                    TimeoutSecureTurnstileEvents.CARD,
                     guard = { cardId -&gt;
                         requireNotNull(cardId) { "cardId is required" }
                         !isValidCard(cardId)
@@ -2413,13 +2413,13 @@ The context class stores values and will update value in very specific ways.</p>
                     invalidCard(cardId)
                 }
             }
-            whenState(SecureTurnstileStates.UNLOCKED) {
-                timeout(SecureTurnstileStates.LOCKED, { timeout }) {
+            whenState(TimeoutSecureTurnstileStates.UNLOCKED) {
+                timeout(TimeoutSecureTurnstileStates.LOCKED, { timeout }) {
                     println("Timeout. Locking")
                     lock()
                 }
                 onEvent(
-                    SecureTurnstileEvents.CARD to SecureTurnstileStates.LOCKED,
+                    TimeoutSecureTurnstileEvents.CARD to TimeoutSecureTurnstileStates.LOCKED,
                     guard = { cardId -&gt;
                         requireNotNull(cardId)
                         isOverrideCard(cardId)
@@ -2427,7 +2427,7 @@ The context class stores values and will update value in very specific ways.</p>
                 ) {
                     lock()
                 }
-                onEvent(SecureTurnstileEvents.PASS to SecureTurnstileStates.LOCKED) {
+                onEvent(TimeoutSecureTurnstileEvents.PASS to TimeoutSecureTurnstileStates.LOCKED) {
                     lock()
                 }
             }
@@ -2435,9 +2435,9 @@ The context class stores values and will update value in very specific ways.</p>
     }
 
     private val fsm = definition.create(secureTurnstile)
-    suspend fun card(cardId: Int) = fsm.sendEvent(SecureTurnstileEvents.CARD, cardId)
-    suspend fun pass() = fsm.sendEvent(SecureTurnstileEvents.PASS)
-    fun allowEvent(): Set&lt;String&gt; = fsm.allowed().map { it.name.toLowerCase() }.toSet()
+    suspend fun card(cardId: Int) = fsm.sendEvent(TimeoutSecureTurnstileEvents.CARD, cardId)
+    suspend fun pass() = fsm.sendEvent(TimeoutSecureTurnstileEvents.PASS)
+    fun allowEvent(): Set&lt;String&gt; = fsm.allowed().map { it.name.lowercase() }.toSet()
 }</code></pre>
 </div>
 </div>
@@ -2509,7 +2509,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-jvm:1.5.1'
+    implementation 'io.jumpco.open:kfsm-jvm:1.5.2'
 }</code></pre>
 </div>
 </div>
@@ -2519,7 +2519,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">dependencies {
-    implementation("io.jumpco.open:kfsm-jvm:1.5.1")
+    implementation("io.jumpco.open:kfsm-jvm:1.5.2")
 }</code></pre>
 </div>
 </div>
@@ -2532,7 +2532,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-js:1.5.1'
+    implementation 'io.jumpco.open:kfsm-js:1.5.2'
 }</code></pre>
 </div>
 </div>
@@ -2542,7 +2542,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">dependencies {
-    implementation("io.jumpco.open:kfsm-js:1.5.1")
+    implementation("io.jumpco.open:kfsm-js:1.5.2")
 }</code></pre>
 </div>
 </div>
@@ -2555,7 +2555,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-linuxX64:1.5.1'
+    implementation 'io.jumpco.open:kfsm-linuxX64:1.5.2'
 }</code></pre>
 </div>
 </div>
@@ -2565,7 +2565,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">dependencies {
-    implementation("io.jumpco.open:kfsm-linuxX64:1.5.1")
+    implementation("io.jumpco.open:kfsm-linuxX64:1.5.2")
 }</code></pre>
 </div>
 </div>
@@ -2578,7 +2578,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-mingwX64:1.5.1'
+    implementation 'io.jumpco.open:kfsm-mingwX64:1.5.2'
 }</code></pre>
 </div>
 </div>
@@ -2588,7 +2588,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">dependencies {
-    implementation("io.jumpco.open:kfsm-mingwX64:1.5.1")
+    implementation("io.jumpco.open:kfsm-mingwX64:1.5.2")
 }</code></pre>
 </div>
 </div>
@@ -2601,7 +2601,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-macosX64:1.5.1'
+    implementation 'io.jumpco.open:kfsm-macosX64:1.5.2'
 }</code></pre>
 </div>
 </div>
@@ -2611,7 +2611,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">dependencies {
-    implementation("io.jumpco.open:kfsm-macosX64:1.5.1")
+    implementation("io.jumpco.open:kfsm-macosX64:1.5.2")
 }</code></pre>
 </div>
 </div>
@@ -3750,7 +3750,7 @@ The <code>onEntry</code> and <code>onExit</code> action are only invoked for <co
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.5.1<br>
+Version 1.5.2<br>
 Last updated 2021-02-13 11:29:36 +0200
 </div>
 </div>
