@@ -1,0 +1,11 @@
+title=Local Properties Plugin 1.0.0
+date=2021-11-07
+type=post
+tags=blog,open-source,jumpco,release,gradle
+status=published
+summary=OpenJumpCO releases Local Properties Gradle Plugin 1.0.1
+~~~~~~
+
+In this release:
+
+* Update the logging to show warning when in use.
