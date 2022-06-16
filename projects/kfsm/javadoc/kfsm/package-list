@@ -173,12 +173,12 @@ $dokka.location:io.jumpco.open.kfsm.async/AsyncStateMapInstance/sendEvent/#TypeP
 $dokka.location:io.jumpco.open.kfsm.async/AsyncStateMapInstance/timers/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm.async/-async-state-map-instance/timers.html
 $dokka.location:io.jumpco.open.kfsm.async/AsyncTimer///PointingToDeclaration/kfsm/io.jumpco.open.kfsm.async/-async-timer/index.html
 $dokka.location:io.jumpco.open.kfsm.async/AsyncTimer/AsyncTimer/#io.jumpco.open.kfsm.async.AsyncStateMapInstance[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]#TypeParam(bounds=[kotlin.Any?])#TypeParam(bounds=[kotlin.Any?])?#io.jumpco.open.kfsm.async.AsyncTimerDefinition[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/kfsm/io.jumpco.open.kfsm.async/-async-timer/-async-timer.html
-$dokka.location:io.jumpco.open.kfsm.async/AsyncTimer/active/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm.async/-async-timer/[mingw]active.html
-$dokka.location:io.jumpco.open.kfsm.async/AsyncTimer/arg/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm.async/-async-timer/[mingw]arg.html
+$dokka.location:io.jumpco.open.kfsm.async/AsyncTimer/active/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm.async/-async-timer/[linux]active.html
+$dokka.location:io.jumpco.open.kfsm.async/AsyncTimer/arg/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm.async/-async-timer/[linux]arg.html
 $dokka.location:io.jumpco.open.kfsm.async/AsyncTimer/cancel/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm.async/-async-timer/cancel.html
-$dokka.location:io.jumpco.open.kfsm.async/AsyncTimer/context/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm.async/-async-timer/[mingw]context.html
-$dokka.location:io.jumpco.open.kfsm.async/AsyncTimer/definition/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm.async/-async-timer/[mingw]definition.html
-$dokka.location:io.jumpco.open.kfsm.async/AsyncTimer/parentFsm/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm.async/-async-timer/[mingw]parent-fsm.html
+$dokka.location:io.jumpco.open.kfsm.async/AsyncTimer/context/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm.async/-async-timer/[linux]context.html
+$dokka.location:io.jumpco.open.kfsm.async/AsyncTimer/definition/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm.async/-async-timer/[linux]definition.html
+$dokka.location:io.jumpco.open.kfsm.async/AsyncTimer/parentFsm/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm.async/-async-timer/[linux]parent-fsm.html
 $dokka.location:io.jumpco.open.kfsm.async/AsyncTimer/trigger/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm.async/-async-timer/trigger.html
 $dokka.location:io.jumpco.open.kfsm.async/AsyncTimerDefinition///PointingToDeclaration/kfsm/io.jumpco.open.kfsm.async/-async-timer-definition/index.html
 $dokka.location:io.jumpco.open.kfsm.async/AsyncTimerDefinition/AsyncTimerDefinition/#kotlin.Function1[TypeParam(bounds=[kotlin.Any?]),kotlin.Long]#io.jumpco.open.kfsm.async.AsyncTransitionRules[TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?]),TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/kfsm/io.jumpco.open.kfsm.async/-async-timer-definition/-async-timer-definition.html
@@ -364,21 +364,11 @@ $dokka.location:io.jumpco.open.kfsm/StateMapDefinition/invariants/#/PointingToDe
 $dokka.location:io.jumpco.open.kfsm/StateMapDefinition/name/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm/-state-map-definition/name.html
 $dokka.location:io.jumpco.open.kfsm/StateMapDefinition/transitionRules/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm/-state-map-definition/transition-rules.html
 $dokka.location:io.jumpco.open.kfsm/StateMapDefinition/validStates/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm/-state-map-definition/valid-states.html
-$dokka.location:io.jumpco.open.kfsm/TransitionType.DEFAULT///PointingToDeclaration/kfsm/io.jumpco.open.kfsm/-transition-type/-d-e-f-a-u-l-t/index.html
-$dokka.location:io.jumpco.open.kfsm/TransitionType.DEFAULT/name/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm/-transition-type/-d-e-f-a-u-l-t/name.html
-$dokka.location:io.jumpco.open.kfsm/TransitionType.DEFAULT/ordinal/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm/-transition-type/-d-e-f-a-u-l-t/ordinal.html
-$dokka.location:io.jumpco.open.kfsm/TransitionType.NORMAL///PointingToDeclaration/kfsm/io.jumpco.open.kfsm/-transition-type/-n-o-r-m-a-l/index.html
-$dokka.location:io.jumpco.open.kfsm/TransitionType.NORMAL/name/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm/-transition-type/-n-o-r-m-a-l/name.html
-$dokka.location:io.jumpco.open.kfsm/TransitionType.NORMAL/ordinal/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm/-transition-type/-n-o-r-m-a-l/ordinal.html
-$dokka.location:io.jumpco.open.kfsm/TransitionType.POP///PointingToDeclaration/kfsm/io.jumpco.open.kfsm/-transition-type/-p-o-p/index.html
-$dokka.location:io.jumpco.open.kfsm/TransitionType.POP/name/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm/-transition-type/-p-o-p/name.html
-$dokka.location:io.jumpco.open.kfsm/TransitionType.POP/ordinal/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm/-transition-type/-p-o-p/ordinal.html
-$dokka.location:io.jumpco.open.kfsm/TransitionType.PUSH///PointingToDeclaration/kfsm/io.jumpco.open.kfsm/-transition-type/-p-u-s-h/index.html
-$dokka.location:io.jumpco.open.kfsm/TransitionType.PUSH/name/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm/-transition-type/-p-u-s-h/name.html
-$dokka.location:io.jumpco.open.kfsm/TransitionType.PUSH/ordinal/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm/-transition-type/-p-u-s-h/ordinal.html
-$dokka.location:io.jumpco.open.kfsm/TransitionType.TIMEOUT///PointingToDeclaration/kfsm/io.jumpco.open.kfsm/-transition-type/-t-i-m-e-o-u-t/index.html
-$dokka.location:io.jumpco.open.kfsm/TransitionType.TIMEOUT/name/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm/-transition-type/-t-i-m-e-o-u-t/name.html
-$dokka.location:io.jumpco.open.kfsm/TransitionType.TIMEOUT/ordinal/#/PointingToDeclaration/kfsm/io.jumpco.open.kfsm/-transition-type/-t-i-m-e-o-u-t/ordinal.html
+$dokka.location:io.jumpco.open.kfsm/TransitionType.DEFAULT///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}kfsm/io.jumpco.open.kfsm/-transition-type/-d-e-f-a-u-l-t/index.html
+$dokka.location:io.jumpco.open.kfsm/TransitionType.NORMAL///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}kfsm/io.jumpco.open.kfsm/-transition-type/-n-o-r-m-a-l/index.html
+$dokka.location:io.jumpco.open.kfsm/TransitionType.POP///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}kfsm/io.jumpco.open.kfsm/-transition-type/-p-o-p/index.html
+$dokka.location:io.jumpco.open.kfsm/TransitionType.PUSH///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}kfsm/io.jumpco.open.kfsm/-transition-type/-p-u-s-h/index.html
+$dokka.location:io.jumpco.open.kfsm/TransitionType.TIMEOUT///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}kfsm/io.jumpco.open.kfsm/-transition-type/-t-i-m-e-o-u-t/index.html
 $dokka.location:io.jumpco.open.kfsm/TransitionType///PointingToDeclaration/kfsm/io.jumpco.open.kfsm/-transition-type/index.html
 io.jumpco.open.kfsm
 io.jumpco.open.kfsm.async

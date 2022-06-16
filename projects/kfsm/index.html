@@ -429,13 +429,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 #footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
-<link href="prism.css" rel="stylesheet" />
+<link href="prism.css" rel="stylesheet"/>
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
 <h1>KFSM - Kotlin Finite-state machine</h1>
 <div class="details">
-<span id="revnumber">version 1.5.2</span>
+<span id="revnumber">version 1.6.0</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -585,9 +585,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="introduction">Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Having used various incarnations of <a href="http://smc.sourceforge.net/">SMC</a> over the years we decided to try it again and
-discovered it didn&#8217;t have specific support for Kotlin. Instead of creating a generator for Kotlin we decided to attempt
-a Kotlin DSL along with a simple implementation.</p>
+<p>Having used various incarnations of <a href="http://smc.sourceforge.net/">SMC</a> over the years we decided to try it again and discovered it didn&#8217;t have specific support for Kotlin.
+Instead of creating a generator for Kotlin we decided to attempt a Kotlin DSL along with a simple implementation.</p>
 </div>
 <div class="paragraph">
 <p>To learn more about Finite State Machines visit:</p>
@@ -1084,7 +1083,7 @@ enum class PayingTurnstileEvents {
 </div>
 <div class="paragraph">
 <p>We add a stateMap named <code>coins</code> with the state <code>COINS</code>.
-The statemap  will be entered when there are coins.
+The statemap will be entered when there are coins.
 The automatic transitions will be triggered based on the guard expressions.</p>
 </div>
 </div>
@@ -1102,6 +1101,7 @@ The <code>externalState</code> method provides a list of states for the case whe
     val initialState: ExternalState&lt;PayingTurnstileStates&gt;
 )
 
+@OptIn(ExperimentalStdlibApi::class)
 class PayingTurnstileFSM(
     requiredCoins: Int,
     savedState: PayingTurnstileFSMExternalState? = null
@@ -1398,8 +1398,7 @@ When the override card is tapped a 2nd time it will cancel the override or lock 
 <h4 id="context-class-3">Context class</h4>
 <div class="paragraph">
 <p>The context class doesn&#8217;t make decisions about the behaviour of the turnstile.
-The context will provide information about the state of turnstile and validity of cards
-The context class stores values and will update value in very specific ways.</p>
+The context will provide information about the state of turnstile and validity of cards The context class stores values and will update value in very specific ways.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2016,7 +2015,8 @@ enum class ReaderStates {
 <div class="sect3">
 <h4 id="immutable-context">Immutable Context</h4>
 <div class="paragraph">
-<p>The immutable context doesn&#8217;t modify a variable. It returns a copy containing the new context</p>
+<p>The immutable context doesn&#8217;t modify a variable.
+It returns a copy containing the new context</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2129,7 +2129,8 @@ operator fun ImmutableLock.plus(event: LockEvents): ImmutableLock {
 <div class="sect3">
 <h4 id="usage-2">Usage</h4>
 <div class="paragraph">
-<p>We also added an overloaded plus operator. The provides for a way of signaling the application of event to context.</p>
+<p>We also added an overloaded plus operator.
+The provides for a way of signaling the application of event to context.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2289,8 +2290,7 @@ lock()
 <h4 id="context-class-4">Context class</h4>
 <div class="paragraph">
 <p>The context class doesn&#8217;t make decisions about the behaviour of the turnstile.
-The context will provide information about the state of turnstile and validity of cards
-The context class stores values and will update value in very specific ways.</p>
+The context will provide information about the state of turnstile and validity of cards The context class stores values and will update value in very specific ways.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2476,7 +2476,8 @@ The context class stores values and will update value in very specific ways.</p>
 The current implementation has a problem in that the value should be added to different buffer.
 It may be worthwhile to have a mechanism for providing a different substate context to take care of this kind of situation.
 An interface/class exposed to the substate instead of the full context.
-In this example <code>Block</code> will be exposed to the stateMap. The stateMap can then pop after adding the byte.
+In this example <code>Block</code> will be exposed to the stateMap.
+The stateMap can then pop after adding the byte.
 In the case of an invalid character the statemap will still transition to the end state.</p>
 </div>
 </div>
@@ -2488,7 +2489,8 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="sect2">
 <h3 id="repository">Repository</h3>
 <div class="paragraph">
-<p>Use this repository for SNAPSHOT builds. Releases are on Maven Central</p>
+<p>Use this repository for SNAPSHOT builds.
+Releases are on Maven Central</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2509,7 +2511,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-jvm:1.5.2'
+    implementation 'io.jumpco.open:kfsm-jvm:1.6.0'
 }</code></pre>
 </div>
 </div>
@@ -2519,7 +2521,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">dependencies {
-    implementation("io.jumpco.open:kfsm-jvm:1.5.2")
+    implementation("io.jumpco.open:kfsm-jvm:1.6.0")
 }</code></pre>
 </div>
 </div>
@@ -2532,7 +2534,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-js:1.5.2'
+    implementation 'io.jumpco.open:kfsm-js:1.6.0'
 }</code></pre>
 </div>
 </div>
@@ -2542,7 +2544,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">dependencies {
-    implementation("io.jumpco.open:kfsm-js:1.5.2")
+    implementation("io.jumpco.open:kfsm-js:1.6.0")
 }</code></pre>
 </div>
 </div>
@@ -2555,7 +2557,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-linuxX64:1.5.2'
+    implementation 'io.jumpco.open:kfsm-linuxX64:1.6.0'
 }</code></pre>
 </div>
 </div>
@@ -2565,7 +2567,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">dependencies {
-    implementation("io.jumpco.open:kfsm-linuxX64:1.5.2")
+    implementation("io.jumpco.open:kfsm-linuxX64:1.6.0")
 }</code></pre>
 </div>
 </div>
@@ -2578,7 +2580,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-mingwX64:1.5.2'
+    implementation 'io.jumpco.open:kfsm-mingwX64:1.6.0'
 }</code></pre>
 </div>
 </div>
@@ -2588,7 +2590,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">dependencies {
-    implementation("io.jumpco.open:kfsm-mingwX64:1.5.2")
+    implementation("io.jumpco.open:kfsm-mingwX64:1.6.0")
 }</code></pre>
 </div>
 </div>
@@ -2601,7 +2603,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">dependencies {
-    implementation 'io.jumpco.open:kfsm-macosX64:1.5.2'
+    implementation 'io.jumpco.open:kfsm-macosX64:1.6.0'
 }</code></pre>
 </div>
 </div>
@@ -2611,7 +2613,7 @@ In the case of an invalid character the statemap will still transition to the en
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">dependencies {
-    implementation("io.jumpco.open:kfsm-macosX64:1.5.2")
+    implementation("io.jumpco.open:kfsm-macosX64:1.6.0")
 }</code></pre>
 </div>
 </div>
@@ -2641,16 +2643,20 @@ In the case of an invalid character the statemap will still transition to the en
 <p>The names <code>START</code> and <code>END</code> as states will be used the the start and end states when a state diagram is generated by <code>kfsm-viz</code></p>
 </div>
 <div class="paragraph">
-<p>The events may receive an argument and may return a value. The argument for all event must be the same type. However sealed classes can be used to simplify the representation of different argument types.</p>
+<p>The events may receive an argument and may return a value.
+The argument for all event must be the same type.
+However sealed classes can be used to simplify the representation of different argument types.</p>
 </div>
 <div class="paragraph">
 <p>The state machine will define one or more state maps each representing a subset of possible states of the same type.</p>
 </div>
 <div class="paragraph">
-<p>The state machine will receive events, constrained by set of events. The events does not have to be enum, only a value with <code>equals</code> and <code>hashCode</code> implementations.</p>
+<p>The state machine will receive events, constrained by set of events.
+The events does not have to be enum, only a value with <code>equals</code> and <code>hashCode</code> implementations.</p>
 </div>
 <div class="paragraph">
-<p>The state machine will apply actions to a context. The context represents the work that need to be performed.</p>
+<p>The state machine will apply actions to a context.
+The context represents the work that need to be performed.</p>
 </div>
 <div class="paragraph">
 <p>An event may trigger a state transition which defines actions to apply when the state machine is in a specific state.</p>
@@ -2659,10 +2665,12 @@ In the case of an invalid character the statemap will still transition to the en
 <p>Transitions may have a guard expression that has to evaluate to <code>true</code> to allow execution of transition.</p>
 </div>
 <div class="paragraph">
-<p>An automatic transition can be defined on a state and has no events. Automatic transitions will be executed if the specific state is current after the exit action.</p>
+<p>An automatic transition can be defined on a state and has no events.
+Automatic transitions will be executed if the specific state is current after the exit action.</p>
 </div>
 <div class="paragraph">
-<p>A timeout transition can be defined on a state and is triggered a configured amount of time after the entry into the state. The transition will be trigger upon timeout unless a configured guard expression doesn&#8217;t evaluate to <code>true</code>.</p>
+<p>A timeout transition can be defined on a state and is triggered a configured amount of time after the entry into the state.
+The transition will be trigger upon timeout unless a configured guard expression doesn&#8217;t evaluate to <code>true</code>.</p>
 </div>
 <div class="paragraph">
 <p>The state can be any value type providing <code>equals</code> and <code>hashCode</code>, even though we have been using <code>enum class</code> most examples.</p>
@@ -2678,10 +2686,12 @@ The state machine can also be defined to derive the current state from the provi
 <p>Then events are sent to the FSM with an argument if needed and this may trigger the defined actions.</p>
 </div>
 <div class="paragraph">
-<p>The FSM provides for a query to determine which events are allowed for the current or a given state. This is useful when user interaction controls need to be disabled or in the case of a back-end application using HATEOAS can add links limited to allowed events.</p>
+<p>The FSM provides for a query to determine which events are allowed for the current or a given state.
+This is useful when user interaction controls need to be disabled or in the case of a back-end application using HATEOAS can add links limited to allowed events.</p>
 </div>
 <div class="paragraph">
-<p>If the FSM is configured with timeout transitions the instance will need to remain active. This is typically only used in UI or embedded interactive applications.</p>
+<p>If the FSM is configured with timeout transitions the instance will need to remain active.
+This is typically only used in UI or embedded interactive applications.</p>
 </div>
 <div class="paragraph">
 <p>If the FSM is used in a stateless environment that is driven by requests or events, the state can be externalised after use if it isn&#8217;t derived from the provided context.
@@ -2691,7 +2701,8 @@ The externalised state is a list of pairs making up the state type and the name 
 <div class="sect2">
 <h3 id="named-maps-and-push-pop-transitions">Named Maps and Push / Pop Transitions</h3>
 <div class="paragraph">
-<p>A named map represents a set of states that is grouped together. Named maps can be visited by using a push transition and return using a pop transition.
+<p>A named map represents a set of states that is grouped together.
+Named maps can be visited by using a push transition and return using a pop transition.
 A push transition requires a map name and a target state along with the normal event and optional guard and action.
 The current state map will be pushed on a stack and a statemap instance will be created using the named definition.
 Events will be processed according to the transition rules of the named map.</p>
@@ -3461,7 +3472,8 @@ All automatic transitions attached to a given state will be invoked if their gua
 <div class="paragraph">
 <p>This defines a transition action for a given event.
 For an external transition a target state must be provided, while an internal transition must have no targetState.
-An optional guard expression can be provided. The order in which the DSL encounters guard expression determine the evaluation order.
+An optional guard expression can be provided.
+The order in which the DSL encounters guard expression determine the evaluation order.
 The first matching guard expression will determine the transition that will be used.
 Their may be only one transition without a guard expression.</p>
 </div>
@@ -3500,8 +3512,7 @@ onEvent(Event.EV2 to State.S2) { arg -&gt; // external transition
 </ul>
 </div>
 <div class="paragraph">
-<p>There are 2 variations of automatic transitions: Those with and without guards
-Example:</p>
+<p>There are 2 variations of automatic transitions: Those with and without guards Example:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3576,7 +3587,8 @@ Example:</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>There are 2 versions. One adds the support for a guard expression that will be evaluated and the action will only trigger if the guard evaluates true.</p>
+<p>There are 2 versions.
+One adds the support for a guard expression that will be evaluated and the action will only trigger if the guard evaluates true.</p>
 </div>
 </div>
 <div class="sect3">
@@ -3721,10 +3733,12 @@ If the transition rules contains guard transitions the guard expressions are eva
 The <code>onEntry</code> and <code>onExit</code> action are only invoked for <code>external</code> transitions.</p>
 </div>
 <div class="paragraph">
-<p>External transitions have an explicit target state defined. If the target state is not defined it is an internal transition.</p>
+<p>External transitions have an explicit target state defined.
+If the target state is not defined it is an internal transition.</p>
 </div>
 <div class="paragraph">
-<p>The currentState determines the exit action. The target state determines the entry action.</p>
+<p>The currentState determines the exit action.
+The target state determines the entry action.</p>
 </div>
 </div>
 <div class="sect2">
@@ -3735,7 +3749,8 @@ The <code>onEntry</code> and <code>onExit</code> action are only invoked for <co
 <div class="sect3">
 <h4 id="jvm">JVM</h4>
 <div class="paragraph">
-<p>The code in the JVM implementation uses <code>CoroutineScope(Dispatchers.Default)</code> to <code>launch</code> the trigger. Your action will be responsible for ensuring proper handling if a UI thread is impacted.</p>
+<p>The code in the JVM implementation uses <code>CoroutineScope(Dispatchers.Default)</code> to <code>launch</code> the trigger.
+Your action will be responsible for ensuring proper handling if a UI thread is impacted.</p>
 </div>
 </div>
 <div class="sect3">
@@ -3750,8 +3765,8 @@ The <code>onEntry</code> and <code>onExit</code> action are only invoked for <co
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.5.2<br>
-Last updated 2021-02-13 11:29:36 +0200
+Version 1.6.0<br>
+Last updated 2021-11-06 15:40:25 +0200
 </div>
 </div>
 <script src="prism.js"></script>

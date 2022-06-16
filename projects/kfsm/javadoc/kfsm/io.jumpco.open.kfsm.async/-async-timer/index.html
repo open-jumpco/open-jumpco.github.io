@@ -1,325 +1,214 @@
+<!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>AsyncTimer</title>
-<link href="../../../../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script><script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script><link href="../../../styles/style.css" rel="Stylesheet"><link href="../../../styles/logo-styles.css" rel="Stylesheet"><link href="../../../styles/jetbrains-mono.css" rel="Stylesheet"><link href="../../../styles/main.css" rel="Stylesheet"><script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script><script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script><script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script><script type="text/javascript" src="../../../scripts/main.js" async="async"></script>  </head>
-  <body>
-    <div id="container">
-      <div id="leftColumn"><a href="../../../index.html">
-          <div id="logo"></div>
-        </a>
-        <div id="paneSearch"></div>
-        <div id="sideMenu"></div>
-      </div>
-      <div id="main">
-        <div id="leftToggler"><span class="icon-toggler"></span></div>
-<script type="text/javascript" src="../../../scripts/main.js"></script>        <div class="main-content" id="content" pageIds="kfsm::io.jumpco.open.kfsm.async/AsyncTimer///PointingToDeclaration//301945550">
-          <div class="navigation-wrapper" id="navigation-wrapper">
-            <div class="breadcrumbs"><a href="../../../index.html">kfsm</a>/<a href="../index.html">io.jumpco.open.kfsm.async</a>/<a href="index.html">AsyncTimer</a></div>
-            <div class="pull-right d-flex">
-              <div class="filter-section" id="filter-section"><button class="platform-tag platform-selector common-like" data-active="" data-filter=":dokkaHtml/commonMain">common</button><button class="platform-tag platform-selector js-like" data-active="" data-filter=":dokkaHtml/jsMain">js</button><button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":dokkaHtml/jvmMain">jvm</button><button class="platform-tag platform-selector native-like" data-active="" data-filter=":dokkaHtml/mingwMain">mingw</button></div>
-              <div id="searchBar"></div>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+const savedDarkMode = storage ? JSON.parse(storage) : false
+if(savedDarkMode === true){
+    document.getElementsByTagName("html")[0].classList.add("theme-dark")
+}</script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+</head>
+<body>
+<div class="navigation-wrapper" id="navigation-wrapper">
+    <div id="leftToggler"><span class="icon-toggler"></span></div>
+    <div class="library-name">
+            <a href="../../../index.html">
+                    <span>kfsm</span>
+            </a>
+    </div>
+    <div>
+1.6.0    </div>
+    <div class="pull-right d-flex">
+            <div class="filter-section" id="filter-section">
+                    <button class="platform-tag platform-selector common-like" data-active="" data-filter=":dokkaHtml/commonMain">common</button>
+                    <button class="platform-tag platform-selector js-like" data-active="" data-filter=":dokkaHtml/jsMain">js</button>
+                    <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":dokkaHtml/jvmMain">jvm</button>
+                    <button class="platform-tag platform-selector native-like" data-active="" data-filter=":dokkaHtml/linuxMain">linux</button>
             </div>
-          </div>
-          <div class="cover ">
-            <h1 class="cover"><span>Async</span><wbr></wbr><span>Timer</span></h1>
-            <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace">class <a href="index.html">AsyncTimer</a>&lt;<a href="index.html">S</a>, <a href="index.html">E</a>, <a href="index.html">C</a>, <a href="index.html">A</a>, <a href="index.html">R</a>&gt;(parentFsm: <a href="../-async-state-map-instance/index.html">AsyncStateMapInstance</a>&lt;<a href="index.html">S</a>, <a href="index.html">E</a>, <a href="index.html">C</a>, <a href="index.html">A</a>, <a href="index.html">R</a>&gt;, context: <a href="index.html">C</a>, arg: <a href="index.html">A</a>?, definition: <a href="../-async-timer-definition/index.html">AsyncTimerDefinition</a>&lt;<a href="index.html">S</a>, <a href="index.html">E</a>, <a href="index.html">C</a>, <a href="index.html">A</a>, <a href="index.html">R</a>&gt;)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-          </div>
-          <div class="tabbedcontent">
-            <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button></div>
-            <div class="tabs-section-body">
-              <h2 class="">Functions</h2>
-              <div class="table" data-togglable="Functions"><a data-name="982330865%2FFunctions%2F301945550" anchor-label="cancel" id="982330865%2FFunctions%2F301945550" data-filterable-set=":dokkaHtml/commonMain :dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/mingwMain"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/commonMain :dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/mingwMain" data-filterable-set=":dokkaHtml/commonMain :dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/mingwMain">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="cancel.html">cancel</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="982330865%2FFunctions%2F301945550"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/commonMain :dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/mingwMain" data-filterable-set=":dokkaHtml/commonMain :dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/mingwMain"><div class="with-platform-tags"><span class="pull-right">
-  <div class="platform-tags ">
-    <div class="platform-tag common-like">common</div>
-  </div>
-</span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace">fun <a href="cancel.html">cancel</a>()<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
+        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+    </div>
 </div>
-</div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-745619625%2FFunctions%2F301945550" anchor-label="trigger" id="-745619625%2FFunctions%2F301945550" data-filterable-set=":dokkaHtml/commonMain :dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/mingwMain"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/commonMain :dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/mingwMain" data-filterable-set=":dokkaHtml/commonMain :dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/mingwMain">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="trigger.html">trigger</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-745619625%2FFunctions%2F301945550"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="title"><div class="divergent-group" data-filterable-current=":dokkaHtml/commonMain :dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/mingwMain" data-filterable-set=":dokkaHtml/commonMain :dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/mingwMain"><div class="with-platform-tags"><span class="pull-right">
-  <div class="platform-tags ">
-    <div class="platform-tag common-like">common</div>
+<div id="container">
+    <div id="leftColumn">
+        <div id="sideMenu"></div>
+    </div>
+    <div id="main">
+<div class="main-content" id="content" pageIds="kfsm::io.jumpco.open.kfsm.async/AsyncTimer///PointingToDeclaration//433982898">
+  <div class="breadcrumbs"><a href="../../../index.html">kfsm</a><span class="delimiter">/</span><a href="../index.html">io.jumpco.open.kfsm.async</a><span class="delimiter">/</span><a href="index.html">AsyncTimer</a></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Async</span><wbr></wbr><span><span>Timer</span></span></h1>
+    <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+      <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button><button class="platform-bookmark js-like" data-filterable-current=":dokkaHtml/jsMain" data-filterable-set=":dokkaHtml/jsMain" data-toggle=":dokkaHtml/jsMain">js</button><button class="platform-bookmark jvm-like" data-filterable-current=":dokkaHtml/jvmMain" data-filterable-set=":dokkaHtml/jvmMain" data-toggle=":dokkaHtml/jvmMain">jvm</button><button class="platform-bookmark native-like" data-filterable-current=":dokkaHtml/linuxMain" data-filterable-set=":dokkaHtml/linuxMain" data-toggle=":dokkaHtml/linuxMain">linux</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">class </span><a href="index.html">AsyncTimer</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;parentFsm<span class="token operator">: </span><a href="../-async-state-map-instance/index.html">AsyncStateMapInstance</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;context<span class="token operator">: </span><a href="index.html">C</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;arg<span class="token operator">: </span><a href="index.html">A</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;definition<span class="token operator">: </span><a href="../-async-timer-definition/index.html">AsyncTimerDefinition</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":dokkaHtml/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">class </span><a href="index.html">AsyncTimer</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>parentFsm<span class="token operator">: </span><span data-unresolved-link="io.jumpco.open.kfsm.async/AsyncStateMapInstance///PointingToDeclaration/">AsyncStateMapInstance</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>context<span class="token operator">: </span><a href="index.html">C</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>arg<span class="token operator">: </span><a href="index.html">A</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>definition<span class="token operator">: </span><span data-unresolved-link="io.jumpco.open.kfsm.async/AsyncTimerDefinition///PointingToDeclaration/">AsyncTimerDefinition</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">class </span><a href="index.html">AsyncTimer</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>parentFsm<span class="token operator">: </span><span data-unresolved-link="io.jumpco.open.kfsm.async/AsyncStateMapInstance///PointingToDeclaration/">AsyncStateMapInstance</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>context<span class="token operator">: </span><a href="index.html">C</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>arg<span class="token operator">: </span><a href="index.html">A</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>definition<span class="token operator">: </span><span data-unresolved-link="io.jumpco.open.kfsm.async/AsyncTimerDefinition///PointingToDeclaration/">AsyncTimerDefinition</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":dokkaHtml/linuxMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">class </span><a href="index.html">AsyncTimer</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>parentFsm<span class="token operator">: </span><span data-unresolved-link="io.jumpco.open.kfsm.async/AsyncStateMapInstance///PointingToDeclaration/">AsyncStateMapInstance</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>context<span class="token operator">: </span><a href="index.html">C</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>arg<span class="token operator">: </span><a href="index.html">A</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>definition<span class="token operator">: </span><span data-unresolved-link="io.jumpco.open.kfsm.async/AsyncTimerDefinition///PointingToDeclaration/">AsyncTimerDefinition</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div>    </div>
   </div>
-</span></div>
-
-  <div>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace">suspend fun <a href="trigger.html">trigger</a>()<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-  </div>
-</div>
-</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <h2 class="">Properties</h2>
-              <div class="table" data-togglable="Properties"><a data-name="1883984613%2FProperties%2F371682492" anchor-label="active" id="1883984613%2FProperties%2F371682492" data-filterable-set=":dokkaHtml/jsMain"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/jsMain" data-filterable-set=":dokkaHtml/jsMain">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="[js]active.html">active</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1883984613%2FProperties%2F371682492"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="platform-tags ">
-                        <div class="platform-tag js-like">js</div>
-                      </div>
-                      <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/jsMain"><a data-name="1883984613%2FProperties%2F371682492" anchor-label="active" id="1883984613%2FProperties%2F371682492" data-filterable-set=":dokkaHtml/jsMain"></a><div class="symbol monospace">var <a href="[js]active.html">active</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="1883984613%2FProperties%2F-879532132" anchor-label="active" id="1883984613%2FProperties%2F-879532132" data-filterable-set=":dokkaHtml/jvmMain"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/jvmMain" data-filterable-set=":dokkaHtml/jvmMain">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="[jvm]active.html">active</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1883984613%2FProperties%2F-879532132"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="platform-tags ">
-                        <div class="platform-tag jvm-like">jvm</div>
-                      </div>
-                      <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/jvmMain"><a data-name="1883984613%2FProperties%2F-879532132" anchor-label="active" id="1883984613%2FProperties%2F-879532132" data-filterable-set=":dokkaHtml/jvmMain"></a><div class="symbol monospace">var <a href="[jvm]active.html">active</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="1883984613%2FProperties%2F1331579264" anchor-label="active" id="1883984613%2FProperties%2F1331579264" data-filterable-set=":dokkaHtml/mingwMain"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/mingwMain" data-filterable-set=":dokkaHtml/mingwMain">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="[mingw]active.html">active</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1883984613%2FProperties%2F1331579264"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="platform-tags ">
-                        <div class="platform-tag native-like">mingw</div>
-                      </div>
-                      <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/mingwMain"><a data-name="1883984613%2FProperties%2F1331579264" anchor-label="active" id="1883984613%2FProperties%2F1331579264" data-filterable-set=":dokkaHtml/mingwMain"></a><div class="symbol monospace">var <a href="[mingw]active.html">active</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> = false<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="2079089017%2FProperties%2F371682492" anchor-label="arg" id="2079089017%2FProperties%2F371682492" data-filterable-set=":dokkaHtml/jsMain"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/jsMain" data-filterable-set=":dokkaHtml/jsMain">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="[js]arg.html">arg</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2079089017%2FProperties%2F371682492"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="platform-tags ">
-                        <div class="platform-tag js-like">js</div>
-                      </div>
-                      <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/jsMain"><a data-name="2079089017%2FProperties%2F371682492" anchor-label="arg" id="2079089017%2FProperties%2F371682492" data-filterable-set=":dokkaHtml/jsMain"></a><div class="symbol monospace">val <a href="[js]arg.html">arg</a>: <a href="index.html">A</a>?<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="2079089017%2FProperties%2F-879532132" anchor-label="arg" id="2079089017%2FProperties%2F-879532132" data-filterable-set=":dokkaHtml/jvmMain"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/jvmMain" data-filterable-set=":dokkaHtml/jvmMain">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="[jvm]arg.html">arg</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2079089017%2FProperties%2F-879532132"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="platform-tags ">
-                        <div class="platform-tag jvm-like">jvm</div>
-                      </div>
-                      <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/jvmMain"><a data-name="2079089017%2FProperties%2F-879532132" anchor-label="arg" id="2079089017%2FProperties%2F-879532132" data-filterable-set=":dokkaHtml/jvmMain"></a><div class="symbol monospace">val <a href="[jvm]arg.html">arg</a>: <a href="index.html">A</a>?<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="2079089017%2FProperties%2F1331579264" anchor-label="arg" id="2079089017%2FProperties%2F1331579264" data-filterable-set=":dokkaHtml/mingwMain"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/mingwMain" data-filterable-set=":dokkaHtml/mingwMain">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="[mingw]arg.html">arg</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2079089017%2FProperties%2F1331579264"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="platform-tags ">
-                        <div class="platform-tag native-like">mingw</div>
-                      </div>
-                      <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/mingwMain"><a data-name="2079089017%2FProperties%2F1331579264" anchor-label="arg" id="2079089017%2FProperties%2F1331579264" data-filterable-set=":dokkaHtml/mingwMain"></a><div class="symbol monospace">val <a href="[mingw]arg.html">arg</a>: <a href="index.html">A</a>?<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="153285440%2FProperties%2F371682492" anchor-label="context" id="153285440%2FProperties%2F371682492" data-filterable-set=":dokkaHtml/jsMain"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/jsMain" data-filterable-set=":dokkaHtml/jsMain">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="[js]context.html">context</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="153285440%2FProperties%2F371682492"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="platform-tags ">
-                        <div class="platform-tag js-like">js</div>
-                      </div>
-                      <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/jsMain"><a data-name="153285440%2FProperties%2F371682492" anchor-label="context" id="153285440%2FProperties%2F371682492" data-filterable-set=":dokkaHtml/jsMain"></a><div class="symbol monospace">val <a href="[js]context.html">context</a>: <a href="index.html">C</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="153285440%2FProperties%2F-879532132" anchor-label="context" id="153285440%2FProperties%2F-879532132" data-filterable-set=":dokkaHtml/jvmMain"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/jvmMain" data-filterable-set=":dokkaHtml/jvmMain">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="[jvm]context.html">context</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="153285440%2FProperties%2F-879532132"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="platform-tags ">
-                        <div class="platform-tag jvm-like">jvm</div>
-                      </div>
-                      <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/jvmMain"><a data-name="153285440%2FProperties%2F-879532132" anchor-label="context" id="153285440%2FProperties%2F-879532132" data-filterable-set=":dokkaHtml/jvmMain"></a><div class="symbol monospace">val <a href="[jvm]context.html">context</a>: <a href="index.html">C</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="153285440%2FProperties%2F1331579264" anchor-label="context" id="153285440%2FProperties%2F1331579264" data-filterable-set=":dokkaHtml/mingwMain"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/mingwMain" data-filterable-set=":dokkaHtml/mingwMain">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="[mingw]context.html">context</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="153285440%2FProperties%2F1331579264"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="platform-tags ">
-                        <div class="platform-tag native-like">mingw</div>
-                      </div>
-                      <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/mingwMain"><a data-name="153285440%2FProperties%2F1331579264" anchor-label="context" id="153285440%2FProperties%2F1331579264" data-filterable-set=":dokkaHtml/mingwMain"></a><div class="symbol monospace">val <a href="[mingw]context.html">context</a>: <a href="index.html">C</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-286198216%2FProperties%2F371682492" anchor-label="definition" id="-286198216%2FProperties%2F371682492" data-filterable-set=":dokkaHtml/jsMain"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/jsMain" data-filterable-set=":dokkaHtml/jsMain">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="[js]definition.html">definition</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-286198216%2FProperties%2F371682492"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="platform-tags ">
-                        <div class="platform-tag js-like">js</div>
-                      </div>
-                      <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/jsMain"><a data-name="-286198216%2FProperties%2F371682492" anchor-label="definition" id="-286198216%2FProperties%2F371682492" data-filterable-set=":dokkaHtml/jsMain"></a><div class="symbol monospace">val <a href="[js]definition.html">definition</a>: <a href="../-async-timer-definition/index.html">AsyncTimerDefinition</a>&lt;<a href="index.html">S</a>, <a href="index.html">E</a>, <a href="index.html">C</a>, <a href="index.html">A</a>, <a href="index.html">R</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-286198216%2FProperties%2F-879532132" anchor-label="definition" id="-286198216%2FProperties%2F-879532132" data-filterable-set=":dokkaHtml/jvmMain"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/jvmMain" data-filterable-set=":dokkaHtml/jvmMain">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="[jvm]definition.html">definition</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-286198216%2FProperties%2F-879532132"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="platform-tags ">
-                        <div class="platform-tag jvm-like">jvm</div>
-                      </div>
-                      <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/jvmMain"><a data-name="-286198216%2FProperties%2F-879532132" anchor-label="definition" id="-286198216%2FProperties%2F-879532132" data-filterable-set=":dokkaHtml/jvmMain"></a><div class="symbol monospace">val <a href="[jvm]definition.html">definition</a>: <a href="../-async-timer-definition/index.html">AsyncTimerDefinition</a>&lt;<a href="index.html">S</a>, <a href="index.html">E</a>, <a href="index.html">C</a>, <a href="index.html">A</a>, <a href="index.html">R</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="-286198216%2FProperties%2F1331579264" anchor-label="definition" id="-286198216%2FProperties%2F1331579264" data-filterable-set=":dokkaHtml/mingwMain"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/mingwMain" data-filterable-set=":dokkaHtml/mingwMain">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="[mingw]definition.html">definition</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-286198216%2FProperties%2F1331579264"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="platform-tags ">
-                        <div class="platform-tag native-like">mingw</div>
-                      </div>
-                      <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/mingwMain"><a data-name="-286198216%2FProperties%2F1331579264" anchor-label="definition" id="-286198216%2FProperties%2F1331579264" data-filterable-set=":dokkaHtml/mingwMain"></a><div class="symbol monospace">val <a href="[mingw]definition.html">definition</a>: <a href="../-async-timer-definition/index.html">AsyncTimerDefinition</a>&lt;<a href="index.html">S</a>, <a href="index.html">E</a>, <a href="index.html">C</a>, <a href="index.html">A</a>, <a href="index.html">R</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="665919001%2FProperties%2F371682492" anchor-label="parentFsm" id="665919001%2FProperties%2F371682492" data-filterable-set=":dokkaHtml/jsMain"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/jsMain" data-filterable-set=":dokkaHtml/jsMain">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="[js]parent-fsm.html">parentFsm</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="665919001%2FProperties%2F371682492"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="platform-tags ">
-                        <div class="platform-tag js-like">js</div>
-                      </div>
-                      <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/jsMain"><a data-name="665919001%2FProperties%2F371682492" anchor-label="parentFsm" id="665919001%2FProperties%2F371682492" data-filterable-set=":dokkaHtml/jsMain"></a><div class="symbol monospace">val <a href="[js]parent-fsm.html">parentFsm</a>: <a href="../-async-state-map-instance/index.html">AsyncStateMapInstance</a>&lt;<a href="index.html">S</a>, <a href="index.html">E</a>, <a href="index.html">C</a>, <a href="index.html">A</a>, <a href="index.html">R</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="665919001%2FProperties%2F-879532132" anchor-label="parentFsm" id="665919001%2FProperties%2F-879532132" data-filterable-set=":dokkaHtml/jvmMain"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/jvmMain" data-filterable-set=":dokkaHtml/jvmMain">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="[jvm]parent-fsm.html">parentFsm</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="665919001%2FProperties%2F-879532132"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="platform-tags ">
-                        <div class="platform-tag jvm-like">jvm</div>
-                      </div>
-                      <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/jvmMain"><a data-name="665919001%2FProperties%2F-879532132" anchor-label="parentFsm" id="665919001%2FProperties%2F-879532132" data-filterable-set=":dokkaHtml/jvmMain"></a><div class="symbol monospace">val <a href="[jvm]parent-fsm.html">parentFsm</a>: <a href="../-async-state-map-instance/index.html">AsyncStateMapInstance</a>&lt;<a href="index.html">S</a>, <a href="index.html">E</a>, <a href="index.html">C</a>, <a href="index.html">A</a>, <a href="index.html">R</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-<a data-name="665919001%2FProperties%2F1331579264" anchor-label="parentFsm" id="665919001%2FProperties%2F1331579264" data-filterable-set=":dokkaHtml/mingwMain"></a>
-                <div class="table-row" data-filterable-current=":dokkaHtml/mingwMain" data-filterable-set=":dokkaHtml/mingwMain">
-                  <div class="main-subrow keyValue ">
-                    <div class=""><span class="inline-flex"><a href="[mingw]parent-fsm.html">parentFsm</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="665919001%2FProperties%2F1331579264"></span>
-                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                        </span></span></div>
-                    <div>
-                      <div class="platform-tags ">
-                        <div class="platform-tag native-like">mingw</div>
-                      </div>
-                      <div class="title">
-                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/mingwMain"><a data-name="665919001%2FProperties%2F1331579264" anchor-label="parentFsm" id="665919001%2FProperties%2F1331579264" data-filterable-set=":dokkaHtml/mingwMain"></a><div class="symbol monospace">val <a href="[mingw]parent-fsm.html">parentFsm</a>: <a href="../-async-state-map-instance/index.html">AsyncStateMapInstance</a>&lt;<a href="index.html">S</a>, <a href="index.html">E</a>, <a href="index.html">C</a>, <a href="index.html">A</a>, <a href="index.html">R</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button></div>
+    <div class="tabs-section-body">
+      <h2 class="tabbedcontent">Constructors</h2>
+      <div class="table" data-togglable="Constructors"><a data-name="-342931348%2FConstructors%2F433982898" anchor-label="AsyncTimer" id="-342931348%2FConstructors%2F433982898" data-filterable-set=":dokkaHtml/commonMain :dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain :dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain" data-filterable-set=":dokkaHtml/commonMain :dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain">
+          <div class="main-subrow keyValue TabbedContent">
+            <div class=""><span class="inline-flex">
+                <div><a href="-async-timer.html"><span>Async</span><wbr></wbr><span><span>Timer</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-342931348%2FConstructors%2F433982898"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button><button class="platform-bookmark js-like" data-filterable-current=":dokkaHtml/jsMain" data-filterable-set=":dokkaHtml/jsMain" data-toggle=":dokkaHtml/jsMain">js</button><button class="platform-bookmark jvm-like" data-filterable-current=":dokkaHtml/jvmMain" data-filterable-set=":dokkaHtml/jvmMain" data-toggle=":dokkaHtml/jvmMain">jvm</button><button class="platform-bookmark native-like" data-filterable-current=":dokkaHtml/linuxMain" data-filterable-set=":dokkaHtml/linuxMain" data-toggle=":dokkaHtml/linuxMain">linux</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt; </span><a href="-async-timer.html"><span class="token function">AsyncTimer</span></a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;parentFsm<span class="token operator">: </span><a href="../-async-state-map-instance/index.html">AsyncStateMapInstance</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;context<span class="token operator">: </span><a href="index.html">C</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;arg<span class="token operator">: </span><a href="index.html">A</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;definition<span class="token operator">: </span><a href="../-async-timer-definition/index.html">AsyncTimerDefinition</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":dokkaHtml/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt; </span><a href="-async-timer.html"><span class="token function">AsyncTimer</span></a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;parentFsm<span class="token operator">: </span><span data-unresolved-link="io.jumpco.open.kfsm.async/AsyncStateMapInstance///PointingToDeclaration/">AsyncStateMapInstance</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;context<span class="token operator">: </span><a href="index.html">C</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;arg<span class="token operator">: </span><a href="index.html">A</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;definition<span class="token operator">: </span><span data-unresolved-link="io.jumpco.open.kfsm.async/AsyncTimerDefinition///PointingToDeclaration/">AsyncTimerDefinition</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt; </span><a href="-async-timer.html"><span class="token function">AsyncTimer</span></a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;parentFsm<span class="token operator">: </span><span data-unresolved-link="io.jumpco.open.kfsm.async/AsyncStateMapInstance///PointingToDeclaration/">AsyncStateMapInstance</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;context<span class="token operator">: </span><a href="index.html">C</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;arg<span class="token operator">: </span><a href="index.html">A</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;definition<span class="token operator">: </span><span data-unresolved-link="io.jumpco.open.kfsm.async/AsyncTimerDefinition///PointingToDeclaration/">AsyncTimerDefinition</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":dokkaHtml/linuxMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt; </span><a href="-async-timer.html"><span class="token function">AsyncTimer</span></a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;parentFsm<span class="token operator">: </span><span data-unresolved-link="io.jumpco.open.kfsm.async/AsyncStateMapInstance///PointingToDeclaration/">AsyncStateMapInstance</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;context<span class="token operator">: </span><a href="index.html">C</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;arg<span class="token operator">: </span><a href="index.html">A</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;definition<span class="token operator">: </span><span data-unresolved-link="io.jumpco.open.kfsm.async/AsyncTimerDefinition///PointingToDeclaration/">AsyncTimerDefinition</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div>                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="footer"><span class="go-to-top-icon"><a href="#content"></a></span><span>© 2021 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span></div>
+      </div>
+      <h2 class="">Functions</h2>
+      <div class="table" data-togglable="Functions"><a data-name="982330865%2FFunctions%2F433982898" anchor-label="cancel" id="982330865%2FFunctions%2F433982898" data-filterable-set=":dokkaHtml/commonMain :dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain :dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain" data-filterable-set=":dokkaHtml/commonMain :dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="cancel.html"><span><span>cancel</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="982330865%2FFunctions%2F433982898"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button><button class="platform-bookmark js-like" data-filterable-current=":dokkaHtml/jsMain" data-filterable-set=":dokkaHtml/jsMain" data-toggle=":dokkaHtml/jsMain">js</button><button class="platform-bookmark jvm-like" data-filterable-current=":dokkaHtml/jvmMain" data-filterable-set=":dokkaHtml/jvmMain" data-toggle=":dokkaHtml/jvmMain">jvm</button><button class="platform-bookmark native-like" data-filterable-current=":dokkaHtml/linuxMain" data-filterable-set=":dokkaHtml/linuxMain" data-toggle=":dokkaHtml/linuxMain">linux</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="cancel.html"><span class="token function">cancel</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":dokkaHtml/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="cancel.html"><span class="token function">cancel</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="cancel.html"><span class="token function">cancel</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":dokkaHtml/linuxMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="cancel.html"><span class="token function">cancel</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div>                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-745619625%2FFunctions%2F433982898" anchor-label="trigger" id="-745619625%2FFunctions%2F433982898" data-filterable-set=":dokkaHtml/commonMain :dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain :dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain" data-filterable-set=":dokkaHtml/commonMain :dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="trigger.html"><span><span>trigger</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-745619625%2FFunctions%2F433982898"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button><button class="platform-bookmark js-like" data-filterable-current=":dokkaHtml/jsMain" data-filterable-set=":dokkaHtml/jsMain" data-toggle=":dokkaHtml/jsMain">js</button><button class="platform-bookmark jvm-like" data-filterable-current=":dokkaHtml/jvmMain" data-filterable-set=":dokkaHtml/jvmMain" data-toggle=":dokkaHtml/jvmMain">jvm</button><button class="platform-bookmark native-like" data-filterable-current=":dokkaHtml/linuxMain" data-filterable-set=":dokkaHtml/linuxMain" data-toggle=":dokkaHtml/linuxMain">linux</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="trigger.html"><span class="token function">trigger</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":dokkaHtml/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="trigger.html"><span class="token function">trigger</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="trigger.html"><span class="token function">trigger</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":dokkaHtml/linuxMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="trigger.html"><span class="token function">trigger</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div>                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="">Properties</h2>
+      <div class="table" data-togglable="Properties"><a data-name="1883984613%2FProperties%2F-1193211100" anchor-label="active" id="1883984613%2FProperties%2F-1193211100" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><span data-unresolved-link="io.jumpco.open.kfsm.async/AsyncTimer/active/#/PointingToDeclaration/">active</span></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1883984613%2FProperties%2F-1193211100"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted" data-togglable="Properties">
+                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark js-like" data-filterable-current=":dokkaHtml/jsMain" data-filterable-set=":dokkaHtml/jsMain" data-active="" data-toggle=":dokkaHtml/jsMain">js</button><button class="platform-bookmark jvm-like" data-filterable-current=":dokkaHtml/jvmMain" data-filterable-set=":dokkaHtml/jvmMain" data-toggle=":dokkaHtml/jvmMain">jvm</button><button class="platform-bookmark native-like" data-filterable-current=":dokkaHtml/linuxMain" data-filterable-set=":dokkaHtml/linuxMain" data-toggle=":dokkaHtml/linuxMain">linux</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/jsMain"><a data-name="1883984613%2FProperties%2F-1193211100" anchor-label="active" id="1883984613%2FProperties%2F-1193211100" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">var </span><a href="[js]active.html">active</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":dokkaHtml/jvmMain"><a data-name="1883984613%2FProperties%2F-1193211100" anchor-label="active" id="1883984613%2FProperties%2F-1193211100" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">var </span><a href="[jvm]active.html">active</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":dokkaHtml/linuxMain"><a data-name="1883984613%2FProperties%2F-1193211100" anchor-label="active" id="1883984613%2FProperties%2F-1193211100" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">var </span><a href="[linux]active.html">active</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div>                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="2079089017%2FProperties%2F-1193211100" anchor-label="arg" id="2079089017%2FProperties%2F-1193211100" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><span data-unresolved-link="io.jumpco.open.kfsm.async/AsyncTimer/arg/#/PointingToDeclaration/">arg</span></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2079089017%2FProperties%2F-1193211100"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted" data-togglable="Properties">
+                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark js-like" data-filterable-current=":dokkaHtml/jsMain" data-filterable-set=":dokkaHtml/jsMain" data-active="" data-toggle=":dokkaHtml/jsMain">js</button><button class="platform-bookmark jvm-like" data-filterable-current=":dokkaHtml/jvmMain" data-filterable-set=":dokkaHtml/jvmMain" data-toggle=":dokkaHtml/jvmMain">jvm</button><button class="platform-bookmark native-like" data-filterable-current=":dokkaHtml/linuxMain" data-filterable-set=":dokkaHtml/linuxMain" data-toggle=":dokkaHtml/linuxMain">linux</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/jsMain"><a data-name="2079089017%2FProperties%2F-1193211100" anchor-label="arg" id="2079089017%2FProperties%2F-1193211100" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="[js]arg.html">arg</a><span class="token operator">: </span><a href="index.html">A</a><span class="token operator">?</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":dokkaHtml/jvmMain"><a data-name="2079089017%2FProperties%2F-1193211100" anchor-label="arg" id="2079089017%2FProperties%2F-1193211100" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="[jvm]arg.html">arg</a><span class="token operator">: </span><a href="index.html">A</a><span class="token operator">?</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":dokkaHtml/linuxMain"><a data-name="2079089017%2FProperties%2F-1193211100" anchor-label="arg" id="2079089017%2FProperties%2F-1193211100" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="[linux]arg.html">arg</a><span class="token operator">: </span><a href="index.html">A</a><span class="token operator">?</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div>                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="153285440%2FProperties%2F-1193211100" anchor-label="context" id="153285440%2FProperties%2F-1193211100" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><span data-unresolved-link="io.jumpco.open.kfsm.async/AsyncTimer/context/#/PointingToDeclaration/">context</span></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="153285440%2FProperties%2F-1193211100"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted" data-togglable="Properties">
+                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark js-like" data-filterable-current=":dokkaHtml/jsMain" data-filterable-set=":dokkaHtml/jsMain" data-active="" data-toggle=":dokkaHtml/jsMain">js</button><button class="platform-bookmark jvm-like" data-filterable-current=":dokkaHtml/jvmMain" data-filterable-set=":dokkaHtml/jvmMain" data-toggle=":dokkaHtml/jvmMain">jvm</button><button class="platform-bookmark native-like" data-filterable-current=":dokkaHtml/linuxMain" data-filterable-set=":dokkaHtml/linuxMain" data-toggle=":dokkaHtml/linuxMain">linux</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/jsMain"><a data-name="153285440%2FProperties%2F-1193211100" anchor-label="context" id="153285440%2FProperties%2F-1193211100" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="[js]context.html">context</a><span class="token operator">: </span><a href="index.html">C</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":dokkaHtml/jvmMain"><a data-name="153285440%2FProperties%2F-1193211100" anchor-label="context" id="153285440%2FProperties%2F-1193211100" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="[jvm]context.html">context</a><span class="token operator">: </span><a href="index.html">C</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":dokkaHtml/linuxMain"><a data-name="153285440%2FProperties%2F-1193211100" anchor-label="context" id="153285440%2FProperties%2F-1193211100" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="[linux]context.html">context</a><span class="token operator">: </span><a href="index.html">C</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div>                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-286198216%2FProperties%2F-1193211100" anchor-label="definition" id="-286198216%2FProperties%2F-1193211100" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><span data-unresolved-link="io.jumpco.open.kfsm.async/AsyncTimer/definition/#/PointingToDeclaration/">definition</span></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-286198216%2FProperties%2F-1193211100"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted" data-togglable="Properties">
+                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark js-like" data-filterable-current=":dokkaHtml/jsMain" data-filterable-set=":dokkaHtml/jsMain" data-active="" data-toggle=":dokkaHtml/jsMain">js</button><button class="platform-bookmark jvm-like" data-filterable-current=":dokkaHtml/jvmMain" data-filterable-set=":dokkaHtml/jvmMain" data-toggle=":dokkaHtml/jvmMain">jvm</button><button class="platform-bookmark native-like" data-filterable-current=":dokkaHtml/linuxMain" data-filterable-set=":dokkaHtml/linuxMain" data-toggle=":dokkaHtml/linuxMain">linux</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/jsMain"><a data-name="-286198216%2FProperties%2F-1193211100" anchor-label="definition" id="-286198216%2FProperties%2F-1193211100" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="[js]definition.html">definition</a><span class="token operator">: </span><span data-unresolved-link="io.jumpco.open.kfsm.async/AsyncTimerDefinition///PointingToDeclaration/">AsyncTimerDefinition</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":dokkaHtml/jvmMain"><a data-name="-286198216%2FProperties%2F-1193211100" anchor-label="definition" id="-286198216%2FProperties%2F-1193211100" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="[jvm]definition.html">definition</a><span class="token operator">: </span><span data-unresolved-link="io.jumpco.open.kfsm.async/AsyncTimerDefinition///PointingToDeclaration/">AsyncTimerDefinition</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":dokkaHtml/linuxMain"><a data-name="-286198216%2FProperties%2F-1193211100" anchor-label="definition" id="-286198216%2FProperties%2F-1193211100" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="[linux]definition.html">definition</a><span class="token operator">: </span><span data-unresolved-link="io.jumpco.open.kfsm.async/AsyncTimerDefinition///PointingToDeclaration/">AsyncTimerDefinition</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div>                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="665919001%2FProperties%2F-1193211100" anchor-label="parentFsm" id="665919001%2FProperties%2F-1193211100" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain"></a>
+        <div class="table-row" data-filterable-current=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><span data-unresolved-link="io.jumpco.open.kfsm.async/AsyncTimer/parentFsm/#/PointingToDeclaration/">parentFsm</span></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="665919001%2FProperties%2F-1193211100"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted" data-togglable="Properties">
+                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark js-like" data-filterable-current=":dokkaHtml/jsMain" data-filterable-set=":dokkaHtml/jsMain" data-active="" data-toggle=":dokkaHtml/jsMain">js</button><button class="platform-bookmark jvm-like" data-filterable-current=":dokkaHtml/jvmMain" data-filterable-set=":dokkaHtml/jvmMain" data-toggle=":dokkaHtml/jvmMain">jvm</button><button class="platform-bookmark native-like" data-filterable-current=":dokkaHtml/linuxMain" data-filterable-set=":dokkaHtml/linuxMain" data-toggle=":dokkaHtml/linuxMain">linux</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/jsMain"><a data-name="665919001%2FProperties%2F-1193211100" anchor-label="parentFsm" id="665919001%2FProperties%2F-1193211100" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="[js]parent-fsm.html">parentFsm</a><span class="token operator">: </span><span data-unresolved-link="io.jumpco.open.kfsm.async/AsyncStateMapInstance///PointingToDeclaration/">AsyncStateMapInstance</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":dokkaHtml/jvmMain"><a data-name="665919001%2FProperties%2F-1193211100" anchor-label="parentFsm" id="665919001%2FProperties%2F-1193211100" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="[jvm]parent-fsm.html">parentFsm</a><span class="token operator">: </span><span data-unresolved-link="io.jumpco.open.kfsm.async/AsyncStateMapInstance///PointingToDeclaration/">AsyncStateMapInstance</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div><div class="content sourceset-depenent-content" data-togglable=":dokkaHtml/linuxMain"><a data-name="665919001%2FProperties%2F-1193211100" anchor-label="parentFsm" id="665919001%2FProperties%2F-1193211100" data-filterable-set=":dokkaHtml/jsMain :dokkaHtml/jvmMain :dokkaHtml/linuxMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="[linux]parent-fsm.html">parentFsm</a><span class="token operator">: </span><span data-unresolved-link="io.jumpco.open.kfsm.async/AsyncStateMapInstance///PointingToDeclaration/">AsyncStateMapInstance</span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div>                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </body>
+  </div>
+</div>
+        <div class="footer"><span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2022 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+        </div>
+    </div>
+</div>
+</body>
 </html>
-
