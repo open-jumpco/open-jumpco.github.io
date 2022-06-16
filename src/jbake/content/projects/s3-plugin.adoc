@@ -1,9 +1,9 @@
 title=S3 Plugin
-date=2021-07-27
+date=2022-04-19
 type=project
 status=published
 summary=Gradle S3 Plugin
-version=1.3.0
+version=1.4.3
 ~~~~~~
 = Gradle S3 Plugin
 
