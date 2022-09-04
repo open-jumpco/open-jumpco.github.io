@@ -12,7 +12,7 @@ plugins {
 }
 
 group 'kfsm-docs'
-version '1.6.0'
+version '1.6.1'
 
 repositories {
     mavenLocal()
@@ -24,7 +24,7 @@ configurations {
 }
 
 dependencies {
-    externalDocs 'io.jumpco.open:kfsm:1.6.0:doc@zip'
+    externalDocs 'io.jumpco.open:kfsm:1.6.1:doc@zip'
 }
 
 gitPublish {
