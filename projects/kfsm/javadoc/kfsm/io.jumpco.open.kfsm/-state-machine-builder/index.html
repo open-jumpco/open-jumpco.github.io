@@ -1,353 +1,330 @@
-<!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>StateMachineBuilder</title>
-    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
-    <script>var pathToRoot = "../../../";</script>
-    <script>const storage = localStorage.getItem("dokka-dark-mode")
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>    <script>const storage = localStorage.getItem("dokka-dark-mode")
 const savedDarkMode = storage ? JSON.parse(storage) : false
 if(savedDarkMode === true){
     document.getElementsByTagName("html")[0].classList.add("theme-dark")
 }</script>
-<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
-<link href="../../../styles/style.css" rel="Stylesheet">
-<link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
-<link href="../../../styles/main.css" rel="Stylesheet">
-<link href="../../../styles/prism.css" rel="Stylesheet">
-<link href="../../../styles/logo-styles.css" rel="Stylesheet">
-<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
-<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
-<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
-<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
-<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
-</head>
-<body>
-<div class="navigation-wrapper" id="navigation-wrapper">
-    <div id="leftToggler"><span class="icon-toggler"></span></div>
-    <div class="library-name">
-            <a href="../../../index.html">
-                    <span>kfsm</span>
-            </a>
-    </div>
-    <div>
-1.6.0    </div>
-    <div class="pull-right d-flex">
-            <div class="filter-section" id="filter-section">
-                    <button class="platform-tag platform-selector common-like" data-active="" data-filter=":dokkaHtml/commonMain">common</button>
-            </div>
-        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script><link href="../../../styles/style.css" rel="Stylesheet"><link href="../../../styles/jetbrains-mono.css" rel="Stylesheet"><link href="../../../styles/main.css" rel="Stylesheet"><link href="../../../styles/prism.css" rel="Stylesheet"><link href="../../../styles/logo-styles.css" rel="Stylesheet"><script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script><script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script><script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script><script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script><script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>  </head>
+  <body>
+    <div class="navigation-wrapper" id="navigation-wrapper">
+      <div id="leftToggler"><span class="icon-toggler"></span></div>
+      <div class="library-name"><a href="../../../index.html">kfsm</a></div>
+      <div>1.6.1</div>
+      <div class="pull-right d-flex">
+        <div class="filter-section" id="filter-section"><button class="platform-tag platform-selector common-like" data-active="" data-filter=":dokkaHtml/commonMain">common</button></div>
+<button id="theme-toggle-button"><span id="theme-toggle"></span></button>
         <div id="searchBar"></div>
+      </div>
     </div>
-</div>
-<div id="container">
-    <div id="leftColumn">
+    <div id="container">
+      <div id="leftColumn">
         <div id="sideMenu"></div>
-    </div>
-    <div id="main">
-<div class="main-content" id="content" pageIds="kfsm::io.jumpco.open.kfsm/StateMachineBuilder///PointingToDeclaration//788909594">
-  <div class="breadcrumbs"><a href="../../../index.html">kfsm</a><span class="delimiter">/</span><a href="../index.html">io.jumpco.open.kfsm</a><span class="delimiter">/</span><a href="index.html">StateMachineBuilder</a></div>
-  <div class="cover ">
-    <h1 class="cover"><span>State</span><wbr></wbr><span>Machine</span><wbr></wbr><span><span>Builder</span></span></h1>
-    <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-      <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
-<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">StateMachineBuilder</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">validMapStates<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">validEvents<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">E</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">This class represents the definition of a statemachine.</p><div class="block"></div><h4 class="">Author</h4><p class="paragraph">Corneil du Plessis</p></div>    </div>
-  </div>
-  <div class="tabbedcontent">
-    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button><button class="section-tab" data-togglable="Parameters">Parameters</button></div>
-    <div class="tabs-section-body">
-      <h2 class="">Parameters</h2>
-      <div data-togglable="Parameters">
-        <div class="platform-hinted WithExtraAttributes with-platform-tabs" data-platform-hinted="data-platform-hinted" data-togglable="Parameters">
-          <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
-<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span><span>S</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">is an enum representing all the states of the FSM</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span><span>E</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">is en enum representing all the events the FSM may receive</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span><span>C</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">is the class of the Context where the action will be applied.</p></div></div></div></div></div></div></div></div>        </div>
       </div>
-      <h2 class="tabbedcontent">Constructors</h2>
-      <div class="table" data-togglable="Constructors"><a data-name="1398761745%2FConstructors%2F788909594" anchor-label="StateMachineBuilder" id="1398761745%2FConstructors%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
-          <div class="main-subrow keyValue TabbedContent">
-            <div class=""><span class="inline-flex">
-                <div><a href="-state-machine-builder.html"><span>State</span><wbr></wbr><span>Machine</span><wbr></wbr><span><span>Builder</span></span></a></div>
+      <div id="main">
+        <div class="main-content" id="content" pageIds="kfsm::io.jumpco.open.kfsm/StateMachineBuilder///PointingToDeclaration//788909594">
+          <div class="breadcrumbs"><a href="../../../index.html">kfsm</a>/<a href="../index.html">io.jumpco.open.kfsm</a>/<a href="index.html">StateMachineBuilder</a></div>
+          <div class="cover ">
+            <h1 class="cover"><span>State</span><wbr></wbr><span>Machine</span><wbr></wbr><span><span>Builder</span></span></h1>
+            <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+              <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">StateMachineBuilder</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token punctuation">(</span>validMapStates<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token operator">&gt;</span><span class="token punctuation">, </span>validEvents<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">E</a><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">This class represents the definition of a statemachine.</p><h4 class="">Author</h4><p class="paragraph">Corneil du Plessis</p></div>            </div>
+          </div>
+          <div class="tabbedcontent">
+            <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button><button class="section-tab" data-togglable="Parameters">Parameters</button></div>
+            <div class="tabs-section-body">
+              <h2 class="">Parameters</h2>
+              <div data-togglable="Parameters">
+                <div class="platform-hinted WithExtraAttributes with-platform-tabs" data-platform-hinted="data-platform-hinted" data-togglable="Parameters">
+                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span><span>S</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">is an enum representing all the states of the FSM</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span><span>E</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">is en enum representing all the events the FSM may receive</p></div></div></div></div></div><div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span><span>C</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">is the class of the Context where the action will be applied.</p></div></div></div></div></div></div></div></div>                </div>
+              </div>
+              <h2 class="tabbedcontent">Constructors</h2>
+              <div class="table" data-togglable="Constructors"><a data-name="1398761745%2FConstructors%2F788909594" anchor-label="StateMachineBuilder" id="1398761745%2FConstructors%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+                <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+                  <div class="main-subrow keyValue TabbedContent">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="-state-machine-builder.html"><span>State</span><wbr></wbr><span>Machine</span><wbr></wbr><span><span>Builder</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1398761745%2FConstructors%2F788909594"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
-<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token operator">&gt; </span><a href="-state-machine-builder.html"><span class="token function">StateMachineBuilder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">validMapStates<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">validEvents<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">E</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div>                </div>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                          <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token operator">&gt; </span><a href="-state-machine-builder.html"><span class="token function">StateMachineBuilder</span></a><span class="token punctuation">(</span>validMapStates<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token operator">&gt;</span><span class="token punctuation">, </span>validEvents<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">E</a><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div>                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <h2 class="">Functions</h2>
-      <div class="table" data-togglable="Functions"><a data-name="1714107077%2FFunctions%2F788909594" anchor-label="afterStateChange" id="1714107077%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="after-state-change.html"><span>after</span><wbr></wbr><span>State</span><wbr></wbr><span><span>Change</span></span></a></div>
+              <h2 class="">Functions</h2>
+              <div class="table" data-togglable="Functions"><a data-name="1714107077%2FFunctions%2F788909594" anchor-label="afterStateChange" id="1714107077%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+                <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="after-state-change.html"><span>after</span><wbr></wbr><span>State</span><wbr></wbr><span><span>Change</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1714107077%2FFunctions%2F788909594"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
-<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="after-state-change.html"><span class="token function">afterStateChange</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">action<span class="token operator">: </span><a href="../index.html#1054919228%2FClasslikes%2F788909594">StateChangeAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">S</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function will set an action that will be invoked when the state has changed and transition is complete. This will be invoked after onEntry and onExit handlers.</p></div></div>                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                          <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="after-state-change.html"><span class="token function">afterStateChange</span></a><span class="token punctuation">(</span>action<span class="token operator">: </span><a href="../index.html#1054919228%2FClasslikes%2F788909594">StateChangeAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">S</a><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function will set an action that will be invoked when the state has changed and transition is complete. This will be invoked after onEntry and onExit handlers.</p></div></div>                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 <a data-name="1320627896%2FFunctions%2F788909594" anchor-label="complete" id="1320627896%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="complete.html"><span><span>complete</span></span></a></div>
+                <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="complete.html"><span><span>complete</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1320627896%2FFunctions%2F788909594"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
-<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="complete.html"><span class="token function">complete</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-state-machine-definition/index.html">StateMachineDefinition</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function enables completed for the state machine definition prevent further changes to the state machine behaviour.</p></div></div>                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                          <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="complete.html"><span class="token function">complete</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-state-machine-definition/index.html">StateMachineDefinition</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function enables completed for the state machine definition prevent further changes to the state machine behaviour.</p></div></div>                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 <a data-name="-1100572735%2FFunctions%2F788909594" anchor-label="default" id="-1100572735%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="default.html"><span><span>default</span></span></a></div>
+                <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="default.html"><span><span>default</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1100572735%2FFunctions%2F788909594"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
-<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="default.html"><span class="token function">default</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">event<span class="token operator">: </span><a href="index.html">E</a><span class="token punctuation">, </span></span><span class="parameter ">action<span class="token operator">: </span><a href="../index.html#49891591%2FClasslikes%2F788909594">SyncStateAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines an action to be invoked when no transitions are found for given event.</p></div><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="default.html"><span class="token function">default</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">currentState<span class="token operator">: </span><a href="index.html">S</a><span class="token punctuation">, </span></span><span class="parameter ">action<span class="token operator">: </span><a href="../index.html#-1187614039%2FClasslikes%2F788909594">DefaultStateAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines an action to be invoked when no transitions are found matching the given state and on.</p></div><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="default.html"><span class="token function">default</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">event<span class="token operator">: </span><a href="../index.html#-1828336424%2FClasslikes%2F788909594">EventState</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">S</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">action<span class="token operator">: </span><a href="../index.html#49891591%2FClasslikes%2F788909594">SyncStateAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines an action to be invoked when no transitions match the event. The currentState will be change to second parameter of the Pair.</p></div></div>                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                          <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="default.html"><span class="token function">default</span></a><span class="token punctuation">(</span>event<span class="token operator">: </span><a href="index.html">E</a><span class="token punctuation">, </span>action<span class="token operator">: </span><a href="../index.html#49891591%2FClasslikes%2F788909594">SyncStateAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines an action to be invoked when no transitions are found for given event.</p></div><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="default.html"><span class="token function">default</span></a><span class="token punctuation">(</span>currentState<span class="token operator">: </span><a href="index.html">S</a><span class="token punctuation">, </span>action<span class="token operator">: </span><a href="../index.html#-1187614039%2FClasslikes%2F788909594">DefaultStateAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines an action to be invoked when no transitions are found matching the given state and on.</p></div><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="default.html"><span class="token function">default</span></a><span class="token punctuation">(</span>event<span class="token operator">: </span><a href="../index.html#-1828336424%2FClasslikes%2F788909594">EventState</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">S</a><span class="token operator">&gt;</span><span class="token punctuation">, </span>action<span class="token operator">: </span><a href="../index.html#49891591%2FClasslikes%2F788909594">SyncStateAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines an action to be invoked when no transitions match the event. The currentState will be change to second parameter of the Pair.</p></div></div>                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 <a data-name="-352647941%2FFunctions%2F788909594" anchor-label="defaultAction" id="-352647941%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="default-action.html"><span>default</span><wbr></wbr><span><span>Action</span></span></a></div>
+                <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="default-action.html"><span>default</span><wbr></wbr><span><span>Action</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-352647941%2FFunctions%2F788909594"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
-<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="default-action.html"><span class="token function">defaultAction</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">action<span class="token operator">: </span><a href="../index.html#-1187614039%2FClasslikes%2F788909594">DefaultStateAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines an action to be invoked when no action is found matching the current state and event. This will be an internal transition and will not cause a change in state or invoke entry or exit functions.</p></div></div>                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                          <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="default-action.html"><span class="token function">defaultAction</span></a><span class="token punctuation">(</span>action<span class="token operator">: </span><a href="../index.html#-1187614039%2FClasslikes%2F788909594">DefaultStateAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines an action to be invoked when no action is found matching the current state and event. This will be an internal transition and will not cause a change in state or invoke entry or exit functions.</p></div></div>                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 <a data-name="1877730471%2FFunctions%2F788909594" anchor-label="defaultEntry" id="1877730471%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="default-entry.html"><span>default</span><wbr></wbr><span><span>Entry</span></span></a></div>
+                <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="default-entry.html"><span>default</span><wbr></wbr><span><span>Entry</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1877730471%2FFunctions%2F788909594"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
-<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="default-entry.html"><span class="token function">defaultEntry</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">action<span class="token operator">: </span><a href="../index.html#-595538134%2FClasslikes%2F788909594">DefaultEntryExitAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines an action to be invoked when no entry action is defined for the current state.</p></div></div>                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                          <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="default-entry.html"><span class="token function">defaultEntry</span></a><span class="token punctuation">(</span>action<span class="token operator">: </span><a href="../index.html#-595538134%2FClasslikes%2F788909594">DefaultEntryExitAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines an action to be invoked when no entry action is defined for the current state.</p></div></div>                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 <a data-name="2125492209%2FFunctions%2F788909594" anchor-label="defaultExit" id="2125492209%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="default-exit.html"><span>default</span><wbr></wbr><span><span>Exit</span></span></a></div>
+                <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="default-exit.html"><span>default</span><wbr></wbr><span><span>Exit</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2125492209%2FFunctions%2F788909594"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
-<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="default-exit.html"><span class="token function">defaultExit</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">action<span class="token operator">: </span><a href="../index.html#-595538134%2FClasslikes%2F788909594">DefaultEntryExitAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines an action to be invoked when no exit action is defined for the current state.</p></div></div>                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                          <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="default-exit.html"><span class="token function">defaultExit</span></a><span class="token punctuation">(</span>action<span class="token operator">: </span><a href="../index.html#-595538134%2FClasslikes%2F788909594">DefaultEntryExitAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines an action to be invoked when no exit action is defined for the current state.</p></div></div>                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 <a data-name="-634834273%2FFunctions%2F788909594" anchor-label="entry" id="-634834273%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="entry.html"><span><span>entry</span></span></a></div>
+                <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="entry.html"><span><span>entry</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-634834273%2FFunctions%2F788909594"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
-<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="entry.html"><span class="token function">entry</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">currentState<span class="token operator">: </span><a href="index.html">S</a><span class="token punctuation">, </span></span><span class="parameter ">action<span class="token operator">: </span><a href="../index.html#-595538134%2FClasslikes%2F788909594">DefaultEntryExitAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines an action to be invoked when the FSM changes to the provided state</p></div></div>                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                          <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="entry.html"><span class="token function">entry</span></a><span class="token punctuation">(</span>currentState<span class="token operator">: </span><a href="index.html">S</a><span class="token punctuation">, </span>action<span class="token operator">: </span><a href="../index.html#-595538134%2FClasslikes%2F788909594">DefaultEntryExitAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines an action to be invoked when the FSM changes to the provided state</p></div></div>                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 <a data-name="408039451%2FFunctions%2F788909594" anchor-label="exit" id="408039451%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="exit.html"><span><span>exit</span></span></a></div>
+                <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="exit.html"><span><span>exit</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="408039451%2FFunctions%2F788909594"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
-<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="exit.html"><span class="token function">exit</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">currentState<span class="token operator">: </span><a href="index.html">S</a><span class="token punctuation">, </span></span><span class="parameter ">action<span class="token operator">: </span><a href="../index.html#-595538134%2FClasslikes%2F788909594">DefaultEntryExitAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines an action to be invoke when the FSM changes from the provided state</p></div></div>                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                          <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="exit.html"><span class="token function">exit</span></a><span class="token punctuation">(</span>currentState<span class="token operator">: </span><a href="index.html">S</a><span class="token punctuation">, </span>action<span class="token operator">: </span><a href="../index.html#-595538134%2FClasslikes%2F788909594">DefaultEntryExitAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines an action to be invoke when the FSM changes from the provided state</p></div></div>                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 <a data-name="598998126%2FFunctions%2F788909594" anchor-label="initialState" id="598998126%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="initial-state.html"><span>initial</span><wbr></wbr><span><span>State</span></span></a></div>
+                <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="initial-state.html"><span>initial</span><wbr></wbr><span><span>State</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="598998126%2FFunctions%2F788909594"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
-<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="initial-state.html"><span class="token function">initialState</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="../index.html#1448254520%2FClasslikes%2F788909594">StateQuery</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">S</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function is used to provide a method for determining the initial state of the FSM using the provided content.</p></div></div>                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                          <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="initial-state.html"><span class="token function">initialState</span></a><span class="token punctuation">(</span>init<span class="token operator">: </span><a href="../index.html#1448254520%2FClasslikes%2F788909594">StateQuery</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">S</a><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function is used to provide a method for determining the initial state of the FSM using the provided content.</p></div></div>                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 <a data-name="-1733433898%2FFunctions%2F788909594" anchor-label="initialStates" id="-1733433898%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="initial-states.html"><span>initial</span><wbr></wbr><span><span>States</span></span></a></div>
+                <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="initial-states.html"><span>initial</span><wbr></wbr><span><span>States</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1733433898%2FFunctions%2F788909594"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
-<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="initial-states.html"><span class="token function">initialStates</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="../index.html#-335797578%2FClasslikes%2F788909594">StateMapQuery</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">S</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function is used to provide a method for determining the initial state of the FSM in cases where there may be one or more named statemaps. In this case the state may be a stack or name / value pairs representing the map name and pushed state.</p></div></div>                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                          <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="initial-states.html"><span class="token function">initialStates</span></a><span class="token punctuation">(</span>init<span class="token operator">: </span><a href="../index.html#-335797578%2FClasslikes%2F788909594">StateMapQuery</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">S</a><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function is used to provide a method for determining the initial state of the FSM in cases where there may be one or more named statemaps. In this case the state may be a stack or name / value pairs representing the map name and pushed state.</p></div></div>                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 <a data-name="1296144313%2FFunctions%2F788909594" anchor-label="invariant" id="1296144313%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="invariant.html"><span><span>invariant</span></span></a></div>
+                <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="invariant.html"><span><span>invariant</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1296144313%2FFunctions%2F788909594"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
-<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="invariant.html"><span class="token function">invariant</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">message<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">condition<span class="token operator">: </span><a href="../index.html#-60487464%2FClasslikes%2F788909594">Condition</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines an invariant condition that will hold true before and after all transitions.</p></div></div>                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                          <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="invariant.html"><span class="token function">invariant</span></a><span class="token punctuation">(</span>message<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span>condition<span class="token operator">: </span><a href="../index.html#-60487464%2FClasslikes%2F788909594">Condition</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines an invariant condition that will hold true before and after all transitions.</p></div></div>                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 <a data-name="-1405963556%2FFunctions%2F788909594" anchor-label="stateMachine" id="-1405963556%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="state-machine.html"><span>state</span><wbr></wbr><span><span>Machine</span></span></a></div>
+                <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="state-machine.html"><span>state</span><wbr></wbr><span><span>Machine</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1405963556%2FFunctions%2F788909594"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
-<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="state-machine.html"><span class="token function">stateMachine</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">handler<span class="token operator">: </span><span class="token keyword"></span><a href="../-dsl-state-machine-handler/index.html">DslStateMachineHandler</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-dsl-state-machine-handler/index.html">DslStateMachineHandler</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function can be used the define a new state machine.</p></div></div>                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                          <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><a href="state-machine.html"><span class="token function">stateMachine</span></a><span class="token punctuation">(</span>handler<span class="token operator">: </span><span class="token keyword"></span><a href="../-dsl-state-machine-handler/index.html">DslStateMachineHandler</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-dsl-state-machine-handler/index.html">DslStateMachineHandler</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function can be used the define a new state machine.</p></div></div>                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 <a data-name="-837468407%2FFunctions%2F788909594" anchor-label="stateMap" id="-837468407%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="state-map.html"><span>state</span><wbr></wbr><span><span>Map</span></span></a></div>
+                <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="state-map.html"><span>state</span><wbr></wbr><span><span>Map</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-837468407%2FFunctions%2F788909594"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
-<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="state-map.html"><span class="token function">stateMap</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">validStates<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-state-map-builder/index.html">StateMapBuilder</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function will be use to define a named statemap.</p></div></div>                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                          <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="state-map.html"><span class="token function">stateMap</span></a><span class="token punctuation">(</span>name<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span>validStates<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-state-map-builder/index.html">StateMapBuilder</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">S</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">E</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function will be use to define a named statemap.</p></div></div>                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 <a data-name="1022435892%2FFunctions%2F788909594" anchor-label="transition" id="1022435892%2FFunctions%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="transition.html"><span><span>transition</span></span></a></div>
+                <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="transition.html"><span><span>transition</span></span></a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1022435892%2FFunctions%2F788909594"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
-                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
-<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="transition.html"><span class="token function">transition</span></a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;startState<span class="token operator">: </span><a href="index.html">S</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;event<span class="token operator">: </span><a href="index.html">E</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;action<span class="token operator">: </span><a href="../index.html#49891591%2FClasslikes%2F788909594">SyncStateAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines a transition that doesn't change the state of the state machine when the currentState is startState and the on is received and after the action was performed. No entry or exit actions performed.</p></div><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="transition.html"><span class="token function">transition</span></a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;startState<span class="token operator">: </span><a href="index.html">S</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;event<span class="token operator">: </span><a href="index.html">E</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;targetState<span class="token operator">: </span><a href="index.html">S</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;action<span class="token operator">: </span><a href="../index.html#49891591%2FClasslikes%2F788909594">SyncStateAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines a transition that will be triggered when the currentState is the same as the startState and on is received. The FSM currentState will change to the targetState after the action was executed. Entry and Exit actions will also be performed.</p></div><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="transition.html"><span class="token function">transition</span></a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;startState<span class="token operator">: </span><a href="index.html">S</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;event<span class="token operator">: </span><a href="index.html">E</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;guard<span class="token operator">: </span><a href="../index.html#1702623483%2FClasslikes%2F788909594">StateGuard</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;action<span class="token operator">: </span><a href="../index.html#49891591%2FClasslikes%2F788909594">SyncStateAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines a transition that doesn't change the state also know as an internal transition. The transition will only occur if the guard expression is met.</p></div><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="transition.html"><span class="token function">transition</span></a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;startState<span class="token operator">: </span><a href="index.html">S</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;event<span class="token operator">: </span><a href="index.html">E</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;targetState<span class="token operator">: </span><a href="index.html">S</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;guard<span class="token operator">: </span><a href="../index.html#1702623483%2FClasslikes%2F788909594">StateGuard</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;action<span class="token operator">: </span><a href="../index.html#49891591%2FClasslikes%2F788909594">SyncStateAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines a transition from the currentState equal to startState to the targetState when event is received and the guard expression is met. The action is executed after any exit action and before entry actions.</p></div></div>                </div>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                          <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="transition.html"><span class="token function">transition</span></a><span class="token punctuation">(</span>startState<span class="token operator">: </span><a href="index.html">S</a><span class="token punctuation">, </span>event<span class="token operator">: </span><a href="index.html">E</a><span class="token punctuation">, </span>action<span class="token operator">: </span><a href="../index.html#49891591%2FClasslikes%2F788909594">SyncStateAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines a transition that doesn't change the state of the state machine when the currentState is startState and the on is received and after the action was performed. No entry or exit actions performed.</p></div><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="transition.html"><span class="token function">transition</span></a><span class="token punctuation">(</span>startState<span class="token operator">: </span><a href="index.html">S</a><span class="token punctuation">, </span>event<span class="token operator">: </span><a href="index.html">E</a><span class="token punctuation">, </span>targetState<span class="token operator">: </span><a href="index.html">S</a><span class="token punctuation">, </span>action<span class="token operator">: </span><a href="../index.html#49891591%2FClasslikes%2F788909594">SyncStateAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines a transition that will be triggered when the currentState is the same as the startState and on is received. The FSM currentState will change to the targetState after the action was executed. Entry and Exit actions will also be performed.</p></div><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="transition.html"><span class="token function">transition</span></a><span class="token punctuation">(</span>startState<span class="token operator">: </span><a href="index.html">S</a><span class="token punctuation">, </span>event<span class="token operator">: </span><a href="index.html">E</a><span class="token punctuation">, </span>guard<span class="token operator">: </span><a href="../index.html#1702623483%2FClasslikes%2F788909594">StateGuard</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token operator">&gt;</span><span class="token punctuation">, </span>action<span class="token operator">: </span><a href="../index.html#49891591%2FClasslikes%2F788909594">SyncStateAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines a transition that doesn't change the state also know as an internal transition. The transition will only occur if the guard expression is met.</p></div><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="transition.html"><span class="token function">transition</span></a><span class="token punctuation">(</span>startState<span class="token operator">: </span><a href="index.html">S</a><span class="token punctuation">, </span>event<span class="token operator">: </span><a href="index.html">E</a><span class="token punctuation">, </span>targetState<span class="token operator">: </span><a href="index.html">S</a><span class="token punctuation">, </span>guard<span class="token operator">: </span><a href="../index.html#1702623483%2FClasslikes%2F788909594">StateGuard</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token operator">&gt;</span><span class="token punctuation">, </span>action<span class="token operator">: </span><a href="../index.html#49891591%2FClasslikes%2F788909594">SyncStateAction</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">C</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">A</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="index.html">R</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">This function defines a transition from the currentState equal to startState to the targetState when event is received and the guard expression is met. The action is executed after any exit action and before entry actions.</p></div></div>                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <h2 class="">Properties</h2>
-      <div class="table" data-togglable="Properties"><a data-name="-651814821%2FProperties%2F788909594" anchor-label="defaultInitialState" id="-651814821%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
-        <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
-          <div class="main-subrow keyValue ">
-            <div class=""><span class="inline-flex">
-                <div><a href="default-initial-state.html">defaultInitialState</a></div>
+              <h2 class="">Properties</h2>
+              <div class="table" data-togglable="Properties"><a data-name="-651814821%2FProperties%2F788909594" anchor-label="defaultInitialState" id="-651814821%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a>
+                <div class="table-row" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex">
+                        <div><a href="default-initial-state.html">defaultInitialState</a></div>
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-651814821%2FProperties%2F788909594"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted" data-togglable="Properties">
-                  <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
-<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><a data-name="-651814821%2FProperties%2F788909594" anchor-label="defaultInitialState" id="-651814821%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">var </span><a href="default-initial-state.html">defaultInitialState</a><span class="token operator">: </span><a href="index.html">S</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div>                </div>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted" data-togglable="Properties">
+                          <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark common-like" data-filterable-current=":dokkaHtml/commonMain" data-filterable-set=":dokkaHtml/commonMain" data-active="" data-toggle=":dokkaHtml/commonMain">common</button></div>
+<div class="content sourceset-depenent-content" data-active="" data-togglable=":dokkaHtml/commonMain"><a data-name="-651814821%2FProperties%2F788909594" anchor-label="defaultInitialState" id="-651814821%2FProperties%2F788909594" data-filterable-set=":dokkaHtml/commonMain"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">var </span><a href="default-initial-state.html">defaultInitialState</a><span class="token operator">: </span><a href="index.html">S</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div>                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <div class="footer"><span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2022 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span></div>
       </div>
     </div>
-  </div>
-</div>
-        <div class="footer"><span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2022 Copyright</span><span
-                class="pull-right"><span>Generated by </span><a
-                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
-        </div>
-    </div>
-</div>
-</body>
+  </body>
 </html>
+

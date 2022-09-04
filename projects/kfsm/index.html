@@ -435,7 +435,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>KFSM - Kotlin Finite-state machine</h1>
 <div class="details">
-<span id="revnumber">version 1.6.0</span>
+<span id="revnumber">version 1.6.1</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -569,12 +569,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#operation">Operation</a>
 <ul class="sectlevel2">
 <li><a href="#send-event">Send Event</a></li>
-<li><a href="#notes-on-concurrency-and-coroutines">Notes on concurrency and coroutines.</a>
-<ul class="sectlevel3">
-<li><a href="#jvm">JVM</a></li>
-<li><a href="#javascript">JavaScript</a></li>
-</ul>
-</li>
+<li><a href="#notes-on-concurrency-and-coroutines">Notes on concurrency and coroutines.</a></li>
 </ul>
 </li>
 </ul>
@@ -2356,7 +2351,7 @@ The context will provide information about the state of turnstile and validity o
 <h4 id="state-machine-definition-packaged-3">State machine definition packaged</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class TimerSecureTurnstileFSM(secureTurnstile: TimerSecureTurnstile) {
+<pre class="highlight"><code class="language-kotlin" data-lang="kotlin">class TimerSecureTurnstileFSM(secureTurnstile: TimerSecureTurnstile, coroutineScope: CoroutineScope) {
     companion object {
         val definition = asyncStateMachine(
             TimeoutSecureTurnstileStates.values().toSet(),
@@ -2434,7 +2429,8 @@ The context will provide information about the state of turnstile and validity o
         }.build()
     }
 
-    private val fsm = definition.create(secureTurnstile)
+    private val fsm = definition.create(secureTurnstile, coroutineScope)
+
     suspend fun card(cardId: Int) = fsm.sendEvent(TimeoutSecureTurnstileEvents.CARD, cardId)
     suspend fun pass() = fsm.sendEvent(TimeoutSecureTurnstileEvents.PASS)
     fun allowEvent(): Set&lt;String&gt; = fsm.allowed().map { it.name.lowercase() }.toSet()
@@ -2449,7 +2445,7 @@ The context will provide information about the state of turnstile and validity o
 <pre class="highlight"><code class="language-kotlin" data-lang="kotlin">    @Test
     fun `test timeout`() {
         val turnstile = TimerSecureTurnstile()
-        val fsm = TimerSecureTurnstileFSM(turnstile)
+        val fsm = TimerSecureTurnstileFSM(turnstile, coroutineScope)
         assertTrue { turnstile.locked }
         println("Card 1")
         runBlocking {
@@ -2854,7 +2850,8 @@ val definition = stateMachine(
 <h3 id="asyncstatemachine"><code>asyncStateMachine</code></h3>
 <div class="paragraph">
 <p>This method provides for creating a statemachine definition and instances that have <code>suspend</code> functions as actions.
-This also adds the support for <code>timeout</code> on the state map handler.</p>
+This also adds the support for <code>timeout</code> on the state map handler.
+Creating an instance of an asyncStateMachine from a definition requires providing a <code>CoroutineScope</code>.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -3744,20 +3741,7 @@ The target state determines the entry action.</p>
 <div class="sect2">
 <h3 id="notes-on-concurrency-and-coroutines">Notes on concurrency and coroutines.</h3>
 <div class="paragraph">
-<p>The implementations of the AsyncTimer on the different platform work slightly differently depending on the platform.</p>
-</div>
-<div class="sect3">
-<h4 id="jvm">JVM</h4>
-<div class="paragraph">
-<p>The code in the JVM implementation uses <code>CoroutineScope(Dispatchers.Default)</code> to <code>launch</code> the trigger.
-Your action will be responsible for ensuring proper handling if a UI thread is impacted.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="javascript">JavaScript</h4>
-<div class="paragraph">
-<p>The current code assumes you are executing in the browser it uses <code>window.setTimeout to configure a function that will use `GlobalScope</code> to <code>launch</code> the trigger.</p>
-</div>
+<p>The implementations of the AsyncTimer uses the provided <code>CoroutineScope</code> to <code>launch</code> the trigger after a <code>delay</code></p>
 </div>
 </div>
 </div>
@@ -3765,7 +3749,7 @@ Your action will be responsible for ensuring proper handling if a UI thread is i
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.6.0<br>
+Version 1.6.1<br>
 Last updated 2021-11-06 15:40:25 +0200
 </div>
 </div>
