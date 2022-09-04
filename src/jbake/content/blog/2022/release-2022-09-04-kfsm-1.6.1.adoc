@@ -1,0 +1,13 @@
+title=KFSM Release 1.6.1
+date=2022-09-04
+type=post
+tags=blog,open-source,jumpco,release,fsm
+status=published
+summary=OpenJumpCO releases KFSM 1.6.1
+~~~~~~
+
+In this release:
+
+* Reverting to Kotlin 1.6.10 for Compose Multiplatform projects.
+* `CoroutineScope` must be provided when creating FSM instance.
+

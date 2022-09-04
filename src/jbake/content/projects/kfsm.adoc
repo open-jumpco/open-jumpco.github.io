@@ -1,9 +1,9 @@
 title=KFSM
-date=2022-06-16
+date=2022-09-04
 type=project
 status=published
 summary=KFSM - A Kotlin finite-state machine
-version=1.6.0
+version=1.6.1
 ~~~~~~
 = KFSM - A Kotlin finite-state machine
 
