@@ -6,9 +6,30 @@
     <atom:link href="./feed.xml" rel="self" type="application/rss+xml" />
     <description>Open JumpCO Feed</description>
     <language>en-gb</language>
-    <pubDate>Sun, 4 Sep 2022 11:20:18 +0200</pubDate>
-    <lastBuildDate>Sun, 4 Sep 2022 11:20:18 +0200</lastBuildDate>
+    <pubDate>Thu, 29 Feb 2024 12:40:35 +0200</pubDate>
+    <lastBuildDate>Thu, 29 Feb 2024 12:40:35 +0200</lastBuildDate>
 
+    <item>
+      <title>KFSM Release 1.9.0-RC1</title>
+      <link>./blog/2024/release-2024-02-28-kfsm-1.9.0-RC1.html</link>
+      <pubDate>Wed, 28 Feb 2024 00:00:00 +0200</pubDate>
+      <guid isPermaLink="false">blog/2024/release-2024-02-28-kfsm-1.9.0-RC1.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In this release:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Upgrading to KMP 1.9.10&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Adding wasmJs target.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+	</description>
+    </item>
     <item>
       <title>KFSM Release 1.6.1</title>
       <link>./blog/2022/release-2022-09-04-kfsm-1.6.1.html</link>
