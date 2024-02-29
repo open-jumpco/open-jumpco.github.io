@@ -7,8 +7,8 @@ buildscript {
 }
 
 plugins {
-    id 'org.jbake.site' version '5.0.0'
-    id 'org.ajoberstar.git-publish' version '2.1.1'
+    id 'org.jbake.site' version '5.5.0'
+    id 'org.ajoberstar.git-publish' version '3.0.1'
 }
 
 group 'kfsm-docs'
@@ -24,7 +24,7 @@ configurations {
 }
 
 dependencies {
-    externalDocs 'io.jumpco.open:kfsm:1.6.1:doc@zip'
+    externalDocs 'io.jumpco.open:kfsm:1.9.0-RC1:doc@zip'
 }
 
 gitPublish {

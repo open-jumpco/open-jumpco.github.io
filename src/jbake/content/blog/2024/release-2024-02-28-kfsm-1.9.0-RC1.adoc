@@ -1,0 +1,13 @@
+title=KFSM Release 1.9.0-RC1
+date=2024-02-28
+type=post
+tags=blog,open-source,jumpco,release,fsm
+status=published
+summary=OpenJumpCO releases KFSM 1.9.0-RC1
+~~~~~~
+
+In this release:
+
+* Upgrading to KMP 1.9.10
+* Adding wasmJs target.
+* Fixed documentation grammar.
