@@ -6,8 +6,8 @@
     <atom:link href="./feed.xml" rel="self" type="application/rss+xml" />
     <description>Open JumpCO Feed</description>
     <language>en-gb</language>
-    <pubDate>Thu, 29 Feb 2024 12:40:35 +0200</pubDate>
-    <lastBuildDate>Thu, 29 Feb 2024 12:40:35 +0200</lastBuildDate>
+    <pubDate>Thu, 29 Feb 2024 12:42:01 +0200</pubDate>
+    <lastBuildDate>Thu, 29 Feb 2024 12:42:01 +0200</lastBuildDate>
 
     <item>
       <title>KFSM Release 1.9.0-RC1</title>
@@ -124,24 +124,6 @@
 	</description>
     </item>
     <item>
-      <title>KFSM-Viz Plugin Release 1.5.2.3</title>
-      <link>./blog/2021/release-2021-08-14-kfsm-viz-plugin-1.5.2.3.html</link>
-      <pubDate>Sun, 15 Aug 2021 00:00:00 +0200</pubDate>
-      <guid isPermaLink="false">blog/2021/release-2021-08-14-kfsm-viz-plugin-1.5.2.3.html</guid>
-      	<description>
-	&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In this release:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;ulist&quot;&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Added extra check to produce start state in diagrams.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-	</description>
-    </item>
-    <item>
       <title>KFSM-Viz Plugin Release 1.5.2.4</title>
       <link>./blog/2021/release-2021-08-14-kfsm-viz-plugin-1.5.2.4.html</link>
       <pubDate>Sun, 15 Aug 2021 00:00:00 +0200</pubDate>
@@ -154,6 +136,24 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Correctly derive start state from defaultInitialState&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+	</description>
+    </item>
+    <item>
+      <title>KFSM-Viz Plugin Release 1.5.2.3</title>
+      <link>./blog/2021/release-2021-08-14-kfsm-viz-plugin-1.5.2.3.html</link>
+      <pubDate>Sun, 15 Aug 2021 00:00:00 +0200</pubDate>
+      <guid isPermaLink="false">blog/2021/release-2021-08-14-kfsm-viz-plugin-1.5.2.3.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In this release:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Added extra check to produce start state in diagrams.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
@@ -214,24 +214,6 @@
 	</description>
     </item>
     <item>
-      <title>KFSM Release 1.5.0</title>
-      <link>./blog/2021/release-2021-08-07-kfsm-1.5.0.html</link>
-      <pubDate>Sat, 7 Aug 2021 00:00:00 +0200</pubDate>
-      <guid isPermaLink="false">blog/2021/release-2021-08-07-kfsm-1.5.0.html</guid>
-      	<description>
-	&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;In this release:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;ulist&quot;&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;We updated the release for Kotlin 1.5.10 and added lambda support for the definition of the timeout.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-	</description>
-    </item>
-    <item>
       <title>KFSM Release 1.5.1</title>
       <link>./blog/2021/release-2021-08-07-kfsm-1.5.1.html</link>
       <pubDate>Sat, 7 Aug 2021 00:00:00 +0200</pubDate>
@@ -247,6 +229,24 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Updated to Dokka 1.5.0&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+	</description>
+    </item>
+    <item>
+      <title>KFSM Release 1.5.0</title>
+      <link>./blog/2021/release-2021-08-07-kfsm-1.5.0.html</link>
+      <pubDate>Sat, 7 Aug 2021 00:00:00 +0200</pubDate>
+      <guid isPermaLink="false">blog/2021/release-2021-08-07-kfsm-1.5.0.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;In this release:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ulist&quot;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;We updated the release for Kotlin 1.5.10 and added lambda support for the definition of the timeout.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;

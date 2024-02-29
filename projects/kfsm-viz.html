@@ -91,7 +91,7 @@ You will typically add a method to a unit test class as follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">@Test
+<pre class="prettyprint highlight"><code data-lang="kotlin">@Test
 fun produceVisualizationTurnstileFSM() {
     println("== TurnStile")
     val visualization = visualize(TurnstileFSM.definition) // <b class="conum">(1)</b>
@@ -123,7 +123,7 @@ fun produceVisualizationTurnstileFSM() {
 <h4 id="_gradle_groovy_dsl">Gradle Groovy DSL</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-groovy" data-lang="groovy">dependencies {
+<pre class="prettyprint highlight"><code data-lang="groovy">dependencies {
     testImplementation 'io.jumpco.open:kfsm-viz:1.5.2.4'
 }</code></pre>
 </div>
@@ -133,14 +133,14 @@ fun produceVisualizationTurnstileFSM() {
 <h4 id="_gradle_kotlin_dsl">Gradle Kotlin DSL</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">dependencies {
+<pre class="prettyprint highlight"><code data-lang="kotlin">dependencies {
     testImplementation("io.jumpco.open:kfsm-viz:1.5.2.4")
 }</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">@Test
+<pre class="prettyprint highlight"><code data-lang="kotlin">@Test
 fun produceVisualizationTurnstileFSM() {
     println("== Simple TurnStile")
     val visualization = parseStateMachine("SimpleTurnstileFSM", File("src/test/kotlin/SimpleTurnstile.kt")) // <b class="conum">(1)</b>
@@ -200,7 +200,7 @@ fun produceVisualizationTurnstileFSM() {
 <td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">{
+<pre class="prettyprint highlight"><code data-lang="kotlin">{
 unlock()
 }</code></pre>
 </div>
@@ -212,7 +212,7 @@ unlock()
 <td class="tableblock halign-left valign-top"><p class="tableblock">LOCKED</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">{
+<pre class="prettyprint highlight"><code data-lang="kotlin">{
 lock()
 }</code></pre>
 </div>
@@ -224,7 +224,7 @@ lock()
 <td class="tableblock halign-left valign-top"><p class="tableblock">UNLOCKED</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-kotlin" data-lang="kotlin">{
+<pre class="prettyprint highlight"><code data-lang="kotlin">{
 returnCoin()
 }</code></pre>
 </div>
@@ -280,7 +280,7 @@ writing code.</p>
     <div id="footer">
       <div class="container">
         <p class="muted credit">&copy; 2019 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a
-                    href="http://jbake.org">JBake v2.6.4</a></p>
+                    href="http://jbake.org">JBake v2.6.6</a></p>
       </div>
     </div>
     
